@@ -2,6 +2,8 @@
     "name": "saro0h/to-do-list",
     "license": "proprietary",
     "type": "project",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "require": {
         "php": ">=7.2",
         "symfony/symfony": "^5.4",
@@ -12,12 +14,23 @@
         "monolog/monolog": "^2.0",
         "doctrine/annotations": "^2.0",
         "symfony/flex": "^2.3",
-        "doctrine/orm": "^2.16",
-        "symfony/twig-bundle": "5.4.*"
+        "doctrine/orm": "^2.16"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^6.3",
         "symfony/maker-bundle": "^1.50"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        },
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
@@ -37,15 +50,8 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": "true",
             "require": "5.4.*"
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "composer/package-versions-deprecated": true,
-            "symfony/flex": true,
-            "symfony/runtime": true
         }
     }
 }
