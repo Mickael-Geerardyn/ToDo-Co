@@ -4,16 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
-class TaskController extends Controller
+class TaskController extends AbstractController
 {
     /**
      * @Route("/tasks", name="task_list")
      */
-    public function listAction()
+    public function showTasks()
     {
         return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository('AppBundle:Task')->findAll()]);
     }
@@ -21,7 +21,7 @@ class TaskController extends Controller
     /**
      * @Route("/tasks/create", name="task_create")
      */
-    public function createAction(Request $request)
+    public function createTasks(Request $request)
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
@@ -45,7 +45,7 @@ class TaskController extends Controller
     /**
      * @Route("/tasks/{id}/edit", name="task_edit")
      */
-    public function editAction(Task $task, Request $request)
+    public function editTasks(Task $task, Request $request)
     {
         $form = $this->createForm(TaskType::class, $task);
 

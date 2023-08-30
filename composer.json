@@ -6,19 +6,24 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.2",
-        "symfony/symfony": "^5.4",
-        "symfony/runtime": "^6.3",
+        "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/orm": "^2.16",
+        "monolog/monolog": "^2.9",
+        "symfony/asset": "5.4.*",
+        "symfony/console": "5.4.*",
+        "symfony/filesystem": "5.4.*",
+        "symfony/flex": "^1.20",
+        "symfony/framework-bundle": "^5.4",
+        "symfony/lock": "5.4.*",
         "symfony/monolog-bundle": "^3.8",
-        "monolog/monolog": "^2.0",
-        "doctrine/annotations": "^2.0",
-        "symfony/flex": "^2.3",
-        "doctrine/orm": "^2.16"
-    },
-    "require-dev": {
-        "symfony/phpunit-bridge": "^6.3",
-        "symfony/maker-bundle": "^1.50"
+        "symfony/runtime": "5.4.*",
+        "symfony/security-bundle": "5.4.*",
+        "symfony/twig-bundle": "5.4.*",
+        "symfony/validator": "5.4.*",
+        "symfony/web-profiler-bundle": "5.4.*",
+        "symfony/yaml": "5.4.*"
     },
     "config": {
         "allow-plugins": {
@@ -53,5 +58,9 @@
             "allow-contrib": "true",
             "require": "5.4.*"
         }
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.43",
+        "symfony/phpunit-bridge": "^6.3"
     }
 }

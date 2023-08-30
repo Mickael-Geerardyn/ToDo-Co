@@ -11,27 +11,37 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Task
 {
-    #[ORM\Column(type: "integer")]
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: "AUTO")]
+	/**
+	 * @ORM\Column(type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
     private $id;
 
 
-    #[ORM\Column(type: "datetime")]
+	/**
+	 * @ORM\Column(type="datetime")
+	 */
     private $createdAt;
 
 
-    #[ORM\Column(type: "string")]
-    #[Assert\NotBlank(message: "Vous devez saisir un titre.")]
+	/**
+	 * @ORM\Column(type="string")
+	 * @Assert\NotBlank(message="Vous devez saisir un titre.")
+	 */
     private $title;
 
 
-    #[ORM\Column(type: "text")]
-    #[Assert\NotBlank(message: "Vous devez saisir du contenu.")]
+	/**
+	 * @ORM\Column(type="text")
+	 * @Assert\NotBlank(message="Vous devez saisir du contenu.")
+	 */
     private $content;
 
 
-    #[ORM\Column(type: "boolean")]
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
     private $isDone;
 
     public function __construct()
@@ -45,8 +55,8 @@ class Task
         return $this->id;
     }
 
-    public function getCreatedAt()
-    {
+    public function getCreatedAt(): \Datetime
+	{
         return $this->createdAt;
     }
 
@@ -75,8 +85,8 @@ class Task
         $this->content = $content;
     }
 
-    public function isDone()
-    {
+    public function isDone(): bool
+	{
         return $this->isDone;
     }
 
