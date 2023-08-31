@@ -12,7 +12,7 @@ namespace App\Controller;
 		/**
 		 * @return Response
 		 *
-		 * @Route("/home", name="home_page")
+		 * @Route("/", name="home_page")
 		 */
 		public function getHomePage(): Response
 		{

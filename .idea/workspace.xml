@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dccbdda-f8db-4baf-bd07-5bbb9527c2d3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpunit.xml.dist" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml.dist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpunit.xml.dist.bak" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml.dist.bak" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/AppBundle/Controller/DefaultControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/AppBundle/Controller/DefaultControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/bootstrap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,6 +165,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu" />
       <path value="$PROJECT_DIR$/vendor/symfony/form" />
+      <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="2UOGC7oK9lGJN9aqyRaIJVjMgYa" />
@@ -183,27 +175,27 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "//wsl$/Ubuntu/usr/bin/php7.2",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "php.override.implement.member.chooser.php.doc": "NONE",
-    "settings.editor.selected.configurable": "advanced.settings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/usr/bin/php7.2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="\\wsl$\Ubuntu\var\www\openclassrooms\projet8\projet8-TodoList\App" />
@@ -241,7 +233,8 @@
       <workItem from="1693329107598" duration="6713000" />
       <workItem from="1693357069025" duration="140000" />
       <workItem from="1693357231581" duration="966000" />
-      <workItem from="1693401897616" duration="23270000" />
+      <workItem from="1693401897616" duration="27589000" />
+      <workItem from="1693484020131" duration="4333000" />
     </task>
     <servers />
   </component>
