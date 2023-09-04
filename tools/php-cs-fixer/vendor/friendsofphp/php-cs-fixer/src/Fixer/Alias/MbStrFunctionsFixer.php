@@ -63,7 +63,7 @@ final class MbStrFunctionsFixer extends AbstractFunctionReferenceFixer
      *     },
      * >
      */
-    private array $functions;
+    private readonly array $functions;
 
     public function __construct()
     {

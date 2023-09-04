@@ -380,7 +380,7 @@ final class MyTest extends \PHPUnit_Framework_TestCase
                                     'Unexpected value for method "%s", expected any of %s, got "%s".',
                                     $method,
                                     Utils::naturalLanguageJoin(array_keys($thisFixer->allowedValues)),
-                                    \is_object($value) ? \get_class($value) : (null === $value ? 'null' : \gettype($value).'#'.$value)
+                                    \is_object($value) ? $value::class : (null === $value ? 'null' : \gettype($value).'#'.$value)
                                 )
                             );
                         }
@@ -419,7 +419,7 @@ final class MyTest extends \PHPUnit_Framework_TestCase
                 if ('this' === $callType) {
                     $attributes = $analyzer->getMethodAttributes($index);
 
-                    if (false !== $attributes['static']) {
+                    if ($attributes['static']) {
                         $index = $this->findEndOfNextBlock($tokens, $index);
 
                         continue;

@@ -24,11 +24,8 @@ use PhpCsFixer\Utils;
  */
 final class RuleSetDocumentationGenerator
 {
-    private DocumentationLocator $locator;
-
-    public function __construct(DocumentationLocator $locator)
+    public function __construct(private readonly DocumentationLocator $locator)
     {
-        $this->locator = $locator;
     }
 
     /**

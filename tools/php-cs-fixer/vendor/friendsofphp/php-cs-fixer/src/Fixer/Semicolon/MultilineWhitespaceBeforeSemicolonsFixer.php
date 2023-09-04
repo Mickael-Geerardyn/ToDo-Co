@@ -163,7 +163,7 @@ $object->method1()
         $lineEnding = $this->whitespacesConfig->getLineEnding();
 
         for ($index, $count = \count($tokens); $index < $count; ++$index) {
-            if (false !== strstr($tokens[$index]->getContent(), $lineEnding)) {
+            if (str_contains($tokens[$index]->getContent(), $lineEnding)) {
                 return $index;
             }
         }

@@ -108,11 +108,11 @@ class InputDefinition
             throw new LogicException(sprintf('An argument with name "%s" already exists.', $argument->getName()));
         }
 
-        if (null !== $this->lastArrayArgument) {
+        if ($this->lastArrayArgument instanceof \Symfony\Component\Console\Input\InputArgument) {
             throw new LogicException(sprintf('Cannot add a required argument "%s" after an array argument "%s".', $argument->getName(), $this->lastArrayArgument->getName()));
         }
 
-        if ($argument->isRequired() && null !== $this->lastOptionalArgument) {
+        if ($argument->isRequired() && $this->lastOptionalArgument instanceof \Symfony\Component\Console\Input\InputArgument) {
             throw new LogicException(sprintf('Cannot add a required argument "%s" after an optional one "%s".', $argument->getName(), $this->lastOptionalArgument->getName()));
         }
 
@@ -170,7 +170,7 @@ class InputDefinition
      */
     public function getArgumentCount(): int
     {
-        return null !== $this->lastArrayArgument ? \PHP_INT_MAX : \count($this->arguments);
+        return $this->lastArrayArgument instanceof \Symfony\Component\Console\Input\InputArgument ? \PHP_INT_MAX : \count($this->arguments);
     }
 
     /**

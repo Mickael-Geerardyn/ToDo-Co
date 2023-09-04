@@ -84,7 +84,7 @@ final class Color
         foreach ($this->options as $option) {
             $setCodes[] = $option['set'];
         }
-        if (0 === \count($setCodes)) {
+        if ([] === $setCodes) {
             return '';
         }
 
@@ -103,7 +103,7 @@ final class Color
         foreach ($this->options as $option) {
             $unsetCodes[] = $option['unset'];
         }
-        if (0 === \count($unsetCodes)) {
+        if ([] === $unsetCodes) {
             return '';
         }
 
@@ -128,6 +128,6 @@ final class Color
             return ($background ? '10' : '9').self::BRIGHT_COLORS[$color];
         }
 
-        throw new InvalidArgumentException(sprintf('Invalid "%s" color; expected one of (%s).', $color, implode(', ', array_merge(array_keys(self::COLORS), array_keys(self::BRIGHT_COLORS)))));
+        throw new InvalidArgumentException(sprintf('Invalid "%s" color; expected one of (%s).', $color, implode(', ', [...array_keys(self::COLORS), ...array_keys(self::BRIGHT_COLORS)])));
     }
 }

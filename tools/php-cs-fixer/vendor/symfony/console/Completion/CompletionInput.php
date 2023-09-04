@@ -24,16 +24,16 @@ use Symfony\Component\Console\Input\InputOption;
  *
  * @author Wouter de Jong <wouter@wouterj.nl>
  */
-final class CompletionInput extends ArgvInput
+final class CompletionInput extends ArgvInput implements \Stringable
 {
     public const TYPE_ARGUMENT_VALUE = 'argument_value';
     public const TYPE_OPTION_VALUE = 'option_value';
     public const TYPE_OPTION_NAME = 'option_name';
     public const TYPE_NONE = 'none';
 
-    private $tokens;
-    private $currentIndex;
-    private $completionType;
+    private ?array $tokens = null;
+    private ?int $currentIndex = null;
+    private ?string $completionType = null;
     private $completionName;
     private $completionValue = '';
 
@@ -74,7 +74,7 @@ final class CompletionInput extends ArgvInput
             [$optionToken, $optionValue] = explode('=', $relevantToken, 2) + ['', ''];
 
             $option = $this->getOptionFromToken($optionToken);
-            if (null === $option && !$this->isCursorFree()) {
+            if (!$option instanceof \Symfony\Component\Console\Input\InputOption && !$this->isCursorFree()) {
                 $this->completionType = self::TYPE_OPTION_NAME;
                 $this->completionValue = $relevantToken;
 
@@ -84,14 +84,14 @@ final class CompletionInput extends ArgvInput
             if ($option?->acceptValue()) {
                 $this->completionType = self::TYPE_OPTION_VALUE;
                 $this->completionName = $option->getName();
-                $this->completionValue = $optionValue ?: (!str_starts_with($optionToken, '--') ? substr($optionToken, 2) : '');
+                $this->completionValue = $optionValue ?: (str_starts_with($optionToken, '--') ? '' : substr($optionToken, 2));
 
                 return;
             }
         }
 
         $previousToken = $this->tokens[$this->currentIndex - 1];
-        if ('-' === $previousToken[0] && '' !== trim($previousToken, '-')) {
+        if ('-' === $previousToken[0] && '' !== trim((string) $previousToken, '-')) {
             // check if previous option accepted a value
             $previousOption = $this->getOptionFromToken($previousToken);
             if ($previousOption?->acceptValue()) {
@@ -114,13 +114,13 @@ final class CompletionInput extends ArgvInput
             $argumentValue = $this->arguments[$argumentName];
             $this->completionName = $argumentName;
             if (\is_array($argumentValue)) {
-                $this->completionValue = $argumentValue ? $argumentValue[array_key_last($argumentValue)] : null;
+                $this->completionValue = $argumentValue !== [] ? $argumentValue[array_key_last($argumentValue)] : null;
             } else {
                 $this->completionValue = $argumentValue;
             }
         }
 
-        if ($this->currentIndex >= \count($this->tokens)) {
+        if ($this->currentIndex >= (is_countable($this->tokens) ? \count($this->tokens) : 0)) {
             if (!isset($this->arguments[$argumentName]) || $this->definition->getArgument($argumentName)->isArray()) {
                 $this->completionName = $argumentName;
                 $this->completionValue = '';
@@ -190,7 +190,7 @@ final class CompletionInput extends ArgvInput
     private function getOptionFromToken(string $optionToken): ?InputOption
     {
         $optionName = ltrim($optionToken, '-');
-        if (!$optionName) {
+        if ($optionName === '' || $optionName === '0') {
             return null;
         }
 
@@ -216,7 +216,7 @@ final class CompletionInput extends ArgvInput
      */
     private function isCursorFree(): bool
     {
-        $nrOfTokens = \count($this->tokens);
+        $nrOfTokens = is_countable($this->tokens) ? \count($this->tokens) : 0;
         if ($this->currentIndex > $nrOfTokens) {
             throw new \LogicException('Current index is invalid, it must be the number of input tokens or one more.');
         }
@@ -224,7 +224,7 @@ final class CompletionInput extends ArgvInput
         return $this->currentIndex >= $nrOfTokens;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         $str = '';
         foreach ($this->tokens as $i => $token) {

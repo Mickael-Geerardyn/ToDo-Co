@@ -38,29 +38,11 @@ final class Error
      */
     public const TYPE_LINT = 3;
 
-    private int $type;
-
-    private string $filePath;
-
-    private ?\Throwable $source;
-
-    /**
-     * @var list<string>
-     */
-    private array $appliedFixers;
-
-    private ?string $diff;
-
     /**
      * @param list<string> $appliedFixers
      */
-    public function __construct(int $type, string $filePath, ?\Throwable $source = null, array $appliedFixers = [], ?string $diff = null)
+    public function __construct(private readonly int $type, private readonly string $filePath, private readonly ?\Throwable $source = null, private readonly array $appliedFixers = [], private readonly ?string $diff = null)
     {
-        $this->type = $type;
-        $this->filePath = $filePath;
-        $this->source = $source;
-        $this->appliedFixers = $appliedFixers;
-        $this->diff = $diff;
     }
 
     public function getFilePath(): string

@@ -18,7 +18,7 @@ use Symfony\Component\Console\Exception\InvalidArgumentException;
  */
 class TableCellStyle
 {
-    public const DEFAULT_ALIGN = 'left';
+    final public const DEFAULT_ALIGN = 'left';
 
     private const TAG_OPTIONS = [
         'fg',

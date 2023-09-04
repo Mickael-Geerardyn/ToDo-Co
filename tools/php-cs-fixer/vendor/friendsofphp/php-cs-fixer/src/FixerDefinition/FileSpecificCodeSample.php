@@ -21,20 +21,17 @@ namespace PhpCsFixer\FixerDefinition;
  */
 final class FileSpecificCodeSample implements FileSpecificCodeSampleInterface
 {
-    private CodeSampleInterface $codeSample;
-
-    private \SplFileInfo $splFileInfo;
+    private readonly CodeSampleInterface $codeSample;
 
     /**
      * @param null|array<string, mixed> $configuration
      */
     public function __construct(
         string $code,
-        \SplFileInfo $splFileInfo,
+        private readonly \SplFileInfo $splFileInfo,
         ?array $configuration = null
     ) {
         $this->codeSample = new CodeSample($code, $configuration);
-        $this->splFileInfo = $splFileInfo;
     }
 
     public function getCode(): string

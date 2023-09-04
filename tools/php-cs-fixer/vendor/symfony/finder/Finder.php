@@ -41,9 +41,9 @@ use Symfony\Component\Finder\Iterator\SortableIterator;
  */
 class Finder implements \IteratorAggregate, \Countable
 {
-    public const IGNORE_VCS_FILES = 1;
-    public const IGNORE_DOT_FILES = 2;
-    public const IGNORE_VCS_IGNORED_FILES = 4;
+    final public const IGNORE_VCS_FILES = 1;
+    final public const IGNORE_DOT_FILES = 2;
+    final public const IGNORE_VCS_IGNORED_FILES = 4;
 
     private int $mode = 0;
     private array $names = [];
@@ -657,11 +657,11 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function getIterator(): \Iterator
     {
-        if (0 === \count($this->dirs) && 0 === \count($this->iterators)) {
+        if ([] === $this->dirs && [] === $this->iterators) {
             throw new \LogicException('You must call one of in() or append() methods before iterating over a Finder.');
         }
 
-        if (1 === \count($this->dirs) && 0 === \count($this->iterators)) {
+        if (1 === \count($this->dirs) && [] === $this->iterators) {
             $iterator = $this->searchInDirectory($this->dirs[0]);
 
             if ($this->sort || $this->reverseSorting) {
@@ -779,7 +779,7 @@ class Finder implements \IteratorAggregate, \Countable
 
         $iterator = new Iterator\RecursiveDirectoryIterator($dir, $flags, $this->ignoreUnreadableDirs);
 
-        if ($exclude) {
+        if ($exclude !== []) {
             $iterator = new Iterator\ExcludeDirectoryFilterIterator($iterator, $exclude);
         }
 
@@ -789,7 +789,7 @@ class Finder implements \IteratorAggregate, \Countable
             $iterator = new Iterator\DepthRangeFilterIterator($iterator, $minDepth, $maxDepth);
         }
 
-        if ($this->mode) {
+        if ($this->mode !== 0) {
             $iterator = new Iterator\FileTypeFilterIterator($iterator, $this->mode);
         }
 

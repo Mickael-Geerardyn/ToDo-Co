@@ -2,52 +2,45 @@
 
 namespace App\Entity;
 
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Table("user")
- * @ORM\Entity
- * @UniqueEntity("email")
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- */
-class User implements UserInterface
+
+#[ORM\Table("user")]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: "email",message: "Cette adresse courriel est déjà utilisée")]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-	/**
-	 * @ORM\Column(type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-    private int $id;
+	#[ORM\Column]
+	#[ORM\Id]
+	#[ORM\GeneratedValue]
+    private ?int $id = null;
 
 
-	/**
-	 * @ORM\Column(type="string", length=25, unique=true)
-	 * @Assert\NotBlank(message="Vous devez saisir un nom d'utilisateur.")
-	 */
+	#[ORM\Column(type: Types::STRING, length: 25, unique: true)]
+	#[Assert\NotBlank(message: "Vous devez saisir un nom d'utilisateur.")]
     private string $username;
 
-
-	/**
-	 * @ORM\Column(type="string", length=64)
-	 */
+	#[ORM\Column(type: Types::STRING, length: 64)]
     private string $password;
 
-	/**
-	 * @ORM\Column(type="string", length=60, unique=true)
-	 * @Assert\NotBlank(message="Vous devez saisir une adresse email.")
-	 * @Assert\Email(message="Le format de l'adresse n'est pas correcte.")
-	 */
+	#[ORM\Column(type: Types::STRING, length: 60, unique: true)]
+	#[Assert\NotBlank(message: "Vous devez saisir une adresse email.")]
+	#[Assert\Email(message: "Le format de l'adresse n'est pas correcte")]
     private string $email;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="user")
-     */
-    private ArrayCollection $tasks;
+	#[ORM\OneToMany(mappedBy: "user", targetEntity: Task::class)]
+    private Collection $tasks;
+
+	#[ORM\Column(type: "json")]
+	private array $roles = [];
 
     public function __construct()
     {
@@ -64,8 +57,8 @@ class User implements UserInterface
         return $this->username;
     }
 
-    public function setUsername($username)
-    {
+    public function setUsername($username): void
+	{
         $this->username = $username;
     }
 
@@ -79,8 +72,8 @@ class User implements UserInterface
         return $this->password;
     }
 
-    public function setPassword($password)
-    {
+    public function setPassword($password): void
+	{
         $this->password = $password;
     }
 
@@ -89,15 +82,29 @@ class User implements UserInterface
         return $this->email;
     }
 
-    public function setEmail($email)
-    {
+    public function setEmail($email): void
+	{
         $this->email = $email;
     }
 
-    public function getRoles(): array
-    {
-        return array('ROLE_USER');
-    }
+	public function getRoles(): array
+	{
+		$roles = $this->roles;
+		// guarantee every user at least has ROLE_USER
+		if($roles === [])
+		{
+			$roles[] = 'ROLE_USER';
+		}
+
+		return array_unique($roles);
+	}
+
+	public function setRoles(array $roles): self
+	{
+		$this->roles = $roles;
+
+		return $this;
+	}
 
     public function eraseCredentials(): void
     {
@@ -105,13 +112,10 @@ class User implements UserInterface
 
     public function getUserIdentifier(): string
     {
-        // TODO: Implement getUserIdentifier() method.
+		return $this->email;
     }
 
-    /**
-     * @return Collection<int, Task>
-     */
-    public function getTasks(): Collection
+	public function getTasks(): ?Collection
     {
         return $this->tasks;
     }
@@ -128,11 +132,9 @@ class User implements UserInterface
 
     public function removeTask(Task $task): self
     {
-        if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
-            if ($task->getUser() === $this) {
-                $task->setUser(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->tasks->removeElement($task) && $task->getUser() === $this) {
+            $task->setUser(null);
         }
 
         return $this;

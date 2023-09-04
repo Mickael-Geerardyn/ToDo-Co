@@ -23,18 +23,15 @@ use Composer\Semver\VersionParser;
  */
 final class NewVersionChecker implements NewVersionCheckerInterface
 {
-    private GithubClientInterface $githubClient;
-
-    private VersionParser $versionParser;
+    private readonly VersionParser $versionParser;
 
     /**
      * @var null|string[]
      */
     private $availableVersions;
 
-    public function __construct(GithubClientInterface $githubClient)
+    public function __construct(private readonly GithubClientInterface $githubClient)
     {
-        $this->githubClient = $githubClient;
         $this->versionParser = new VersionParser();
     }
 
@@ -91,7 +88,7 @@ final class NewVersionChecker implements NewVersionCheckerInterface
                 if ('stable' === VersionParser::parseStability($version)) {
                     $this->availableVersions[] = $version;
                 }
-            } catch (\UnexpectedValueException $exception) {
+            } catch (\UnexpectedValueException) {
                 // not a valid version tag
             }
         }

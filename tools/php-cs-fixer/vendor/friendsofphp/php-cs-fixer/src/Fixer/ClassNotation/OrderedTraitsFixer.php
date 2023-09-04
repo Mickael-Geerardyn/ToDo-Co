@@ -67,7 +67,7 @@ final class OrderedTraitsFixer extends AbstractFixer
             }
 
             if (!$token->isGivenKind(CT::T_USE_TRAIT)) {
-                if (\count($uses) > 0) {
+                if ($uses !== []) {
                     yield $uses;
 
                     $uses = [];

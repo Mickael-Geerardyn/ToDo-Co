@@ -50,15 +50,9 @@ final class BracesFixer extends AbstractProxyFixer implements ConfigurableFixerI
      */
     public const LINE_SAME = 'same';
 
-    /**
-     * @var null|CurlyBracesPositionFixer
-     */
-    private $curlyBracesPositionFixer;
+    private ?\PhpCsFixer\Fixer\Basic\CurlyBracesPositionFixer $curlyBracesPositionFixer = null;
 
-    /**
-     * @var null|ControlStructureContinuationPositionFixer
-     */
-    private $controlStructureContinuationPositionFixer;
+    private ?\PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer $controlStructureContinuationPositionFixer = null;
 
     public function getDefinition(): FixerDefinitionInterface
     {
@@ -227,7 +221,7 @@ class Foo
 
     private function getCurlyBracesPositionFixer(): CurlyBracesPositionFixer
     {
-        if (null === $this->curlyBracesPositionFixer) {
+        if (!$this->curlyBracesPositionFixer instanceof \PhpCsFixer\Fixer\Basic\CurlyBracesPositionFixer) {
             $this->curlyBracesPositionFixer = new CurlyBracesPositionFixer();
         }
 
@@ -236,7 +230,7 @@ class Foo
 
     private function getControlStructureContinuationPositionFixer(): ControlStructureContinuationPositionFixer
     {
-        if (null === $this->controlStructureContinuationPositionFixer) {
+        if (!$this->controlStructureContinuationPositionFixer instanceof \PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer) {
             $this->controlStructureContinuationPositionFixer = new ControlStructureContinuationPositionFixer();
         }
 

@@ -23,8 +23,6 @@ class_exists(Section::class);
  */
 class Stopwatch implements ResetInterface
 {
-    private bool $morePrecision;
-
     /**
      * @var Section[]
      */
@@ -38,9 +36,8 @@ class Stopwatch implements ResetInterface
     /**
      * @param bool $morePrecision If true, time is stored as float to keep the original microsecond precision
      */
-    public function __construct(bool $morePrecision = false)
+    public function __construct(private readonly bool $morePrecision = false)
     {
-        $this->morePrecision = $morePrecision;
         $this->reset();
     }
 
@@ -65,7 +62,7 @@ class Stopwatch implements ResetInterface
     {
         $current = end($this->activeSections);
 
-        if (null !== $id && null === $current->get($id)) {
+        if (null !== $id && !$current->get($id) instanceof \Symfony\Component\Stopwatch\Section) {
             throw new \LogicException(sprintf('The section "%s" has been started at an other level and cannot be opened.', $id));
         }
 
@@ -89,7 +86,7 @@ class Stopwatch implements ResetInterface
     {
         $this->stop('__section__');
 
-        if (1 == \count($this->activeSections)) {
+        if (1 == \count((array) $this->activeSections)) {
             throw new \LogicException('There is no started section to stop.');
         }
 

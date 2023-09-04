@@ -75,7 +75,7 @@ final class ListSetsCommand extends Command
         try {
             $factory->registerBuiltInReporters();
             $reporter = $factory->getReporter($format);
-        } catch (\UnexpectedValueException $e) {
+        } catch (\UnexpectedValueException) {
             $formats = $factory->getFormats();
             sort($formats);
 

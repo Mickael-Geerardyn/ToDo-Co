@@ -126,7 +126,7 @@ class TextDescriptor extends Descriptor
     {
         $command->mergeApplicationDefinition(false);
 
-        if ($description = $command->getDescription()) {
+        if (($description = $command->getDescription()) !== '' && ($description = $command->getDescription()) !== '0') {
             $this->writeText('<comment>Description:</comment>', $options);
             $this->writeText("\n");
             $this->writeText('  '.$description);
@@ -170,7 +170,7 @@ class TextDescriptor extends Descriptor
                 $this->writeText("\n");
             }
         } else {
-            if ('' != $help = $application->getHelp()) {
+            if ('' != ($help = $application->getHelp())) {
                 $this->writeText("$help\n\n", $options);
             }
 
@@ -242,7 +242,7 @@ class TextDescriptor extends Descriptor
         $text = '';
         $aliases = $command->getAliases();
 
-        if ($aliases) {
+        if ($aliases !== []) {
             $text = '['.implode('|', $aliases).'] ';
         }
 
@@ -289,7 +289,7 @@ class TextDescriptor extends Descriptor
             }
         }
 
-        return $widths ? max($widths) + 2 : 0;
+        return $widths !== [] ? max($widths) + 2 : 0;
     }
 
     /**

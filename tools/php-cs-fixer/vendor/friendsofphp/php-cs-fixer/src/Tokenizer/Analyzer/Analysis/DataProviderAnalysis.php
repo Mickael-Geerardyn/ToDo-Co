@@ -16,21 +16,11 @@ namespace PhpCsFixer\Tokenizer\Analyzer\Analysis;
 
 final class DataProviderAnalysis
 {
-    private string $name;
-
-    private int $nameIndex;
-
-    /** @var array<int> */
-    private array $usageIndices;
-
     /**
      * @param array<int> $usageIndices
      */
-    public function __construct(string $name, int $nameIndex, array $usageIndices)
+    public function __construct(private readonly string $name, private readonly int $nameIndex, private readonly array $usageIndices)
     {
-        $this->name = $name;
-        $this->nameIndex = $nameIndex;
-        $this->usageIndices = $usageIndices;
     }
 
     public function getName(): string

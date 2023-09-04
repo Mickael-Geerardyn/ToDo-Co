@@ -15,12 +15,13 @@ if (\PHP_VERSION_ID >= 70400 && extension_loaded('curl')) {
      */
     class CURLStringFile extends CURLFile
     {
-        private $data;
+        /**
+         * @var string
+         */
+        public $name;
 
-        public function __construct(string $data, string $postname, string $mime = 'application/octet-stream')
+        public function __construct()
         {
-            $this->data = $data;
-            parent::__construct('data://application/octet-stream;base64,'.base64_encode($data), $mime, $postname);
         }
 
         public function __set(string $name, $value): void
@@ -35,12 +36,12 @@ if (\PHP_VERSION_ID >= 70400 && extension_loaded('curl')) {
                 throw new \TypeError('Cannot assign '.gettype($value).' to property CURLStringFile::$data of type string');
             }
 
-            $this->name = 'data://application/octet-stream;base64,'.base64_encode($value);
+            $this->name = 'data://application/octet-stream;base64,'.base64_encode((string) $value);
         }
 
         public function __isset(string $name): bool
         {
-            return isset($this->$name);
+            return property_exists($this, 'name') && $this->$name !== null;
         }
 
         public function &__get(string $name)

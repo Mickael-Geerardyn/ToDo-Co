@@ -138,7 +138,7 @@ final class CommentToPhpdocFixer extends AbstractFixer implements ConfigurableFi
                     return false;
                 }
 
-                return !\in_array(strtolower($matches[1]), $this->ignoredTags, true);
+                return !\in_array(strtolower((string) $matches[1]), $this->ignoredTags, true);
             },
             false
         );

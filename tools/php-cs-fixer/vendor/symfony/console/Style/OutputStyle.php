@@ -23,11 +23,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 abstract class OutputStyle implements OutputInterface, StyleInterface
 {
-    private OutputInterface $output;
-
-    public function __construct(OutputInterface $output)
+    public function __construct(private readonly OutputInterface $output)
     {
-        $this->output = $output;
     }
 
     /**

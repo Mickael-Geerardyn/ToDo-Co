@@ -30,11 +30,8 @@ use PhpCsFixer\Utils;
  */
 final class ListDocumentGenerator
 {
-    private DocumentationLocator $locator;
-
-    public function __construct(DocumentationLocator $locator)
+    public function __construct(private readonly DocumentationLocator $locator)
     {
-        $this->locator = $locator;
     }
 
     /**
@@ -71,7 +68,7 @@ final class ListDocumentGenerator
                 $documentation .= "\n   *warning deprecated*";
                 $alternatives = $fixer->getSuccessorsNames();
 
-                if (0 !== \count($alternatives)) {
+                if ([] !== $alternatives) {
                     $documentation .= RstUtils::toRst(sprintf(
                         '   Use %s instead.',
                         Utils::naturalLanguageJoinWithBackticks($alternatives)
@@ -146,7 +143,7 @@ final class ListDocumentGenerator
 
                 $documentation .= "\n   Part of rule set{$plural} ";
 
-                foreach ($ruleSetConfigs as $set => $config) {
+                foreach (array_keys($ruleSetConfigs) as $set) {
                     $ruleSetPath = $this->locator->getRuleSetsDocumentationFilePath($set);
                     $ruleSetPath = substr($ruleSetPath, strrpos($ruleSetPath, '/'));
 

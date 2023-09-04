@@ -23,16 +23,13 @@ use PhpCsFixer\Utils;
  */
 final class Cache implements CacheInterface
 {
-    private SignatureInterface $signature;
-
     /**
      * @var array<string, string>
      */
     private array $hashes = [];
 
-    public function __construct(SignatureInterface $signature)
+    public function __construct(private readonly SignatureInterface $signature)
     {
-        $this->signature = $signature;
     }
 
     public function getSignature(): SignatureInterface
@@ -111,7 +108,7 @@ final class Cache implements CacheInterface
 
         $missingKeys = array_diff_key(array_flip($requiredKeys), $data);
 
-        if (\count($missingKeys) > 0) {
+        if ($missingKeys !== []) {
             throw new \InvalidArgumentException(sprintf(
                 'JSON data is missing keys %s',
                 Utils::naturalLanguageJoin(array_keys($missingKeys))

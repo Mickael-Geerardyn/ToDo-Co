@@ -118,7 +118,7 @@ class SomeClass
 
         $returnTypeAnalysis = $functionsAnalyzer->getFunctionReturnType($tokens, $index);
 
-        if (null !== $returnTypeAnalysis) {
+        if ($returnTypeAnalysis instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis) {
             $this->replaceByShortType($tokens, $returnTypeAnalysis, $uses, $namespaceName);
         }
     }

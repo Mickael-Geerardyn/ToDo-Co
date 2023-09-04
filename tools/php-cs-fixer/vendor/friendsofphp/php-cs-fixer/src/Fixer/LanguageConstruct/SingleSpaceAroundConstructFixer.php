@@ -349,10 +349,8 @@ yield  from  baz();
                 continue;
             }
 
-            if ($token->isComment() || $token->isGivenKind(CT::T_ATTRIBUTE_CLOSE)) {
-                if ($tokens[$whitespaceTokenIndex]->equals([T_WHITESPACE]) && str_contains($tokens[$whitespaceTokenIndex]->getContent(), "\n")) {
-                    continue;
-                }
+            if (($token->isComment() || $token->isGivenKind(CT::T_ATTRIBUTE_CLOSE)) && ($tokens[$whitespaceTokenIndex]->equals([T_WHITESPACE]) && str_contains($tokens[$whitespaceTokenIndex]->getContent(), "\n"))) {
+                continue;
             }
 
             $tokens->ensureWhitespaceAtIndex($whitespaceTokenIndex, 0, ' ');

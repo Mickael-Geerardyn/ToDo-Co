@@ -151,7 +151,7 @@ final class BlankLinesBeforeNamespaceFixer extends AbstractFixer implements Whit
                     break;
                 }
 
-                if (false === $token->isGivenKind(T_WHITESPACE)) {
+                if (!$token->isGivenKind(T_WHITESPACE)) {
                     break;
                 }
 
@@ -190,7 +190,7 @@ final class BlankLinesBeforeNamespaceFixer extends AbstractFixer implements Whit
             ? $expectedMax
             : max($precedingNewlines, $expectedMin);
 
-        if (null !== $openingToken) {
+        if ($openingToken instanceof \PhpCsFixer\Tokenizer\Token) {
             // Use the configured line ending for the PHP opening tag
             $content = rtrim($openingToken->getContent());
             $newContent = $content.$lineEnding;

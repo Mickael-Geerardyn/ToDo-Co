@@ -21,26 +21,14 @@ use function time;
  */
 final class PsrCachedReader implements Reader
 {
-    /** @var Reader */
-    private $delegate;
-
-    /** @var CacheItemPoolInterface */
-    private $cache;
-
-    /** @var bool */
-    private $debug;
-
     /** @var array<string, array<object>> */
-    private $loadedAnnotations = [];
+    private array $loadedAnnotations = [];
 
     /** @var int[] */
-    private $loadedFilemtimes = [];
+    private array $loadedFilemtimes = [];
 
-    public function __construct(Reader $reader, CacheItemPoolInterface $cache, bool $debug = false)
+    public function __construct(private readonly \Doctrine\Common\Annotations\Reader $delegate, private readonly \Psr\Cache\CacheItemPoolInterface $cache, private readonly bool $debug = false)
     {
-        $this->delegate = $reader;
-        $this->cache    = $cache;
-        $this->debug    = (bool) $debug;
     }
 
     /**
@@ -196,12 +184,8 @@ final class PsrCachedReader implements Reader
 
         $lastModification =  max(array_merge(
             [$filename ? filemtime($filename) : 0],
-            array_map(function (ReflectionClass $reflectionTrait): int {
-                return $this->getTraitLastModificationTime($reflectionTrait);
-            }, $class->getTraits()),
-            array_map(function (ReflectionClass $class): int {
-                return $this->getLastModification($class);
-            }, $class->getInterfaces()),
+            array_map(fn(ReflectionClass $reflectionTrait): int => $this->getTraitLastModificationTime($reflectionTrait), $class->getTraits()),
+            array_map(fn(ReflectionClass $class): int => $this->getLastModification($class), $class->getInterfaces()),
             $parent ? [$this->getLastModification($parent)] : []
         ));
 
@@ -218,12 +202,7 @@ final class PsrCachedReader implements Reader
             return $this->loadedFilemtimes[$fileName];
         }
 
-        $lastModificationTime = max(array_merge(
-            [$fileName ? filemtime($fileName) : 0],
-            array_map(function (ReflectionClass $reflectionTrait): int {
-                return $this->getTraitLastModificationTime($reflectionTrait);
-            }, $reflectionTrait->getTraits())
-        ));
+        $lastModificationTime = max([$fileName ? filemtime($fileName) : 0, ...array_map(fn(ReflectionClass $reflectionTrait): int => $this->getTraitLastModificationTime($reflectionTrait), $reflectionTrait->getTraits())]);
 
         assert($lastModificationTime !== false);
 

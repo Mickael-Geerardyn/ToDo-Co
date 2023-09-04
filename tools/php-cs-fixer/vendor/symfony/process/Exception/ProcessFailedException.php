@@ -20,7 +20,7 @@ use Symfony\Component\Process\Process;
  */
 class ProcessFailedException extends RuntimeException
 {
-    private $process;
+    private readonly \Symfony\Component\Process\Process $process;
 
     public function __construct(Process $process)
     {
@@ -28,7 +28,11 @@ class ProcessFailedException extends RuntimeException
             throw new InvalidArgumentException('Expected a failed process, but the given process was successful.');
         }
 
-        $error = sprintf('The command "%s" failed.'."\n\nExit Code: %s(%s)\n\nWorking directory: %s",
+        $error = sprintf('The command "%s" failed.
+
+Exit Code: %s(%s)
+
+Working directory: %s',
             $process->getCommandLine(),
             $process->getExitCode(),
             $process->getExitCodeText(),

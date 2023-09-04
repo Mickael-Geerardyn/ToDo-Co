@@ -19,20 +19,11 @@ namespace PhpCsFixer\FixerDefinition;
  */
 final class CodeSample implements CodeSampleInterface
 {
-    private string $code;
-
-    /**
-     * @var null|array<string, mixed>
-     */
-    private ?array $configuration;
-
     /**
      * @param null|array<string, mixed> $configuration
      */
-    public function __construct(string $code, ?array $configuration = null)
+    public function __construct(private readonly string $code, private readonly ?array $configuration = null)
     {
-        $this->code = $code;
-        $this->configuration = $configuration;
     }
 
     public function getCode(): string

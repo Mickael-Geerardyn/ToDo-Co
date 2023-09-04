@@ -37,58 +37,12 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 final class Runner
 {
-    private DifferInterface $differ;
-
-    private ?DirectoryInterface $directory;
-
-    private ?EventDispatcherInterface $eventDispatcher;
-
-    private ErrorsManager $errorsManager;
-
-    private CacheManagerInterface $cacheManager;
-
-    private bool $isDryRun;
-
-    private LinterInterface $linter;
-
-    /**
-     * @var \Traversable<\SplFileInfo>
-     */
-    private $finder;
-
-    /**
-     * @var list<FixerInterface>
-     */
-    private array $fixers;
-
-    private bool $stopOnViolation;
-
     /**
      * @param \Traversable<\SplFileInfo> $finder
      * @param list<FixerInterface>       $fixers
      */
-    public function __construct(
-        \Traversable $finder,
-        array $fixers,
-        DifferInterface $differ,
-        ?EventDispatcherInterface $eventDispatcher,
-        ErrorsManager $errorsManager,
-        LinterInterface $linter,
-        bool $isDryRun,
-        CacheManagerInterface $cacheManager,
-        ?DirectoryInterface $directory = null,
-        bool $stopOnViolation = false
-    ) {
-        $this->finder = $finder;
-        $this->fixers = $fixers;
-        $this->differ = $differ;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->errorsManager = $errorsManager;
-        $this->linter = $linter;
-        $this->isDryRun = $isDryRun;
-        $this->cacheManager = $cacheManager;
-        $this->directory = $directory ?? new Directory('');
-        $this->stopOnViolation = $stopOnViolation;
+    public function __construct(private \Traversable $finder, private readonly array $fixers, private readonly DifferInterface $differ, private readonly ?EventDispatcherInterface $eventDispatcher, private readonly ErrorsManager $errorsManager, private readonly LinterInterface $linter, private readonly bool $isDryRun, private readonly CacheManagerInterface $cacheManager, private readonly DirectoryInterface $directory = new Directory(''), private readonly bool $stopOnViolation = false)
+    {
     }
 
     /**
@@ -291,7 +245,7 @@ final class Runner
 
     private function dispatchEvent(string $name, Event $event): void
     {
-        if (null === $this->eventDispatcher) {
+        if (!$this->eventDispatcher instanceof \Symfony\Component\EventDispatcher\EventDispatcherInterface) {
             return;
         }
 

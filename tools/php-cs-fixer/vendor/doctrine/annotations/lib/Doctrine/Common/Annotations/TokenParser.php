@@ -30,21 +30,17 @@ class TokenParser
      *
      * @phpstan-var list<mixed[]>
      */
-    private $tokens;
+    private array $tokens;
 
     /**
      * The number of tokens.
-     *
-     * @var int
      */
-    private $numTokens;
+    private readonly int $numTokens;
 
     /**
      * The current array pointer.
-     *
-     * @var int
      */
-    private $pointer = 0;
+    private int $pointer = 0;
 
     public function __construct(string $contents)
     {
@@ -112,7 +108,7 @@ class TokenParser
             ) {
                 $class .= $token[1];
 
-                $classSplit = explode('\\', $token[1]);
+                $classSplit = explode('\\', (string) $token[1]);
                 $alias      = $classSplit[count($classSplit) - 1];
             } elseif ($token[0] === T_NS_SEPARATOR) {
                 $class .= '\\';
@@ -121,12 +117,12 @@ class TokenParser
                 $explicitAlias = true;
                 $alias         = '';
             } elseif ($token === ',') {
-                $statements[strtolower($alias)] = $groupRoot . $class;
+                $statements[strtolower((string) $alias)] = $groupRoot . $class;
                 $class                          = '';
                 $alias                          = '';
                 $explicitAlias                  = false;
             } elseif ($token === ';') {
-                $statements[strtolower($alias)] = $groupRoot . $class;
+                $statements[strtolower((string) $alias)] = $groupRoot . $class;
                 break;
             } elseif ($token === '{') {
                 $groupRoot = $class;
@@ -153,7 +149,7 @@ class TokenParser
         $statements = [];
         while (($token = $this->next())) {
             if ($token[0] === T_USE) {
-                $statements = array_merge($statements, $this->parseUseStatement());
+                $statements = [...$statements, ...$this->parseUseStatement()];
                 continue;
             }
 

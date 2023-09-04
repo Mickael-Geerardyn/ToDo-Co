@@ -43,18 +43,18 @@ final class StrictUnifiedDiffOutputBuilder implements DiffOutputBuilderInterface
         'toFileDate'          => null,
     ];
     private bool $changed;
-    private bool $collapseRanges;
+    private readonly bool $collapseRanges;
 
     /**
      * @psalm-var positive-int
      */
-    private int $commonLineThreshold;
-    private string $header;
+    private readonly int $commonLineThreshold;
+    private readonly string $header;
 
     /**
      * @psalm-var positive-int
      */
-    private int $contextLines;
+    private readonly int $contextLines;
 
     public function __construct(array $options = [])
     {
@@ -92,7 +92,7 @@ final class StrictUnifiedDiffOutputBuilder implements DiffOutputBuilderInterface
 
     public function getDiff(array $diff): string
     {
-        if (0 === count($diff)) {
+        if ([] === $diff) {
             return '';
         }
 
@@ -129,7 +129,7 @@ final class StrictUnifiedDiffOutputBuilder implements DiffOutputBuilderInterface
         $upperLimit = count($diff);
 
         if (0 === $diff[$upperLimit - 1][1]) {
-            $lc = substr($diff[$upperLimit - 1][0], -1);
+            $lc = substr((string) $diff[$upperLimit - 1][0], -1);
 
             if ("\n" !== $lc) {
                 array_splice($diff, $upperLimit, 0, [["\n\\ No newline at end of file\n", Differ::NO_LINE_END_EOF_WARNING]]);
@@ -142,13 +142,13 @@ final class StrictUnifiedDiffOutputBuilder implements DiffOutputBuilderInterface
             for ($i = $upperLimit - 1; $i >= 0; $i--) {
                 if (isset($toFind[$diff[$i][1]])) {
                     unset($toFind[$diff[$i][1]]);
-                    $lc = substr($diff[$i][0], -1);
+                    $lc = substr((string) $diff[$i][0], -1);
 
                     if ("\n" !== $lc) {
                         array_splice($diff, $i + 1, 0, [["\n\\ No newline at end of file\n", Differ::NO_LINE_END_EOF_WARNING]]);
                     }
 
-                    if (!count($toFind)) {
+                    if ($toFind === []) {
                         break;
                     }
                 }
@@ -300,7 +300,7 @@ final class StrictUnifiedDiffOutputBuilder implements DiffOutputBuilderInterface
                 fwrite($output, ' ' . $diff[$i][0]);
             } elseif ($diff[$i][1] === Differ::NO_LINE_END_EOF_WARNING) {
                 $this->changed = true;
-                fwrite($output, $diff[$i][0]);
+                fwrite($output, (string) $diff[$i][0]);
             }
             //} elseif ($diff[$i][1] === Differ::DIFF_LINE_END_WARNING) { // custom comment inserted by PHPUnit/diff package
             //  skip

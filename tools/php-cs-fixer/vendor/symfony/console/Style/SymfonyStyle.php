@@ -38,18 +38,15 @@ use Symfony\Component\Console\Terminal;
  */
 class SymfonyStyle extends OutputStyle
 {
-    public const MAX_LINE_LENGTH = 120;
-
-    private InputInterface $input;
-    private OutputInterface $output;
+    final public const MAX_LINE_LENGTH = 120;
+    private readonly OutputInterface $output;
     private SymfonyQuestionHelper $questionHelper;
     private ProgressBar $progressBar;
-    private int $lineLength;
-    private TrimmedBufferOutput $bufferedOutput;
+    private readonly int $lineLength;
+    private readonly TrimmedBufferOutput $bufferedOutput;
 
-    public function __construct(InputInterface $input, OutputInterface $output)
+    public function __construct(private readonly InputInterface $input, OutputInterface $output)
     {
-        $this->input = $input;
         $this->bufferedOutput = new TrimmedBufferOutput(\DIRECTORY_SEPARATOR === '\\' ? 4 : 2, $output->getVerbosity(), false, clone $output->getFormatter());
         // Windows cmd wraps lines as soon as the terminal width is reached, whether there are following chars or not.
         $width = (new Terminal())->getWidth() ?: self::MAX_LINE_LENGTH;

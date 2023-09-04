@@ -245,7 +245,8 @@ public function testItDoesSomething() {}}'.$this->whitespacesConfig->getLineEndi
         $needsAnnotation = 'annotation' === $this->configuration['style'];
 
         $doc = new DocBlock($tokens[$docBlockIndex]->getContent());
-        for ($i = 0; $i < \count($lines); ++$i) {
+        $counter = \count($lines);
+        for ($i = 0; $i < $counter; ++$i) {
             // If we need to add test annotation and it is a single line comment we need to deal with that separately
             if ($needsAnnotation && ($lines[$i]->isTheStart() && $lines[$i]->isTheEnd())) {
                 if (!$this->doesDocBlockContainTest($doc)) {
@@ -397,6 +398,6 @@ public function testItDoesSomething() {}}'.$this->whitespacesConfig->getLineEndi
 
     private function doesDocBlockContainTest(DocBlock $doc): bool
     {
-        return 0 !== \count($doc->getAnnotationsOfType('test'));
+        return [] !== $doc->getAnnotationsOfType('test');
     }
 }

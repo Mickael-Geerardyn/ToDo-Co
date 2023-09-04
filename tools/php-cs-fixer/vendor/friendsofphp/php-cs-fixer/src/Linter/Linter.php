@@ -23,7 +23,7 @@ namespace PhpCsFixer\Linter;
  */
 final class Linter implements LinterInterface
 {
-    private LinterInterface $subLinter;
+    private readonly LinterInterface $subLinter;
 
     public function __construct()
     {

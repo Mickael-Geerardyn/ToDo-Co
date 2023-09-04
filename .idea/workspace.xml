@@ -5,7 +5,434 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dccbdda-f8db-4baf-bd07-5bbb9527c2d3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/doctrine.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/doctrine.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes/annotations.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TaskController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Task.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Task.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/autoload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/ClassLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/ClassLoader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/InstalledVersions.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/InstalledVersions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/autoload_files.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/autoload_namespaces.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/autoload_namespaces.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/autoload_real.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/installed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/MatchAllResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/MatchAllResult.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/MatchAllStrictGroupsResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/MatchAllStrictGroupsResult.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/MatchAllWithOffsetsResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/MatchAllWithOffsetsResult.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/MatchResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/MatchResult.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/MatchStrictGroupsResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/MatchStrictGroupsResult.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/MatchWithOffsetsResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/MatchWithOffsetsResult.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/PcreException.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/PcreException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/Preg.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/Preg.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/ReplaceResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/ReplaceResult.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/UnexpectedNullMatchException.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/pcre/src/UnexpectedNullMatchException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/CompilingMatcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/CompilingMatcher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Constraint/Bound.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Constraint/Bound.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Constraint/Constraint.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Constraint/Constraint.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Constraint/ConstraintInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Constraint/ConstraintInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Constraint/MatchAllConstraint.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Constraint/MatchAllConstraint.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Constraint/MatchNoneConstraint.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Constraint/MatchNoneConstraint.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Constraint/MultiConstraint.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Constraint/MultiConstraint.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Interval.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Interval.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Intervals.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Intervals.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Semver.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/Semver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/VersionParser.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/semver/src/VersionParser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/xdebug-handler/src/PhpConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/xdebug-handler/src/PhpConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/xdebug-handler/src/Process.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/xdebug-handler/src/Process.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/xdebug-handler/src/Status.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/xdebug-handler/src/Status.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/xdebug-handler/src/XdebugHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/composer/xdebug-handler/src/XdebugHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/Annotation.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/Annotation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/Annotation/Enum.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/Annotation/Enum.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/Annotation/IgnoreAnnotation.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/Annotation/IgnoreAnnotation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/Annotation/Target.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/Annotation/Target.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/AnnotationException.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/AnnotationException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/AnnotationReader.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/AnnotationReader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/AnnotationRegistry.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/AnnotationRegistry.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/DocLexer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/DocLexer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/DocParser.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/DocParser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/IndexedReader.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/IndexedReader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/PsrCachedReader.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/PsrCachedReader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/TokenParser.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations/lib/Doctrine/Common/Annotations/TokenParser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/lexer/src/AbstractLexer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/lexer/src/AbstractLexer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/lexer/src/Token.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/lexer/src/Token.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/AbstractFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/AbstractFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/AbstractFunctionReferenceFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/AbstractFunctionReferenceFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/AbstractPhpdocToTypeDeclarationFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/AbstractPhpdocToTypeDeclarationFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/AbstractPhpdocTypesFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/AbstractPhpdocTypesFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Cache/Cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Cache/Cache.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Cache/Directory.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Cache/Directory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Cache/FileCacheManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Cache/FileCacheManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Cache/FileHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Cache/FileHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Cache/Signature.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Cache/Signature.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/ConfigurationException/InvalidFixerConfigurationException.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/ConfigurationException/InvalidFixerConfigurationException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Application.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Application.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/DescribeCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/DescribeCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/DescribeNameNotFoundException.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/DescribeNameNotFoundException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/FixCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/FixCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/HelpCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/HelpCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/ListFilesCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/ListFilesCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/ListSetsCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/ListSetsCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/SelfUpdateCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Command/SelfUpdateCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/ConfigurationResolver.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/ConfigurationResolver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Output/ErrorOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Output/ErrorOutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Output/OutputContext.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Output/OutputContext.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Output/Progress/DotsOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Output/Progress/DotsOutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Output/Progress/ProgressOutputFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Output/Progress/ProgressOutputFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Report/FixReport/GitlabReporter.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Report/FixReport/GitlabReporter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Report/FixReport/JunitReporter.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Report/FixReport/JunitReporter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Report/FixReport/ReportSummary.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Report/FixReport/ReportSummary.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Report/ListSetsReport/ReportSummary.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/Report/ListSetsReport/ReportSummary.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/SelfUpdate/NewVersionChecker.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/SelfUpdate/NewVersionChecker.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/WarningsDetector.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Console/WarningsDetector.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Differ/DiffConsoleFormatter.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Differ/DiffConsoleFormatter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Differ/FullDiffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Differ/FullDiffer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Differ/UnifiedDiffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Differ/UnifiedDiffer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/DocBlock/Annotation.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/DocBlock/Annotation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/DocBlock/DocBlock.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/DocBlock/DocBlock.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/DocBlock/Line.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/DocBlock/Line.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/DocBlock/ShortDescription.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/DocBlock/ShortDescription.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/DocBlock/Tag.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/DocBlock/Tag.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/DocBlock/TypeExpression.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/DocBlock/TypeExpression.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Doctrine/Annotation/Token.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Doctrine/Annotation/Token.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Doctrine/Annotation/Tokens.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Doctrine/Annotation/Tokens.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Documentation/DocumentationLocator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Documentation/DocumentationLocator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Documentation/FixerDocumentGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Documentation/FixerDocumentGenerator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Documentation/ListDocumentGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Documentation/ListDocumentGenerator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Documentation/RuleSetDocumentationGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Documentation/RuleSetDocumentationGenerator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Error/Error.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Error/Error.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FileReader.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FileReader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FileRemoval.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FileRemoval.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Alias/BacktickToShellExecFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Alias/BacktickToShellExecFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Alias/EregToPregFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Alias/EregToPregFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Alias/MbStrFunctionsFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Alias/MbStrFunctionsFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Alias/NoMixedEchoPrintFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Alias/NoMixedEchoPrintFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Alias/SetTypeToCastFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Alias/SetTypeToCastFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ArrayNotation/ArraySyntaxFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ArrayNotation/ArraySyntaxFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ArrayNotation/ReturnToYieldFromFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ArrayNotation/ReturnToYieldFromFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ArrayNotation/TrimArraySpacesFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ArrayNotation/TrimArraySpacesFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ArrayNotation/YieldFromArrayToYieldsFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ArrayNotation/YieldFromArrayToYieldsFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Basic/BracesFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Basic/BracesFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Basic/CurlyBracesPositionFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Basic/CurlyBracesPositionFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Basic/EncodingFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Basic/EncodingFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Basic/NonPrintableCharacterFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Basic/NonPrintableCharacterFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Basic/PsrAutoloadingFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Basic/PsrAutoloadingFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Casing/NativeFunctionTypeDeclarationCasingFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Casing/NativeFunctionTypeDeclarationCasingFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/ClassAttributesSeparationFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/ClassAttributesSeparationFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/ClassDefinitionFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/ClassDefinitionFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/FinalInternalClassFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/FinalInternalClassFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/NoPhp4ConstructorFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/NoPhp4ConstructorFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/OrderedClassElementsFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/OrderedClassElementsFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/OrderedTraitsFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/OrderedTraitsFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/OrderedTypesFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/OrderedTypesFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/ProtectedToPrivateFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/ProtectedToPrivateFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/SingleTraitInsertPerStatementFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ClassNotation/SingleTraitInsertPerStatementFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Comment/CommentToPhpdocFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Comment/CommentToPhpdocFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Comment/HeaderCommentFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Comment/HeaderCommentFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Comment/NoTrailingWhitespaceInCommentFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Comment/NoTrailingWhitespaceInCommentFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Comment/SingleLineCommentStyleFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Comment/SingleLineCommentStyleFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ConstantNotation/NativeConstantInvocationFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ConstantNotation/NativeConstantInvocationFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/EmptyLoopConditionFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/EmptyLoopConditionFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/NoBreakCommentFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/NoBreakCommentFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/NoUnneededControlParenthesesFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/NoUnneededControlParenthesesFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/SwitchCaseSemicolonToColonFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/SwitchCaseSemicolonToColonFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/SwitchCaseSpaceFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/SwitchCaseSpaceFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/TrailingCommaInMultilineFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/TrailingCommaInMultilineFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/YodaStyleFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ControlStructure/YodaStyleFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/DateTimeCreateFromFormatCallFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/DateTimeCreateFromFormatCallFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/FopenFlagOrderFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/FopenFlagOrderFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/FopenFlagsFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/FopenFlagsFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/LambdaNotUsedImportFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/LambdaNotUsedImportFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/MethodArgumentSpaceFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/MethodArgumentSpaceFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/NativeFunctionInvocationFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/NativeFunctionInvocationFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/PhpdocToReturnTypeFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/PhpdocToReturnTypeFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/RegularCallableCallFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/FunctionNotation/RegularCallableCallFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Import/FullyQualifiedStrictTypesFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Import/FullyQualifiedStrictTypesFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Import/GlobalNamespaceImportFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Import/GlobalNamespaceImportFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Import/GroupImportFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Import/GroupImportFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Import/NoUnusedImportsFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Import/NoUnusedImportsFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Import/OrderedImportsFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Import/OrderedImportsFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Import/SingleImportPerStatementFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Import/SingleImportPerStatementFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/LanguageConstruct/DeclareEqualNormalizeFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/LanguageConstruct/DeclareEqualNormalizeFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/LanguageConstruct/FunctionToConstantFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/LanguageConstruct/FunctionToConstantFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/LanguageConstruct/NullableTypeDeclarationFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/LanguageConstruct/NullableTypeDeclarationFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/LanguageConstruct/SingleSpaceAfterConstructFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/LanguageConstruct/SingleSpaceAfterConstructFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/LanguageConstruct/SingleSpaceAroundConstructFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/LanguageConstruct/SingleSpaceAroundConstructFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ListNotation/ListSyntaxFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ListNotation/ListSyntaxFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/NamespaceNotation/BlankLinesBeforeNamespaceFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/NamespaceNotation/BlankLinesBeforeNamespaceFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/NamespaceNotation/NoLeadingNamespaceWhitespaceFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/NamespaceNotation/NoLeadingNamespaceWhitespaceFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Operator/BinaryOperatorSpacesFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Operator/BinaryOperatorSpacesFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Operator/ConcatSpaceFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Operator/ConcatSpaceFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Operator/OperatorLinebreakFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Operator/OperatorLinebreakFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Operator/TernaryOperatorSpacesFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Operator/TernaryOperatorSpacesFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitDataProviderNameFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitDataProviderNameFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitDataProviderReturnTypeFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitDataProviderReturnTypeFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitDataProviderStaticFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitDataProviderStaticFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitDedicateAssertFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitDedicateAssertFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitMethodCasingFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitMethodCasingFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitMockFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitMockFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitNamespacedFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitNamespacedFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitNoExpectationAnnotationFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitNoExpectationAnnotationFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitTestAnnotationFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitTestAnnotationFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitTestCaseStaticMethodCallsFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/PhpUnit/PhpUnitTestCaseStaticMethodCallsFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/AlignMultilineCommentFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/AlignMultilineCommentFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/GeneralPhpdocAnnotationRemoveFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/GeneralPhpdocAnnotationRemoveFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/GeneralPhpdocTagRenameFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/GeneralPhpdocTagRenameFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/NoBlankLinesAfterPhpdocFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/NoBlankLinesAfterPhpdocFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/NoSuperfluousPhpdocTagsFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/NoSuperfluousPhpdocTagsFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocAddMissingParamAnnotationFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocAddMissingParamAnnotationFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocAlignFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocAlignFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocAnnotationWithoutDotFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocAnnotationWithoutDotFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocInlineTagNormalizerFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocInlineTagNormalizerFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocNoEmptyReturnFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocNoEmptyReturnFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocOrderFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocOrderFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocParamOrderFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocParamOrderFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocReturnSelfReferenceFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocReturnSelfReferenceFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocSeparationFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocSeparationFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocTagTypeFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocTagTypeFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocToCommentFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocToCommentFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocTypesFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocTypesFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocTypesOrderFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Phpdoc/PhpdocTypesOrderFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ReturnNotation/ReturnAssignmentFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/ReturnNotation/ReturnAssignmentFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Semicolon/MultilineWhitespaceBeforeSemicolonsFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Semicolon/MultilineWhitespaceBeforeSemicolonsFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/StringNotation/EscapeImplicitBackslashesFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/StringNotation/EscapeImplicitBackslashesFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/StringNotation/NoTrailingWhitespaceInStringFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/StringNotation/NoTrailingWhitespaceInStringFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/StringNotation/StringLengthToEmptyFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/StringNotation/StringLengthToEmptyFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/HeredocIndentationFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/HeredocIndentationFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/NoWhitespaceInBlankLineFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/NoWhitespaceInBlankLineFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/StatementIndentationFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/StatementIndentationFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/TypeDeclarationSpacesFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/TypeDeclarationSpacesFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/TypesSpacesFixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Fixer/Whitespace/TypesSpacesFixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/AliasedFixerOption.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/AliasedFixerOption.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/AliasedFixerOptionBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/AliasedFixerOptionBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/AllowedValueSubset.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/AllowedValueSubset.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/DeprecatedFixerOption.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/DeprecatedFixerOption.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/FixerConfigurationResolver.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/FixerConfigurationResolver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/FixerOption.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/FixerOption.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/FixerOptionBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerConfiguration/FixerOptionBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerDefinition/CodeSample.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerDefinition/CodeSample.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerDefinition/FileSpecificCodeSample.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerDefinition/FileSpecificCodeSample.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerDefinition/FixerDefinition.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerDefinition/FixerDefinition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerDefinition/VersionSpecificCodeSample.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerDefinition/VersionSpecificCodeSample.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerDefinition/VersionSpecification.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerDefinition/VersionSpecification.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerFileProcessedEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/FixerFileProcessedEvent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Linter/CachingLinter.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Linter/CachingLinter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Linter/Linter.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Linter/Linter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Linter/ProcessLinter.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Linter/ProcessLinter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Linter/ProcessLinterProcessBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Linter/ProcessLinterProcessBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Linter/ProcessLintingResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Linter/ProcessLintingResult.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Linter/TokenizerLintingResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Linter/TokenizerLintingResult.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/RuleSet/AbstractRuleSetDescription.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/RuleSet/AbstractRuleSetDescription.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/RuleSet/RuleSet.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/RuleSet/RuleSet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/RuleSet/RuleSets.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/RuleSet/RuleSets.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Runner/FileCachingLintingIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Runner/FileCachingLintingIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Runner/FileFilterIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Runner/FileFilterIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Runner/FileLintingIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Runner/FileLintingIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Runner/Runner.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Runner/Runner.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/StdinFileInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/StdinFileInfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/AbstractControlCaseStructuresAnalysis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/AbstractControlCaseStructuresAnalysis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/ArgumentAnalysis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/ArgumentAnalysis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/CaseAnalysis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/CaseAnalysis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/DataProviderAnalysis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/DataProviderAnalysis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/DefaultAnalysis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/DefaultAnalysis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/EnumAnalysis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/EnumAnalysis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/MatchAnalysis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/MatchAnalysis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/NamespaceAnalysis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/NamespaceAnalysis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/NamespaceUseAnalysis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/NamespaceUseAnalysis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/SwitchAnalysis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/SwitchAnalysis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/TypeAnalysis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/Analysis/TypeAnalysis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/ArgumentsAnalyzer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/ArgumentsAnalyzer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/CommentsAnalyzer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/CommentsAnalyzer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/FunctionsAnalyzer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/FunctionsAnalyzer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/NamespaceUsesAnalyzer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/NamespaceUsesAnalyzer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/NamespacesAnalyzer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/NamespacesAnalyzer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/WhitespacesAnalyzer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Analyzer/WhitespacesAnalyzer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/CT.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/CT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Token.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Token.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Tokens.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/Tokens.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/TokensAnalyzer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Tokenizer/TokensAnalyzer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/ToolInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/ToolInfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Utils.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/Utils.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/WhitespacesFixerConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/WhitespacesFixerConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/WordMatcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/src/WordMatcher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/container/src/ContainerInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/container/src/ContainerInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log/src/LogLevel.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log/src/LogLevel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log/src/LoggerAwareInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log/src/LoggerAwareInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log/src/LoggerAwareTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log/src/LoggerAwareTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log/src/LoggerInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log/src/LoggerInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log/src/LoggerTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log/src/LoggerTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log/src/NullLogger.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log/src/NullLogger.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Chunk.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Chunk.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Diff.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Diff.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Differ.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Differ.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Line.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Line.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/MemoryEfficientLongestCommonSubsequenceCalculator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/MemoryEfficientLongestCommonSubsequenceCalculator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Output/AbstractChunkOutputBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Output/AbstractChunkOutputBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Output/DiffOnlyOutputBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Output/DiffOnlyOutputBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Output/StrictUnifiedDiffOutputBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Output/StrictUnifiedDiffOutputBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Output/UnifiedDiffOutputBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Output/UnifiedDiffOutputBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Parser.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/Parser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/TimeEfficientLongestCommonSubsequenceCalculator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/sebastian/diff/src/TimeEfficientLongestCommonSubsequenceCalculator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Application.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Application.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/CI/GithubActionReporter.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/CI/GithubActionReporter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Color.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Color.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Command/Command.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Command/Command.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Command/CompleteCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Command/CompleteCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Command/DumpCompletionCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Command/DumpCompletionCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/CommandLoader/ContainerCommandLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/CommandLoader/ContainerCommandLoader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/CommandLoader/FactoryCommandLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/CommandLoader/FactoryCommandLoader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Completion/CompletionInput.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Completion/CompletionInput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Completion/CompletionSuggestions.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Completion/CompletionSuggestions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Completion/Output/ZshCompletionOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Completion/Output/ZshCompletionOutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Cursor.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Cursor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/DependencyInjection/AddConsoleCommandPass.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/DependencyInjection/AddConsoleCommandPass.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Descriptor/ApplicationDescription.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Descriptor/ApplicationDescription.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Descriptor/MarkdownDescriptor.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Descriptor/MarkdownDescriptor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Descriptor/ReStructuredTextDescriptor.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Descriptor/ReStructuredTextDescriptor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Descriptor/TextDescriptor.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Descriptor/TextDescriptor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Descriptor/XmlDescriptor.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Descriptor/XmlDescriptor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Event/ConsoleErrorEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Event/ConsoleErrorEvent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Event/ConsoleEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Event/ConsoleEvent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Event/ConsoleSignalEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Event/ConsoleSignalEvent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/EventListener/ErrorListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/EventListener/ErrorListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Exception/CommandNotFoundException.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Exception/CommandNotFoundException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Formatter/OutputFormatter.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Formatter/OutputFormatter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Formatter/OutputFormatterStyleStack.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Formatter/OutputFormatterStyleStack.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/Dumper.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/Dumper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/Helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/OutputWrapper.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/OutputWrapper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/ProgressBar.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/ProgressBar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/ProgressIndicator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/ProgressIndicator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/QuestionHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/QuestionHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/Table.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/Table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/TableCell.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/TableCell.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/TableCellStyle.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/TableCellStyle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/TableRows.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/TableRows.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/TableStyle.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Helper/TableStyle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/ArgvInput.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/ArgvInput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/ArrayInput.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/ArrayInput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/Input.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/Input.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/InputArgument.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/InputArgument.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/InputDefinition.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/InputDefinition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/InputOption.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/InputOption.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/StringInput.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Input/StringInput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Logger/ConsoleLogger.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Logger/ConsoleLogger.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Output/AnsiColorMode.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Output/AnsiColorMode.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Output/ConsoleOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Output/ConsoleOutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Output/ConsoleSectionOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Output/ConsoleSectionOutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Output/TrimmedBufferOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Output/TrimmedBufferOutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Question/ChoiceQuestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Question/ChoiceQuestion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Question/ConfirmationQuestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Question/ConfirmationQuestion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Question/Question.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Question/Question.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/SignalRegistry/SignalRegistry.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/SignalRegistry/SignalRegistry.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Style/OutputStyle.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Style/OutputStyle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Style/SymfonyStyle.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Style/SymfonyStyle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Terminal.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Terminal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Tester/ApplicationTester.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Tester/ApplicationTester.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Tester/CommandCompletionTester.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Tester/CommandCompletionTester.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Tester/CommandTester.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Tester/CommandTester.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Tester/TesterTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/console/Tester/TesterTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/deprecation-contracts/function.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/deprecation-contracts/function.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher/Debug/WrappedListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher/Debug/WrappedListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher/DependencyInjection/AddEventAliasesPass.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher/DependencyInjection/AddEventAliasesPass.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher/EventDispatcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher/EventDispatcher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher/ImmutableEventDispatcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/event-dispatcher/ImmutableEventDispatcher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/filesystem/Exception/FileNotFoundException.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/filesystem/Exception/FileNotFoundException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/filesystem/Exception/IOException.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/filesystem/Exception/IOException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/filesystem/Filesystem.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/filesystem/Filesystem.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/filesystem/Path.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/filesystem/Path.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Comparator/Comparator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Comparator/Comparator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Comparator/NumberComparator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Comparator/NumberComparator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Finder.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Finder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Gitignore.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Gitignore.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/DateRangeFilterIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/DateRangeFilterIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/DepthRangeFilterIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/DepthRangeFilterIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/ExcludeDirectoryFilterIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/ExcludeDirectoryFilterIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/FileTypeFilterIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/FileTypeFilterIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/FilecontentFilterIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/FilecontentFilterIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/LazyIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/LazyIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/RecursiveDirectoryIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/RecursiveDirectoryIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/SizeRangeFilterIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/SizeRangeFilterIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/SortableIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/SortableIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/VcsIgnoredFilterIterator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/Iterator/VcsIgnoredFilterIterator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/SplFileInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/finder/SplFileInfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/options-resolver/Debug/OptionsResolverIntrospector.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/options-resolver/Debug/OptionsResolverIntrospector.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/options-resolver/OptionConfigurator.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/options-resolver/OptionConfigurator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/options-resolver/OptionsResolver.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/options-resolver/OptionsResolver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-ctype/Ctype.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-ctype/Ctype.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-ctype/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-ctype/bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-grapheme/Grapheme.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-grapheme/Grapheme.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-grapheme/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-grapheme/bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/Normalizer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/Normalizer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/Resources/unidata/canonicalComposition.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/Resources/unidata/canonicalComposition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/Resources/unidata/canonicalDecomposition.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/Resources/unidata/canonicalDecomposition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/Resources/unidata/combiningClass.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/Resources/unidata/combiningClass.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/Resources/unidata/compatibilityDecomposition.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/Resources/unidata/compatibilityDecomposition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-intl-normalizer/bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-mbstring/Mbstring.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-mbstring/Mbstring.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-mbstring/Resources/unidata/lowerCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-mbstring/Resources/unidata/lowerCase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-mbstring/Resources/unidata/upperCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-mbstring/Resources/unidata/upperCase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-mbstring/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-mbstring/bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80/Php80.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80/Php80.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80/Resources/stubs/Attribute.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80/Resources/stubs/Attribute.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80/Resources/stubs/Stringable.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80/Resources/stubs/Stringable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80/Resources/stubs/ValueError.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80/Resources/stubs/ValueError.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php80/bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php81/Php81.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php81/Php81.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php81/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/polyfill-php81/bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Exception/ProcessFailedException.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Exception/ProcessFailedException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Exception/ProcessSignaledException.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Exception/ProcessSignaledException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Exception/ProcessTimedOutException.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Exception/ProcessTimedOutException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/ExecutableFinder.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/ExecutableFinder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/InputStream.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/InputStream.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/PhpExecutableFinder.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/PhpExecutableFinder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Pipes/AbstractPipes.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Pipes/AbstractPipes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Pipes/UnixPipes.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Pipes/UnixPipes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Pipes/WindowsPipes.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Pipes/WindowsPipes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Process.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/process/Process.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/service-contracts/ServiceLocatorTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/service-contracts/ServiceLocatorTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/service-contracts/ServiceSubscriberTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/service-contracts/ServiceSubscriberTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/service-contracts/Test/ServiceLocatorTestCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/service-contracts/Test/ServiceLocatorTestCase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/stopwatch/Section.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/stopwatch/Section.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/stopwatch/Stopwatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/stopwatch/Stopwatch.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/stopwatch/StopwatchEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/stopwatch/StopwatchEvent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/stopwatch/StopwatchPeriod.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/stopwatch/StopwatchPeriod.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/AbstractString.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/AbstractString.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/AbstractUnicodeString.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/AbstractUnicodeString.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/ByteString.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/ByteString.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/CodePointString.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/CodePointString.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/LazyString.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/LazyString.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/Slugger/AsciiSlugger.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/Slugger/AsciiSlugger.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/UnicodeString.php" beforeDir="false" afterPath="$PROJECT_DIR$/tools/php-cs-fixer/vendor/symfony/string/UnicodeString.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,8 +462,16 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="improving-application" />
+                    <option name="lastUsedInstant" value="1693525982" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="update-tests" />
-                    <option name="lastUsedInstant" value="1693015361" />
+                    <option name="lastUsedInstant" value="1693506326" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="delete-files-config" />
+                    <option name="lastUsedInstant" value="1693506285" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="main" />
@@ -54,7 +489,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP7.2">
+  <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/lexer" />
       <path value="$PROJECT_DIR$/tools/php-cs-fixer/vendor/doctrine/annotations" />
@@ -82,87 +517,116 @@
       <path value="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/cache" />
       <path value="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/log" />
       <path value="$PROJECT_DIR$/tools/php-cs-fixer/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/psr/cache" />
-      <path value="$PROJECT_DIR$/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/vendor/twig/twig" />
-      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
-      <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/lock" />
-      <path value="$PROJECT_DIR$/vendor/symfony/password-hasher" />
-      <path value="$PROJECT_DIR$/vendor/symfony/validator" />
-      <path value="$PROJECT_DIR$/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/vendor/symfony/security-core" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
-      <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/web-profiler-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
-      <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
-      <path value="$PROJECT_DIR$/vendor/symfony/security-csrf" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
-      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bridge" />
-      <path value="$PROJECT_DIR$/vendor/symfony/cache-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
-      <path value="$PROJECT_DIR$/vendor/symfony/asset" />
-      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
-      <path value="$PROJECT_DIR$/vendor/symfony/config" />
-      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/vendor/symfony/flex" />
-      <path value="$PROJECT_DIR$/vendor/symfony/cache" />
-      <path value="$PROJECT_DIR$/vendor/symfony/framework-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
-      <path value="$PROJECT_DIR$/vendor/symfony/security-guard" />
-      <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
-      <path value="$PROJECT_DIR$/vendor/symfony/security-http" />
-      <path value="$PROJECT_DIR$/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/vendor/symfony/property-access" />
-      <path value="$PROJECT_DIR$/vendor/symfony/dotenv" />
-      <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
-      <path value="$PROJECT_DIR$/vendor/symfony/runtime" />
-      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
-      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
-      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
-      <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
-      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/symfony/doctrine-bridge" />
-      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/orm" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-bundle" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-migrations-bundle" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
       <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/sql-formatter" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
       <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/common" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/collections" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/migrations" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
-      <path value="$PROJECT_DIR$/vendor/friendsofphp/proxy-manager-lts" />
-      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
-      <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-migrations-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/doctrine-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dotenv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/runtime" />
       <path value="$PROJECT_DIR$/vendor/symfony/phpunit-bridge" />
-      <path value="$PROJECT_DIR$/vendor/bin/.phpunit" />
-      <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
+      <path value="$PROJECT_DIR$/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-http" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-guard" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/framework-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/flex" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/cache" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/form" />
+      <path value="$PROJECT_DIR$/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/vendor/symfony/asset" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/symfony/cache-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-csrf" />
+      <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/web-profiler-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-core" />
+      <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/lock" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/password-hasher" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/migrations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/vendor/rector/rector" />
+      <path value="$PROJECT_DIR$/vendor/phpstan/phpstan" />
+      <path value="$PROJECT_DIR$/vendor/bin/.phpunit" />
       <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
     </include_path>
   </component>
   <component name="ProjectId" id="2UOGC7oK9lGJN9aqyRaIJVjMgYa" />
@@ -172,31 +636,32 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/usr/bin/php7.2&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "//wsl$/Ubuntu/usr/bin/php7.2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "php.override.implement.member.chooser.php.doc": "NONE",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Twig",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="\\wsl$\Ubuntu\var\www\openclassrooms\projet8\projet8-TodoList\App" />
       <recent name="\\wsl$\Ubuntu\var\www\openclassrooms\projet8\projet8-TodoList" />
+      <recent name="\\wsl$\Ubuntu\var\www\openclassrooms\projet8\projet8-TodoList\src" />
+      <recent name="\\wsl$\Ubuntu\var\www\openclassrooms\projet8\projet8-TodoList\App" />
       <recent name="\\wsl$\Ubuntu\var\www\openclassrooms\projet8\projet8-TodoList\public" />
       <recent name="\\wsl$\Ubuntu\var\www\openclassrooms\projet8\projet8-TodoList\templates" />
     </key>
@@ -232,6 +697,9 @@
       <workItem from="1693357231581" duration="966000" />
       <workItem from="1693401897616" duration="27589000" />
       <workItem from="1693484020131" duration="4333000" />
+      <workItem from="1693579744977" duration="23508000" />
+      <workItem from="1693671271311" duration="13452000" />
+      <workItem from="1693750232391" duration="26217000" />
     </task>
     <servers />
   </component>

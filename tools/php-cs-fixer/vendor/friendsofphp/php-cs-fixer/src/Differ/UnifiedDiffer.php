@@ -22,7 +22,7 @@ final class UnifiedDiffer implements DifferInterface
 {
     public function diff(string $old, string $new, ?\SplFileInfo $file = null): string
     {
-        if (null === $file) {
+        if (!$file instanceof \SplFileInfo) {
             $options = [
                 'fromFile' => 'Original',
                 'toFile' => 'New',

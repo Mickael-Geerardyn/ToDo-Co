@@ -35,11 +35,9 @@ final class Differ
     public const REMOVED                 = 2;
     public const DIFF_LINE_END_WARNING   = 3;
     public const NO_LINE_END_EOF_WARNING = 4;
-    private DiffOutputBuilderInterface $outputBuilder;
 
-    public function __construct(DiffOutputBuilderInterface $outputBuilder)
+    public function __construct(private readonly DiffOutputBuilderInterface $outputBuilder)
     {
-        $this->outputBuilder = $outputBuilder;
     }
 
     public function diff(array|string $from, array|string $to, LongestCommonSubsequenceCalculator $lcs = null): string
@@ -61,7 +59,7 @@ final class Differ
 
         [$from, $to, $start, $end] = self::getArrayDiffParted($from, $to);
 
-        if ($lcs === null) {
+        if (!$lcs instanceof \SebastianBergmann\Diff\LongestCommonSubsequenceCalculator) {
             $lcs = $this->selectLcsImplementation($from, $to);
         }
 
@@ -159,13 +157,13 @@ final class Differ
         }
 
         // two-way compare
-        foreach ($newLineBreaks as $break => $set) {
+        foreach (array_keys($newLineBreaks) as $break) {
             if (!isset($oldLineBreaks[$break])) {
                 return true;
             }
         }
 
-        foreach ($oldLineBreaks as $break => $set) {
+        foreach (array_keys($oldLineBreaks) as $break) {
             if (!isset($newLineBreaks[$break])) {
                 return true;
             }
@@ -197,7 +195,7 @@ final class Differ
         return "\n";
     }
 
-    private static function getArrayDiffParted(array &$from, array &$to): array
+    private function getArrayDiffParted(array &$from, array &$to): array
     {
         $start = [];
         $end   = [];
@@ -217,11 +215,10 @@ final class Differ
         }
 
         end($from);
-        end($to);
 
         do {
             $fromK = key($from);
-            $toK   = key($to);
+            $toK   = array_key_last($to);
 
             if (null === $fromK || null === $toK || current($from) !== current($to)) {
                 break;

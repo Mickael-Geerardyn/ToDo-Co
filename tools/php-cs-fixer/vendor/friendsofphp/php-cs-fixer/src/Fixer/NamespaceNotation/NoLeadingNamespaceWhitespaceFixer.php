@@ -84,7 +84,7 @@ final class NoLeadingNamespaceWhitespaceFixer extends AbstractFixer implements W
         }
     }
 
-    private static function endsWithWhitespace(string $str): bool
+    private function endsWithWhitespace(string $str): bool
     {
         if ('' === $str) {
             return false;

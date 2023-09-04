@@ -29,7 +29,7 @@ use Symfony\Component\Console\Formatter\OutputFormatter;
  */
 final class GitlabReporter implements ReporterInterface
 {
-    private Parser $diffParser;
+    private readonly Parser $diffParser;
 
     public function __construct()
     {

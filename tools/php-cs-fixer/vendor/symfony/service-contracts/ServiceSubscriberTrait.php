@@ -35,7 +35,7 @@ trait ServiceSubscriberTrait
                 continue;
             }
 
-            if (!$attribute = $method->getAttributes(SubscribedService::class)[0] ?? null) {
+            if (!($attribute = $method->getAttributes(SubscribedService::class)[0] ?? null) instanceof \ReflectionAttribute) {
                 continue;
             }
 
@@ -43,7 +43,7 @@ trait ServiceSubscriberTrait
                 throw new \LogicException(sprintf('Cannot use "%s" on method "%s::%s()" (can only be used on non-static, non-abstract methods with no parameters).', SubscribedService::class, self::class, $method->name));
             }
 
-            if (!$returnType = $method->getReturnType()) {
+            if (!($returnType = $method->getReturnType()) instanceof \ReflectionType) {
                 throw new \LogicException(sprintf('Cannot use "%s" on methods without a return type in "%s::%s()".', SubscribedService::class, $method->name, self::class));
             }
 

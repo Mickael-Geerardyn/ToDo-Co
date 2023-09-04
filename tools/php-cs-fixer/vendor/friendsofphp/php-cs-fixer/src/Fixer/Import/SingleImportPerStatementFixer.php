@@ -246,7 +246,7 @@ use Space\Models\ {
             $tokens->insertAt($i, new Token([T_USE, 'use']));
             $tokens->insertAt($i + 1, new Token([T_WHITESPACE, ' ']));
 
-            foreach ($leadingTokens as $offset => $leadingToken) {
+            foreach (array_keys($leadingTokens) as $offset) {
                 $tokens->insertAt($i + 2 + $offset, clone $leadingTokens[$offset]);
             }
 

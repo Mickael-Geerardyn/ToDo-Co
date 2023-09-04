@@ -19,7 +19,7 @@ namespace PhpCsFixer;
  *
  * @internal
  */
-final class StdinFileInfo extends \SplFileInfo
+final class StdinFileInfo extends \SplFileInfo implements \Stringable
 {
     public function __construct()
     {

@@ -17,7 +17,8 @@ use function sprintf;
  */
 final class IgnoreAnnotation
 {
-    /** @phpstan-var list<string> */
+    /** @phpstan-var list<string>
+     * @var string[] */
     public $names;
 
     /**
@@ -34,7 +35,7 @@ final class IgnoreAnnotation
         if (! is_array($values['value'])) {
             throw new RuntimeException(sprintf(
                 '@IgnoreAnnotation expects either a string name, or an array of strings, but got %s.',
-                json_encode($values['value'])
+                json_encode($values['value'], JSON_THROW_ON_ERROR)
             ));
         }
 

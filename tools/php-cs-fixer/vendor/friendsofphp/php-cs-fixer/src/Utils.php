@@ -126,7 +126,7 @@ final class Utils
      */
     public static function naturalLanguageJoin(array $names, string $wrapper = '"'): string
     {
-        if (0 === \count($names)) {
+        if ([] === $names) {
             throw new \InvalidArgumentException('Array of names cannot be empty.');
         }
 
@@ -138,7 +138,7 @@ final class Utils
 
         $last = array_pop($names);
 
-        if (\count($names) > 0) {
+        if ($names !== []) {
             return implode(', ', $names).' and '.$last;
         }
 
@@ -184,20 +184,14 @@ final class Utils
         return $triggeredDeprecations;
     }
 
-    /**
-     * @param mixed $value
-     */
-    public static function toString($value): string
+    public static function toString(mixed $value): string
     {
         return \is_array($value)
             ? self::arrayToString($value)
             : self::scalarToString($value);
     }
 
-    /**
-     * @param mixed $value
-     */
-    private static function scalarToString($value): string
+    private static function scalarToString(mixed $value): string
     {
         $str = var_export($value, true);
 
@@ -209,7 +203,7 @@ final class Utils
      */
     private static function arrayToString(array $value): string
     {
-        if (0 === \count($value)) {
+        if ([] === $value) {
             return '[]';
         }
 

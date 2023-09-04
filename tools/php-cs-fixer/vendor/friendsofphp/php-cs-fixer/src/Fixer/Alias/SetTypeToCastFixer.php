@@ -88,11 +88,9 @@ settype($bar, "null");
                 continue; // return value of the function is used
             }
 
-            reset($arguments);
-
             // --- Test first argument --------------------
 
-            $firstArgumentStart = key($arguments);
+            $firstArgumentStart = array_key_first($arguments);
             if ($tokens[$firstArgumentStart]->isComment() || $tokens[$firstArgumentStart]->isWhitespace()) {
                 $firstArgumentStart = $tokens->getNextMeaningfulToken($firstArgumentStart);
             }

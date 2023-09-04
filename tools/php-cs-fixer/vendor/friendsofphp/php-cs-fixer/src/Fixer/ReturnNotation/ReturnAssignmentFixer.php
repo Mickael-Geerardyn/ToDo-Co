@@ -518,10 +518,6 @@ final class ReturnAssignmentFixer extends AbstractFixer
         $finallyCloseIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $finallyOpenIndex);
         $varIndex = $tokens->getNextTokenOfKind($finallyOpenIndex, [$tokens[$returnVarIndex]]);
         // Check if the variable is used in the finally block
-        if (null !== $varIndex && $varIndex < $finallyCloseIndex) {
-            return true;
-        }
-
-        return false;
+        return null !== $varIndex && $varIndex < $finallyCloseIndex;
     }
 }

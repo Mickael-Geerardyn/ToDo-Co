@@ -56,7 +56,7 @@ final class ReturnToYieldFromFixer extends AbstractFixer
 
     protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
-        foreach ($tokens->findGivenKind(T_RETURN) as $index => $token) {
+        foreach (array_keys($tokens->findGivenKind(T_RETURN)) as $index) {
             if (!$this->shouldBeFixed($tokens, $index)) {
                 continue;
             }

@@ -39,7 +39,7 @@ class FilecontentFilterIterator extends MultiplePcreFilterIterator
         }
 
         $content = $fileinfo->getContents();
-        if (!$content) {
+        if ($content === '' || $content === '0') {
             return false;
         }
 

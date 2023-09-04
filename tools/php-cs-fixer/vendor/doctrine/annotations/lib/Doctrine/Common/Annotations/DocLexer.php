@@ -68,8 +68,8 @@ final class DocLexer extends AbstractLexer
      */
     public function nextTokenIsAdjacent(): bool
     {
-        return $this->token === null
-            || ($this->lookahead !== null
+        return !$this->token instanceof \Doctrine\Common\Lexer\Token
+            || ($this->lookahead instanceof \Doctrine\Common\Lexer\Token
                 && ($this->lookahead->position - $this->token->position) === strlen($this->token->value));
     }
 
@@ -122,7 +122,7 @@ final class DocLexer extends AbstractLexer
 
         // Checking numeric value
         if (is_numeric($value)) {
-            return strpos($value, '.') !== false || stripos($value, 'e') !== false
+            return str_contains($value, '.') || stripos($value, 'e') !== false
                 ? self::T_FLOAT : self::T_INTEGER;
         }
 

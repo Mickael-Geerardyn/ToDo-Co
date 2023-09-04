@@ -23,7 +23,8 @@ use function sprintf;
  */
 final class Enum
 {
-    /** @phpstan-var list<scalar> */
+    /** @phpstan-var list<scalar>
+     * @var int[]|float[]|string[]|bool[] */
     public $value;
 
     /**
@@ -48,7 +49,7 @@ final class Enum
             if (! is_scalar($var)) {
                 throw new InvalidArgumentException(sprintf(
                     '@Enum supports only scalar values "%s" given.',
-                    is_object($var) ? get_class($var) : gettype($var)
+                    get_debug_type($var)
                 ));
             }
         }

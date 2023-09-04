@@ -22,11 +22,8 @@ use Symfony\Component\Console\Completion\CompletionSuggestions;
  */
 class CommandCompletionTester
 {
-    private $command;
-
-    public function __construct(Command $command)
+    public function __construct(private readonly \Symfony\Component\Console\Command\Command $command)
     {
-        $this->command = $command;
     }
 
     /**

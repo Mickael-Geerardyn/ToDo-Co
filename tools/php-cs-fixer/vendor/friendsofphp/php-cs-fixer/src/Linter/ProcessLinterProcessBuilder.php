@@ -23,14 +23,11 @@ use Symfony\Component\Process\Process;
  */
 final class ProcessLinterProcessBuilder
 {
-    private string $executable;
-
     /**
      * @param string $executable PHP executable
      */
-    public function __construct(string $executable)
+    public function __construct(private readonly string $executable)
     {
-        $this->executable = $executable;
     }
 
     public function build(string $path): Process

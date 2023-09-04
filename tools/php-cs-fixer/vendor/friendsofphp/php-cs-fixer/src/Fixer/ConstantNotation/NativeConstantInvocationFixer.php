@@ -139,7 +139,7 @@ namespace {
         $caseInsensitiveConstantsToEscape = [];
 
         foreach ($constantsToEscape as $constantIndex => $constant) {
-            $loweredConstant = strtolower($constant);
+            $loweredConstant = strtolower((string) $constant);
             if (\in_array($loweredConstant, $caseInsensitiveConstants, true)) {
                 $caseInsensitiveConstantsToEscape[] = $loweredConstant;
                 unset($constantsToEscape[$constantIndex]);

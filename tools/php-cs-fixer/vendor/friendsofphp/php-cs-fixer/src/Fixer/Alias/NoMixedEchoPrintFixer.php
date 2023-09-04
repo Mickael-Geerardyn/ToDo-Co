@@ -31,15 +31,9 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class NoMixedEchoPrintFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
-    /**
-     * @var string
-     */
-    private $callBack;
+    private ?string $callBack = null;
 
-    /**
-     * @var int T_ECHO or T_PRINT
-     */
-    private $candidateTokenType;
+    private ?int $candidateTokenType = null;
 
     public function configure(array $configuration): void
     {

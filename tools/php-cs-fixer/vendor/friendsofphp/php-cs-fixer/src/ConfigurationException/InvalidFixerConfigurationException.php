@@ -25,7 +25,7 @@ use PhpCsFixer\Console\Command\FixCommandExitStatusCalculator;
  */
 class InvalidFixerConfigurationException extends InvalidConfigurationException
 {
-    private string $fixerName;
+    private readonly string $fixerName;
 
     public function __construct(string $fixerName, string $message, ?\Throwable $previous = null)
     {

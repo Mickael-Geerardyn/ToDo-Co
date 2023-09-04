@@ -42,10 +42,10 @@ final class DumpCompletionCommand extends Command
     protected function configure(): void
     {
         $fullCommand = $_SERVER['PHP_SELF'];
-        $commandName = basename($fullCommand);
+        $commandName = basename((string) $fullCommand);
         $fullCommand = @realpath($fullCommand) ?: $fullCommand;
 
-        $shell = $this->guessShell();
+        $shell = self::guessShell();
         [$rcFile, $completionFile] = match ($shell) {
             'fish' => ['~/.config/fish/config.fish', "/etc/fish/completions/$commandName.fish"],
             'zsh' => ['~/.zshrc', '$fpath[1]/_'.$commandName],
@@ -84,14 +84,14 @@ Add this to the end of your shell configuration file (e.g. <info>"{$rcFile}"</>)
     <info>eval "$({$fullCommand} completion {$shell})"</>
 EOH
             )
-            ->addArgument('shell', InputArgument::OPTIONAL, 'The shell type (e.g. "bash"), the value of the "$SHELL" env var will be used if this is not given', null, $this->getSupportedShells(...))
+            ->addArgument('shell', InputArgument::OPTIONAL, 'The shell type (e.g. "bash"), the value of the "$SHELL" env var will be used if this is not given', null)
             ->addOption('debug', null, InputOption::VALUE_NONE, 'Tail the completion debug log')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $commandName = basename($_SERVER['argv'][0]);
+        $commandName = basename((string) $_SERVER['argv'][0]);
 
         if ($input->getOption('debug')) {
             $this->tailDebugLog($commandName, $output);
@@ -121,7 +121,7 @@ EOH
         return 0;
     }
 
-    private static function guessShell(): string
+    private function guessShell(): string
     {
         return basename($_SERVER['SHELL'] ?? '');
     }
@@ -143,7 +143,7 @@ EOH
      */
     private function getSupportedShells(): array
     {
-        if (isset($this->supportedShells)) {
+        if (property_exists($this, 'supportedShells') && $this->supportedShells !== null) {
             return $this->supportedShells;
         }
 

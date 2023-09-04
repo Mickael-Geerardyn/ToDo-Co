@@ -129,7 +129,7 @@ final class TernaryOperatorSpacesFixer extends AbstractFixer
 
             $defaultAnalysis = $analysis->getDefaultAnalysis();
 
-            if (null !== $defaultAnalysis) {
+            if ($defaultAnalysis instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\DefaultAnalysis) {
                 $colonIndices[] = $defaultAnalysis->getColonIndex();
             }
         }

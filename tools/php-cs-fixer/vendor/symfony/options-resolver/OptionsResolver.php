@@ -50,73 +50,73 @@ class OptionsResolver implements Options
     /**
      * The names of all defined options.
      */
-    private $defined = [];
+    private array $defined = [];
 
     /**
      * The default option values.
      */
-    private $defaults = [];
+    private array $defaults = [];
 
     /**
      * A list of closure for nested options.
      *
      * @var \Closure[][]
      */
-    private $nested = [];
+    private array $nested = [];
 
     /**
      * The names of required options.
      */
-    private $required = [];
+    private array $required = [];
 
     /**
      * The resolved option values.
      */
-    private $resolved = [];
+    private array $resolved = [];
 
     /**
      * A list of normalizer closures.
      *
      * @var \Closure[][]
      */
-    private $normalizers = [];
+    private array $normalizers = [];
 
     /**
      * A list of accepted values for each option.
      */
-    private $allowedValues = [];
+    private array $allowedValues = [];
 
     /**
      * A list of accepted types for each option.
      */
-    private $allowedTypes = [];
+    private array $allowedTypes = [];
 
     /**
      * A list of info messages for each option.
      */
-    private $info = [];
+    private array $info = [];
 
     /**
      * A list of closures for evaluating lazy options.
      */
-    private $lazy = [];
+    private array $lazy = [];
 
     /**
      * A list of lazy options whose closure is currently being called.
      *
      * This list helps detecting circular dependencies between lazy options.
      */
-    private $calling = [];
+    private array $calling = [];
 
     /**
      * A list of deprecated options.
      */
-    private $deprecated = [];
+    private array $deprecated = [];
 
     /**
      * The list of options provided by the user.
      */
-    private $given = [];
+    private array $given = [];
 
     /**
      * Whether the instance is locked for reading.
@@ -126,19 +126,19 @@ class OptionsResolver implements Options
      * process. If any option is changed after being read, all evaluated
      * lazy options that depend on this option would become invalid.
      */
-    private $locked = false;
+    private bool $locked = false;
 
     private $parentsOptions = [];
 
     /**
      * Whether the whole options definition is marked as array prototype.
      */
-    private $prototype;
+    private ?bool $prototype = null;
 
     /**
      * The prototype array's index that is being read.
      */
-    private $prototypeIndex;
+    private int|string|null $prototypeIndex = null;
 
     /**
      * Whether to ignore undefined options.
@@ -232,7 +232,7 @@ class OptionsResolver implements Options
                 return $this;
             }
 
-            if (isset($params[0]) && null !== ($type = $params[0]->getType()) && self::class === $type->getName() && (!isset($params[1]) || (($type = $params[1]->getType()) instanceof \ReflectionNamedType && Options::class === $type->getName()))) {
+            if (isset($params[0]) && ($type = $params[0]->getType()) instanceof \ReflectionType && self::class === $type->getName() && (!isset($params[1]) || (($type = $params[1]->getType()) instanceof \ReflectionNamedType && Options::class === $type->getName()))) {
                 // Store closure for later evaluation
                 $this->nested[$option][] = $value;
                 $this->defaults[$option] = [];
@@ -869,7 +869,7 @@ class OptionsResolver implements Options
         // Make sure that no unknown options are passed
         $diff = $this->ignoreUndefined ? [] : array_diff_key($options, $clone->defined);
 
-        if (\count($diff) > 0) {
+        if ($diff !== []) {
             ksort($clone->defined);
             ksort($diff);
 
@@ -890,7 +890,7 @@ class OptionsResolver implements Options
         // Check whether any required option is missing
         $diff = array_diff_key($clone->required, $clone->defaults);
 
-        if (\count($diff) > 0) {
+        if ($diff !== []) {
             ksort($diff);
 
             throw new MissingOptionsException(sprintf(\count($diff) > 1 ? 'The required options "%s" are missing.' : 'The required option "%s" is missing.', $this->formatOptions(array_keys($diff))));
@@ -1027,7 +1027,7 @@ class OptionsResolver implements Options
                 $fmtActualValue = $this->formatValue($value);
                 $fmtAllowedTypes = implode('" or "', $this->allowedTypes[$option]);
                 $fmtProvidedTypes = implode('|', array_keys($invalidTypes));
-                $allowedContainsArrayType = \count(array_filter($this->allowedTypes[$option], static fn ($item) => str_ends_with($item, '[]'))) > 0;
+                $allowedContainsArrayType = (array) array_filter($this->allowedTypes[$option], static fn ($item) => str_ends_with((string) $item, '[]')) !== [];
 
                 if (\is_array($value) && $allowedContainsArrayType) {
                     throw new InvalidOptionsException(sprintf('The option "%s" with value %s is expected to be of type "%s", but one of the elements is of type "%s".', $this->formatOptions([$option]), $fmtActualValue, $fmtAllowedTypes, $fmtProvidedTypes));
@@ -1068,7 +1068,7 @@ class OptionsResolver implements Options
                     $this->formatValue($value)
                 );
 
-                if (\count($printableAllowedValues) > 0) {
+                if ($printableAllowedValues !== []) {
                     $message .= sprintf(
                         ' Accepted values are: %s.',
                         $this->formatValues($printableAllowedValues)
@@ -1186,7 +1186,7 @@ class OptionsResolver implements Options
      *
      * @throws AccessException
      */
-    public function offsetSet(mixed $option, mixed $value): void
+    public function offsetSet(mixed $option, mixed $value): never
     {
         throw new AccessException('Setting options via array access is not supported. Use setDefault() instead.');
     }
@@ -1196,7 +1196,7 @@ class OptionsResolver implements Options
      *
      * @throws AccessException
      */
-    public function offsetUnset(mixed $option): void
+    public function offsetUnset(mixed $option): never
     {
         throw new AccessException('Removing options via array access is not supported. Use remove() instead.');
     }

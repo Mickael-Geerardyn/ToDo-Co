@@ -22,11 +22,7 @@ use Symfony\Component\Console\Exception\CommandNotFoundException;
  */
 class ApplicationDescription
 {
-    public const GLOBAL_NAMESPACE = '_global';
-
-    private Application $application;
-    private ?string $namespace;
-    private bool $showHidden;
+    final public const GLOBAL_NAMESPACE = '_global';
     private array $namespaces;
 
     /**
@@ -39,16 +35,13 @@ class ApplicationDescription
      */
     private array $aliases = [];
 
-    public function __construct(Application $application, string $namespace = null, bool $showHidden = false)
+    public function __construct(private readonly Application $application, private readonly ?string $namespace = null, private readonly bool $showHidden = false)
     {
-        $this->application = $application;
-        $this->namespace = $namespace;
-        $this->showHidden = $showHidden;
     }
 
     public function getNamespaces(): array
     {
-        if (!isset($this->namespaces)) {
+        if ($this->namespaces === null) {
             $this->inspectApplication();
         }
 
@@ -60,7 +53,7 @@ class ApplicationDescription
      */
     public function getCommands(): array
     {
-        if (!isset($this->commands)) {
+        if ($this->commands === null) {
             $this->inspectApplication();
         }
 
@@ -121,12 +114,12 @@ class ApplicationDescription
             }
         }
 
-        if ($globalCommands) {
+        if ($globalCommands !== []) {
             ksort($globalCommands);
             $sortedCommands[self::GLOBAL_NAMESPACE] = $globalCommands;
         }
 
-        if ($namespacedCommands) {
+        if ($namespacedCommands !== []) {
             ksort($namespacedCommands, \SORT_STRING);
             foreach ($namespacedCommands as $key => $commandsSet) {
                 ksort($commandsSet);

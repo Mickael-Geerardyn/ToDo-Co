@@ -45,7 +45,7 @@ trait TesterTrait
         $display = stream_get_contents($this->output->getStream());
 
         if ($normalize) {
-            $display = str_replace(\PHP_EOL, "\n", $display);
+            $display = str_replace(\PHP_EOL, "\n", (string) $display);
         }
 
         return $display;

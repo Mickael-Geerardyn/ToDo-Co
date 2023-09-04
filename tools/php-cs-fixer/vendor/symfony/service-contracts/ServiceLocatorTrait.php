@@ -76,7 +76,7 @@ trait ServiceLocatorTrait
                 } else {
                     $type = (new \ReflectionFunction($factory))->getReturnType();
 
-                    $this->providedTypes[$name] = $type ? ($type->allowsNull() ? '?' : '').($type instanceof \ReflectionNamedType ? $type->getName() : $type) : '?';
+                    $this->providedTypes[$name] = $type instanceof \ReflectionType ? ($type->allowsNull() ? '?' : '').($type instanceof \ReflectionNamedType ? $type->getName() : $type) : '?';
                 }
             }
         }
@@ -90,7 +90,7 @@ trait ServiceLocatorTrait
             $message = 'is empty...';
         } else {
             $last = array_pop($alternatives);
-            if ($alternatives) {
+            if ($alternatives !== []) {
                 $message = sprintf('only knows about the "%s" and "%s" services.', implode('", "', $alternatives), $last);
             } else {
                 $message = sprintf('only knows about the "%s" service.', $last);

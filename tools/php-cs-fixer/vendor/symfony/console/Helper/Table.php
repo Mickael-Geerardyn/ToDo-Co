@@ -45,7 +45,6 @@ class Table
     private array $rows = [];
     private array $effectiveColumnWidths = [];
     private int $numberOfColumns;
-    private OutputInterface $output;
     private TableStyle $style;
     private array $columnStyles = [];
     private array $columnWidths = [];
@@ -55,10 +54,8 @@ class Table
 
     private static array $styles;
 
-    public function __construct(OutputInterface $output)
+    public function __construct(private readonly OutputInterface $output)
     {
-        $this->output = $output;
-
         self::$styles ??= self::initStyles();
 
         $this->setStyle('default');
@@ -349,7 +346,7 @@ class Table
                     continue;
                 }
 
-                if ($rows) {
+                if ($rows !== []) {
                     $rows[] = [$divider];
                 }
 
@@ -361,7 +358,7 @@ class Table
                 }
 
                 $headers = $this->headers[0] ?? [];
-                $maxRows = max(\count($headers), \count($row));
+                $maxRows = max(is_countable($headers) ? \count($headers) : 0, is_countable($row) ? \count($row) : 0);
                 for ($i = 0; $i < $maxRows; ++$i) {
                     $cell = (string) ($row[$i] ?? '');
                     if ($headers && !$containsColspan) {
@@ -456,7 +453,7 @@ class Table
      */
     private function renderRowSeparator(int $type = self::SEPARATOR_MID, string $title = null, string $titleFormat = null): void
     {
-        if (!$count = $this->numberOfColumns) {
+        if (($count = $this->numberOfColumns) === 0) {
             return;
         }
 
@@ -478,7 +475,7 @@ class Table
 
         $markup = $leftChar;
         for ($column = 0; $column < $count; ++$column) {
-            $markup .= str_repeat($horizontal, $this->effectiveColumnWidths[$column]);
+            $markup .= str_repeat((string) $horizontal, $this->effectiveColumnWidths[$column]);
             $markup .= $column === $count - 1 ? $rightChar : $midChar;
         }
 
@@ -492,10 +489,10 @@ class Table
             }
 
             $titleStart = intdiv($markupLength - $titleLength, 2);
-            if (false === mb_detect_encoding($markup, null, true)) {
-                $markup = substr_replace($markup, $formattedTitle, $titleStart, $titleLength);
+            if (false === mb_detect_encoding((string) $markup, null, true)) {
+                $markup = substr_replace((string) $markup, $formattedTitle, $titleStart, $titleLength);
             } else {
-                $markup = mb_substr($markup, 0, $titleStart).$formattedTitle.mb_substr($markup, $titleStart + $titleLength);
+                $markup = mb_substr((string) $markup, 0, $titleStart).$formattedTitle.mb_substr((string) $markup, $titleStart + $titleLength);
             }
         }
 
@@ -550,14 +547,14 @@ class Table
         }
 
         // str_pad won't work properly with multi-byte strings, we need to fix the padding
-        if (false !== $encoding = mb_detect_encoding($cell, null, true)) {
-            $width += \strlen($cell) - mb_strwidth($cell, $encoding);
+        if (false !== $encoding = mb_detect_encoding((string) $cell, null, true)) {
+            $width += \strlen((string) $cell) - mb_strwidth((string) $cell, $encoding);
         }
 
         $style = $this->getColumnStyle($column);
 
         if ($cell instanceof TableSeparator) {
-            return sprintf($style->getBorderFormat(), str_repeat($style->getBorderChars()[2], $width));
+            return sprintf($style->getBorderFormat(), str_repeat((string) $style->getBorderChars()[2], $width));
         }
 
         $width += Helper::length($cell) - Helper::length(Helper::removeDecoration($this->output->getFormatter(), $cell));
@@ -611,7 +608,8 @@ class Table
         /** @var WrappableOutputFormatterInterface $formatter */
         $formatter = $this->output->getFormatter();
         $unmergedRows = [];
-        for ($rowKey = 0; $rowKey < \count($rows); ++$rowKey) {
+        $counter = \count($rows);
+        for ($rowKey = 0; $rowKey < $counter; ++$rowKey) {
             $rows = $this->fillNextRows($rows, $rowKey);
 
             // Remove any new line breaks and replace it with a new line
@@ -624,7 +622,7 @@ class Table
                 if (!str_contains($cell ?? '', "\n")) {
                     continue;
                 }
-                $escaped = implode("\n", array_map(OutputFormatter::escapeTrailingBackslash(...), explode("\n", $cell)));
+                $escaped = implode("\n", array_map(OutputFormatter::escapeTrailingBackslash(...), explode("\n", (string) $cell)));
                 $cell = $cell instanceof TableCell ? new TableCell($escaped, ['colspan' => $cell->getColspan()]) : $escaped;
                 $lines = explode("\n", str_replace("\n", "<fg=default;bg=default></>\n", $cell));
                 foreach ($lines as $lineKey => $line) {
@@ -697,7 +695,7 @@ class Table
 
                 // create a two dimensional array (rowspan x colspan)
                 $unmergedRows = array_replace_recursive(array_fill($line + 1, $nbLines, []), $unmergedRows);
-                foreach ($unmergedRows as $unmergedRowKey => $unmergedRow) {
+                foreach (array_keys($unmergedRows) as $unmergedRowKey) {
                     $value = $lines[$unmergedRowKey - $line] ?? '';
                     $unmergedRows[$unmergedRowKey][$column] = new TableCell($value, ['colspan' => $cell->getColspan(), 'style' => $cell->getStyle()]);
                     if ($nbLines === $unmergedRowKey - $line) {
@@ -808,7 +806,7 @@ class Table
                             $textContent = Helper::removeDecoration($this->output->getFormatter(), $cell);
                             $textLength = Helper::width($textContent);
                             if ($textLength > 0) {
-                                $contentColumns = mb_str_split($textContent, ceil($textLength / $cell->getColspan()));
+                                $contentColumns = mb_str_split((string) $textContent, ceil($textLength / $cell->getColspan()));
                                 foreach ($contentColumns as $position => $content) {
                                     $row[$i + $position] = $content;
                                 }

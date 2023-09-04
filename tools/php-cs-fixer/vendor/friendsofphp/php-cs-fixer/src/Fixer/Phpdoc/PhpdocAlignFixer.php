@@ -229,7 +229,7 @@ final class PhpdocAlignFixer extends AbstractFixer implements ConfigurableFixerI
             $items = [$matches];
 
             while (true) {
-                if (null === $docBlock->getLine(++$i)) {
+                if (!$docBlock->getLine(++$i) instanceof \PhpCsFixer\DocBlock\Line) {
                     break 2;
                 }
 
@@ -366,7 +366,7 @@ final class PhpdocAlignFixer extends AbstractFixer implements ConfigurableFixerI
             }
 
             if (isset($matches['hint'])) {
-                $matches['hint'] = trim($matches['hint']);
+                $matches['hint'] = trim((string) $matches['hint']);
             }
 
             if (!isset($matches['static'])) {

@@ -49,13 +49,13 @@ final class OutputWrapper
     private const URL_PATTERN = 'https?://\S+';
 
     public function __construct(
-        private bool $allowCutUrls = false
+        private readonly bool $allowCutUrls = false
     ) {
     }
 
     public function wrap(string $text, int $width, string $break = "\n"): string
     {
-        if (!$width) {
+        if ($width === 0) {
             return $text;
         }
 

@@ -65,7 +65,7 @@ class CodePointString extends AbstractUnicodeString
         $str = clone $this;
         $chunks = [];
 
-        foreach (preg_split($rx, $this->string, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY) as $chunk) {
+        foreach (preg_split($rx, (string) $this->string, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY) as $chunk) {
             $str->string = $chunk;
             $chunks[] = clone $str;
         }
@@ -75,7 +75,7 @@ class CodePointString extends AbstractUnicodeString
 
     public function codePointsAt(int $offset): array
     {
-        $str = $offset ? $this->slice($offset, 1) : $this;
+        $str = $offset !== 0 ? $this->slice($offset, 1) : $this;
 
         return '' === $str->string ? [] : [mb_ord($str->string, 'UTF-8')];
     }
@@ -88,15 +88,15 @@ class CodePointString extends AbstractUnicodeString
             return parent::endsWith($suffix);
         }
 
-        if ('' === $suffix || !preg_match('//u', $suffix)) {
+        if ('' === $suffix || !preg_match('//u', (string) $suffix)) {
             return false;
         }
 
         if ($this->ignoreCase) {
-            return preg_match('{'.preg_quote($suffix).'$}iuD', $this->string);
+            return preg_match('{'.preg_quote((string) $suffix).'$}iuD', (string) $this->string);
         }
 
-        return \strlen($this->string) >= \strlen($suffix) && 0 === substr_compare($this->string, $suffix, -\strlen($suffix));
+        return \strlen((string) $this->string) >= \strlen((string) $suffix) && str_ends_with((string) $this->string, (string) $suffix);
     }
 
     public function equalsTo(string|iterable|AbstractString $string): bool
@@ -108,7 +108,7 @@ class CodePointString extends AbstractUnicodeString
         }
 
         if ('' !== $string && $this->ignoreCase) {
-            return \strlen($string) === \strlen($this->string) && 0 === mb_stripos($this->string, $string, 0, 'UTF-8');
+            return \strlen((string) $string) === \strlen((string) $this->string) && 0 === mb_stripos((string) $this->string, (string) $string, 0, 'UTF-8');
         }
 
         return $string === $this->string;
@@ -126,7 +126,7 @@ class CodePointString extends AbstractUnicodeString
             return null;
         }
 
-        $i = $this->ignoreCase ? mb_stripos($this->string, $needle, $offset, 'UTF-8') : mb_strpos($this->string, $needle, $offset, 'UTF-8');
+        $i = $this->ignoreCase ? mb_stripos((string) $this->string, (string) $needle, $offset, 'UTF-8') : mb_strpos((string) $this->string, (string) $needle, $offset, 'UTF-8');
 
         return false === $i ? null : $i;
     }
@@ -143,14 +143,14 @@ class CodePointString extends AbstractUnicodeString
             return null;
         }
 
-        $i = $this->ignoreCase ? mb_strripos($this->string, $needle, $offset, 'UTF-8') : mb_strrpos($this->string, $needle, $offset, 'UTF-8');
+        $i = $this->ignoreCase ? mb_strripos((string) $this->string, (string) $needle, $offset, 'UTF-8') : mb_strrpos((string) $this->string, (string) $needle, $offset, 'UTF-8');
 
         return false === $i ? null : $i;
     }
 
     public function length(): int
     {
-        return mb_strlen($this->string, 'UTF-8');
+        return mb_strlen((string) $this->string, 'UTF-8');
     }
 
     public function prepend(string ...$prefix): static
@@ -178,9 +178,9 @@ class CodePointString extends AbstractUnicodeString
         }
 
         if ($this->ignoreCase) {
-            $str->string = implode($to, preg_split('{'.preg_quote($from).'}iuD', $this->string));
+            $str->string = implode($to, preg_split('{'.preg_quote($from).'}iuD', (string) $this->string));
         } else {
-            $str->string = str_replace($from, $to, $this->string);
+            $str->string = str_replace($from, $to, (string) $this->string);
         }
 
         return $str;
@@ -189,7 +189,7 @@ class CodePointString extends AbstractUnicodeString
     public function slice(int $start = 0, int $length = null): static
     {
         $str = clone $this;
-        $str->string = mb_substr($this->string, $start, $length, 'UTF-8');
+        $str->string = mb_substr((string) $this->string, $start, $length, 'UTF-8');
 
         return $str;
     }
@@ -201,9 +201,9 @@ class CodePointString extends AbstractUnicodeString
         }
 
         $str = clone $this;
-        $start = $start ? \strlen(mb_substr($this->string, 0, $start, 'UTF-8')) : 0;
-        $length = $length ? \strlen(mb_substr($this->string, $start, $length, 'UTF-8')) : $length;
-        $str->string = substr_replace($this->string, $replacement, $start, $length ?? \PHP_INT_MAX);
+        $start = $start !== 0 ? \strlen(mb_substr((string) $this->string, 0, $start, 'UTF-8')) : 0;
+        $length = $length ? \strlen(mb_substr((string) $this->string, $start, $length, 'UTF-8')) : $length;
+        $str->string = substr_replace((string) $this->string, $replacement, $start, $length ?? \PHP_INT_MAX);
 
         return $str;
     }
@@ -228,8 +228,8 @@ class CodePointString extends AbstractUnicodeString
 
         $str = clone $this;
         $chunks = $this->ignoreCase
-            ? preg_split('{'.preg_quote($delimiter).'}iuD', $this->string, $limit)
-            : explode($delimiter, $this->string, $limit);
+            ? preg_split('{'.preg_quote($delimiter).'}iuD', (string) $this->string, $limit)
+            : explode($delimiter, (string) $this->string, $limit);
 
         foreach ($chunks as &$chunk) {
             $str->string = $chunk;
@@ -247,14 +247,14 @@ class CodePointString extends AbstractUnicodeString
             return parent::startsWith($prefix);
         }
 
-        if ('' === $prefix || !preg_match('//u', $prefix)) {
+        if ('' === $prefix || !preg_match('//u', (string) $prefix)) {
             return false;
         }
 
         if ($this->ignoreCase) {
-            return 0 === mb_stripos($this->string, $prefix, 0, 'UTF-8');
+            return 0 === mb_stripos((string) $this->string, (string) $prefix, 0, 'UTF-8');
         }
 
-        return 0 === strncmp($this->string, $prefix, \strlen($prefix));
+        return str_starts_with((string) $this->string, (string) $prefix);
     }
 }

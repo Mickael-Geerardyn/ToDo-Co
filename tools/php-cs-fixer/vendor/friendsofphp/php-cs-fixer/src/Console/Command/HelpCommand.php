@@ -61,7 +61,7 @@ final class HelpCommand extends BaseHelpCommand
                 );
             });
 
-            if (0 === \count($allowed)) {
+            if ([] === $allowed) {
                 $allowed = null;
             }
         }

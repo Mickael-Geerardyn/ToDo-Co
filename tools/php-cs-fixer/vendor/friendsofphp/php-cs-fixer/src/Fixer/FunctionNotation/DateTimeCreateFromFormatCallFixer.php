@@ -156,8 +156,8 @@ final class DateTimeCreateFromFormatCallFixer extends AbstractFixer
             return null; // argument is not a simple single string
         }
 
-        return !$tokens[$argumentStartIndex]->isGivenKind(T_CONSTANT_ENCAPSED_STRING)
-            ? null // first argument is not a string
-            : $argumentStartIndex;
+        return $tokens[$argumentStartIndex]->isGivenKind(T_CONSTANT_ENCAPSED_STRING)
+            ? $argumentStartIndex // first argument is not a string
+            : null;
     }
 }

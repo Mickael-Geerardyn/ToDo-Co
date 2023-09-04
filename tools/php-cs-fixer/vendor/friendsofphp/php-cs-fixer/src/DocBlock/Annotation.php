@@ -24,7 +24,7 @@ use PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis;
  * @author Graham Campbell <hello@gjcampbell.co.uk>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class Annotation
+final class Annotation implements \Stringable
 {
     /**
      * All the annotation tag names with types.
@@ -52,24 +52,18 @@ final class Annotation
 
     /**
      * The position of the first line of the annotation in the docblock.
-     *
-     * @var int
      */
-    private $start;
+    private readonly int|string $start;
 
     /**
      * The position of the last line of the annotation in the docblock.
-     *
-     * @var int
      */
-    private $end;
+    private readonly int|string|false $end;
 
     /**
      * The associated tag.
-     *
-     * @var null|Tag
      */
-    private $tag;
+    private ?\PhpCsFixer\DocBlock\Tag $tag = null;
 
     /**
      * Lazy loaded, cached types content.
@@ -83,17 +77,7 @@ final class Annotation
      *
      * @var null|string[]
      */
-    private $types;
-
-    /**
-     * @var null|NamespaceAnalysis
-     */
-    private $namespace;
-
-    /**
-     * @var NamespaceUseAnalysis[]
-     */
-    private array $namespaceUses;
+    private ?array $types = null;
 
     /**
      * Create a new line instance.
@@ -102,11 +86,9 @@ final class Annotation
      * @param null|NamespaceAnalysis $namespace
      * @param NamespaceUseAnalysis[] $namespaceUses
      */
-    public function __construct(array $lines, $namespace = null, array $namespaceUses = [])
+    public function __construct(array $lines, private $namespace = null, private readonly array $namespaceUses = [])
     {
         $this->lines = array_values($lines);
-        $this->namespace = $namespace;
-        $this->namespaceUses = $namespaceUses;
 
         $keys = array_keys($lines);
 
@@ -153,7 +135,7 @@ final class Annotation
      */
     public function getTag(): Tag
     {
-        if (null === $this->tag) {
+        if (!$this->tag instanceof \PhpCsFixer\DocBlock\Tag) {
             $this->tag = new Tag($this->lines[0]);
         }
 
@@ -198,9 +180,9 @@ final class Annotation
     {
         if (null === $this->types) {
             $typeExpression = $this->getTypeExpression();
-            $this->types = null === $typeExpression
-                ? []
-                : $typeExpression->getTypes();
+            $this->types = $typeExpression instanceof \PhpCsFixer\DocBlock\TypeExpression
+                ? $typeExpression->getTypes()
+                : [];
         }
 
         return $this->types;

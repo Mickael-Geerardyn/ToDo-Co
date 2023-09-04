@@ -23,44 +23,33 @@ final class NamespaceUseAnalysis implements StartEndTokenAwareAnalysis
     public const TYPE_FUNCTION = 2;
     public const TYPE_CONSTANT = 3;
 
-    /**
-     * The fully qualified use namespace.
-     */
-    private string $fullName;
-
-    /**
-     * The short version of use namespace or the alias name in case of aliased use statements.
-     */
-    private string $shortName;
-
-    /**
-     * Is the use statement being aliased?
-     */
-    private bool $isAliased;
-
-    /**
-     * The start index of the namespace declaration in the analyzed Tokens.
-     */
-    private int $startIndex;
-
-    /**
-     * The end index of the namespace declaration in the analyzed Tokens.
-     */
-    private int $endIndex;
-
-    /**
-     * The type of import: class, function or constant.
-     */
-    private int $type;
-
-    public function __construct(string $fullName, string $shortName, bool $isAliased, int $startIndex, int $endIndex, int $type)
+    public function __construct(
+        /**
+         * The fully qualified use namespace.
+         */
+        private readonly string $fullName,
+        /**
+         * The short version of use namespace or the alias name in case of aliased use statements.
+         */
+        private readonly string $shortName,
+        /**
+         * Is the use statement being aliased?
+         */
+        private readonly bool $isAliased,
+        /**
+         * The start index of the namespace declaration in the analyzed Tokens.
+         */
+        private readonly int $startIndex,
+        /**
+         * The end index of the namespace declaration in the analyzed Tokens.
+         */
+        private readonly int $endIndex,
+        /**
+         * The type of import: class, function or constant.
+         */
+        private readonly int $type
+    )
     {
-        $this->fullName = $fullName;
-        $this->shortName = $shortName;
-        $this->isAliased = $isAliased;
-        $this->startIndex = $startIndex;
-        $this->endIndex = $endIndex;
-        $this->type = $type;
     }
 
     public function getFullName(): string

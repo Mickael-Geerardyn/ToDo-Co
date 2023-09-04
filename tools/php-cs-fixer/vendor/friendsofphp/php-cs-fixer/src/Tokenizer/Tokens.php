@@ -35,19 +35,19 @@ use PhpCsFixer\Tokenizer\Analyzer\NamespacesAnalyzer;
  */
 class Tokens extends \SplFixedArray
 {
-    public const BLOCK_TYPE_PARENTHESIS_BRACE = 1;
-    public const BLOCK_TYPE_CURLY_BRACE = 2;
-    public const BLOCK_TYPE_INDEX_SQUARE_BRACE = 3;
-    public const BLOCK_TYPE_ARRAY_SQUARE_BRACE = 4;
-    public const BLOCK_TYPE_DYNAMIC_PROP_BRACE = 5;
-    public const BLOCK_TYPE_DYNAMIC_VAR_BRACE = 6;
-    public const BLOCK_TYPE_ARRAY_INDEX_CURLY_BRACE = 7;
-    public const BLOCK_TYPE_GROUP_IMPORT_BRACE = 8;
-    public const BLOCK_TYPE_DESTRUCTURING_SQUARE_BRACE = 9;
-    public const BLOCK_TYPE_BRACE_CLASS_INSTANTIATION = 10;
-    public const BLOCK_TYPE_ATTRIBUTE = 11;
-    public const BLOCK_TYPE_DISJUNCTIVE_NORMAL_FORM_TYPE_PARENTHESIS = 12;
-    public const BLOCK_TYPE_DYNAMIC_CLASS_CONSTANT_FETCH_CURLY_BRACE = 13;
+    final public const BLOCK_TYPE_PARENTHESIS_BRACE = 1;
+    final public const BLOCK_TYPE_CURLY_BRACE = 2;
+    final public const BLOCK_TYPE_INDEX_SQUARE_BRACE = 3;
+    final public const BLOCK_TYPE_ARRAY_SQUARE_BRACE = 4;
+    final public const BLOCK_TYPE_DYNAMIC_PROP_BRACE = 5;
+    final public const BLOCK_TYPE_DYNAMIC_VAR_BRACE = 6;
+    final public const BLOCK_TYPE_ARRAY_INDEX_CURLY_BRACE = 7;
+    final public const BLOCK_TYPE_GROUP_IMPORT_BRACE = 8;
+    final public const BLOCK_TYPE_DESTRUCTURING_SQUARE_BRACE = 9;
+    final public const BLOCK_TYPE_BRACE_CLASS_INSTANTIATION = 10;
+    final public const BLOCK_TYPE_ATTRIBUTE = 11;
+    final public const BLOCK_TYPE_DISJUNCTIVE_NORMAL_FORM_TYPE_PARENTHESIS = 12;
+    final public const BLOCK_TYPE_DYNAMIC_CLASS_CONSTANT_FETCH_CURLY_BRACE = 13;
 
     /**
      * Static class cache.
@@ -478,7 +478,7 @@ class Tokens extends \SplFixedArray
 
         $possibleKinds = array_filter($possibleKinds, fn ($kind): bool => $this->isTokenKindFound($kind));
 
-        if (\count($possibleKinds) > 0) {
+        if ($possibleKinds !== []) {
             for ($i = $start; $i < $end; ++$i) {
                 $token = $this[$i];
                 if ($token->isGivenKind($possibleKinds)) {
@@ -610,7 +610,7 @@ class Tokens extends \SplFixedArray
     {
         $tokens = array_filter($tokens, fn ($token): bool => $this->isTokenKindFound($this->extractTokenKind($token)));
 
-        if (0 === \count($tokens)) {
+        if ([] === $tokens) {
             return null;
         }
 
@@ -1015,10 +1015,6 @@ class Tokens extends \SplFixedArray
             $this->registerFoundToken($token);
         }
 
-        if (\PHP_VERSION_ID < 8_00_00) {
-            $this->rewind();
-        }
-
         $this->changeCodeHash(self::calculateCodeHash($code));
         $this->changed = true;
         $this->namespaceDeclarations = null;
@@ -1030,10 +1026,6 @@ class Tokens extends \SplFixedArray
 
         foreach ($this as $index => $token) {
             $output[$index] = $token->toArray();
-        }
-
-        if (\PHP_VERSION_ID < 8_00_00) {
-            $this->rewind();
         }
 
         return json_encode($output, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
@@ -1341,7 +1333,7 @@ class Tokens extends \SplFixedArray
      * @param string $key   item key
      * @param Tokens $value item value
      */
-    private static function setCache(string $key, self $value): void
+    private function setCache(string $key, self $value): void
     {
         self::$cache[$key] = $value;
     }

@@ -32,13 +32,9 @@ final class StatementIndentationFixer extends AbstractFixer implements Whitespac
 
     private AlternativeSyntaxAnalyzer $alternativeSyntaxAnalyzer;
 
-    private bool $bracesFixerCompatibility;
-
-    public function __construct(bool $bracesFixerCompatibility = false)
+    public function __construct(private readonly bool $bracesFixerCompatibility = false)
     {
         parent::__construct();
-
-        $this->bracesFixerCompatibility = $bracesFixerCompatibility;
     }
 
     public function getDefinition(): FixerDefinitionInterface
@@ -324,7 +320,7 @@ else {
 
                 if (
                     $this->bracesFixerCompatibility
-                    && null !== $nextToken
+                    && $nextToken instanceof \PhpCsFixer\Tokenizer\Token
                     && $nextToken->isComment()
                     && !$this->isCommentWithFixableIndentation($tokens, $index + 1)
                 ) {
@@ -404,7 +400,7 @@ else {
                     $tokens->clearAt($index);
                 }
 
-                if (null !== $nextToken && $nextToken->isComment()) {
+                if ($nextToken instanceof \PhpCsFixer\Tokenizer\Token && $nextToken->isComment()) {
                     $tokens[$index + 1] = new Token([
                         $nextToken->getId(),
                         Preg::replace(

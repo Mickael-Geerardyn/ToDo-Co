@@ -21,19 +21,18 @@ use PhpCsFixer\Preg;
  *
  * @author Graham Campbell <hello@gjcampbell.co.uk>
  */
-final class Line
+final class Line implements \Stringable
 {
-    /**
-     * The content of this line.
-     */
-    private string $content;
-
     /**
      * Create a new line instance.
      */
-    public function __construct(string $content)
+    public function __construct(
+        /**
+         * The content of this line.
+         */
+        private string $content
+    )
     {
-        $this->content = $content;
     }
 
     /**

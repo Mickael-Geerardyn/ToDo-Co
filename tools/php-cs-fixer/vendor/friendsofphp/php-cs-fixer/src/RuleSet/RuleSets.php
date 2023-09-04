@@ -26,7 +26,7 @@ final class RuleSets
     /**
      * @var array<string,RuleSetDescriptionInterface>
      */
-    private static $setDefinitions;
+    private static ?array $setDefinitions = null;
 
     /**
      * @return array<string, RuleSetDescriptionInterface>

@@ -18,7 +18,7 @@ namespace Symfony\Component\Finder\Iterator;
  */
 class LazyIterator implements \IteratorAggregate
 {
-    private \Closure $iteratorFactory;
+    private readonly \Closure $iteratorFactory;
 
     public function __construct(callable $iteratorFactory)
     {

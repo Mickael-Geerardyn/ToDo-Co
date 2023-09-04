@@ -34,10 +34,7 @@ final class ToolInfo implements ToolInfoInterface
      */
     private $composerInstallationDetails;
 
-    /**
-     * @var null|bool
-     */
-    private $isInstalledByComposer;
+    private ?bool $isInstalledByComposer = null;
 
     public function getComposerInstallationDetails(): array
     {

@@ -22,16 +22,10 @@ namespace PhpCsFixer;
 final class WordMatcher
 {
     /**
-     * @var string[]
-     */
-    private array $candidates;
-
-    /**
      * @param string[] $candidates
      */
-    public function __construct(array $candidates)
+    public function __construct(private readonly array $candidates)
     {
-        $this->candidates = $candidates;
     }
 
     public function match(string $needle): ?string

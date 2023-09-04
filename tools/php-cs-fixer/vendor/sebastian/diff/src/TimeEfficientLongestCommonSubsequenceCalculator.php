@@ -43,17 +43,11 @@ final class TimeEfficientLongestCommonSubsequenceCalculator implements LongestCo
                 $firstOrLast = $from[$i - 1] === $to[$j - 1] ? $matrix[$o - $width - 1] + 1 : 0;
 
                 if ($matrix[$o - 1] > $matrix[$o - $width]) {
-                    if ($firstOrLast > $matrix[$o - 1]) {
-                        $matrix[$o] = $firstOrLast;
-                    } else {
-                        $matrix[$o] = $matrix[$o - 1];
-                    }
+                    $matrix[$o] = $firstOrLast > $matrix[$o - 1] ? $firstOrLast : $matrix[$o - 1];
+                } elseif ($firstOrLast > $matrix[$o - $width]) {
+                    $matrix[$o] = $firstOrLast;
                 } else {
-                    if ($firstOrLast > $matrix[$o - $width]) {
-                        $matrix[$o] = $firstOrLast;
-                    } else {
-                        $matrix[$o] = $matrix[$o - $width];
-                    }
+                    $matrix[$o] = $matrix[$o - $width];
                 }
             }
         }

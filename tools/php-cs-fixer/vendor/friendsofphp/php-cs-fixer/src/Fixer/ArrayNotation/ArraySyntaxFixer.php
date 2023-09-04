@@ -33,15 +33,9 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class ArraySyntaxFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
-    /**
-     * @var null|int
-     */
-    private $candidateTokenKind;
+    private ?int $candidateTokenKind = null;
 
-    /**
-     * @var null|string
-     */
-    private $fixCallback;
+    private ?string $fixCallback = null;
 
     public function configure(array $configuration): void
     {
@@ -126,7 +120,7 @@ final class ArraySyntaxFixer extends AbstractFixer implements ConfigurableFixerI
 
     private function resolveFixCallback(): void
     {
-        $this->fixCallback = sprintf('fixTo%sArraySyntax', ucfirst($this->configuration['syntax']));
+        $this->fixCallback = sprintf('fixTo%sArraySyntax', ucfirst((string) $this->configuration['syntax']));
     }
 
     private function resolveCandidateTokenKind(): void

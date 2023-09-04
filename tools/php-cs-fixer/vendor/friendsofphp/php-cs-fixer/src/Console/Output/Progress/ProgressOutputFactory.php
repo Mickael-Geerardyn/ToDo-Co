@@ -23,7 +23,7 @@ final class ProgressOutputFactory
 {
     public function create(string $outputType, OutputContext $context): ProgressOutputInterface
     {
-        if (null === $context->getOutput()) {
+        if (!$context->getOutput() instanceof \Symfony\Component\Console\Output\OutputInterface) {
             $outputType = ProgressOutputType::NONE;
         }
 

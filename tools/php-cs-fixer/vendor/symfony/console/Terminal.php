@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\AnsiColorMode;
 
 class Terminal
 {
-    public const DEFAULT_COLOR_MODE = AnsiColorMode::Ansi4;
+    final public const DEFAULT_COLOR_MODE = AnsiColorMode::Ansi4;
 
     private static ?AnsiColorMode $colorMode = null;
     private static ?int $width = null;
@@ -29,7 +29,7 @@ class Terminal
     public static function getColorMode(): AnsiColorMode
     {
         // Use Cache from previous run (or user forced mode)
-        if (null !== self::$colorMode) {
+        if (self::$colorMode instanceof \Symfony\Component\Console\Output\AnsiColorMode) {
             return self::$colorMode;
         }
 
@@ -131,7 +131,7 @@ class Terminal
         return self::$stty = (bool) shell_exec('stty 2> '.('\\' === \DIRECTORY_SEPARATOR ? 'NUL' : '/dev/null'));
     }
 
-    private static function initDimensions(): void
+    private function initDimensions(): void
     {
         if ('\\' === \DIRECTORY_SEPARATOR) {
             $ansicon = getenv('ANSICON');
@@ -146,8 +146,8 @@ class Terminal
                 self::initDimensionsUsingStty();
             } elseif (null !== $dimensions = self::getConsoleMode()) {
                 // extract [w, h] from "wxh"
-                self::$width = (int) $dimensions[0];
-                self::$height = (int) $dimensions[1];
+                self::$width = $dimensions[0];
+                self::$height = $dimensions[1];
             }
         } else {
             self::initDimensionsUsingStty();
@@ -157,7 +157,7 @@ class Terminal
     /**
      * Returns whether STDOUT has vt100 support (some Windows 10+ configurations).
      */
-    private static function hasVt100Support(): bool
+    private function hasVt100Support(): bool
     {
         return \function_exists('sapi_windows_vt100_support') && sapi_windows_vt100_support(fopen('php://stdout', 'w'));
     }
@@ -165,7 +165,7 @@ class Terminal
     /**
      * Initializes dimensions using the output of an stty columns line.
      */
-    private static function initDimensionsUsingStty(): void
+    private function initDimensionsUsingStty(): void
     {
         if ($sttyString = self::getSttyColumns()) {
             if (preg_match('/rows.(\d+);.columns.(\d+);/is', $sttyString, $matches)) {
@@ -185,7 +185,7 @@ class Terminal
      *
      * @return int[]|null An array composed of the width and the height or null if it could not be parsed
      */
-    private static function getConsoleMode(): ?array
+    private function getConsoleMode(): ?array
     {
         $info = self::readFromProcess('mode CON');
 
@@ -199,12 +199,12 @@ class Terminal
     /**
      * Runs and parses stty -a if it's available, suppressing any error output.
      */
-    private static function getSttyColumns(): ?string
+    private function getSttyColumns(): ?string
     {
         return self::readFromProcess(['stty', '-a']);
     }
 
-    private static function readFromProcess(string|array $command): ?string
+    private function readFromProcess(string|array $command): ?string
     {
         if (!\function_exists('proc_open')) {
             return null;
@@ -227,7 +227,7 @@ class Terminal
         fclose($pipes[2]);
         proc_close($process);
 
-        if ($cp) {
+        if ($cp !== 0) {
             sapi_windows_cp_set($cp);
         }
 

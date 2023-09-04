@@ -30,25 +30,16 @@ use Symfony\Contracts\Service\ResetInterface;
  */
 class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterface
 {
-    protected $logger;
-    protected $stopwatch;
-
     /**
      * @var \SplObjectStorage<WrappedListener, array{string, string}>|null
      */
     private ?\SplObjectStorage $callStack = null;
-    private EventDispatcherInterface $dispatcher;
     private array $wrappedListeners = [];
     private array $orphanedEvents = [];
-    private ?RequestStack $requestStack;
     private string $currentRequestHash = '';
 
-    public function __construct(EventDispatcherInterface $dispatcher, Stopwatch $stopwatch, LoggerInterface $logger = null, RequestStack $requestStack = null)
+    public function __construct(private readonly EventDispatcherInterface $dispatcher, protected \Symfony\Component\Stopwatch\Stopwatch $stopwatch, protected ?\Psr\Log\LoggerInterface $logger = null, private readonly ?RequestStack $requestStack = null)
     {
-        $this->dispatcher = $dispatcher;
-        $this->stopwatch = $stopwatch;
-        $this->logger = $logger;
-        $this->requestStack = $requestStack;
     }
 
     /**
@@ -124,7 +115,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
 
         $this->callStack ??= new \SplObjectStorage();
 
-        $currentRequestHash = $this->currentRequestHash = $this->requestStack && ($request = $this->requestStack->getCurrentRequest()) ? spl_object_hash($request) : '';
+        $currentRequestHash = $this->currentRequestHash = $this->requestStack instanceof \Symfony\Component\HttpFoundation\RequestStack && (($request = $this->requestStack->getCurrentRequest()) instanceof \Symfony\Component\HttpFoundation\Request) ? spl_object_hash($request) : '';
 
         if (null !== $this->logger && $event instanceof StoppableEventInterface && $event->isPropagationStopped()) {
             $this->logger->debug(sprintf('The "%s" event is already stopped. No listeners have been called.', $eventName));
@@ -155,11 +146,11 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
 
     public function getCalledListeners(Request $request = null): array
     {
-        if (null === $this->callStack) {
+        if (!$this->callStack instanceof \SplObjectStorage) {
             return [];
         }
 
-        $hash = $request ? spl_object_hash($request) : null;
+        $hash = $request instanceof \Symfony\Component\HttpFoundation\Request ? spl_object_hash($request) : null;
         $called = [];
         foreach ($this->callStack as $listener) {
             [$eventName, $requestHash] = $this->callStack->getInfo();
@@ -182,10 +173,10 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
             return [];
         }
 
-        $hash = $request ? spl_object_hash($request) : null;
+        $hash = $request instanceof \Symfony\Component\HttpFoundation\Request ? spl_object_hash($request) : null;
         $calledListeners = [];
 
-        if (null !== $this->callStack) {
+        if ($this->callStack instanceof \SplObjectStorage) {
             foreach ($this->callStack as $calledListener) {
                 [, $requestHash] = $this->callStack->getInfo();
 
@@ -215,7 +206,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
 
     public function getOrphanedEvents(Request $request = null): array
     {
-        if ($request) {
+        if ($request instanceof \Symfony\Component\HttpFoundation\Request) {
             return $this->orphanedEvents[spl_object_hash($request)] ?? [];
         }
 
@@ -320,7 +311,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
 
     private function sortNotCalledListeners(array $a, array $b): int
     {
-        if (0 !== $cmp = strcmp($a['event'], $b['event'])) {
+        if (0 !== $cmp = strcmp((string) $a['event'], (string) $b['event'])) {
             return $cmp;
         }
 

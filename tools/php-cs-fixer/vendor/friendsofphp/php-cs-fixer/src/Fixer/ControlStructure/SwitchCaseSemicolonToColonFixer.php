@@ -68,7 +68,7 @@ final class SwitchCaseSemicolonToColonFixer extends AbstractFixer
         foreach (ControlCaseStructuresAnalyzer::findControlStructures($tokens, [T_SWITCH]) as $analysis) {
             $default = $analysis->getDefaultAnalysis();
 
-            if (null !== $default) {
+            if ($default instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\DefaultAnalysis) {
                 $this->fixTokenIfNeeded($tokens, $default->getColonIndex());
             }
 

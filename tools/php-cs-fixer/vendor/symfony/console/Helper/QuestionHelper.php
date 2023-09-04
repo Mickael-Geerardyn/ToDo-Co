@@ -215,7 +215,7 @@ class QuestionHelper extends Helper
     {
         $messages = [];
 
-        $maxWidth = max(array_map([__CLASS__, 'width'], array_keys($choices = $question->getChoices())));
+        $maxWidth = max(array_map(fn(?string $string): int => self::width($string), array_keys($choices = $question->getChoices())));
 
         foreach ($choices as $key => $value) {
             $padding = str_repeat(' ', $maxWidth - self::width($key));
@@ -233,7 +233,7 @@ class QuestionHelper extends Helper
      */
     protected function writeError(OutputInterface $output, \Exception $error)
     {
-        if (null !== $this->getHelperSet() && $this->getHelperSet()->has('formatter')) {
+        if ($this->getHelperSet() instanceof \Symfony\Component\Console\Helper\HelperSet && $this->getHelperSet()->has('formatter')) {
             $message = $this->getHelperSet()->get('formatter')->formatBlock($error->getMessage(), 'error');
         } else {
             $message = '<error>'.$error->getMessage().'</error>';
@@ -257,7 +257,7 @@ class QuestionHelper extends Helper
         $i = 0;
         $ofs = -1;
         $matches = $autocomplete($ret);
-        $numMatches = \count($matches);
+        $numMatches = is_countable($matches) ? \count($matches) : 0;
 
         $sttyMode = shell_exec('stty -g');
         $isStdin = 'php://stdin' === (stream_get_meta_data($inputStream)['uri'] ?? null);
@@ -293,7 +293,7 @@ class QuestionHelper extends Helper
                 if (0 === $i) {
                     $ofs = -1;
                     $matches = $autocomplete($ret);
-                    $numMatches = \count($matches);
+                    $numMatches = is_countable($matches) ? \count($matches) : 0;
                 } else {
                     $numMatches = 0;
                 }
@@ -329,9 +329,9 @@ class QuestionHelper extends Helper
 
                         $matches = array_filter(
                             $autocomplete($ret),
-                            fn ($match) => '' === $ret || str_starts_with($match, $ret)
+                            fn ($match) => '' === $ret || str_starts_with((string) $match, $ret)
                         );
-                        $numMatches = \count($matches);
+                        $numMatches = \count((array) $matches);
                         $ofs = -1;
                     }
 
@@ -365,7 +365,7 @@ class QuestionHelper extends Helper
 
                 foreach ($autocomplete($ret) as $value) {
                     // If typed characters match the beginning chunk of value (e.g. [AcmeDe]moBundle)
-                    if (str_starts_with($value, $tempRet)) {
+                    if (str_starts_with((string) $value, $tempRet)) {
                         $matches[$numMatches++] = $value;
                     }
                 }
@@ -377,7 +377,7 @@ class QuestionHelper extends Helper
                 $cursor->savePosition();
                 // Write highlighted text, complete the partially entered response
                 $charactersEntered = \strlen(trim($this->mostRecentlyEnteredValue($fullChoice)));
-                $output->write('<hl>'.OutputFormatter::escapeTrailingBackslash(substr($matches[$ofs], $charactersEntered)).'</hl>');
+                $output->write('<hl>'.OutputFormatter::escapeTrailingBackslash(substr((string) $matches[$ofs], $charactersEntered)).'</hl>');
                 $cursor->restorePosition();
             }
         }
@@ -484,7 +484,7 @@ class QuestionHelper extends Helper
                 return $question->getValidator()($interviewer());
             } catch (RuntimeException $e) {
                 throw $e;
-            } catch (\Exception $error) {
+            } catch (\Exception) {
             }
         }
 
@@ -599,7 +599,7 @@ class QuestionHelper extends Helper
 
         // For seekable and writable streams, add all the same data to the
         // cloned stream and then seek to the same offset.
-        if (true === $seekable && !\in_array($mode, ['r', 'rb', 'rt'])) {
+        if ($seekable && !\in_array($mode, ['r', 'rb', 'rt'])) {
             $offset = ftell($inputStream);
             rewind($inputStream);
             stream_copy_to_stream($inputStream, $cloneStream);

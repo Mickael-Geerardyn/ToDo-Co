@@ -127,9 +127,8 @@ final class TypesSpacesFixer extends AbstractFixer implements ConfigurableFixerI
 
         $addedTokenCount = 0;
         $addedTokenCount += $this->ensureSingleSpace($tokens, $index + 1, 0);
-        $addedTokenCount += $this->ensureSingleSpace($tokens, $index - 1, 1);
 
-        return $addedTokenCount;
+        return $addedTokenCount + $this->ensureSingleSpace($tokens, $index - 1, 1);
     }
 
     private function ensureSingleSpace(Tokens $tokens, int $index, int $offset): int

@@ -246,11 +246,6 @@ call_user_func(static function ($a, $b) { var_dump($a, $b); }, 1, 2);
         }
 
         $name = substr($name, 1, -1);
-
-        if ($name !== trim($name)) {
-            return false;
-        }
-
-        return true;
+        return $name === trim($name);
     }
 }

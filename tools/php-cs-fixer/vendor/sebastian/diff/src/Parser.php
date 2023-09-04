@@ -27,11 +27,11 @@ final class Parser
     {
         $lines = preg_split('(\r\n|\r|\n)', $string);
 
-        if (!empty($lines) && $lines[count($lines) - 1] === '') {
+        if ($lines !== [] && $lines !== false && $lines[count($lines) - 1] === '') {
             array_pop($lines);
         }
 
-        $lineCount = count($lines);
+        $lineCount = is_countable($lines) ? count($lines) : 0;
         $diffs     = [];
         $diff      = null;
         $collected = [];
@@ -39,7 +39,7 @@ final class Parser
         for ($i = 0; $i < $lineCount; $i++) {
             if (preg_match('#^---\h+"?(?P<file>[^\\v\\t"]+)#', $lines[$i], $fromMatch) &&
                 preg_match('#^\\+\\+\\+\\h+"?(?P<file>[^\\v\\t"]+)#', $lines[$i + 1], $toMatch)) {
-                if ($diff !== null) {
+                if ($diff instanceof \SebastianBergmann\Diff\Diff) {
                     $this->parseFileDiff($diff, $collected);
 
                     $diffs[]   = $diff;
@@ -58,7 +58,7 @@ final class Parser
             }
         }
 
-        if ($diff !== null && count($collected)) {
+        if ($diff instanceof \SebastianBergmann\Diff\Diff && count($collected)) {
             $this->parseFileDiff($diff, $collected);
 
             $diffs[] = $diff;
@@ -74,7 +74,7 @@ final class Parser
         $diffLines = [];
 
         foreach ($lines as $line) {
-            if (preg_match('/^@@\s+-(?P<start>\d+)(?:,\s*(?P<startrange>\d+))?\s+\+(?P<end>\d+)(?:,\s*(?P<endrange>\d+))?\s+@@/', $line, $match, PREG_UNMATCHED_AS_NULL)) {
+            if (preg_match('/^@@\s+-(?P<start>\d+)(?:,\s*(?P<startrange>\d+))?\s+\+(?P<end>\d+)(?:,\s*(?P<endrange>\d+))?\s+@@/', (string) $line, $match, PREG_UNMATCHED_AS_NULL)) {
                 $chunk = new Chunk(
                     (int) $match['start'],
                     isset($match['startrange']) ? max(0, (int) $match['startrange']) : 1,
@@ -88,7 +88,7 @@ final class Parser
                 continue;
             }
 
-            if (preg_match('/^(?P<type>[+ -])?(?P<line>.*)/', $line, $match)) {
+            if (preg_match('/^(?P<type>[+ -])?(?P<line>.*)/', (string) $line, $match)) {
                 $type = Line::UNCHANGED;
 
                 if ($match['type'] === '+') {

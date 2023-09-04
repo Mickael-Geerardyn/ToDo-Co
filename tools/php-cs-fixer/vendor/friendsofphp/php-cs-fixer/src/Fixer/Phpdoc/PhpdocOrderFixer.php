@@ -89,7 +89,7 @@ final class PhpdocOrderFixer extends AbstractFixer implements ConfigurableFixerI
             (new FixerOptionBuilder('order', 'Sequence in which annotations in PHPDoc should be ordered.'))
                 ->setAllowedTypes(['string[]'])
                 ->setAllowedValues([function ($order) {
-                    if (\count($order) < 2) {
+                    if ((is_countable($order) ? \count($order) : 0) < 2) {
                         throw new InvalidOptionsException('The option "order" value is invalid. Minimum two tags are required.');
                     }
 
@@ -112,7 +112,7 @@ final class PhpdocOrderFixer extends AbstractFixer implements ConfigurableFixerI
 
             // sort annotations
             $successors = $this->configuration['order'];
-            while (\count($successors) >= 3) {
+            while ((is_countable($successors) ? \count($successors) : 0) >= 3) {
                 $predecessor = array_shift($successors);
                 $content = $this->moveAnnotationsBefore($predecessor, $successors, $content);
             }
@@ -140,13 +140,13 @@ final class PhpdocOrderFixer extends AbstractFixer implements ConfigurableFixerI
         $toBeMoved = $doc->getAnnotationsOfType($move);
 
         // nothing to do if there are no annotations to be moved
-        if (0 === \count($toBeMoved)) {
+        if ([] === $toBeMoved) {
             return $content;
         }
 
         $others = $doc->getAnnotationsOfType($before);
 
-        if (0 === \count($others)) {
+        if ([] === $others) {
             return $content;
         }
 
@@ -179,14 +179,14 @@ final class PhpdocOrderFixer extends AbstractFixer implements ConfigurableFixerI
         $toBeMoved = $doc->getAnnotationsOfType($move);
 
         // nothing to do if there are no annotations to be moved
-        if (0 === \count($toBeMoved)) {
+        if ([] === $toBeMoved) {
             return $content;
         }
 
         $others = $doc->getAnnotationsOfType($after);
 
         // nothing to do if there are no other annotations
-        if (0 === \count($others)) {
+        if ([] === $others) {
             return $content;
         }
 

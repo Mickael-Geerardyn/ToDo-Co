@@ -141,14 +141,12 @@ final class PhpdocSeparationFixer extends AbstractFixer implements ConfigurableF
                     if (isset($tags[$member])) {
                         if ($groupIndex === $tags[$member]) {
                             throw new InvalidOptionsException(
-                                'The option "groups" value is invalid. '.
-                                'The "'.$member.'" tag is specified more than once.'
+                                'The option "groups" value is invalid. The "'.$member.'" tag is specified more than once.'
                             );
                         }
 
                         throw new InvalidOptionsException(
-                            'The option "groups" value is invalid. '.
-                            'The "'.$member.'" tag belongs to more than one group.'
+                            'The option "groups" value is invalid. The "'.$member.'" tag belongs to more than one group.'
                         );
                     }
                     $tags[$member] = $groupIndex;
@@ -189,7 +187,7 @@ final class PhpdocSeparationFixer extends AbstractFixer implements ConfigurableF
             if ($line->containsUsefulContent()) {
                 $next = $doc->getLine($index + 1);
 
-                if (null !== $next && $next->containsATag()) {
+                if ($next instanceof \PhpCsFixer\DocBlock\Line && $next->containsATag()) {
                     $line->addBlank();
 
                     break;
@@ -206,7 +204,7 @@ final class PhpdocSeparationFixer extends AbstractFixer implements ConfigurableF
         foreach ($doc->getAnnotations() as $index => $annotation) {
             $next = $doc->getAnnotation($index + 1);
 
-            if (null === $next) {
+            if (!$next instanceof \PhpCsFixer\DocBlock\Annotation) {
                 break;
             }
 
@@ -228,7 +226,7 @@ final class PhpdocSeparationFixer extends AbstractFixer implements ConfigurableF
         $pos = $first->getEnd();
         $final = $second->getStart();
 
-        for ($pos = $pos + 1; $pos < $final; ++$pos) {
+        for ($pos += 1; $pos < $final; ++$pos) {
             $doc->getLine($pos)->remove();
         }
     }
@@ -248,7 +246,7 @@ final class PhpdocSeparationFixer extends AbstractFixer implements ConfigurableF
             return;
         }
 
-        for ($pos = $pos + 1; $pos < $final; ++$pos) {
+        for ($pos += 1; $pos < $final; ++$pos) {
             $doc->getLine($pos)->remove();
         }
     }

@@ -100,7 +100,7 @@ final class RuleSet implements RuleSetInterface
                 }
 
                 $set = $this->resolveSubset($name, $value);
-                $resolvedRules = array_merge($resolvedRules, $set);
+                $resolvedRules = [...$resolvedRules, ...$set];
             } else {
                 $resolvedRules[$name] = $value;
             }
@@ -128,7 +128,7 @@ final class RuleSet implements RuleSetInterface
             if (str_starts_with($name, '@')) {
                 $set = $this->resolveSubset($name, $setValue);
                 unset($rules[$name]);
-                $rules = array_merge($rules, $set);
+                $rules = [...$rules, ...$set];
             } elseif (!$setValue) {
                 $rules[$name] = false;
             } else {

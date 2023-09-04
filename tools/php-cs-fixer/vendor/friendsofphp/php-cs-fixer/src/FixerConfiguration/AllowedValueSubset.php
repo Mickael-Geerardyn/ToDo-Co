@@ -20,16 +20,10 @@ namespace PhpCsFixer\FixerConfiguration;
 final class AllowedValueSubset
 {
     /**
-     * @var list<string>
-     */
-    private array $allowedValues;
-
-    /**
      * @param list<string> $allowedValues
      */
-    public function __construct(array $allowedValues)
+    public function __construct(private array $allowedValues)
     {
-        $this->allowedValues = $allowedValues;
         sort($this->allowedValues, SORT_FLAG_CASE | SORT_STRING);
     }
 
@@ -38,7 +32,7 @@ final class AllowedValueSubset
      *
      * @param mixed $values the value to validate
      */
-    public function __invoke($values): bool
+    public function __invoke(mixed $values): bool
     {
         if (!\is_array($values)) {
             return false;

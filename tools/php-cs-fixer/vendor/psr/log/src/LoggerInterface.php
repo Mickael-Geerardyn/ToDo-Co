@@ -24,8 +24,6 @@ interface LoggerInterface
      *
      * @param string|\Stringable $message
      * @param mixed[] $context
-     *
-     * @return void
      */
     public function emergency(string|\Stringable $message, array $context = []): void;
 
@@ -37,8 +35,6 @@ interface LoggerInterface
      *
      * @param string|\Stringable $message
      * @param mixed[] $context
-     *
-     * @return void
      */
     public function alert(string|\Stringable $message, array $context = []): void;
 
@@ -49,8 +45,6 @@ interface LoggerInterface
      *
      * @param string|\Stringable $message
      * @param mixed[] $context
-     *
-     * @return void
      */
     public function critical(string|\Stringable $message, array $context = []): void;
 
@@ -60,8 +54,6 @@ interface LoggerInterface
      *
      * @param string|\Stringable $message
      * @param mixed[] $context
-     *
-     * @return void
      */
     public function error(string|\Stringable $message, array $context = []): void;
 
@@ -73,8 +65,6 @@ interface LoggerInterface
      *
      * @param string|\Stringable $message
      * @param mixed[] $context
-     *
-     * @return void
      */
     public function warning(string|\Stringable $message, array $context = []): void;
 
@@ -83,8 +73,6 @@ interface LoggerInterface
      *
      * @param string|\Stringable $message
      * @param mixed[] $context
-     *
-     * @return void
      */
     public function notice(string|\Stringable $message, array $context = []): void;
 
@@ -95,8 +83,6 @@ interface LoggerInterface
      *
      * @param string|\Stringable $message
      * @param mixed[] $context
-     *
-     * @return void
      */
     public function info(string|\Stringable $message, array $context = []): void;
 
@@ -105,21 +91,17 @@ interface LoggerInterface
      *
      * @param string|\Stringable $message
      * @param mixed[] $context
-     *
-     * @return void
      */
     public function debug(string|\Stringable $message, array $context = []): void;
 
     /**
      * Logs with an arbitrary level.
      *
-     * @param mixed   $level
      * @param string|\Stringable $message
      * @param mixed[] $context
      *
-     * @return void
      *
      * @throws \Psr\Log\InvalidArgumentException
      */
-    public function log($level, string|\Stringable $message, array $context = []): void;
+    public function log(mixed $level, string|\Stringable $message, array $context = []): void;
 }

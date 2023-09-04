@@ -31,10 +31,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class PhpUnitMockFixer extends AbstractPhpUnitFixer implements ConfigurableFixerInterface
 {
-    /**
-     * @var bool
-     */
-    private $fixCreatePartialMock;
+    private ?bool $fixCreatePartialMock = null;
 
     public function getDefinition(): FixerDefinitionInterface
     {
@@ -107,7 +104,7 @@ final class MyTest extends \PHPUnit_Framework_TestCase
 
                 if (1 === $argumentsCount) {
                     $tokens[$index] = new Token([T_STRING, 'createMock']);
-                } elseif (2 === $argumentsCount && true === $this->fixCreatePartialMock) {
+                } elseif (2 === $argumentsCount && $this->fixCreatePartialMock) {
                     $tokens[$index] = new Token([T_STRING, 'createPartialMock']);
                 }
             }

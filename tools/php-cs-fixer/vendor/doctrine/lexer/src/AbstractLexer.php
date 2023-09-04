@@ -52,7 +52,7 @@ abstract class AbstractLexer
      * @var mixed[]|null
      * @psalm-var Token<T, V>|null
      */
-    public Token|null $lookahead;
+    public Token|null $lookahead = null;
 
     /**
      * The last matched/seen token.
@@ -60,7 +60,7 @@ abstract class AbstractLexer
      * @var mixed[]|null
      * @psalm-var Token<T, V>|null
      */
-    public Token|null $token;
+    public Token|null $token = null;
 
     /**
      * Composed regex for input parsing.
@@ -142,7 +142,7 @@ abstract class AbstractLexer
      */
     public function isNextToken(int|string|UnitEnum $type)
     {
-        return $this->lookahead !== null && $this->lookahead->isA($type);
+        return $this->lookahead instanceof \Doctrine\Common\Lexer\Token && $this->lookahead->isA($type);
     }
 
     /**
@@ -156,7 +156,7 @@ abstract class AbstractLexer
      */
     public function isNextTokenAny(array $types)
     {
-        return $this->lookahead !== null && $this->lookahead->isA(...$types);
+        return $this->lookahead instanceof \Doctrine\Common\Lexer\Token && $this->lookahead->isA(...$types);
     }
 
     /**
@@ -173,7 +173,7 @@ abstract class AbstractLexer
         $this->lookahead = isset($this->tokens[$this->position])
             ? $this->tokens[$this->position++] : null;
 
-        return $this->lookahead !== null;
+        return $this->lookahead instanceof \Doctrine\Common\Lexer\Token;
     }
 
     /**
@@ -185,7 +185,7 @@ abstract class AbstractLexer
      */
     public function skipUntil(int|string|UnitEnum $type)
     {
-        while ($this->lookahead !== null && ! $this->lookahead->isA($type)) {
+        while ($this->lookahead instanceof \Doctrine\Common\Lexer\Token && ! $this->lookahead->isA($type)) {
             $this->moveNext();
         }
     }
@@ -238,7 +238,7 @@ abstract class AbstractLexer
      */
     protected function scan(string $input)
     {
-        if (! isset($this->regex)) {
+        if ($this->regex === null) {
             $this->regex = sprintf(
                 '/(%s)|%s/%s',
                 implode(')|(', $this->getCatchablePatterns()),

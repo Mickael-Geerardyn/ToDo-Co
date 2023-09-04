@@ -89,7 +89,7 @@ class Bar {}
             // get the next non-whitespace token inc comments, provided
             // that there is whitespace between it and the current token
             $next = $tokens->getNextNonWhitespace($index);
-            if ($index + 2 === $next && false === $tokens[$next]->isGivenKind($forbiddenSuccessors)) {
+            if ($index + 2 === $next && !$tokens[$next]->isGivenKind($forbiddenSuccessors)) {
                 $this->fixWhitespace($tokens, $index + 1);
             }
         }

@@ -36,7 +36,7 @@ final class NonPrintableCharacterFixer extends AbstractFixer implements Configur
     /**
      * @var array<string, string[]>
      */
-    private array $symbolsReplace;
+    private readonly array $symbolsReplace;
 
     /**
      * @var int[]

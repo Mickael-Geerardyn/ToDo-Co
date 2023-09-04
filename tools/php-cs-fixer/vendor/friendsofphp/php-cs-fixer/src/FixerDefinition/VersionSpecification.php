@@ -22,12 +22,12 @@ final class VersionSpecification implements VersionSpecificationInterface
     /**
      * @var null|int<1, max>
      */
-    private ?int $minimum;
+    private readonly ?int $minimum;
 
     /**
      * @var null|int<1, max>
      */
-    private ?int $maximum;
+    private readonly ?int $maximum;
 
     /**
      * @param null|int<1, max> $minimum

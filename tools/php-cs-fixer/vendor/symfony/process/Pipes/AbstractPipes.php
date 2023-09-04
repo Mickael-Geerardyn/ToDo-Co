@@ -24,8 +24,8 @@ abstract class AbstractPipes implements PipesInterface
 
     private $inputBuffer = '';
     private $input;
-    private $blocked = true;
-    private $lastError;
+    private bool $blocked = true;
+    private ?string $lastError = null;
 
     /**
      * @param resource|string|int|float|bool|\Iterator|null $input
@@ -60,7 +60,7 @@ abstract class AbstractPipes implements PipesInterface
         $this->lastError = null;
 
         // stream_select returns false when the `select` system call is interrupted by an incoming signal
-        return null !== $lastError && false !== stripos($lastError, 'interrupted system call');
+        return null !== $lastError && false !== stripos((string) $lastError, 'interrupted system call');
     }
 
     /**
@@ -124,8 +124,8 @@ abstract class AbstractPipes implements PipesInterface
 
         foreach ($w as $stdin) {
             if (isset($this->inputBuffer[0])) {
-                $written = fwrite($stdin, $this->inputBuffer);
-                $this->inputBuffer = substr($this->inputBuffer, $written);
+                $written = fwrite($stdin, (string) $this->inputBuffer);
+                $this->inputBuffer = substr((string) $this->inputBuffer, $written);
                 if (isset($this->inputBuffer[0])) {
                     return [$this->pipes[0]];
                 }
@@ -160,7 +160,7 @@ abstract class AbstractPipes implements PipesInterface
             $this->input = null;
             fclose($this->pipes[0]);
             unset($this->pipes[0]);
-        } elseif (!$w) {
+        } elseif ($w === []) {
             return [$this->pipes[0]];
         }
 

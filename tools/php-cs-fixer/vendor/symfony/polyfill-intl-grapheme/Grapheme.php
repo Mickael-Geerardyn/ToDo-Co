@@ -45,16 +45,16 @@ final class Grapheme
     public static function grapheme_extract($s, $size, $type = \GRAPHEME_EXTR_COUNT, $start = 0, &$next = 0)
     {
         if (0 > $start) {
-            $start = \strlen($s) + $start;
+            $start = \strlen((string) $s) + $start;
         }
 
         if (!\is_scalar($s)) {
             $hasError = false;
             set_error_handler(function () use (&$hasError) { $hasError = true; });
-            $next = substr($s, $start);
+            $next = substr((string) $s, $start);
             restore_error_handler();
             if ($hasError) {
-                substr($s, $start);
+                substr((string) $s, $start);
                 $s = '';
             } else {
                 $s = $next;
@@ -67,10 +67,6 @@ final class Grapheme
         $start = (int) $start;
 
         if (\GRAPHEME_EXTR_COUNT !== $type && \GRAPHEME_EXTR_MAXBYTES !== $type && \GRAPHEME_EXTR_MAXCHARS !== $type) {
-            if (80000 > \PHP_VERSION_ID) {
-                return false;
-            }
-
             throw new \ValueError('grapheme_extract(): Argument #3 ($type) must be one of GRAPHEME_EXTR_COUNT, GRAPHEME_EXTR_MAXBYTES, or GRAPHEME_EXTR_MAXCHARS');
         }
 
@@ -113,7 +109,7 @@ final class Grapheme
 
     public static function grapheme_strlen($s)
     {
-        preg_replace('/'.SYMFONY_GRAPHEME_CLUSTER_RX.'/u', '', $s, -1, $len);
+        preg_replace('/'.SYMFONY_GRAPHEME_CLUSTER_RX.'/u', '', (string) $s, -1, $len);
 
         return 0 === $len && '' !== $s ? null : $len;
     }
@@ -121,22 +117,18 @@ final class Grapheme
     public static function grapheme_substr($s, $start, $len = null)
     {
         if (null === $len) {
-            $len = 2147483647;
+            $len = 2_147_483_647;
         }
 
-        preg_match_all('/'.SYMFONY_GRAPHEME_CLUSTER_RX.'/u', $s, $s);
+        preg_match_all('/'.SYMFONY_GRAPHEME_CLUSTER_RX.'/u', (string) $s, $s);
 
-        $slen = \count($s[0]);
+        $slen = is_countable($s[0]) ? \count($s[0]) : 0;
         $start = (int) $start;
 
         if (0 > $start) {
             $start += $slen;
         }
         if (0 > $start) {
-            if (\PHP_VERSION_ID < 80000) {
-                return false;
-            }
-
             $start = 0;
         }
         if ($start >= $slen) {
@@ -183,12 +175,12 @@ final class Grapheme
 
     public static function grapheme_stristr($s, $needle, $beforeNeedle = false)
     {
-        return mb_stristr($s, $needle, $beforeNeedle, 'UTF-8');
+        return mb_stristr((string) $s, (string) $needle, $beforeNeedle, 'UTF-8');
     }
 
     public static function grapheme_strstr($s, $needle, $beforeNeedle = false)
     {
-        return mb_strstr($s, $needle, $beforeNeedle, 'UTF-8');
+        return mb_strstr((string) $s, (string) $needle, $beforeNeedle, 'UTF-8');
     }
 
     private static function grapheme_position($s, $needle, $offset, $mode)
@@ -223,12 +215,12 @@ final class Grapheme
         // case fold the strings first.
         $caseInsensitive = $mode & 1;
         $reverse = $mode & 2;
-        if ($caseInsensitive) {
+        if ($caseInsensitive !== 0) {
             // Use the same case folding mode as mbstring does for mb_stripos().
             // Stick to SIMPLE case folding to avoid changing the length of the string, which
             // might result in offsets being shifted.
             $mode = \defined('MB_CASE_FOLD_SIMPLE') ? \MB_CASE_FOLD_SIMPLE : \MB_CASE_LOWER;
-            $s = mb_convert_case($s, $mode, 'UTF-8');
+            $s = mb_convert_case((string) $s, $mode, 'UTF-8');
             $needle = mb_convert_case($needle, $mode, 'UTF-8');
 
             if (!\defined('MB_CASE_FOLD_SIMPLE')) {
@@ -236,12 +228,8 @@ final class Grapheme
                 $needle = str_replace(self::CASE_FOLD[0], self::CASE_FOLD[1], $needle);
             }
         }
-        if ($reverse) {
-            $needlePos = strrpos($s, $needle);
-        } else {
-            $needlePos = strpos($s, $needle);
-        }
+        $needlePos = $reverse !== 0 ? strrpos((string) $s, $needle) : strpos((string) $s, $needle);
 
-        return false !== $needlePos ? self::grapheme_strlen(substr($s, 0, $needlePos)) + $offset : false;
+        return false !== $needlePos ? self::grapheme_strlen(substr((string) $s, 0, $needlePos)) + $offset : false;
     }
 }

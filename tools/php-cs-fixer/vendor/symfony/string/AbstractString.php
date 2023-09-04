@@ -231,7 +231,7 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
     {
         $str = $this->slice($offset, 1);
 
-        return '' === $str->string ? [] : array_values(unpack('C*', $str->string));
+        return '' === $str->string ? [] : array_values(unpack('C*', (string) $str->string));
     }
 
     abstract public function camel(): static;
@@ -244,7 +244,7 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
     public function collapseWhitespace(): static
     {
         $str = clone $this;
-        $str->string = trim(preg_replace("/(?:[ \n\r\t\x0C]{2,}+|[\n\r\t\x0C])/", ' ', $str->string), " \n\r\t\x0C");
+        $str->string = trim(preg_replace("/(?:[ \n\r\t\x0C]{2,}+|[\n\r\t\x0C])/", ' ', (string) $str->string), " \n\r\t\x0C");
 
         return $str;
     }
@@ -418,7 +418,7 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
         }
 
         $str = clone $this;
-        $str->string = str_repeat($str->string, $multiplier);
+        $str->string = str_repeat((string) $str->string, $multiplier);
 
         return $str;
     }
@@ -448,10 +448,10 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
             $delimiter .= 'i';
         }
 
-        set_error_handler(static function ($t, $m) { throw new InvalidArgumentException($m); });
+        set_error_handler(static function ($t, $m): never { throw new InvalidArgumentException($m); });
 
         try {
-            if (false === $chunks = preg_split($delimiter, $this->string, $limit, $flags)) {
+            if (false === $chunks = preg_split($delimiter, (string) $this->string, $limit, $flags)) {
                 throw new RuntimeException('Splitting failed with error: '.preg_last_error_msg());
             }
         } finally {
@@ -460,7 +460,7 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
 
         $str = clone $this;
 
-        if (self::PREG_SPLIT_OFFSET_CAPTURE & $flags) {
+        if ((self::PREG_SPLIT_OFFSET_CAPTURE & $flags) !== 0) {
             foreach ($chunks as &$chunk) {
                 $str->string = $chunk[0];
                 $chunk[0] = clone $str;
@@ -501,23 +501,23 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
 
         $toEncoding = \in_array($toEncoding, ['utf8', 'utf-8', 'UTF8'], true) ? 'UTF-8' : $toEncoding;
 
-        if (null === $toEncoding || $toEncoding === $fromEncoding = $this instanceof AbstractUnicodeString || preg_match('//u', $b->string) ? 'UTF-8' : 'Windows-1252') {
+        if (null === $toEncoding || $toEncoding === $fromEncoding = $this instanceof AbstractUnicodeString || preg_match('//u', (string) $b->string) ? 'UTF-8' : 'Windows-1252') {
             $b->string = $this->string;
 
             return $b;
         }
 
-        set_error_handler(static function ($t, $m) { throw new InvalidArgumentException($m); });
+        set_error_handler(static function ($t, $m): never { throw new InvalidArgumentException($m); });
 
         try {
             try {
-                $b->string = mb_convert_encoding($this->string, $toEncoding, 'UTF-8');
+                $b->string = mb_convert_encoding((string) $this->string, $toEncoding, 'UTF-8');
             } catch (InvalidArgumentException $e) {
                 if (!\function_exists('iconv')) {
                     throw $e;
                 }
 
-                $b->string = iconv('UTF-8', $toEncoding, $this->string);
+                $b->string = iconv('UTF-8', $toEncoding, (string) $this->string);
             }
         } finally {
             restore_error_handler();
@@ -550,7 +550,7 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
      */
     public function trimPrefix($prefix): static
     {
-        if (\is_array($prefix) || $prefix instanceof \Traversable) { // don't use is_iterable(), it's slow
+        if (is_iterable($prefix)) { // don't use is_iterable(), it's slow
             foreach ($prefix as $s) {
                 $t = $this->trimPrefix($s);
 
@@ -564,14 +564,10 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
 
         $str = clone $this;
 
-        if ($prefix instanceof self) {
-            $prefix = $prefix->string;
-        } else {
-            $prefix = (string) $prefix;
-        }
+        $prefix = $prefix instanceof self ? $prefix->string : (string) $prefix;
 
-        if ('' !== $prefix && \strlen($this->string) >= \strlen($prefix) && 0 === substr_compare($this->string, $prefix, 0, \strlen($prefix), $this->ignoreCase)) {
-            $str->string = substr($this->string, \strlen($prefix));
+        if ('' !== $prefix && \strlen((string) $this->string) >= \strlen($prefix) && 0 === substr_compare((string) $this->string, $prefix, 0, \strlen($prefix), $this->ignoreCase)) {
+            $str->string = substr((string) $this->string, \strlen($prefix));
         }
 
         return $str;
@@ -584,7 +580,7 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
      */
     public function trimSuffix($suffix): static
     {
-        if (\is_array($suffix) || $suffix instanceof \Traversable) { // don't use is_iterable(), it's slow
+        if (is_iterable($suffix)) { // don't use is_iterable(), it's slow
             foreach ($suffix as $s) {
                 $t = $this->trimSuffix($s);
 
@@ -598,14 +594,10 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
 
         $str = clone $this;
 
-        if ($suffix instanceof self) {
-            $suffix = $suffix->string;
-        } else {
-            $suffix = (string) $suffix;
-        }
+        $suffix = $suffix instanceof self ? $suffix->string : (string) $suffix;
 
-        if ('' !== $suffix && \strlen($this->string) >= \strlen($suffix) && 0 === substr_compare($this->string, $suffix, -\strlen($suffix), null, $this->ignoreCase)) {
-            $str->string = substr($this->string, 0, -\strlen($suffix));
+        if ('' !== $suffix && \strlen((string) $this->string) >= \strlen($suffix) && str_ends_with((string) $this->string, $suffix)) {
+            $str->string = substr((string) $this->string, 0, -\strlen($suffix));
         }
 
         return $str;
@@ -635,7 +627,7 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
 
         $str = $this->slice(0, $length - $ellipsisLength);
 
-        return $ellipsisLength ? $str->trimEnd()->append($ellipsis) : $str;
+        return $ellipsisLength !== 0 ? $str->trimEnd()->append($ellipsis) : $str;
     }
 
     abstract public function upper(): static;

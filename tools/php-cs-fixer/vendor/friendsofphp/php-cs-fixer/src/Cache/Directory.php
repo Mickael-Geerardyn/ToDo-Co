@@ -21,11 +21,8 @@ namespace PhpCsFixer\Cache;
  */
 final class Directory implements DirectoryInterface
 {
-    private string $directoryName;
-
-    public function __construct(string $directoryName)
+    public function __construct(private readonly string $directoryName)
     {
-        $this->directoryName = $directoryName;
     }
 
     public function getRelativePathTo(string $file): string

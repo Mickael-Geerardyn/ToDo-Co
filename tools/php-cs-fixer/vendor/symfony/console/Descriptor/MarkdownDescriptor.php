@@ -47,7 +47,7 @@ class MarkdownDescriptor extends Descriptor
     {
         $this->write(
             '#### `'.($argument->getName() ?: '<none>')."`\n\n"
-            .($argument->getDescription() ? preg_replace('/\s*[\r\n]\s*/', "\n", $argument->getDescription())."\n\n" : '')
+            .($argument->getDescription() !== '' && $argument->getDescription() !== '0' ? preg_replace('/\s*[\r\n]\s*/', "\n", $argument->getDescription())."\n\n" : '')
             .'* Is required: '.($argument->isRequired() ? 'yes' : 'no')."\n"
             .'* Is array: '.($argument->isArray() ? 'yes' : 'no')."\n"
             .'* Default: `'.str_replace("\n", '', var_export($argument->getDefault(), true)).'`'
@@ -66,7 +66,7 @@ class MarkdownDescriptor extends Descriptor
 
         $this->write(
             '#### `'.$name.'`'."\n\n"
-            .($option->getDescription() ? preg_replace('/\s*[\r\n]\s*/', "\n", $option->getDescription())."\n\n" : '')
+            .($option->getDescription() !== '' && $option->getDescription() !== '0' ? preg_replace('/\s*[\r\n]\s*/', "\n", $option->getDescription())."\n\n" : '')
             .'* Accept value: '.($option->acceptValue() ? 'yes' : 'no')."\n"
             .'* Is value required: '.($option->isValueRequired() ? 'yes' : 'no')."\n"
             .'* Is multiple: '.($option->isArray() ? 'yes' : 'no')."\n"
@@ -77,7 +77,7 @@ class MarkdownDescriptor extends Descriptor
 
     protected function describeInputDefinition(InputDefinition $definition, array $options = []): void
     {
-        if ($showArguments = \count($definition->getArguments()) > 0) {
+        if ($showArguments = $definition->getArguments() !== []) {
             $this->write('### Arguments');
             foreach ($definition->getArguments() as $argument) {
                 $this->write("\n\n");
@@ -85,7 +85,7 @@ class MarkdownDescriptor extends Descriptor
             }
         }
 
-        if (\count($definition->getOptions()) > 0) {
+        if ($definition->getOptions() !== []) {
             if ($showArguments) {
                 $this->write("\n\n");
             }
@@ -104,7 +104,7 @@ class MarkdownDescriptor extends Descriptor
             $this->write(
                 '`'.$command->getName()."`\n"
                 .str_repeat('-', Helper::width($command->getName()) + 2)."\n\n"
-                .($command->getDescription() ? $command->getDescription()."\n\n" : '')
+                .($command->getDescription() !== '' && $command->getDescription() !== '0' ? $command->getDescription()."\n\n" : '')
                 .'### Usage'."\n\n"
                 .array_reduce($command->getAliases(), fn ($carry, $usage) => $carry.'* `'.$usage.'`'."\n")
             );
@@ -117,12 +117,12 @@ class MarkdownDescriptor extends Descriptor
         $this->write(
             '`'.$command->getName()."`\n"
             .str_repeat('-', Helper::width($command->getName()) + 2)."\n\n"
-            .($command->getDescription() ? $command->getDescription()."\n\n" : '')
+            .($command->getDescription() !== '' && $command->getDescription() !== '0' ? $command->getDescription()."\n\n" : '')
             .'### Usage'."\n\n"
             .array_reduce(array_merge([$command->getSynopsis()], $command->getAliases(), $command->getUsages()), fn ($carry, $usage) => $carry.'* `'.$usage.'`'."\n")
         );
 
-        if ($help = $command->getProcessedHelp()) {
+        if (($help = $command->getProcessedHelp()) !== '' && ($help = $command->getProcessedHelp()) !== '0') {
             $this->write("\n");
             $this->write($help);
         }

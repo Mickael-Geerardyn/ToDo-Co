@@ -17,9 +17,7 @@ class NullLogger extends AbstractLogger
      *
      * @param mixed  $level
      * @param string|\Stringable $message
-     * @param array $context
      *
-     * @return void
      *
      * @throws \Psr\Log\InvalidArgumentException
      */

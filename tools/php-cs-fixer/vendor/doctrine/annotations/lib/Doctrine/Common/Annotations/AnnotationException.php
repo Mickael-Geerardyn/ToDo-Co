@@ -74,7 +74,6 @@ class AnnotationException extends Exception
     /**
      * Creates a new AnnotationException describing an type error of an attribute.
      *
-     * @param mixed $actual
      *
      * @return AnnotationException
      */
@@ -83,7 +82,7 @@ class AnnotationException extends Exception
         string $annotationName,
         string $context,
         string $expected,
-        $actual
+        mixed $actual
     ) {
         return self::typeError(sprintf(
             'Attribute "%s" of @%s declared on %s expects %s, but got %s.',
@@ -91,7 +90,7 @@ class AnnotationException extends Exception
             $annotationName,
             $context,
             $expected,
-            is_object($actual) ? 'an instance of ' . get_class($actual) : gettype($actual)
+            is_object($actual) ? 'an instance of ' . $actual::class : gettype($actual)
         ));
     }
 
@@ -118,9 +117,7 @@ class AnnotationException extends Exception
     /**
      * Creates a new AnnotationException describing a invalid enummerator.
      *
-     * @param mixed $given
      * @phpstan-param list<string> $available
-     *
      * @return AnnotationException
      */
     public static function enumeratorError(
@@ -128,7 +125,7 @@ class AnnotationException extends Exception
         string $annotationName,
         string $context,
         array $available,
-        $given
+        mixed $given
     ) {
         return new self(sprintf(
             '[Enum Error] Attribute "%s" of @%s declared on %s accepts only [%s], but got %s.',
@@ -136,7 +133,7 @@ class AnnotationException extends Exception
             $annotationName,
             $context,
             implode(', ', $available),
-            is_object($given) ? get_class($given) : $given
+            is_object($given) ? $given::class : $given
         ));
     }
 

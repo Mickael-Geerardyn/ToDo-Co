@@ -20,20 +20,17 @@ namespace Symfony\Component\Finder\Iterator;
  */
 class SortableIterator implements \IteratorAggregate
 {
-    public const SORT_BY_NONE = 0;
-    public const SORT_BY_NAME = 1;
-    public const SORT_BY_TYPE = 2;
-    public const SORT_BY_ACCESSED_TIME = 3;
-    public const SORT_BY_CHANGED_TIME = 4;
-    public const SORT_BY_MODIFIED_TIME = 5;
-    public const SORT_BY_NAME_NATURAL = 6;
-    public const SORT_BY_NAME_CASE_INSENSITIVE = 7;
-    public const SORT_BY_NAME_NATURAL_CASE_INSENSITIVE = 8;
-    public const SORT_BY_EXTENSION = 9;
-    public const SORT_BY_SIZE = 10;
-
-    /** @var \Traversable<string, \SplFileInfo> */
-    private \Traversable $iterator;
+    final public const SORT_BY_NONE = 0;
+    final public const SORT_BY_NAME = 1;
+    final public const SORT_BY_TYPE = 2;
+    final public const SORT_BY_ACCESSED_TIME = 3;
+    final public const SORT_BY_CHANGED_TIME = 4;
+    final public const SORT_BY_MODIFIED_TIME = 5;
+    final public const SORT_BY_NAME_NATURAL = 6;
+    final public const SORT_BY_NAME_CASE_INSENSITIVE = 7;
+    final public const SORT_BY_NAME_NATURAL_CASE_INSENSITIVE = 8;
+    final public const SORT_BY_EXTENSION = 9;
+    final public const SORT_BY_SIZE = 10;
     private \Closure|int $sort;
 
     /**
@@ -42,9 +39,8 @@ class SortableIterator implements \IteratorAggregate
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(\Traversable $iterator, int|callable $sort, bool $reverseOrder = false)
+    public function __construct(private readonly \Traversable $iterator, int|callable $sort, bool $reverseOrder = false)
     {
-        $this->iterator = $iterator;
         $order = $reverseOrder ? -1 : 1;
 
         if (self::SORT_BY_NAME === $sort) {

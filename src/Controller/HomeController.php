@@ -6,15 +6,10 @@ namespace App\Controller;
 	use Symfony\Component\HttpFoundation\Response;
 	use Symfony\Component\Routing\Annotation\Route;
 
-	class DefaultController extends AbstractController
+	class HomeController extends AbstractController
 	{
-
-		/**
-		 * @return Response
-		 *
-		 * @Route("/", name="home_page")
-		 */
-		public function getHomePage(): Response
+		#[Route(path: "/", name: "home_page")]
+  		public function getHomePage(): Response
 		{
 			return $this->render('default/index.html.twig');
 		}

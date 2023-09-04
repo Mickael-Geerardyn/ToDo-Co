@@ -22,16 +22,11 @@ use Symfony\Component\Console\Exception\CommandNotFoundException;
  */
 class ContainerCommandLoader implements CommandLoaderInterface
 {
-    private ContainerInterface $container;
-    private array $commandMap;
-
     /**
      * @param array $commandMap An array with command names as keys and service ids as values
      */
-    public function __construct(ContainerInterface $container, array $commandMap)
+    public function __construct(private readonly ContainerInterface $container, private array $commandMap)
     {
-        $this->container = $container;
-        $this->commandMap = $commandMap;
     }
 
     public function get(string $name): Command

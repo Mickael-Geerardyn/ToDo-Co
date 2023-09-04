@@ -118,7 +118,7 @@ final class HeredocIndentationFixer extends AbstractFixer implements Configurabl
 
         Preg::match('/^\h*/', $tokens[$end]->getContent(), $matches);
         $currentIndent = $matches[0];
-        $currentIndentLength = \strlen($currentIndent);
+        $currentIndentLength = \strlen((string) $currentIndent);
 
         $content = $indent.substr($tokens[$end]->getContent(), $currentIndentLength);
         $tokens[$end] = new Token([T_END_HEREDOC, $content]);
@@ -154,7 +154,7 @@ final class HeredocIndentationFixer extends AbstractFixer implements Configurabl
 
         $content = $tokens[$index]->getContent();
 
-        if (!\in_array($content[0], ["\r", "\n"], true) && (!$currentIndent || str_starts_with($content, $currentIndent))) {
+        if (!\in_array($content[0], ["\r", "\n"], true) && (!$currentIndent || str_starts_with($content, (string) $currentIndent))) {
             $content = $indent.substr($content, $currentIndentLength);
         } elseif ($currentIndent) {
             $content = Preg::replace('/^(?!'.$currentIndent.')\h+/', '', $content);

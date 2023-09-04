@@ -26,20 +26,11 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
 
 final class LambdaNotUsedImportFixer extends AbstractFixer
 {
-    /**
-     * @var ArgumentsAnalyzer
-     */
-    private $argumentsAnalyzer;
+    private ?\PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer $argumentsAnalyzer = null;
 
-    /**
-     * @var FunctionsAnalyzer
-     */
-    private $functionAnalyzer;
+    private ?\PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer $functionAnalyzer = null;
 
-    /**
-     * @var TokensAnalyzer
-     */
-    private $tokensAnalyzer;
+    private ?\PhpCsFixer\Tokenizer\TokensAnalyzer $tokensAnalyzer = null;
 
     public function getDefinition(): FixerDefinitionInterface
     {
@@ -87,7 +78,7 @@ final class LambdaNotUsedImportFixer extends AbstractFixer
 
         $imports = $this->filterArguments($tokens, $arguments);
 
-        if (0 === \count($imports)) {
+        if ([] === $imports) {
             return; // no imports to remove
         }
 
@@ -166,7 +157,7 @@ final class LambdaNotUsedImportFixer extends AbstractFixer
                 if (isset($imports[$content])) {
                     unset($imports[$content]);
 
-                    if (0 === \count($imports)) {
+                    if ([] === $imports) {
                         return $imports;
                     }
                 }
@@ -178,7 +169,7 @@ final class LambdaNotUsedImportFixer extends AbstractFixer
                 if (isset($imports[$content])) {
                     unset($imports[$content]);
 
-                    if (0 === \count($imports)) {
+                    if ([] === $imports) {
                         return $imports;
                     }
                 }
@@ -243,7 +234,7 @@ final class LambdaNotUsedImportFixer extends AbstractFixer
             if (isset($imports[$content])) {
                 unset($imports[$content]);
 
-                if (0 === \count($imports)) {
+                if ([] === $imports) {
                     return $imports;
                 }
             }

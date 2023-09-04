@@ -37,7 +37,7 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 final class FixerFactory
 {
-    private FixerNameValidator $nameValidator;
+    private readonly FixerNameValidator $nameValidator;
 
     /**
      * @var list<FixerInterface>
@@ -171,12 +171,12 @@ final class FixerFactory
             $fixersByName[$name] = $fixer;
             $conflicts = array_intersect($this->getFixersConflicts($fixer), $fixerNames);
 
-            if (\count($conflicts) > 0) {
+            if ($conflicts !== []) {
                 $fixerConflicts[$name] = $conflicts;
             }
         }
 
-        if (\count($fixerConflicts) > 0) {
+        if ($fixerConflicts !== []) {
             throw new \UnexpectedValueException($this->generateConflictMessage($fixerConflicts));
         }
 
@@ -228,7 +228,7 @@ final class FixerFactory
                 static fn (string $candidate): bool => !\array_key_exists($candidate, $report) || !\in_array($fixer, $report[$candidate], true)
             );
 
-            if (\count($report[$fixer]) > 0) {
+            if ($report[$fixer] !== []) {
                 $message .= sprintf("\n- \"%s\" with %s", $fixer, Utils::naturalLanguageJoin($report[$fixer]));
             }
         }

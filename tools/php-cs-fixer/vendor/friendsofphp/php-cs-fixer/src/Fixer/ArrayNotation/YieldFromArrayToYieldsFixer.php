@@ -101,7 +101,7 @@ final class YieldFromArrayToYieldsFixer extends AbstractFixer
             }
 
             // there was a trailing comma, so we do not need original `;` after initial array structure
-            if (true === $arrayHasTrailingComma) {
+            if ($arrayHasTrailingComma) {
                 $tokens->clearTokenAndMergeSurroundingWhitespace($tokens->getNextMeaningfulToken($endIndex));
             }
         }
@@ -160,7 +160,7 @@ final class YieldFromArrayToYieldsFixer extends AbstractFixer
             // skip nested (), [], {} constructs
             $blockDefinitionProbe = Tokens::detectBlockType($token);
 
-            if (null !== $blockDefinitionProbe && true === $blockDefinitionProbe['isStart']) {
+            if (null !== $blockDefinitionProbe && $blockDefinitionProbe['isStart']) {
                 $index = $tokens->findBlockEnd($blockDefinitionProbe['type'], $index);
 
                 continue;

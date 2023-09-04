@@ -19,44 +19,33 @@ namespace PhpCsFixer\Tokenizer\Analyzer\Analysis;
  */
 final class NamespaceAnalysis implements StartEndTokenAwareAnalysis
 {
-    /**
-     * The fully qualified namespace name.
-     */
-    private string $fullName;
-
-    /**
-     * The short version of the namespace.
-     */
-    private string $shortName;
-
-    /**
-     * The start index of the namespace declaration in the analyzed Tokens.
-     */
-    private int $startIndex;
-
-    /**
-     * The end index of the namespace declaration in the analyzed Tokens.
-     */
-    private int $endIndex;
-
-    /**
-     * The start index of the scope of the namespace in the analyzed Tokens.
-     */
-    private int $scopeStartIndex;
-
-    /**
-     * The end index of the scope of the namespace in the analyzed Tokens.
-     */
-    private int $scopeEndIndex;
-
-    public function __construct(string $fullName, string $shortName, int $startIndex, int $endIndex, int $scopeStartIndex, int $scopeEndIndex)
+    public function __construct(
+        /**
+         * The fully qualified namespace name.
+         */
+        private readonly string $fullName,
+        /**
+         * The short version of the namespace.
+         */
+        private readonly string $shortName,
+        /**
+         * The start index of the namespace declaration in the analyzed Tokens.
+         */
+        private readonly int $startIndex,
+        /**
+         * The end index of the namespace declaration in the analyzed Tokens.
+         */
+        private readonly int $endIndex,
+        /**
+         * The start index of the scope of the namespace in the analyzed Tokens.
+         */
+        private readonly int $scopeStartIndex,
+        /**
+         * The end index of the scope of the namespace in the analyzed Tokens.
+         */
+        private readonly int $scopeEndIndex
+    )
     {
-        $this->fullName = $fullName;
-        $this->shortName = $shortName;
-        $this->startIndex = $startIndex;
-        $this->endIndex = $endIndex;
-        $this->scopeStartIndex = $scopeStartIndex;
-        $this->scopeEndIndex = $scopeEndIndex;
     }
 
     public function getFullName(): string

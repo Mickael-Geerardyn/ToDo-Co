@@ -23,53 +23,44 @@ use Psr\Log\LoggerInterface;
  */
 class XdebugHandler
 {
-    const SUFFIX_ALLOW = '_ALLOW_XDEBUG';
-    const SUFFIX_INIS = '_ORIGINAL_INIS';
-    const RESTART_ID = 'internal';
-    const RESTART_SETTINGS = 'XDEBUG_HANDLER_SETTINGS';
-    const DEBUG = 'XDEBUG_HANDLER_DEBUG';
+    final public const SUFFIX_ALLOW = '_ALLOW_XDEBUG';
+    final public const SUFFIX_INIS = '_ORIGINAL_INIS';
+    final public const RESTART_ID = 'internal';
+    final public const RESTART_SETTINGS = 'XDEBUG_HANDLER_SETTINGS';
+    final public const DEBUG = 'XDEBUG_HANDLER_DEBUG';
 
     /** @var string|null */
     protected $tmpIni;
 
-    /** @var bool */
-    private static $inRestart;
+    private static bool $inRestart;
 
-    /** @var string */
-    private static $name;
+    private static string $name;
 
     /** @var string|null */
     private static $skipped;
 
-    /** @var bool */
-    private static $xdebugActive;
+    private static bool $xdebugActive;
+
+    private static ?string $xdebugMode = null;
 
     /** @var string|null */
-    private static $xdebugMode;
+    private static string $xdebugVersion;
 
-    /** @var string|null */
-    private static $xdebugVersion;
-
-    /** @var bool */
-    private $cli;
+    private ?bool $cli = null;
 
     /** @var string|null */
     private $debug;
 
-    /** @var string */
-    private $envAllowXdebug;
+    private readonly string $envAllowXdebug;
 
-    /** @var string */
-    private $envOriginalInis;
+    private readonly string $envOriginalInis;
 
-    /** @var bool */
-    private $persistent;
+    private ?bool $persistent = null;
 
     /** @var string|null */
     private $script;
 
-    /** @var Status */
-    private $statusWriter;
+    private readonly \Composer\XdebugHandler\Status $statusWriter;
 
     /**
      * Constructor
@@ -285,15 +276,7 @@ class XdebugHandler
         $this->tryEnableSignals();
         $this->notify(Status::RESTARTING, implode(' ', $command));
 
-        if (PHP_VERSION_ID >= 70400) {
-            $cmd = $command;
-        } else {
-            $cmd = Process::escapeShellCommand($command);
-            if (defined('PHP_WINDOWS_VERSION_BUILD')) {
-                // Outer quotes required on cmd string below PHP 8
-                $cmd = '"'.$cmd.'"';
-            }
-        }
+        $cmd = $command;
 
         $process = proc_open($cmd, [], $pipes);
         if (is_resource($process)) {
@@ -339,7 +322,7 @@ class XdebugHandler
         } elseif (!$this->checkMainScript()) {
             $error = 'Unable to access main script: '.$this->script;
         } elseif (!$this->writeTmpIni($iniFiles, $tmpDir, $error)) {
-            $error = $error !== null ? $error : 'Unable to create temp ini file at: '.$tmpDir;
+            $error ??= 'Unable to create temp ini file at: '.$tmpDir;
         } elseif (!$this->setEnvironment($scannedInis, $iniFiles)) {
             $error = 'Unable to set environment variables';
         }
@@ -415,7 +398,9 @@ class XdebugHandler
 
         if (!$this->persistent) {
             // Use command-line options
-            array_push($php, '-n', '-c', $this->tmpIni);
+            $php[] = '-n';
+            $php[] = '-c';
+            $php[] = $this->tmpIni;
         }
 
         return array_merge($php, [$this->script], $args);
@@ -438,11 +423,9 @@ class XdebugHandler
             return false;
         }
 
-        if ($this->persistent) {
-            // Use the environment to persist the settings
-            if (!putenv('PHP_INI_SCAN_DIR=') || !putenv('PHPRC='.$this->tmpIni)) {
-                return false;
-            }
+        // Use the environment to persist the settings
+        if ($this->persistent && (!putenv('PHP_INI_SCAN_DIR=') || !putenv('PHPRC='.$this->tmpIni))) {
+            return false;
         }
 
         // Flag restarted process and save values for it to use
@@ -479,7 +462,7 @@ class XdebugHandler
         foreach ($loadedConfig as $name => $value) {
             // Value will either be null, string or array (HHVM only)
             if (!is_string($value)
-                || strpos($name, 'xdebug') === 0
+                || str_starts_with($name, 'xdebug')
                 || $name === 'apc.mmap_file_mask') {
                 continue;
             }
@@ -582,7 +565,7 @@ class XdebugHandler
                 return false;
             }
 
-            if (0 === strpos($workingDir, '\\\\')) {
+            if (str_starts_with($workingDir, '\\\\')) {
                 $info = 'cmd.exe does not support UNC paths: '.$workingDir;
                 return false;
             }
@@ -638,7 +621,7 @@ class XdebugHandler
 
         if (version_compare(self::$xdebugVersion, '3.1', '>=')) {
             $modes = xdebug_info('mode');
-            self::$xdebugMode = count($modes) === 0 ? 'off' : implode(',', $modes);
+            self::$xdebugMode = (is_countable($modes) ? count($modes) : 0) === 0 ? 'off' : implode(',', $modes);
             self::$xdebugActive = self::$xdebugMode !== 'off';
             return;
         }

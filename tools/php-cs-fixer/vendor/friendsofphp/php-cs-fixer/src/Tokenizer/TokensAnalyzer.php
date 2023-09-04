@@ -29,16 +29,15 @@ use PhpCsFixer\Tokenizer\Analyzer\GotoLabelAnalyzer;
  */
 final class TokensAnalyzer
 {
-    /**
-     * Tokens collection instance.
-     */
-    private Tokens $tokens;
-
     private ?GotoLabelAnalyzer $gotoLabelAnalyzer = null;
 
-    public function __construct(Tokens $tokens)
+    public function __construct(
+        /**
+         * Tokens collection instance.
+         */
+        private Tokens $tokens
+    )
     {
-        $this->tokens = $tokens;
     }
 
     /**
@@ -391,7 +390,7 @@ final class TokensAnalyzer
 
         // check for goto label
         if ($this->tokens[$nextIndex]->equals(':')) {
-            if (null === $this->gotoLabelAnalyzer) {
+            if (!$this->gotoLabelAnalyzer instanceof \PhpCsFixer\Tokenizer\Analyzer\GotoLabelAnalyzer) {
                 $this->gotoLabelAnalyzer = new GotoLabelAnalyzer();
             }
 
@@ -601,12 +600,7 @@ final class TokensAnalyzer
         if ($token->isArray()) {
             return isset($arrayOperators[$token->getId()]);
         }
-
-        if (isset($nonArrayOperators[$token->getContent()])) {
-            return true;
-        }
-
-        return false;
+        return isset($nonArrayOperators[$token->getContent()]);
     }
 
     /**

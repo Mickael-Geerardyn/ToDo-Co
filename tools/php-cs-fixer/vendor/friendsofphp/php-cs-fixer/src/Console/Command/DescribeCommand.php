@@ -57,20 +57,20 @@ final class DescribeCommand extends Command
     /**
      * @var string[]
      */
-    private $setNames;
+    private ?array $setNames = null;
 
-    private FixerFactory $fixerFactory;
+    private readonly FixerFactory $fixerFactory;
 
     /**
      * @var array<string, FixerInterface>
      */
-    private $fixers;
+    private ?array $fixers = null;
 
     public function __construct(?FixerFactory $fixerFactory = null)
     {
         parent::__construct();
 
-        if (null === $fixerFactory) {
+        if (!$fixerFactory instanceof \PhpCsFixer\FixerFactory) {
             $fixerFactory = new FixerFactory();
             $fixerFactory->registerBuiltInFixers();
         }
@@ -110,7 +110,7 @@ final class DescribeCommand extends Command
         $name = $input->getArgument('name');
 
         try {
-            if (str_starts_with($name, '@')) {
+            if (str_starts_with((string) $name, '@')) {
                 $this->describeSet($output, $name);
 
                 return 0;
@@ -131,7 +131,7 @@ final class DescribeCommand extends Command
                 ucfirst($e->getType()),
                 $name,
                 null === $alternative ? '' : ' Did you mean "'.$alternative.'"?'
-            ));
+            ), $e->getCode(), $e);
         }
 
         return 0;
@@ -164,7 +164,7 @@ final class DescribeCommand extends Command
         $output->writeln(sprintf('<info>Description of</info> %s <info>rule</info>.', $name));
 
         if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-            $output->writeln(sprintf('Fixer class: <comment>%s</comment>.', \get_class($fixer)));
+            $output->writeln(sprintf('Fixer class: <comment>%s</comment>.', $fixer::class));
         }
 
         $output->writeln($summary);
@@ -251,7 +251,7 @@ final class DescribeCommand extends Command
             return true;
         });
 
-        if (0 === \count($codeSamples)) {
+        if ([] === $codeSamples) {
             $output->writeln([
                 'Fixing examples cannot be demonstrated on the current PHP version.',
                 '',

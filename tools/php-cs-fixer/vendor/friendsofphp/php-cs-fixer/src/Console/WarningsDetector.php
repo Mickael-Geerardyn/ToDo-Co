@@ -24,16 +24,13 @@ use PhpCsFixer\ToolInfoInterface;
  */
 final class WarningsDetector
 {
-    private ToolInfoInterface $toolInfo;
-
     /**
      * @var string[]
      */
     private array $warnings = [];
 
-    public function __construct(ToolInfoInterface $toolInfo)
+    public function __construct(private readonly ToolInfoInterface $toolInfo)
     {
-        $this->toolInfo = $toolInfo;
     }
 
     public function detectOldMajor(): void
@@ -64,7 +61,7 @@ final class WarningsDetector
      */
     public function getWarnings(): array
     {
-        if (0 === \count($this->warnings)) {
+        if ([] === $this->warnings) {
             return [];
         }
 

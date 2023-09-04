@@ -74,7 +74,7 @@ final class PhpdocTagTypeFixer extends AbstractFixer implements ConfigurableFixe
 
     protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
-        if (0 === \count($this->configuration['tags'])) {
+        if (0 === (is_countable($this->configuration['tags']) ? \count($this->configuration['tags']) : 0)) {
             return;
         }
 
@@ -111,7 +111,7 @@ final class PhpdocTagTypeFixer extends AbstractFixer implements ConfigurableFixe
                     $tagName = $matches['inlined_tag_name'];
                 }
 
-                $tagName = strtolower($tagName);
+                $tagName = strtolower((string) $tagName);
                 if (!isset($this->configuration['tags'][$tagName])) {
                     continue;
                 }

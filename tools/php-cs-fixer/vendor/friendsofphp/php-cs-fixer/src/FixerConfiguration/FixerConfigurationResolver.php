@@ -39,7 +39,7 @@ final class FixerConfigurationResolver implements FixerConfigurationResolverInte
             $this->addOption($option);
         }
 
-        if (0 === \count($this->registeredNames)) {
+        if ([] === $this->registeredNames) {
             throw new \LogicException('Options cannot be empty.');
         }
     }
@@ -98,7 +98,7 @@ final class FixerConfigurationResolver implements FixerConfigurationResolverInte
             }
 
             $normalizer = $option->getNormalizer();
-            if (null !== $normalizer) {
+            if ($normalizer instanceof \Closure) {
                 $resolver->setNormalizer($name, $normalizer);
             }
         }

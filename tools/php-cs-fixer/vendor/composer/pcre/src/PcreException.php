@@ -50,7 +50,7 @@ class PcreException extends \RuntimeException
         }
 
         foreach ($constants['pcre'] as $const => $val) {
-            if ($val === $code && substr($const, -6) === '_ERROR') {
+            if ($val === $code && str_ends_with((string) $const, '_ERROR')) {
                 return $const;
             }
         }

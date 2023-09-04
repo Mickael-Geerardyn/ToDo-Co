@@ -132,7 +132,7 @@ final class PhpdocTypesFixer extends AbstractPhpdocTypesFixer implements Configu
         return Preg::replaceCallback(
             '/(\b|(?=\$|\\\\))(\$|\\\\)?'.TypeExpression::REGEX_IDENTIFIER.'(?!\\\\|\h*:)/',
             function (array $matches): string {
-                $valueLower = strtolower($matches[0]);
+                $valueLower = strtolower((string) $matches[0]);
                 if (isset($this->typesSetToFix[$valueLower])) {
                     return $valueLower;
                 }

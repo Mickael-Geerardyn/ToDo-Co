@@ -23,11 +23,8 @@ use Symfony\Component\Filesystem\Exception\IOException;
  */
 final class FileHandler implements FileHandlerInterface
 {
-    private string $file;
-
-    public function __construct(string $file)
+    public function __construct(private readonly string $file)
     {
-        $this->file = $file;
     }
 
     public function getFile(): string
@@ -45,7 +42,7 @@ final class FileHandler implements FileHandlerInterface
 
         try {
             $cache = Cache::fromJson($content);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException) {
             return null;
         }
 

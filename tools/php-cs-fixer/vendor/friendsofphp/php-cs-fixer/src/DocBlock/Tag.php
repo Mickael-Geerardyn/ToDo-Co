@@ -35,11 +35,6 @@ final class Tag
     ];
 
     /**
-     * The line containing the tag.
-     */
-    private Line $line;
-
-    /**
      * The cached tag name.
      */
     private ?string $name = null;
@@ -47,9 +42,13 @@ final class Tag
     /**
      * Create a new tag instance.
      */
-    public function __construct(Line $line)
+    public function __construct(
+        /**
+         * The line containing the tag.
+         */
+        private readonly Line $line
+    )
     {
-        $this->line = $line;
     }
 
     /**
@@ -62,11 +61,7 @@ final class Tag
         if (null === $this->name) {
             Preg::matchAll('/@[a-zA-Z0-9_-]+(?=\s|$)/', $this->line->getContent(), $matches);
 
-            if (isset($matches[0][0])) {
-                $this->name = ltrim($matches[0][0], '@');
-            } else {
-                $this->name = 'other';
-            }
+            $this->name = isset($matches[0][0]) ? ltrim((string) $matches[0][0], '@') : 'other';
         }
 
         return $this->name;

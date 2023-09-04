@@ -47,7 +47,7 @@ class AddConsoleCommandPass implements CompilerPassInterface
             if (isset($tags[0]['command'])) {
                 $aliases = $tags[0]['command'];
             } else {
-                if (!$r = $container->getReflectionClass($class)) {
+                if (!($r = $container->getReflectionClass($class)) instanceof \ReflectionClass) {
                     throw new InvalidArgumentException(sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
                 }
                 if (!$r->isSubclassOf(Command::class)) {
@@ -95,7 +95,7 @@ class AddConsoleCommandPass implements CompilerPassInterface
 
             $definition->addMethodCall('setName', [$commandName]);
 
-            if ($aliases) {
+            if ($aliases !== []) {
                 $definition->addMethodCall('setAliases', [$aliases]);
             }
 
@@ -104,7 +104,7 @@ class AddConsoleCommandPass implements CompilerPassInterface
             }
 
             if (!$description) {
-                if (!$r = $container->getReflectionClass($class)) {
+                if (!($r = $container->getReflectionClass($class)) instanceof \ReflectionClass) {
                     throw new InvalidArgumentException(sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
                 }
                 if (!$r->isSubclassOf(Command::class)) {

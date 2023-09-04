@@ -59,7 +59,7 @@ final class Tokens extends \SplFixedArray
             $index = 0;
             $nbScannedTokensToUse = 0;
             $nbScopes = 0;
-            while (null !== $token = $lexer->peek()) {
+            while (($token = $lexer->peek()) instanceof \Doctrine\Common\Lexer\Token) {
                 if (0 === $index && !$token->isA(DocLexer::T_AT)) {
                     break;
                 }
@@ -96,7 +96,7 @@ final class Tokens extends \SplFixedArray
             }
 
             if (0 !== $nbScannedTokensToUse) {
-                $ignoredTextLength = $nextAtPosition - $ignoredTextPosition;
+                $ignoredTextLength = $nextAtPosition;
                 if (0 !== $ignoredTextLength) {
                     $tokens[] = new Token(DocLexer::T_NONE, substr($content, $ignoredTextPosition, $ignoredTextLength));
                 }
@@ -247,7 +247,7 @@ final class Tokens extends \SplFixedArray
 
     public function offsetSet($index, $token): void
     {
-        if (null === $token) {
+        if (!$token instanceof \PhpCsFixer\Doctrine\Annotation\Token) {
             throw new \InvalidArgumentException('Token must be an instance of PhpCsFixer\\Doctrine\\Annotation\\Token, "null" given.');
         }
 
@@ -255,7 +255,7 @@ final class Tokens extends \SplFixedArray
             $type = \gettype($token);
 
             if ('object' === $type) {
-                $type = \get_class($token);
+                $type = $token::class;
             }
 
             throw new \InvalidArgumentException(sprintf('Token must be an instance of PhpCsFixer\\Doctrine\\Annotation\\Token, "%s" given.', $type));
@@ -265,11 +265,9 @@ final class Tokens extends \SplFixedArray
     }
 
     /**
-     * @param mixed $index
-     *
      * @throws \OutOfBoundsException
      */
-    public function offsetUnset($index): void
+    public function offsetUnset(mixed $index): void
     {
         if (!isset($this[$index])) {
             throw new \OutOfBoundsException(sprintf('Index "%s" is invalid or does not exist.', $index));

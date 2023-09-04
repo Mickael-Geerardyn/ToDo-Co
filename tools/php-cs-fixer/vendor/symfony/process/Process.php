@@ -52,36 +52,33 @@ class Process implements \IteratorAggregate
     public const ITER_SKIP_ERR = 8;     // Use this flag to skip STDERR while iterating
 
     private $callback;
-    private $hasCallback = false;
-    private $commandline;
-    private $cwd;
-    private $env = [];
+    private bool $hasCallback = false;
+    private array $env = [];
     private $input;
-    private $starttime;
-    private $lastOutputTime;
-    private $timeout;
-    private $idleTimeout;
+    private string|float|null $starttime = null;
+    private string|float|null $lastOutputTime = null;
+    private ?float $timeout = null;
+    private ?float $idleTimeout = null;
     private $exitcode;
-    private $fallbackStatus = [];
+    private array $fallbackStatus = [];
     private $processInformation;
-    private $outputDisabled = false;
+    private bool $outputDisabled = false;
     private $stdout;
     private $stderr;
     private $process;
-    private $status = self::STATUS_READY;
-    private $incrementalOutputOffset = 0;
-    private $incrementalErrorOutputOffset = 0;
-    private $tty = false;
-    private $pty;
-    private $options = ['suppress_errors' => true, 'bypass_shell' => true];
+    private string $status = self::STATUS_READY;
+    private int|bool $incrementalOutputOffset = 0;
+    private int|bool $incrementalErrorOutputOffset = 0;
+    private bool $tty = false;
+    private bool $pty;
+    private array $options = ['suppress_errors' => true, 'bypass_shell' => true];
 
-    private $useFileHandles = false;
-    /** @var PipesInterface */
-    private $processPipes;
+    private bool $useFileHandles;
+    private \Symfony\Component\Process\Pipes\WindowsPipes|\Symfony\Component\Process\Pipes\UnixPipes|null $processPipes = null;
 
-    private $latestSignal;
+    private ?int $latestSignal = null;
 
-    private static $sigchild;
+    private static ?bool $sigchild = null;
 
     /**
      * Exit codes translation table.
@@ -132,7 +129,7 @@ class Process implements \IteratorAggregate
     ];
 
     /**
-     * @param array          $command The command to run and its arguments listed as separate entries
+     * @param array $commandline The command to run and its arguments listed as separate entries
      * @param string|null    $cwd     The working directory or null to use the working dir of the current PHP process
      * @param array|null     $env     The environment variables or null to use the same environment as the current PHP process
      * @param mixed          $input   The input as stream resource, scalar or \Traversable, or null for no input
@@ -140,14 +137,11 @@ class Process implements \IteratorAggregate
      *
      * @throws LogicException When proc_open is not installed
      */
-    public function __construct(array $command, string $cwd = null, array $env = null, mixed $input = null, ?float $timeout = 60)
+    public function __construct(private array $commandline, private ?string $cwd = null, array $env = null, mixed $input = null, ?float $timeout = 60)
     {
         if (!\function_exists('proc_open')) {
             throw new LogicException('The Process class relies on proc_open, which is not available on your PHP installation.');
         }
-
-        $this->commandline = $command;
-        $this->cwd = $cwd;
 
         // on Windows, if the cwd changed via chdir(), proc_open defaults to the dir where PHP was started
         // on Gnu/Linux, PHP builds with --enable-maintainer-zts are also affected
@@ -197,12 +191,12 @@ class Process implements \IteratorAggregate
 
     public function __sleep(): array
     {
-        throw new \BadMethodCallException('Cannot serialize '.__CLASS__);
+        throw new \BadMethodCallException('Cannot serialize '.self::class);
     }
 
     public function __wakeup()
     {
-        throw new \BadMethodCallException('Cannot unserialize '.__CLASS__);
+        throw new \BadMethodCallException('Cannot unserialize '.self::class);
     }
 
     public function __destruct()
@@ -337,7 +331,7 @@ class Process implements \IteratorAggregate
 
         $envPairs = [];
         foreach ($env as $k => $v) {
-            if (false !== $v && false === \in_array($k, ['argc', 'argv', 'ARGC', 'ARGV'], true)) {
+            if (false !== $v && !\in_array($k, ['argc', 'argv', 'ARGC', 'ARGV'], true)) {
                 $envPairs[] = $k.'='.$v;
             }
         }
@@ -890,11 +884,7 @@ class Process implements \IteratorAggregate
                 usleep(1000);
             } while ($this->isRunning() && microtime(true) < $timeoutMicro);
 
-            if ($this->isRunning()) {
-                // Avoid exception here: process is supposed to be running, but it might have stopped just
-                // after this line. In any case, let's silently discard the error, we cannot do anything.
-                $this->doSignal($signal ?: 9, false);
-            }
+            $this->doSignal($signal ?: 9, false);
         }
 
         if ($this->isRunning()) {

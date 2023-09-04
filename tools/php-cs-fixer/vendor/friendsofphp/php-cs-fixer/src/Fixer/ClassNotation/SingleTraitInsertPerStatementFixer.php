@@ -62,7 +62,7 @@ final class Example
         for ($index = \count($tokens) - 1; 1 < $index; --$index) {
             if ($tokens[$index]->isGivenKind(CT::T_USE_TRAIT)) {
                 $candidates = $this->getCandidates($tokens, $index);
-                if (\count($candidates) > 0) {
+                if ($candidates !== []) {
                     $this->fixTraitUse($tokens, $index, $candidates);
                 }
             }

@@ -67,7 +67,7 @@ final class GroupImportFixer extends AbstractFixer
     {
         $useDeclarations = (new NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens);
 
-        if (0 === \count($useDeclarations)) {
+        if ([] === $useDeclarations) {
             return [];
         }
 
@@ -256,7 +256,7 @@ final class GroupImportFixer extends AbstractFixer
      */
     private function areDeclarationsDifferent(?NamespaceUseAnalysis $analysis1, ?NamespaceUseAnalysis $analysis2): bool
     {
-        if (null === $analysis1 || null === $analysis2) {
+        if (!$analysis1 instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis || !$analysis2 instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis) {
             return true;
         }
 

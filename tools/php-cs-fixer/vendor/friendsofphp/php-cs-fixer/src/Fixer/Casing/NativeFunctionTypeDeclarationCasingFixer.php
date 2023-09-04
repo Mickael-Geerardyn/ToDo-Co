@@ -51,37 +51,29 @@ final class NativeFunctionTypeDeclarationCasingFixer extends AbstractFixer
      *
      * @var array<string, true>
      */
-    private array $hints;
+    private array $hints = [
+        'array' => true,
+        'bool' => true,
+        'callable' => true,
+        'float' => true,
+        'int' => true,
+        'iterable' => true,
+        'object' => true,
+        'self' => true,
+        'string' => true,
+        'void' => true,
+    ];
 
-    private FunctionsAnalyzer $functionsAnalyzer;
+    private readonly FunctionsAnalyzer $functionsAnalyzer;
 
     public function __construct()
     {
         parent::__construct();
-
-        $this->hints = [
-            'array' => true,
-            'bool' => true,
-            'callable' => true,
-            'float' => true,
-            'int' => true,
-            'iterable' => true,
-            'object' => true,
-            'self' => true,
-            'string' => true,
-            'void' => true,
-        ];
-
-        if (\PHP_VERSION_ID >= 8_00_00) {
-            $this->hints['false'] = true;
-            $this->hints['mixed'] = true;
-            $this->hints['null'] = true;
-            $this->hints['static'] = true;
-        }
-
-        if (\PHP_VERSION_ID >= 8_01_00) {
-            $this->hints['never'] = true;
-        }
+        $this->hints['false'] = true;
+        $this->hints['mixed'] = true;
+        $this->hints['null'] = true;
+        $this->hints['static'] = true;
+        $this->hints['never'] = true;
 
         if (\PHP_VERSION_ID >= 8_02_00) {
             $this->hints['true'] = true;
@@ -139,7 +131,7 @@ final class NativeFunctionTypeDeclarationCasingFixer extends AbstractFixer
 
     private function fixArgumentType(Tokens $tokens, ?TypeAnalysis $type = null): void
     {
-        if (null === $type) {
+        if (!$type instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis) {
             return;
         }
 

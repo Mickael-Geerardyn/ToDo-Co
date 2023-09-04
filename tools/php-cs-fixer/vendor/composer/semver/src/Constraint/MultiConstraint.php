@@ -14,22 +14,19 @@ namespace Composer\Semver\Constraint;
 /**
  * Defines a conjunctive or disjunctive set of constraints.
  */
-class MultiConstraint implements ConstraintInterface
+class MultiConstraint implements ConstraintInterface, \Stringable
 {
     /**
      * @var ConstraintInterface[]
      * @phpstan-var non-empty-array<ConstraintInterface>
      */
-    protected $constraints;
+    protected array $constraints;
 
     /** @var string|null */
     protected $prettyString;
 
     /** @var string|null */
     protected $string;
-
-    /** @var bool */
-    protected $conjunctive;
 
     /** @var Bound|null */
     protected $lowerBound;
@@ -43,7 +40,7 @@ class MultiConstraint implements ConstraintInterface
      *
      * @throws \InvalidArgumentException If less than 2 constraints are passed
      */
-    public function __construct(array $constraints, $conjunctive = true)
+    public function __construct(array $constraints, protected $conjunctive = true)
     {
         if (\count($constraints) < 2) {
             throw new \InvalidArgumentException(
@@ -54,7 +51,6 @@ class MultiConstraint implements ConstraintInterface
         }
 
         $this->constraints = $constraints;
-        $this->conjunctive = $conjunctive;
     }
 
     /**
@@ -86,7 +82,7 @@ class MultiConstraint implements ConstraintInterface
      */
     public function compile($otherOperator)
     {
-        $parts = array();
+        $parts = [];
         foreach ($this->constraints as $constraint) {
             $code = $constraint->compile($otherOperator);
             if ($code === 'true') {
@@ -102,7 +98,7 @@ class MultiConstraint implements ConstraintInterface
             }
         }
 
-        if (!$parts) {
+        if ($parts === []) {
             return $this->conjunctive ? 'true' : 'false';
         }
 
@@ -110,13 +106,11 @@ class MultiConstraint implements ConstraintInterface
     }
 
     /**
-     * @param ConstraintInterface $provider
-     *
      * @return bool
      */
     public function matches(ConstraintInterface $provider)
     {
-        if (false === $this->conjunctive) {
+        if (!$this->conjunctive) {
             foreach ($this->constraints as $constraint) {
                 if ($provider->matches($constraint)) {
                     return true;
@@ -165,13 +159,13 @@ class MultiConstraint implements ConstraintInterface
     /**
      * {@inheritDoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->string !== null) {
             return $this->string;
         }
 
-        $constraints = array();
+        $constraints = [];
         foreach ($this->constraints as $constraint) {
             $constraints[] = (string) $constraint;
         }
@@ -186,7 +180,7 @@ class MultiConstraint implements ConstraintInterface
     {
         $this->extractBounds();
 
-        if (null === $this->lowerBound) {
+        if (!$this->lowerBound instanceof \Composer\Semver\Constraint\Bound) {
             throw new \LogicException('extractBounds should have populated the lowerBound property');
         }
 
@@ -200,7 +194,7 @@ class MultiConstraint implements ConstraintInterface
     {
         $this->extractBounds();
 
-        if (null === $this->upperBound) {
+        if (!$this->upperBound instanceof \Composer\Semver\Constraint\Bound) {
             throw new \LogicException('extractBounds should have populated the upperBound property');
         }
 
@@ -220,7 +214,7 @@ class MultiConstraint implements ConstraintInterface
      */
     public static function create(array $constraints, $conjunctive = true)
     {
-        if (0 === \count($constraints)) {
+        if ([] === $constraints) {
             return new MatchAllConstraint();
         }
 
@@ -230,7 +224,7 @@ class MultiConstraint implements ConstraintInterface
 
         $optimized = self::optimizeConstraints($constraints, $conjunctive);
         if ($optimized !== null) {
-            list($constraints, $conjunctive) = $optimized;
+            [$constraints, $conjunctive] = $optimized;
             if (\count($constraints) === 1) {
                 return $constraints[0];
             }
@@ -253,7 +247,7 @@ class MultiConstraint implements ConstraintInterface
         // [>= 1 < 2] || [>= 2 < 3] || [>= 3 < 4] => [>= 1 < 4]
         if (!$conjunctive) {
             $left = $constraints[0];
-            $mergedConstraints = array();
+            $mergedConstraints = [];
             $optimized = false;
             for ($i = 1, $l = \count($constraints); $i < $l; $i++) {
                 $right = $constraints[$i];
@@ -276,10 +270,7 @@ class MultiConstraint implements ConstraintInterface
                 ) {
                     $optimized = true;
                     $left = new MultiConstraint(
-                        array(
-                            $left->constraints[0],
-                            $right->constraints[1],
-                        ),
+                        [$left->constraints[0], $right->constraints[1]],
                         true);
                 } else {
                     $mergedConstraints[] = $left;
@@ -288,7 +279,7 @@ class MultiConstraint implements ConstraintInterface
             }
             if ($optimized) {
                 $mergedConstraints[] = $left;
-                return array($mergedConstraints, false);
+                return [$mergedConstraints, false];
             }
         }
 
@@ -302,12 +293,12 @@ class MultiConstraint implements ConstraintInterface
      */
     private function extractBounds()
     {
-        if (null !== $this->lowerBound) {
+        if ($this->lowerBound instanceof \Composer\Semver\Constraint\Bound) {
             return;
         }
 
         foreach ($this->constraints as $constraint) {
-            if (null === $this->lowerBound || null === $this->upperBound) {
+            if (!$this->lowerBound instanceof \Composer\Semver\Constraint\Bound || !$this->upperBound instanceof \Composer\Semver\Constraint\Bound) {
                 $this->lowerBound = $constraint->getLowerBound();
                 $this->upperBound = $constraint->getUpperBound();
                 continue;

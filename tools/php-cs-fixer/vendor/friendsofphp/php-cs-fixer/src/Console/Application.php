@@ -42,7 +42,7 @@ final class Application extends BaseApplication
     public const VERSION = '3.23.0';
     public const VERSION_CODENAME = 'First Steps';
 
-    private ToolInfo $toolInfo;
+    private readonly ToolInfo $toolInfo;
 
     public function __construct()
     {
@@ -73,13 +73,13 @@ final class Application extends BaseApplication
             ? $output->getErrorOutput()
             : ($input->hasParameterOption('--format', true) && 'txt' !== $input->getParameterOption('--format', null, true) ? null : $output);
 
-        if (null !== $stdErr) {
+        if ($stdErr instanceof \Symfony\Component\Console\Output\OutputInterface) {
             $warningsDetector = new WarningsDetector($this->toolInfo);
             $warningsDetector->detectOldVendor();
             $warningsDetector->detectOldMajor();
             $warnings = $warningsDetector->getWarnings();
 
-            if (\count($warnings) > 0) {
+            if ($warnings !== []) {
                 foreach ($warnings as $warning) {
                     $stdErr->writeln(sprintf($stdErr->isDecorated() ? '<bg=yellow;fg=black;>%s</>' : '%s', $warning));
                 }
@@ -90,12 +90,12 @@ final class Application extends BaseApplication
         $result = parent::doRun($input, $output);
 
         if (
-            null !== $stdErr
+            $stdErr instanceof \Symfony\Component\Console\Output\OutputInterface
             && $output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE
         ) {
             $triggeredDeprecations = Utils::getTriggeredDeprecations();
 
-            if (\count($triggeredDeprecations) > 0) {
+            if ($triggeredDeprecations !== []) {
                 $stdErr->writeln('');
                 $stdErr->writeln($stdErr->isDecorated() ? '<bg=yellow;fg=black;>Detected deprecations in use:</>' : 'Detected deprecations in use:');
                 foreach ($triggeredDeprecations as $deprecation) {
@@ -112,14 +112,14 @@ final class Application extends BaseApplication
         $commit = '@git-commit@';
         $versionCommit = '';
 
-        if ('@'.'git-commit@' !== $commit) { /** @phpstan-ignore-line as `$commit` is replaced during phar building */
+        if ('@git-commit@' !== $commit) { /** @phpstan-ignore-line as `$commit` is replaced during phar building */
             $versionCommit = substr($commit, 0, 7);
         }
 
         return implode('', [
             parent::getLongVersion(),
-            $versionCommit ? sprintf(' <info>(%s)</info>', $versionCommit) : '', // @phpstan-ignore-line to avoid `Ternary operator condition is always true|false.`
-            self::VERSION_CODENAME ? sprintf(' <info>%s</info>', self::VERSION_CODENAME) : '', // @phpstan-ignore-line to avoid `Ternary operator condition is always true|false.`
+            $versionCommit !== '' ? sprintf(' <info>(%s)</info>', $versionCommit) : '', // @phpstan-ignore-line to avoid `Ternary operator condition is always true|false.`
+            self::VERSION_CODENAME !== '' ? sprintf(' <info>%s</info>', self::VERSION_CODENAME) : '', // @phpstan-ignore-line to avoid `Ternary operator condition is always true|false.`
             ' by <comment>Fabien Potencier</comment> and <comment>Dariusz Ruminski</comment>.',
             "\nPHP runtime: <info>".PHP_VERSION.'</info>',
         ]);

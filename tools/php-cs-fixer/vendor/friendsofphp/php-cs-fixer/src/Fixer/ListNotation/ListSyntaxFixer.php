@@ -29,10 +29,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 
 final class ListSyntaxFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
-    /**
-     * @var null|int
-     */
-    private $candidateTokenKind;
+    private ?int $candidateTokenKind = null;
 
     /**
      * @param array{syntax: 'long'|'short'} $configuration

@@ -54,8 +54,6 @@ class AsciiSlugger implements SluggerInterface, LocaleAwareInterface
         'uz' => 'Uzbek-Latin',
         'zh' => 'Han-Latin',
     ];
-
-    private ?string $defaultLocale;
     private \Closure|array $symbolsMap = [
         'en' => ['@' => 'at', '&' => 'and'],
     ];
@@ -68,9 +66,8 @@ class AsciiSlugger implements SluggerInterface, LocaleAwareInterface
      */
     private array $transliterators = [];
 
-    public function __construct(string $defaultLocale = null, array|\Closure $symbolsMap = null)
+    public function __construct(private ?string $defaultLocale = null, array|\Closure $symbolsMap = null)
     {
-        $this->defaultLocale = $defaultLocale;
         $this->symbolsMap = $symbolsMap ?? $this->symbolsMap;
     }
 
@@ -116,7 +113,7 @@ class AsciiSlugger implements SluggerInterface, LocaleAwareInterface
             $transliterator = (array) $this->createTransliterator($locale);
         }
 
-        if ($emojiTransliterator = $this->createEmojiTransliterator($locale)) {
+        if (($emojiTransliterator = $this->createEmojiTransliterator($locale)) instanceof \Symfony\Component\Intl\Transliterator\EmojiTransliterator) {
             $transliterator[] = $emojiTransliterator;
         }
 
@@ -195,7 +192,7 @@ class AsciiSlugger implements SluggerInterface, LocaleAwareInterface
         return null;
     }
 
-    private static function getParentLocale(?string $locale): ?string
+    private function getParentLocale(?string $locale): ?string
     {
         if (!$locale) {
             return null;

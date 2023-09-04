@@ -15,18 +15,6 @@ final class ReplaceResult
 {
     /**
      * @readonly
-     * @var string
-     */
-    public $result;
-
-    /**
-     * @readonly
-     * @var 0|positive-int
-     */
-    public $count;
-
-    /**
-     * @readonly
      * @var bool
      */
     public $matched;
@@ -34,10 +22,11 @@ final class ReplaceResult
     /**
      * @param 0|positive-int $count
      */
-    public function __construct(int $count, string $result)
+    public function __construct(public int $count, /**
+     * @readonly
+     */
+    public string $result)
     {
-        $this->count = $count;
         $this->matched = (bool) $count;
-        $this->result = $result;
     }
 }

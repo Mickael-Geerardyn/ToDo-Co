@@ -72,7 +72,7 @@ function foo ($bar) {}
             $doc = new DocBlock($token->getContent());
             $annotations = $doc->getAnnotations();
 
-            if (0 === \count($annotations)) {
+            if ([] === $annotations) {
                 continue;
             }
 
@@ -84,7 +84,7 @@ function foo ($bar) {}
                 }
 
                 $lineAfterAnnotation = $doc->getLine($annotation->getEnd() + 1);
-                if (null !== $lineAfterAnnotation) {
+                if ($lineAfterAnnotation instanceof \PhpCsFixer\DocBlock\Line) {
                     $lineAfterAnnotationTrimmed = ltrim($lineAfterAnnotation->getContent());
                     if ('' === $lineAfterAnnotationTrimmed || !str_starts_with($lineAfterAnnotationTrimmed, '*')) {
                         // malformed PHPDoc, missing asterisk !
@@ -110,7 +110,7 @@ function foo ($bar) {}
                     : '';
                 $content = Preg::replaceCallback(
                     '/^(\s*\*\s*@\w+\s+'.$optionalTypeRegEx.')(\p{Lu}?(?=\p{Ll}|\p{Zs}))(.*)$/',
-                    static fn (array $matches): string => $matches[1].mb_strtolower($matches[2]).$matches[3],
+                    static fn (array $matches): string => $matches[1].mb_strtolower((string) $matches[2]).$matches[3],
                     $startLine->getContent(),
                     1
                 );

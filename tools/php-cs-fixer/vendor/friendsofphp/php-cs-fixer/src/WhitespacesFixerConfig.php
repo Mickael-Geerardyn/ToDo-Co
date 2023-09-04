@@ -19,9 +19,9 @@ namespace PhpCsFixer;
  */
 final class WhitespacesFixerConfig
 {
-    private string $indent;
+    private readonly string $indent;
 
-    private string $lineEnding;
+    private readonly string $lineEnding;
 
     public function __construct(string $indent = '    ', string $lineEnding = "\n")
     {

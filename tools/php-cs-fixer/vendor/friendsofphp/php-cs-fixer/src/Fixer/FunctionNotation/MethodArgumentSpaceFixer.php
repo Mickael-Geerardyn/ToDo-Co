@@ -335,7 +335,7 @@ final class MethodArgumentSpaceFixer extends AbstractFixer implements Configurab
             }
         }
 
-        $this->fixNewline($tokens, $startFunctionIndex, $indentation, false);
+        $this->fixNewline($tokens, $startFunctionIndex, $indentation);
     }
 
     /**
@@ -343,9 +343,8 @@ final class MethodArgumentSpaceFixer extends AbstractFixer implements Configurab
      *
      * @param int    $index       index of a comma
      * @param string $indentation the indentation that should be used
-     * @param bool   $override    whether to override the existing character or not
      */
-    private function fixNewline(Tokens $tokens, int $index, string $indentation, bool $override = true): void
+    private function fixNewline(Tokens $tokens, int $index, string $indentation): void
     {
         if ($tokens[$index + 1]->isComment()) {
             return;

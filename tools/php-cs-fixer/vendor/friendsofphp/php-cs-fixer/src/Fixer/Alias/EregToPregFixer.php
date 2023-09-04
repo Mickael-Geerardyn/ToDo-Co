@@ -154,7 +154,7 @@ final class EregToPregFixer extends AbstractFixer
             Preg::match($pattern, '');
 
             return true;
-        } catch (PregException $e) {
+        } catch (PregException) {
             return false;
         }
     }

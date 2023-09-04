@@ -42,12 +42,9 @@ final class Path
      *
      * @var array<string, string>
      */
-    private static $buffer = [];
+    private static array $buffer = [];
 
-    /**
-     * @var int
-     */
-    private static $bufferSize = 0;
+    private static int $bufferSize = 0;
 
     /**
      * Canonicalizes the given path.
@@ -349,13 +346,13 @@ final class Path
         $extension = ltrim($extension, '.');
 
         // No extension for paths
-        if ('/' === substr($path, -1)) {
+        if (str_ends_with($path, '/')) {
             return $path;
         }
 
         // No actual extension in path
-        if (empty($actualExtension)) {
-            return $path.('.' === substr($path, -1) ? '' : '.').$extension;
+        if ($actualExtension === '') {
+            return $path.(str_ends_with($path, '.') ? '' : '.').$extension;
         }
 
         return substr($path, 0, -\strlen($actualExtension)).$extension;
@@ -737,7 +734,7 @@ final class Path
 
             // Collapse ".." with the previous part, if one exists
             // Don't collapse ".." if the previous part is also ".."
-            if ('..' === $part && \count($canonicalParts) > 0 && '..' !== $canonicalParts[\count($canonicalParts) - 1]) {
+            if ('..' === $part && $canonicalParts !== [] && '..' !== $canonicalParts[\count($canonicalParts) - 1]) {
                 array_pop($canonicalParts);
 
                 continue;

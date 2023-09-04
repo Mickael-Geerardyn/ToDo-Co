@@ -35,7 +35,7 @@ abstract class Input implements InputInterface, StreamableInputInterface
 
     public function __construct(InputDefinition $definition = null)
     {
-        if (null === $definition) {
+        if (!$definition instanceof \Symfony\Component\Console\Input\InputDefinition) {
             $this->definition = new InputDefinition();
         } else {
             $this->bind($definition);
@@ -72,7 +72,7 @@ abstract class Input implements InputInterface, StreamableInputInterface
 
         $missingArguments = array_filter(array_keys($definition->getArguments()), fn ($argument) => !\array_key_exists($argument, $givenArguments) && $definition->getArgument($argument)->isRequired());
 
-        if (\count($missingArguments) > 0) {
+        if ($missingArguments !== []) {
             throw new RuntimeException(sprintf('Not enough arguments (missing: "%s").', implode(', ', $missingArguments)));
         }
     }

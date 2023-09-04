@@ -50,19 +50,17 @@ final class FixCommand extends Command
 {
     protected static $defaultName = 'fix';
 
-    private EventDispatcherInterface $eventDispatcher;
+    private readonly EventDispatcherInterface $eventDispatcher;
 
-    private ErrorsManager $errorsManager;
+    private readonly ErrorsManager $errorsManager;
 
-    private Stopwatch $stopwatch;
+    private readonly Stopwatch $stopwatch;
 
-    private ConfigInterface $defaultConfig;
+    private readonly ConfigInterface $defaultConfig;
 
-    private ToolInfoInterface $toolInfo;
+    private readonly ProgressOutputFactory $progressOutputFactory;
 
-    private ProgressOutputFactory $progressOutputFactory;
-
-    public function __construct(ToolInfoInterface $toolInfo)
+    public function __construct(private readonly ToolInfoInterface $toolInfo)
     {
         parent::__construct();
 
@@ -70,7 +68,6 @@ final class FixCommand extends Command
         $this->errorsManager = new ErrorsManager();
         $this->stopwatch = new Stopwatch();
         $this->defaultConfig = new Config();
-        $this->toolInfo = $toolInfo;
         $this->progressOutputFactory = new ProgressOutputFactory();
     }
 
@@ -249,7 +246,7 @@ final class FixCommand extends Command
             ? $output->getErrorOutput()
             : ('txt' === $reporter->getFormat() ? $output : null);
 
-        if (null !== $stdErr) {
+        if ($stdErr instanceof \Symfony\Component\Console\Output\OutputInterface) {
             if (OutputInterface::VERBOSITY_VERBOSE <= $verbosity) {
                 $stdErr->writeln($this->getApplication()->getLongVersion());
             }
@@ -268,7 +265,7 @@ final class FixCommand extends Command
 
         $finder = new \ArrayIterator(iterator_to_array($resolver->getFinder()));
 
-        if (null !== $stdErr && $resolver->configFinderIsOverridden()) {
+        if ($stdErr instanceof \Symfony\Component\Console\Output\OutputInterface && $resolver->configFinderIsOverridden()) {
             $stdErr->writeln(
                 sprintf($stdErr->isDecorated() ? '<bg=yellow;fg=black;>%s</>' : '%s', 'Paths from configuration file have been overridden by paths provided as command arguments.')
             );
@@ -297,11 +294,15 @@ final class FixCommand extends Command
             $resolver->shouldStopOnViolation()
         );
 
-        $this->eventDispatcher->addListener(FixerFileProcessedEvent::NAME, [$progressOutput, 'onFixerFileProcessed']);
+        $this->eventDispatcher->addListener(FixerFileProcessedEvent::NAME, function (\PhpCsFixer\FixerFileProcessedEvent $event) use ($progressOutput) : void {
+            $progressOutput->onFixerFileProcessed($event);
+        });
         $this->stopwatch->start('fixFiles');
         $changed = $runner->fix();
         $this->stopwatch->stop('fixFiles');
-        $this->eventDispatcher->removeListener(FixerFileProcessedEvent::NAME, [$progressOutput, 'onFixerFileProcessed']);
+        $this->eventDispatcher->removeListener(FixerFileProcessedEvent::NAME, function (\PhpCsFixer\FixerFileProcessedEvent $event) use ($progressOutput) : void {
+            $progressOutput->onFixerFileProcessed($event);
+        });
 
         $progressOutput->printLegend();
 
@@ -325,18 +326,18 @@ final class FixCommand extends Command
         $exceptionErrors = $this->errorsManager->getExceptionErrors();
         $lintErrors = $this->errorsManager->getLintErrors();
 
-        if (null !== $stdErr) {
+        if ($stdErr instanceof \Symfony\Component\Console\Output\OutputInterface) {
             $errorOutput = new ErrorOutput($stdErr);
 
-            if (\count($invalidErrors) > 0) {
+            if ($invalidErrors !== []) {
                 $errorOutput->listErrors('linting before fixing', $invalidErrors);
             }
 
-            if (\count($exceptionErrors) > 0) {
+            if ($exceptionErrors !== []) {
                 $errorOutput->listErrors('fixing', $exceptionErrors);
             }
 
-            if (\count($lintErrors) > 0) {
+            if ($lintErrors !== []) {
                 $errorOutput->listErrors('linting after fixing', $lintErrors);
             }
         }
@@ -345,10 +346,10 @@ final class FixCommand extends Command
 
         return $exitStatusCalculator->calculate(
             $resolver->isDryRun(),
-            \count($changed) > 0,
-            \count($invalidErrors) > 0,
-            \count($exceptionErrors) > 0,
-            \count($lintErrors) > 0
+            $changed !== [],
+            $invalidErrors !== [],
+            $exceptionErrors !== [],
+            $lintErrors !== []
         );
     }
 }

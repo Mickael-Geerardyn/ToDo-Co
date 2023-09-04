@@ -36,7 +36,7 @@ final class AlignMultilineCommentFixer extends AbstractFixer implements Configur
     /**
      * @var null|int[]
      */
-    private $tokenKinds;
+    private ?array $tokenKinds = null;
 
     public function configure(array $configuration): void
     {

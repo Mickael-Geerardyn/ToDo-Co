@@ -155,7 +155,7 @@ class Sample
                         if (!\in_array($to, self::$toTypes, true)) {
                             throw new InvalidOptionsException(sprintf(
                                 'Unknown value "%s", expected any of %s.',
-                                \is_object($to) ? \get_class($to) : \gettype($to).(\is_resource($to) ? '' : '#'.$to),
+                                \is_object($to) ? $to::class : \gettype($to).(\is_resource($to) ? '' : '#'.$to),
                                 Utils::naturalLanguageJoin(self::$toTypes)
                             ));
                         }
@@ -193,14 +193,14 @@ class Sample
         $docBlock = new DocBlock($tokens[$docIndex]->getContent());
         $returnsBlock = $docBlock->getAnnotationsOfType('return');
 
-        if (0 === \count($returnsBlock)) {
+        if ([] === $returnsBlock) {
             return; // no return annotation found
         }
 
         $returnsBlock = $returnsBlock[0];
         $types = $returnsBlock->getTypes();
 
-        if (0 === \count($types)) {
+        if ([] === $types) {
             return; // no return type(s) found
         }
 

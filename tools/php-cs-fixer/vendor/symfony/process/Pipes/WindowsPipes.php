@@ -26,19 +26,16 @@ use Symfony\Component\Process\Process;
  */
 class WindowsPipes extends AbstractPipes
 {
-    private $files = [];
-    private $fileHandles = [];
-    private $lockHandles = [];
-    private $readBytes = [
+    private array $files = [];
+    private array $fileHandles = [];
+    private array $lockHandles = [];
+    private array $readBytes = [
         Process::STDOUT => 0,
         Process::STDERR => 0,
     ];
-    private $haveReadSupport;
 
-    public function __construct(mixed $input, bool $haveReadSupport)
+    public function __construct(mixed $input, private readonly bool $haveReadSupport)
     {
-        $this->haveReadSupport = $haveReadSupport;
-
         if ($this->haveReadSupport) {
             // Fix for PHP bug #51800: reading from STDOUT pipe hangs forever on Windows if the output is too big.
             // Workaround for this problem is to use temporary files instead of pipes on Windows platform.
@@ -90,12 +87,12 @@ class WindowsPipes extends AbstractPipes
 
     public function __sleep(): array
     {
-        throw new \BadMethodCallException('Cannot serialize '.__CLASS__);
+        throw new \BadMethodCallException('Cannot serialize '.self::class);
     }
 
     public function __wakeup()
     {
-        throw new \BadMethodCallException('Cannot unserialize '.__CLASS__);
+        throw new \BadMethodCallException('Cannot unserialize '.self::class);
     }
 
     public function __destruct()

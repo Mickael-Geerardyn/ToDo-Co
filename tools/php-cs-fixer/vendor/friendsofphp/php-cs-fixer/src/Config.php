@@ -45,12 +45,7 @@ class Config implements ConfigInterface
 
     private string $lineEnding = "\n";
 
-    private string $name;
-
-    /**
-     * @var null|string
-     */
-    private $phpExecutable;
+    private ?string $phpExecutable = null;
 
     /**
      * @TODO: 4.0 - update to @PER
@@ -61,9 +56,8 @@ class Config implements ConfigInterface
 
     private bool $usingCache = true;
 
-    public function __construct(string $name = 'default')
+    public function __construct(private readonly string $name = 'default')
     {
-        $this->name = $name;
     }
 
     public function getCacheFile(): string

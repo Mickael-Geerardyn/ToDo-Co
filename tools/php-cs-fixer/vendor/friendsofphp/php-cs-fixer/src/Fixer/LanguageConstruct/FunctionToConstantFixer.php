@@ -33,7 +33,7 @@ final class FunctionToConstantFixer extends AbstractFixer implements Configurabl
     /**
      * @var array<string, Token[]>
      */
-    private static $availableFunctions;
+    private static ?array $availableFunctions = null;
 
     /**
      * @var array<string, Token[]>

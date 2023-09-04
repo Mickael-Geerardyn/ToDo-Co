@@ -14,13 +14,9 @@ final class Line
     public const ADDED     = 1;
     public const REMOVED   = 2;
     public const UNCHANGED = 3;
-    private int $type;
-    private string $content;
 
-    public function __construct(int $type = self::UNCHANGED, string $content = '')
+    public function __construct(private readonly int $type = self::UNCHANGED, private readonly string $content = '')
     {
-        $this->type    = $type;
-        $this->content = $content;
     }
 
     public function getContent(): string

@@ -23,7 +23,6 @@ use function Symfony\Component\String\b;
  */
 class OutputFormatter implements WrappableOutputFormatterInterface
 {
-    private bool $decorated;
     private array $styles = [];
     private OutputFormatterStyleStack $styleStack;
 
@@ -67,10 +66,8 @@ class OutputFormatter implements WrappableOutputFormatterInterface
      *
      * @param OutputFormatterStyleInterface[] $styles Array of "name => FormatterStyle" instances
      */
-    public function __construct(bool $decorated = false, array $styles = [])
+    public function __construct(private bool $decorated = false, array $styles = [])
     {
-        $this->decorated = $decorated;
-
         $this->setStyle('error', new OutputFormatterStyle('white', 'red'));
         $this->setStyle('info', new OutputFormatterStyle('green'));
         $this->setStyle('comment', new OutputFormatterStyle('yellow'));
@@ -151,16 +148,12 @@ class OutputFormatter implements WrappableOutputFormatterInterface
             $offset = $pos + \strlen($text);
 
             // opening tag?
-            if ($open = '/' !== $text[1]) {
-                $tag = $matches[1][$i][0];
-            } else {
-                $tag = $matches[3][$i][0] ?? '';
-            }
+            $tag = ($open = '/' !== $text[1]) ? $matches[1][$i][0] : $matches[3][$i][0] ?? '';
 
             if (!$open && !$tag) {
                 // </>
                 $this->styleStack->pop();
-            } elseif (null === $style = $this->createStyleFromString($tag)) {
+            } elseif (!($style = $this->createStyleFromString($tag)) instanceof \Symfony\Component\Console\Formatter\OutputFormatterStyleInterface) {
                 $output .= $this->applyCurrentStyle($text, $output, $width, $currentLineLength);
             } elseif ($open) {
                 $this->styleStack->push($style);
@@ -227,7 +220,7 @@ class OutputFormatter implements WrappableOutputFormatterInterface
             return '';
         }
 
-        if (!$width) {
+        if ($width === 0) {
             return $this->isDecorated() ? $this->styleStack->getCurrent()->apply($text) : $text;
         }
 
@@ -235,7 +228,7 @@ class OutputFormatter implements WrappableOutputFormatterInterface
             $text = ltrim($text);
         }
 
-        if ($currentLineLength) {
+        if ($currentLineLength !== 0) {
             $prefix = substr($text, 0, $i = $width - $currentLineLength)."\n";
             $text = substr($text, $i);
         } else {

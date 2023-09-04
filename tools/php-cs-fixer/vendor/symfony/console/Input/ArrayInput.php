@@ -23,14 +23,10 @@ use Symfony\Component\Console\Exception\InvalidOptionException;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ArrayInput extends Input
+class ArrayInput extends Input implements \Stringable
 {
-    private array $parameters;
-
-    public function __construct(array $parameters, InputDefinition $definition = null)
+    public function __construct(private readonly array $parameters, InputDefinition $definition = null)
     {
-        $this->parameters = $parameters;
-
         parent::__construct($definition);
     }
 

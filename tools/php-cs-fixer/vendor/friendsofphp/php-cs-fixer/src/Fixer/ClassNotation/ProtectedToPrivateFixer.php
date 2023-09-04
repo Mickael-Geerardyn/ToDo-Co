@@ -90,7 +90,7 @@ final class Sample
                 $classesCandidate[$classIndex] = $this->isClassCandidate($tokens, $classIndex);
             }
 
-            if (false === $classesCandidate[$classIndex]) {
+            if (!$classesCandidate[$classIndex]) {
                 continue;
             }
 

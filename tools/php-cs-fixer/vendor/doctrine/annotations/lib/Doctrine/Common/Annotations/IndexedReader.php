@@ -14,12 +14,8 @@ use function get_class;
  */
 class IndexedReader implements Reader
 {
-    /** @var Reader */
-    private $delegate;
-
-    public function __construct(Reader $reader)
+    public function __construct(private readonly \Doctrine\Common\Annotations\Reader $delegate)
     {
-        $this->delegate = $reader;
     }
 
     /**
@@ -29,7 +25,7 @@ class IndexedReader implements Reader
     {
         $annotations = [];
         foreach ($this->delegate->getClassAnnotations($class) as $annot) {
-            $annotations[get_class($annot)] = $annot;
+            $annotations[$annot::class] = $annot;
         }
 
         return $annotations;
@@ -50,7 +46,7 @@ class IndexedReader implements Reader
     {
         $annotations = [];
         foreach ($this->delegate->getMethodAnnotations($method) as $annot) {
-            $annotations[get_class($annot)] = $annot;
+            $annotations[$annot::class] = $annot;
         }
 
         return $annotations;
@@ -71,7 +67,7 @@ class IndexedReader implements Reader
     {
         $annotations = [];
         foreach ($this->delegate->getPropertyAnnotations($property) as $annot) {
-            $annotations[get_class($annot)] = $annot;
+            $annotations[$annot::class] = $annot;
         }
 
         return $annotations;

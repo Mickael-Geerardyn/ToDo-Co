@@ -121,7 +121,7 @@ class InvalidName {}
                 // name cannot be a class name - detected by PHP 5.x
                 return false;
             }
-        } catch (\ParseError $e) {
+        } catch (\ParseError) {
             // name cannot be a class name - detected by PHP 7.x
             return false;
         }
@@ -144,7 +144,7 @@ class InvalidName {}
     {
         $tokenAnalyzer = new TokensAnalyzer($tokens);
 
-        if (null !== $this->configuration['dir'] && !str_starts_with($file->getRealPath(), $this->configuration['dir'])) {
+        if (null !== $this->configuration['dir'] && !str_starts_with($file->getRealPath(), (string) $this->configuration['dir'])) {
             return;
         }
 

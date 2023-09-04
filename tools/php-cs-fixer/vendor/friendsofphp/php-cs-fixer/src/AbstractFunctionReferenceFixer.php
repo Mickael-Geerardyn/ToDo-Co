@@ -24,10 +24,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 abstract class AbstractFunctionReferenceFixer extends AbstractFixer
 {
-    /**
-     * @var null|FunctionsAnalyzer
-     */
-    private $functionsAnalyzer;
+    private ?\PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer $functionsAnalyzer = null;
 
     public function isCandidate(Tokens $tokens): bool
     {
@@ -47,7 +44,7 @@ abstract class AbstractFunctionReferenceFixer extends AbstractFixer
      */
     protected function find(string $functionNameToSearch, Tokens $tokens, int $start = 0, ?int $end = null): ?array
     {
-        if (null === $this->functionsAnalyzer) {
+        if (!$this->functionsAnalyzer instanceof \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer) {
             $this->functionsAnalyzer = new FunctionsAnalyzer();
         }
 

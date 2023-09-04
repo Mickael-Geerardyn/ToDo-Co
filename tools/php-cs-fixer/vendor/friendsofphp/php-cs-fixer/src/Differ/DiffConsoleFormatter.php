@@ -24,14 +24,8 @@ use Symfony\Component\Console\Formatter\OutputFormatter;
  */
 final class DiffConsoleFormatter
 {
-    private bool $isDecoratedOutput;
-
-    private string $template;
-
-    public function __construct(bool $isDecoratedOutput, string $template = '%s')
+    public function __construct(private bool $isDecoratedOutput, private readonly string $template = '%s')
     {
-        $this->isDecoratedOutput = $isDecoratedOutput;
-        $this->template = $template;
     }
 
     public function format(string $diff, string $lineTemplate = '%s'): string

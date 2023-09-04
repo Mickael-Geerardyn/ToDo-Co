@@ -37,7 +37,7 @@ class EventDispatcher implements EventDispatcherInterface
 
     public function __construct()
     {
-        if (__CLASS__ === static::class) {
+        if (self::class === static::class) {
             $this->optimized = [];
         }
     }
@@ -46,7 +46,7 @@ class EventDispatcher implements EventDispatcherInterface
     {
         $eventName ??= $event::class;
 
-        if (isset($this->optimized)) {
+        if ($this->optimized !== null) {
             $listeners = $this->optimized[$eventName] ?? (empty($this->listeners[$eventName]) ? [] : $this->optimizeListeners($eventName));
         } else {
             $listeners = $this->getListeners($eventName);

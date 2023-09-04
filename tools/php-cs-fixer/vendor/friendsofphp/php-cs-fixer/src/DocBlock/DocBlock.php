@@ -25,7 +25,7 @@ use PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis;
  *
  * @author Graham Campbell <hello@gjcampbell.co.uk>
  */
-final class DocBlock
+final class DocBlock implements \Stringable
 {
     /**
      * @var list<Line>
@@ -37,24 +37,14 @@ final class DocBlock
      */
     private ?array $annotations = null;
 
-    private ?NamespaceAnalysis $namespace;
-
-    /**
-     * @var list<NamespaceUseAnalysis>
-     */
-    private array $namespaceUses;
-
     /**
      * @param list<NamespaceUseAnalysis> $namespaceUses
      */
-    public function __construct(string $content, ?NamespaceAnalysis $namespace = null, array $namespaceUses = [])
+    public function __construct(string $content, private readonly ?NamespaceAnalysis $namespace = null, private readonly array $namespaceUses = [])
     {
         foreach (Preg::split('/([^\n\r]+\R*)/', $content, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE) as $line) {
             $this->lines[] = new Line($line);
         }
-
-        $this->namespace = $namespace;
-        $this->namespaceUses = $namespaceUses;
     }
 
     public function __toString(): string
@@ -160,7 +150,7 @@ final class DocBlock
         }
 
         $lineContent = '';
-        if (\count($usefulLines) > 0) {
+        if ($usefulLines !== []) {
             $lineContent = $this->getSingleLineDocBlockEntry(array_shift($usefulLines));
         }
 
@@ -209,7 +199,7 @@ final class DocBlock
     {
         $index = $start;
 
-        while ($line = $this->getLine(++$index)) {
+        while (($line = $this->getLine(++$index)) instanceof \PhpCsFixer\DocBlock\Line) {
             if ($line->containsATag()) {
                 // we've 100% reached the end of the description if we get here
                 break;
@@ -218,7 +208,7 @@ final class DocBlock
             if (!$line->containsUsefulContent()) {
                 // if next line is also non-useful, or contains a tag, then we're done here
                 $next = $this->getLine($index + 1);
-                if (null === $next || !$next->containsUsefulContent() || $next->containsATag()) {
+                if (!$next instanceof \PhpCsFixer\DocBlock\Line || !$next->containsUsefulContent() || $next->containsATag()) {
                     break;
                 }
                 // otherwise, continue, the annotation must have contained a blank line in its description

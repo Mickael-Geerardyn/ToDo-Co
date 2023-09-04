@@ -194,7 +194,7 @@ interface Bar
 
         $catchArgumentType = $this->collectTypeAnalysis($tokens, $catchStart, $catchEnd);
 
-        if (null === $catchArgumentType || !$this->isTypeSortable($catchArgumentType)) {
+        if (!$catchArgumentType instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis || !$this->isTypeSortable($catchArgumentType)) {
             return; // nothing to fix
         }
 
@@ -216,7 +216,7 @@ interface Bar
 
         $propertyType = $this->collectTypeAnalysis($tokens, $index, $propertyIndex);
 
-        if (null === $propertyType || !$this->isTypeSortable($propertyType)) {
+        if (!$propertyType instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis || !$this->isTypeSortable($propertyType)) {
             return; // nothing to fix
         }
 
@@ -228,7 +228,7 @@ interface Bar
         foreach ($functionsAnalyzer->getFunctionArguments($tokens, $index) as $argumentInfo) {
             $argumentType = $argumentInfo->getTypeAnalysis();
 
-            if (null === $argumentType || !$this->isTypeSortable($argumentType)) {
+            if (!$argumentType instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis || !$this->isTypeSortable($argumentType)) {
                 continue; // nothing to fix
             }
 
@@ -240,7 +240,7 @@ interface Bar
     {
         $returnType = $functionsAnalyzer->getFunctionReturnType($tokens, $index);
 
-        if (null === $returnType || !$this->isTypeSortable($returnType)) {
+        if (!$returnType instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis || !$this->isTypeSortable($returnType)) {
             return; // nothing to fix
         }
 

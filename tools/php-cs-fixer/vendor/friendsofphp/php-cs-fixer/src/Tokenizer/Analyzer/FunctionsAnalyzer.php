@@ -128,12 +128,7 @@ final class FunctionsAnalyzer
             // global import like `use function \str_repeat;`
             return $functionUse->getShortName() === ltrim($functionUse->getFullName(), '\\');
         }
-
-        if (AttributeAnalyzer::isAttribute($tokens, $index)) {
-            return false;
-        }
-
-        return true;
+        return !AttributeAnalyzer::isAttribute($tokens, $index);
     }
 
     /**

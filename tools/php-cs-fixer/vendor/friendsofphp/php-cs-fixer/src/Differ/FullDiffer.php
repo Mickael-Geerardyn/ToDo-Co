@@ -24,7 +24,7 @@ use SebastianBergmann\Diff\Output\StrictUnifiedDiffOutputBuilder;
  */
 final class FullDiffer implements DifferInterface
 {
-    private Differ $differ;
+    private readonly Differ $differ;
 
     public function __construct()
     {

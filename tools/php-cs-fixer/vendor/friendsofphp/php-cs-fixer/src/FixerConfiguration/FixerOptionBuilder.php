@@ -16,10 +16,6 @@ namespace PhpCsFixer\FixerConfiguration;
 
 final class FixerOptionBuilder
 {
-    private string $name;
-
-    private string $description;
-
     /**
      * @var mixed
      */
@@ -30,35 +26,25 @@ final class FixerOptionBuilder
     /**
      * @var null|list<string>
      */
-    private $allowedTypes;
+    private ?array $allowedTypes = null;
 
     /**
      * @var null|list<null|(callable(mixed): bool)|scalar>
      */
-    private $allowedValues;
+    private ?array $allowedValues = null;
 
-    /**
-     * @var null|\Closure
-     */
-    private $normalizer;
+    private ?\Closure $normalizer = null;
 
-    /**
-     * @var null|string
-     */
-    private $deprecationMessage;
+    private ?string $deprecationMessage = null;
 
-    public function __construct(string $name, string $description)
+    public function __construct(private readonly string $name, private readonly string $description)
     {
-        $this->name = $name;
-        $this->description = $description;
     }
 
     /**
-     * @param mixed $default
-     *
      * @return $this
      */
-    public function setDefault($default): self
+    public function setDefault(mixed $default): self
     {
         $this->default = $default;
         $this->isRequired = false;

@@ -128,23 +128,7 @@ final class PhpUnitDedicateAssertFixer extends AbstractPhpUnitFixer implements C
 
         if (PhpUnitTargetVersion::fulfills($this->configuration['target'], PhpUnitTargetVersion::VERSION_3_5)) {
             // assertions added in 3.5: assertInternalType assertNotEmpty assertEmpty
-            $this->functions = array_merge($this->functions, [
-                'empty',
-                'is_array',
-                'is_bool',
-                'is_boolean',
-                'is_callable',
-                'is_double',
-                'is_float',
-                'is_int',
-                'is_integer',
-                'is_long',
-                'is_numeric',
-                'is_object',
-                'is_real',
-                'is_scalar',
-                'is_string',
-            ]);
+            $this->functions = [...$this->functions, 'empty', 'is_array', 'is_bool', 'is_boolean', 'is_callable', 'is_double', 'is_float', 'is_int', 'is_integer', 'is_long', 'is_numeric', 'is_object', 'is_real', 'is_scalar', 'is_string'];
         }
 
         if (PhpUnitTargetVersion::fulfills($this->configuration['target'], PhpUnitTargetVersion::VERSION_5_0)) {
@@ -512,7 +496,7 @@ final class MyTest extends \PHPUnit_Framework_TestCase
 
         $tokens[$assertCall['index']] = new Token([
             T_STRING,
-            false === strpos($assertCall['loweredName'], 'not', 6) ? 'assertCount' : 'assertNotCount',
+            str_contains(substr($assertCall['loweredName'], 6), 'not') ? 'assertNotCount' : 'assertCount',
         ]);
     }
 

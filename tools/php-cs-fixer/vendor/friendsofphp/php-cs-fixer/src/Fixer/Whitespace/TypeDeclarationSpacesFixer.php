@@ -149,7 +149,7 @@ class Foo
         foreach (array_reverse($functionsAnalyzer->getFunctionArguments($tokens, $index)) as $argumentInfo) {
             $argumentType = $argumentInfo->getTypeAnalysis();
 
-            if (null === $argumentType) {
+            if (!$argumentType instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis) {
                 continue;
             }
 
@@ -172,7 +172,7 @@ class Foo
 
         $propertyType = $this->collectTypeAnalysis($tokens, $index, $propertyIndex);
 
-        if (null === $propertyType) {
+        if (!$propertyType instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis) {
             return;
         }
 

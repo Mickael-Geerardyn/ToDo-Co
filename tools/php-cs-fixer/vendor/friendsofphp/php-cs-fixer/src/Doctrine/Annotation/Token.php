@@ -23,18 +23,12 @@ use Doctrine\Common\Annotations\DocLexer;
  */
 final class Token
 {
-    private int $type;
-
-    private string $content;
-
     /**
      * @param int    $type    The type
      * @param string $content The content
      */
-    public function __construct(int $type = DocLexer::T_NONE, string $content = '')
+    public function __construct(private int $type = DocLexer::T_NONE, private string $content = '')
     {
-        $this->type = $type;
-        $this->content = $content;
     }
 
     public function getType(): int

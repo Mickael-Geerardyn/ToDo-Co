@@ -72,7 +72,7 @@ final class FopenFlagOrderFixer extends AbstractFopenFlagFixer
             return; // nothing to sort
         }
 
-        if (false === $this->isValidModeString($mode)) {
+        if (!$this->isValidModeString($mode)) {
             return;
         }
 

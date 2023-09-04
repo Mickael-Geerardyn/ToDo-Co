@@ -61,7 +61,7 @@ final class NoUnusedImportsFixer extends AbstractFixer
     {
         $useDeclarations = (new NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens);
 
-        if (0 === \count($useDeclarations)) {
+        if ([] === $useDeclarations) {
             return;
         }
 

@@ -19,7 +19,7 @@ namespace Symfony\Component\Process;
  */
 class PhpExecutableFinder
 {
-    private $executableFinder;
+    private readonly \Symfony\Component\Process\ExecutableFinder $executableFinder;
 
     public function __construct()
     {
@@ -66,10 +66,8 @@ class PhpExecutableFinder
             return $php;
         }
 
-        if ($php = getenv('PHP_PEAR_PHP_BIN')) {
-            if (@is_executable($php) && !@is_dir($php)) {
-                return $php;
-            }
+        if (($php = getenv('PHP_PEAR_PHP_BIN')) && (@is_executable($php) && !@is_dir($php))) {
+            return $php;
         }
 
         if (@is_executable($php = \PHP_BINDIR.('\\' === \DIRECTORY_SEPARATOR ? '\\php.exe' : '/php')) && !@is_dir($php)) {

@@ -24,11 +24,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class ErrorListener implements EventSubscriberInterface
 {
-    private ?LoggerInterface $logger;
-
-    public function __construct(LoggerInterface $logger = null)
+    public function __construct(private readonly ?LoggerInterface $logger = null)
     {
-        $this->logger = $logger;
     }
 
     /**
@@ -36,13 +33,13 @@ class ErrorListener implements EventSubscriberInterface
      */
     public function onConsoleError(ConsoleErrorEvent $event)
     {
-        if (null === $this->logger) {
+        if (!$this->logger instanceof \Psr\Log\LoggerInterface) {
             return;
         }
 
         $error = $event->getError();
 
-        if (!$inputString = $this->getInputString($event)) {
+        if (!$inputString = self::getInputString($event)) {
             $this->logger->critical('An error occurred while using the console. Message: "{message}"', ['exception' => $error, 'message' => $error->getMessage()]);
 
             return;
@@ -56,7 +53,7 @@ class ErrorListener implements EventSubscriberInterface
      */
     public function onConsoleTerminate(ConsoleTerminateEvent $event)
     {
-        if (null === $this->logger) {
+        if (!$this->logger instanceof \Psr\Log\LoggerInterface) {
             return;
         }
 
@@ -66,7 +63,7 @@ class ErrorListener implements EventSubscriberInterface
             return;
         }
 
-        if (!$inputString = $this->getInputString($event)) {
+        if (!$inputString = self::getInputString($event)) {
             $this->logger->debug('The console exited with code "{code}"', ['code' => $exitCode]);
 
             return;
@@ -83,7 +80,7 @@ class ErrorListener implements EventSubscriberInterface
         ];
     }
 
-    private static function getInputString(ConsoleEvent $event): ?string
+    private function getInputString(ConsoleEvent $event): ?string
     {
         $commandName = $event->getCommand()?->getName();
         $input = $event->getInput();

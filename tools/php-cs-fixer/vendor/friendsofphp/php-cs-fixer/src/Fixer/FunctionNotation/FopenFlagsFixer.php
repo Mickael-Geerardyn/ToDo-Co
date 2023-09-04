@@ -83,7 +83,7 @@ final class FopenFlagsFixer extends AbstractFopenFlagFixer implements Configurab
             $mode = substr($content, 1, -1);
         }
 
-        if (false === $this->isValidModeString($mode)) {
+        if (!$this->isValidModeString($mode)) {
             return;
         }
 

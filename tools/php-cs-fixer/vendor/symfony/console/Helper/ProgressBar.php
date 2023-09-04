@@ -47,7 +47,7 @@ final class ProgressBar
     private float $lastWriteTime = 0;
     private float $minSecondsBetweenRedraws = 0;
     private float $maxSecondsBetweenRedraws = 1;
-    private OutputInterface $output;
+    private readonly OutputInterface $output;
     private int $step = 0;
     private int $startingStep = 0;
     private ?int $max = null;
@@ -56,9 +56,9 @@ final class ProgressBar
     private float $percent = 0.0;
     private array $messages = [];
     private bool $overwrite = true;
-    private Terminal $terminal;
+    private readonly Terminal $terminal;
     private ?string $previousMessage = null;
-    private Cursor $cursor;
+    private readonly Cursor $cursor;
     private array $placeholders = [];
 
     private static array $formatters;
@@ -229,7 +229,7 @@ final class ProgressBar
 
     public function getRemaining(): float
     {
-        if (!$this->step) {
+        if ($this->step === 0) {
             return 0;
         }
 
@@ -396,7 +396,7 @@ final class ProgressBar
     {
         $this->format = null;
         $this->max = max(0, $max);
-        $this->stepWidth = $this->max ? Helper::width((string) $this->max) : 4;
+        $this->stepWidth = $this->max !== 0 ? Helper::width((string) $this->max) : 4;
     }
 
     /**
@@ -536,14 +536,14 @@ final class ProgressBar
             },
             'elapsed' => fn (self $bar) => Helper::formatTime(time() - $bar->getStartTime()),
             'remaining' => function (self $bar) {
-                if (!$bar->getMaxSteps()) {
+                if ($bar->getMaxSteps() === 0) {
                     throw new LogicException('Unable to display the remaining time if the maximum number of steps is not set.');
                 }
 
                 return Helper::formatTime($bar->getRemaining());
             },
             'estimated' => function (self $bar) {
-                if (!$bar->getMaxSteps()) {
+                if ($bar->getMaxSteps() === 0) {
                     throw new LogicException('Unable to display the estimated time if the maximum number of steps is not set.');
                 }
 

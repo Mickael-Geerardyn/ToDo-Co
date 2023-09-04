@@ -109,14 +109,14 @@ final class CompleteCommand extends Command
                 '',
                 '<comment>'.date('Y-m-d H:i:s').'</>',
                 '<info>Input:</> <comment>("|" indicates the cursor position)</>',
-                '  '.(string) $completionInput,
+                '  '.$completionInput,
                 '<info>Command:</>',
-                '  '.(string) implode(' ', $_SERVER['argv']),
+                '  '.implode(' ', $_SERVER['argv']),
                 '<info>Messages:</>',
             ]);
 
-            $command = $this->findCommand($completionInput, $output);
-            if (null === $command) {
+            $command = $this->findCommand($completionInput);
+            if (!$command instanceof \Symfony\Component\Console\Command\Command) {
                 $this->log('  No command found, completing using the Application class.');
 
                 $this->getApplication()->complete($completionInput, $suggestions);
@@ -182,7 +182,7 @@ final class CompleteCommand extends Command
     private function createCompletionInput(InputInterface $input): CompletionInput
     {
         $currentIndex = $input->getOption('current');
-        if (!$currentIndex || !ctype_digit($currentIndex)) {
+        if (!$currentIndex || !ctype_digit((string) $currentIndex)) {
             throw new \RuntimeException('The "--current" option must be set and it must be an integer.');
         }
 
@@ -196,7 +196,7 @@ final class CompleteCommand extends Command
         return $completionInput;
     }
 
-    private function findCommand(CompletionInput $completionInput, OutputInterface $output): ?Command
+    private function findCommand(CompletionInput $completionInput): ?Command
     {
         try {
             $inputName = $completionInput->getFirstArgument();
@@ -217,7 +217,7 @@ final class CompleteCommand extends Command
             return;
         }
 
-        $commandName = basename($_SERVER['argv'][0]);
+        $commandName = basename((string) $_SERVER['argv'][0]);
         file_put_contents(sys_get_temp_dir().'/sf_'.$commandName.'.log', implode(\PHP_EOL, (array) $messages).\PHP_EOL, \FILE_APPEND);
     }
 }

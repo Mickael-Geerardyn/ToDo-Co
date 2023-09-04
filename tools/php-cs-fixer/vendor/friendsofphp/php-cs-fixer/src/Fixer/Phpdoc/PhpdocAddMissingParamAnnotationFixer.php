@@ -150,7 +150,7 @@ function f9(string $foo, $bar, $baz) {}
                 }
             }
 
-            if (0 === \count($arguments)) {
+            if ([] === $arguments) {
                 continue;
             }
 
@@ -167,7 +167,7 @@ function f9(string $foo, $bar, $baz) {}
                 $lastParamLine = max($lastParamLine, $annotation->getEnd());
             }
 
-            if (0 === \count($arguments)) {
+            if ([] === $arguments) {
                 continue;
             }
 

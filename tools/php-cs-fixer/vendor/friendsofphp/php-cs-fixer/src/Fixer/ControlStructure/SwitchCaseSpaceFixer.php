@@ -59,7 +59,7 @@ final class SwitchCaseSpaceFixer extends AbstractFixer
         foreach (ControlCaseStructuresAnalyzer::findControlStructures($tokens, [T_SWITCH]) as $analysis) {
             $default = $analysis->getDefaultAnalysis();
 
-            if (null !== $default) {
+            if ($default instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\DefaultAnalysis) {
                 $index = $default->getIndex();
 
                 if (!$tokens[$index + 1]->isWhitespace() || !$tokens[$index + 2]->equalsAny([':', ';'])) {

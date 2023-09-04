@@ -109,16 +109,12 @@ abstract class Helper implements HelperInterface
         ];
 
         foreach ($timeFormats as $index => $format) {
-            if ($secs >= $format[0]) {
-                if ((isset($timeFormats[$index + 1]) && $secs < $timeFormats[$index + 1][0])
-                    || $index == \count($timeFormats) - 1
-                ) {
-                    if (2 == \count($format)) {
-                        return $format[1];
-                    }
-
-                    return floor($secs / $format[2]).' '.$format[1];
+            if ($secs >= $format[0] && ((isset($timeFormats[$index + 1]) && $secs < $timeFormats[$index + 1][0])
+                || $index == \count($timeFormats) - 1)) {
+                if (2 == (is_countable($format) ? \count($format) : 0)) {
+                    return $format[1];
                 }
+                return floor($secs / $format[2]).' '.$format[1];
             }
         }
     }

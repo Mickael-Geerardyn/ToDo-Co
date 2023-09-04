@@ -22,43 +22,12 @@ namespace PhpCsFixer\Console\Report\FixReport;
 final class ReportSummary
 {
     /**
-     * @var array<string, array{appliedFixers: list<string>, diff: string}>
-     */
-    private array $changed;
-
-    private int $filesCount;
-
-    private int $time;
-
-    private int $memory;
-
-    private bool $addAppliedFixers;
-
-    private bool $isDryRun;
-
-    private bool $isDecoratedOutput;
-
-    /**
      * @param array<string, array{appliedFixers: list<string>, diff: string}> $changed
      * @param int                                                             $time    duration in milliseconds
      * @param int                                                             $memory  memory usage in bytes
      */
-    public function __construct(
-        array $changed,
-        int $filesCount,
-        int $time,
-        int $memory,
-        bool $addAppliedFixers,
-        bool $isDryRun,
-        bool $isDecoratedOutput
-    ) {
-        $this->changed = $changed;
-        $this->filesCount = $filesCount;
-        $this->time = $time;
-        $this->memory = $memory;
-        $this->addAppliedFixers = $addAppliedFixers;
-        $this->isDryRun = $isDryRun;
-        $this->isDecoratedOutput = $isDecoratedOutput;
+    public function __construct(private readonly array $changed, private readonly int $filesCount, private readonly int $time, private readonly int $memory, private readonly bool $addAppliedFixers, private readonly bool $isDryRun, private readonly bool $isDecoratedOutput)
+    {
     }
 
     public function isDecoratedOutput(): bool

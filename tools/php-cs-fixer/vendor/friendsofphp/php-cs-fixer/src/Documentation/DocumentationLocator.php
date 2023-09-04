@@ -23,7 +23,7 @@ use PhpCsFixer\Utils;
  */
 final class DocumentationLocator
 {
-    private string $path;
+    private readonly string $path;
 
     public function __construct()
     {
@@ -45,7 +45,7 @@ final class DocumentationLocator
         return $this->getFixersDocumentationDirectoryPath().'/'.Preg::replaceCallback(
             '/^.*\\\\(.+)\\\\(.+)Fixer$/',
             static fn (array $matches): string => Utils::camelCaseToUnderscore($matches[1]).'/'.Utils::camelCaseToUnderscore($matches[2]),
-            \get_class($fixer)
+            $fixer::class
         ).'.rst';
     }
 

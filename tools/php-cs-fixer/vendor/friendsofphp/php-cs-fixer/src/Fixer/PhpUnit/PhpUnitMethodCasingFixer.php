@@ -169,7 +169,8 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
         $lines = $doc->getLines();
 
         $docBlockNeedsUpdate = false;
-        for ($inc = 0; $inc < \count($lines); ++$inc) {
+        $counter = \count($lines);
+        for ($inc = 0; $inc < $counter; ++$inc) {
             $lineContent = $lines[$inc]->getContent();
             if (!str_contains($lineContent, '@depends')) {
                 continue;

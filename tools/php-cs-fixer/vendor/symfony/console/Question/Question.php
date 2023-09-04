@@ -21,13 +21,11 @@ use Symfony\Component\Console\Exception\LogicException;
  */
 class Question
 {
-    private string $question;
     private ?int $attempts = null;
     private bool $hidden = false;
     private bool $hiddenFallback = true;
     private ?\Closure $autocompleterCallback = null;
     private ?\Closure $validator = null;
-    private string|int|bool|null|float $default;
     private ?\Closure $normalizer = null;
     private bool $trimmable = true;
     private bool $multiline = false;
@@ -36,10 +34,8 @@ class Question
      * @param string                     $question The question to ask to the user
      * @param string|bool|int|float|null $default  The default answer to return if the user enters nothing
      */
-    public function __construct(string $question, string|bool|int|float $default = null)
+    public function __construct(private readonly string $question, private readonly string|int|bool|null|float $default = null)
     {
-        $this->question = $question;
-        $this->default = $default;
     }
 
     /**
@@ -95,7 +91,7 @@ class Question
      */
     public function setHidden(bool $hidden): static
     {
-        if ($this->autocompleterCallback) {
+        if ($this->autocompleterCallback instanceof \Closure) {
             throw new LogicException('A hidden question cannot use the autocompleter.');
         }
 
@@ -144,7 +140,7 @@ class Question
     public function setAutocompleterValues(?iterable $values): static
     {
         if (\is_array($values)) {
-            $values = $this->isAssoc($values) ? array_merge(array_keys($values), array_values($values)) : array_values($values);
+            $values = $this->isAssoc($values) ? [...array_keys($values), ...array_values($values)] : array_values($values);
 
             $callback = static fn () => $values;
         } elseif ($values instanceof \Traversable) {

@@ -30,10 +30,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class DeclareEqualNormalizeFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
-    /**
-     * @var string
-     */
-    private $callback;
+    private ?string $callback = null;
 
     public function configure(array $configuration): void
     {

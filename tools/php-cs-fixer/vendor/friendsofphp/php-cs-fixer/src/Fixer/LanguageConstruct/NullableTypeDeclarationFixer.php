@@ -204,7 +204,7 @@ class ValueObject
 
         $propertyType = $this->collectTypeAnalysis($tokens, $index, $propertyEndIndex);
 
-        if (null === $propertyType || !$this->isTypeNormalizable($propertyType)) {
+        if (!$propertyType instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis || !$this->isTypeNormalizable($propertyType)) {
             return;
         }
 
@@ -216,7 +216,7 @@ class ValueObject
         foreach (array_reverse($functionsAnalyzer->getFunctionArguments($tokens, $index), true) as $argumentInfo) {
             $argumentType = $argumentInfo->getTypeAnalysis();
 
-            if (null === $argumentType || !$this->isTypeNormalizable($argumentType)) {
+            if (!$argumentType instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis || !$this->isTypeNormalizable($argumentType)) {
                 continue;
             }
 
@@ -228,7 +228,7 @@ class ValueObject
     {
         $returnType = $functionsAnalyzer->getFunctionReturnType($tokens, $index);
 
-        if (null === $returnType || !$this->isTypeNormalizable($returnType)) {
+        if (!$returnType instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis || !$this->isTypeNormalizable($returnType)) {
             return;
         }
 

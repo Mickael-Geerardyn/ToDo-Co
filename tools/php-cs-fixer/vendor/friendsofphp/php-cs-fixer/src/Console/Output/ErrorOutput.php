@@ -25,16 +25,10 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class ErrorOutput
 {
-    private OutputInterface $output;
+    private readonly bool $isDecorated;
 
-    /**
-     * @var bool
-     */
-    private $isDecorated;
-
-    public function __construct(OutputInterface $output)
+    public function __construct(private readonly OutputInterface $output)
     {
-        $this->output = $output;
         $this->isDecorated = $output->isDecorated();
     }
 
@@ -53,11 +47,11 @@ final class ErrorOutput
         foreach ($errors as $i => $error) {
             $this->output->writeln(sprintf('%4d) %s', $i + 1, $error->getFilePath()));
             $e = $error->getSource();
-            if (!$showDetails || null === $e) {
+            if (!$showDetails || !$e instanceof \Throwable) {
                 continue;
             }
 
-            $class = sprintf('[%s]', \get_class($e));
+            $class = sprintf('[%s]', $e::class);
             $message = $e->getMessage();
             $code = $e->getCode();
             if (0 !== $code) {
@@ -96,7 +90,7 @@ final class ErrorOutput
                 }
             }
 
-            if (Error::TYPE_LINT === $error->getType() && 0 < \count($error->getAppliedFixers())) {
+            if (Error::TYPE_LINT === $error->getType() && [] !== $error->getAppliedFixers()) {
                 $this->output->writeln('');
                 $this->output->writeln(sprintf('      Applied fixers: <comment>%s</comment>', implode(', ', $error->getAppliedFixers())));
 

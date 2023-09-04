@@ -241,7 +241,7 @@ use Bar;
                 ->setAllowedValues([static function (?array $value) use ($supportedSortTypes): bool {
                     if (null !== $value) {
                         $missing = array_diff($supportedSortTypes, $value);
-                        if (\count($missing) > 0) {
+                        if ($missing !== []) {
                             throw new InvalidOptionsException(sprintf(
                                 'Missing sort %s %s.',
                                 1 === \count($missing) ? 'type' : 'types',
@@ -250,7 +250,7 @@ use Bar;
                         }
 
                         $unknown = array_diff($value, $supportedSortTypes);
-                        if (\count($unknown) > 0) {
+                        if ($unknown !== []) {
                             throw new InvalidOptionsException(sprintf(
                                 'Unknown sort %s %s.',
                                 1 === \count($unknown) ? 'type' : 'types',
@@ -524,9 +524,9 @@ use Bar;
     private function sortByAlgorithm(array $indices): array
     {
         if (self::SORT_ALPHA === $this->configuration['sort_algorithm']) {
-            uasort($indices, [$this, 'sortAlphabetically']);
+            uasort($indices, fn(array $first, array $second): int => $this->sortAlphabetically($first, $second));
         } elseif (self::SORT_LENGTH === $this->configuration['sort_algorithm']) {
-            uasort($indices, [$this, 'sortByLength']);
+            uasort($indices, fn(array $first, array $second): int => $this->sortByLength($first, $second));
         }
 
         return $indices;

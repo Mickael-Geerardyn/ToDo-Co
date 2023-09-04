@@ -29,16 +29,16 @@ use Symfony\Component\Process\Process;
  */
 final class ProcessLinter implements LinterInterface
 {
-    private FileRemoval $fileRemoval;
+    private readonly FileRemoval $fileRemoval;
 
-    private ProcessLinterProcessBuilder $processBuilder;
+    private readonly ProcessLinterProcessBuilder $processBuilder;
 
     /**
      * Temporary file for code linting.
      *
      * @var null|string
      */
-    private $temporaryFile;
+    private string|bool|null $temporaryFile = null;
 
     /**
      * @param null|string $executable PHP executable, null for autodetection
@@ -84,7 +84,7 @@ final class ProcessLinter implements LinterInterface
      */
     public function __sleep(): array
     {
-        throw new \BadMethodCallException('Cannot serialize '.__CLASS__);
+        throw new \BadMethodCallException('Cannot serialize '.self::class);
     }
 
     /**
@@ -95,7 +95,7 @@ final class ProcessLinter implements LinterInterface
      */
     public function __wakeup(): void
     {
-        throw new \BadMethodCallException('Cannot unserialize '.__CLASS__);
+        throw new \BadMethodCallException('Cannot unserialize '.self::class);
     }
 
     public function isAsync(): bool

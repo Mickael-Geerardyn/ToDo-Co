@@ -65,7 +65,7 @@ final class NamespaceUsesAnalyzer
             $endIndex = $tokens->getNextTokenOfKind($index, [';', [T_CLOSE_TAG]]);
             $analysis = $this->parseDeclaration($tokens, $index, $endIndex);
 
-            if (null !== $analysis) {
+            if ($analysis instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis) {
                 $uses[] = $analysis;
             }
         }

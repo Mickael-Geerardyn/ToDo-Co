@@ -21,7 +21,7 @@ use Symfony\Component\Console\Formatter\OutputFormatterInterface;
  */
 class TrimmedBufferOutput extends Output
 {
-    private int $maxLength;
+    private readonly int $maxLength;
     private string $buffer = '';
 
     public function __construct(int $maxLength, ?int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = false, OutputFormatterInterface $formatter = null)
@@ -56,6 +56,6 @@ class TrimmedBufferOutput extends Output
             $this->buffer .= \PHP_EOL;
         }
 
-        $this->buffer = substr($this->buffer, 0 - $this->maxLength);
+        $this->buffer = substr($this->buffer, -$this->maxLength);
     }
 }

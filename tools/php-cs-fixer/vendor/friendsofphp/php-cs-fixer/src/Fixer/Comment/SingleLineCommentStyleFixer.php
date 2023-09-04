@@ -32,15 +32,9 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class SingleLineCommentStyleFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
-    /**
-     * @var bool
-     */
-    private $asteriskEnabled;
+    private ?bool $asteriskEnabled = null;
 
-    /**
-     * @var bool
-     */
-    private $hashEnabled;
+    private ?bool $hashEnabled = null;
 
     public function configure(array $configuration): void
     {

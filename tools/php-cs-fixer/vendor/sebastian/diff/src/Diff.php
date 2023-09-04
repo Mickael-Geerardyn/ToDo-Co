@@ -11,22 +11,18 @@ namespace SebastianBergmann\Diff;
 
 final class Diff
 {
-    private string $from;
-    private string $to;
-
-    /**
-     * @psalm-var list<Chunk>
-     */
-    private array $chunks;
-
     /**
      * @psalm-param list<Chunk> $chunks
      */
-    public function __construct(string $from, string $to, array $chunks = [])
+    public function __construct(
+        private readonly string $from,
+        private readonly string $to,
+        /**
+         * @psalm-var list<Chunk>
+         */
+        private array $chunks = []
+    )
     {
-        $this->from   = $from;
-        $this->to     = $to;
-        $this->chunks = $chunks;
     }
 
     public function getFrom(): string

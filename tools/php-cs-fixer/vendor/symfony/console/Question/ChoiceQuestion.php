@@ -32,7 +32,7 @@ class ChoiceQuestion extends Question
      */
     public function __construct(string $question, array $choices, mixed $default = null)
     {
-        if (!$choices) {
+        if ($choices === []) {
             throw new \LogicException('Choice question must have at least 1 choice available.');
         }
 

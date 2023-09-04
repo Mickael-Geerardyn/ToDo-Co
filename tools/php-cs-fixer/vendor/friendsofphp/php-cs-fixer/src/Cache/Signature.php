@@ -21,28 +21,16 @@ namespace PhpCsFixer\Cache;
  */
 final class Signature implements SignatureInterface
 {
-    private string $phpVersion;
-
-    private string $fixerVersion;
-
-    private string $indent;
-
-    private string $lineEnding;
-
     /**
      * @var array<string, array<string, mixed>|bool>
      */
-    private array $rules;
+    private readonly array $rules;
 
     /**
      * @param array<string, array<string, mixed>|bool> $rules
      */
-    public function __construct(string $phpVersion, string $fixerVersion, string $indent, string $lineEnding, array $rules)
+    public function __construct(private readonly string $phpVersion, private readonly string $fixerVersion, private readonly string $indent, private readonly string $lineEnding, array $rules)
     {
-        $this->phpVersion = $phpVersion;
-        $this->fixerVersion = $fixerVersion;
-        $this->indent = $indent;
-        $this->lineEnding = $lineEnding;
         $this->rules = self::makeJsonEncodable($rules);
     }
 
@@ -85,7 +73,7 @@ final class Signature implements SignatureInterface
      *
      * @return array<string, array<string, mixed>|bool>
      */
-    private static function makeJsonEncodable(array $data): array
+    private function makeJsonEncodable(array $data): array
     {
         array_walk_recursive($data, static function (&$item): void {
             if (\is_string($item) && !mb_detect_encoding($item, 'utf-8', true)) {

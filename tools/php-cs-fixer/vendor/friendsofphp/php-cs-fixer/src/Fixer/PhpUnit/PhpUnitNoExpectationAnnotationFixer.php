@@ -36,10 +36,7 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
  */
 final class PhpUnitNoExpectationAnnotationFixer extends AbstractPhpUnitFixer implements ConfigurableFixerInterface, WhitespacesAwareFixerInterface
 {
-    /**
-     * @var bool
-     */
-    private $fixMessageRegExp;
+    private ?bool $fixMessageRegExp = null;
 
     public function configure(array $configuration): void
     {
@@ -245,11 +242,7 @@ final class MyTest extends \PHPUnit_Framework_TestCase
 
         $exceptionClass = trim($exceptionClass);
 
-        if (true === $this->configuration['use_class_const']) {
-            $params[] = "\\{$exceptionClass}::class";
-        } else {
-            $params[] = "'{$exceptionClass}'";
-        }
+        $params[] = true === $this->configuration['use_class_const'] ? "\\{$exceptionClass}::class" : "'{$exceptionClass}'";
 
         if (isset($annotations['expectedExceptionMessage'])) {
             $params[] = var_export($annotations['expectedExceptionMessage'], true);

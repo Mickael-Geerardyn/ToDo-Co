@@ -174,8 +174,6 @@ final class TypeExpression
             |)
         )';
 
-    private string $value;
-
     private bool $isUnionType = false;
 
     private string $typesGlue = '|';
@@ -185,22 +183,11 @@ final class TypeExpression
      */
     private array $innerTypeExpressions = [];
 
-    private ?NamespaceAnalysis $namespace;
-
-    /**
-     * @var NamespaceUseAnalysis[]
-     */
-    private array $namespaceUses;
-
     /**
      * @param NamespaceUseAnalysis[] $namespaceUses
      */
-    public function __construct(string $value, ?NamespaceAnalysis $namespace, array $namespaceUses)
+    public function __construct(private string $value, private readonly ?NamespaceAnalysis $namespace, private readonly array $namespaceUses)
     {
-        $this->value = $value;
-        $this->namespace = $namespace;
-        $this->namespaceUses = $namespaceUses;
-
         $this->parse();
     }
 
@@ -343,7 +330,7 @@ final class TypeExpression
                 'expression' => $this->inner($matches['type'][0]),
             ];
 
-            $consumedValueLength = \strlen($matches[0][0]);
+            $consumedValueLength = \strlen((string) $matches[0][0]);
             $index += $consumedValueLength;
 
             if (\strlen($this->value) === $index) {
@@ -351,33 +338,33 @@ final class TypeExpression
             }
         }
 
-        $nullableLength = \strlen($matches['nullable'][0]);
+        $nullableLength = \strlen((string) $matches['nullable'][0]);
         $index = $nullableLength;
 
         if ('' !== ($matches['generic'][0] ?? '') && $matches['generic'][1] === $nullableLength) {
             $this->parseCommaSeparatedInnerTypes(
-                $index + \strlen($matches['generic_start'][0]),
+                $index + \strlen((string) $matches['generic_start'][0]),
                 $matches['generic_types'][0]
             );
         } elseif ('' !== ($matches['callable'][0] ?? '') && $matches['callable'][1] === $nullableLength) {
             $this->parseCallableArgumentTypes(
-                $index + \strlen($matches['callable_start'][0]),
+                $index + \strlen((string) $matches['callable_start'][0]),
                 $matches['callable_arguments'][0]
             );
 
             if ('' !== ($matches['callable_return'][0] ?? '')) {
                 $this->innerTypeExpressions[] = [
-                    'start_index' => \strlen($this->value) - \strlen($matches['callable_return'][0]),
+                    'start_index' => \strlen($this->value) - \strlen((string) $matches['callable_return'][0]),
                     'expression' => $this->inner($matches['callable_return'][0]),
                 ];
             }
         } elseif ('' !== ($matches['array_shape'][0] ?? '') && $matches['array_shape'][1] === $nullableLength) {
             $this->parseArrayShapeInnerTypes(
-                $index + \strlen($matches['array_shape_start'][0]),
+                $index + \strlen((string) $matches['array_shape_start'][0]),
                 $matches['array_shape_inners'][0]
             );
         } elseif ('' !== ($matches['parenthesized'][0] ?? '') && $matches['parenthesized'][1] === $nullableLength) {
-            $index += \strlen($matches['parenthesized_start'][0]);
+            $index += \strlen((string) $matches['parenthesized_start'][0]);
 
             if ('' !== ($matches['conditional'][0] ?? '')) {
                 if ('' !== ($matches['conditional_cond_left_types'][0] ?? '')) {
@@ -387,21 +374,21 @@ final class TypeExpression
                     ];
                 }
 
-                $index += \strlen($matches['conditional_cond_left'][0]) + \strlen($matches['conditional_cond_middle'][0]);
+                $index += \strlen((string) $matches['conditional_cond_left'][0]) + \strlen((string) $matches['conditional_cond_middle'][0]);
 
                 $this->innerTypeExpressions[] = [
                     'start_index' => $index,
                     'expression' => $this->inner($matches['conditional_cond_right_types'][0]),
                 ];
 
-                $index += \strlen($matches['conditional_cond_right_types'][0]) + \strlen($matches['conditional_true_start'][0]);
+                $index += \strlen((string) $matches['conditional_cond_right_types'][0]) + \strlen((string) $matches['conditional_true_start'][0]);
 
                 $this->innerTypeExpressions[] = [
                     'start_index' => $index,
                     'expression' => $this->inner($matches['conditional_true_types'][0]),
                 ];
 
-                $index += \strlen($matches['conditional_true_types'][0]) + \strlen($matches['conditional_false_start'][0]);
+                $index += \strlen((string) $matches['conditional_true_types'][0]) + \strlen((string) $matches['conditional_false_start'][0]);
 
                 $this->innerTypeExpressions[] = [
                     'start_index' => $index,
@@ -433,7 +420,7 @@ final class TypeExpression
                 'expression' => $this->inner($matches['types']),
             ];
 
-            $index += \strlen($matches[0]);
+            $index += \strlen((string) $matches[0]);
         }
     }
 
@@ -449,8 +436,8 @@ final class TypeExpression
                 $index
             );
             $consumedValue = $prematches['_callable_argument'];
-            $consumedValueLength = \strlen($consumedValue);
-            $consumedCommaLength = \strlen($prematches[0]) - $consumedValueLength;
+            $consumedValueLength = \strlen((string) $consumedValue);
+            $consumedCommaLength = \strlen((string) $prematches[0]) - $consumedValueLength;
 
             $addedPrefix = 'Closure(';
             Preg::match(
@@ -481,8 +468,8 @@ final class TypeExpression
                 $index
             );
             $consumedValue = $prematches['_array_shape_inner'];
-            $consumedValueLength = \strlen($consumedValue);
-            $consumedCommaLength = \strlen($prematches[0]) - $consumedValueLength;
+            $consumedValueLength = \strlen((string) $consumedValue);
+            $consumedCommaLength = \strlen((string) $prematches[0]) - $consumedValueLength;
 
             $addedPrefix = 'array{';
             Preg::match(
@@ -571,7 +558,7 @@ final class TypeExpression
             }
         }
 
-        if (null === $this->namespace || $this->namespace->isGlobalNamespace()) {
+        if (!$this->namespace instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis || $this->namespace->isGlobalNamespace()) {
             return $type;
         }
 

@@ -24,11 +24,8 @@ class CommandTester
 {
     use TesterTrait;
 
-    private Command $command;
-
-    public function __construct(Command $command)
+    public function __construct(private readonly Command $command)
     {
-        $this->command = $command;
     }
 
     /**
@@ -51,7 +48,7 @@ class CommandTester
         // set the command name automatically if the application requires
         // this argument and no command name was passed
         if (!isset($input['command'])
-            && (null !== $application = $this->command->getApplication())
+            && (($application = $this->command->getApplication()) instanceof \Symfony\Component\Console\Application)
             && $application->getDefinition()->hasArgument('command')
         ) {
             $input = array_merge(['command' => $this->command->getName()], $input);

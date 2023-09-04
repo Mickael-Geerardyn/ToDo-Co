@@ -41,7 +41,7 @@ class ConsoleOutput extends StreamOutput implements ConsoleOutputInterface
     {
         parent::__construct($this->openOutputStream(), $verbosity, $decorated, $formatter);
 
-        if (null === $formatter) {
+        if (!$formatter instanceof \Symfony\Component\Console\Formatter\OutputFormatterInterface) {
             // for BC reasons, stdErr has it own Formatter only when user don't inject a specific formatter.
             $this->stderr = new StreamOutput($this->openErrorStream(), $verbosity, $decorated);
 
@@ -110,7 +110,7 @@ class ConsoleOutput extends StreamOutput implements ConsoleOutputInterface
      */
     protected function hasStdoutSupport(): bool
     {
-        return false === $this->isRunningOS400();
+        return !$this->isRunningOS400();
     }
 
     /**
@@ -119,7 +119,7 @@ class ConsoleOutput extends StreamOutput implements ConsoleOutputInterface
      */
     protected function hasStderrSupport(): bool
     {
-        return false === $this->isRunningOS400();
+        return !$this->isRunningOS400();
     }
 
     /**

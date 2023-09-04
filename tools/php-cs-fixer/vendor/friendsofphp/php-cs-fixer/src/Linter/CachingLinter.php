@@ -21,16 +21,13 @@ namespace PhpCsFixer\Linter;
  */
 final class CachingLinter implements LinterInterface
 {
-    private LinterInterface $sublinter;
-
     /**
      * @var array<string, LintingResultInterface>
      */
     private array $cache = [];
 
-    public function __construct(LinterInterface $linter)
+    public function __construct(private readonly LinterInterface $sublinter)
     {
-        $this->sublinter = $linter;
     }
 
     public function isAsync(): bool

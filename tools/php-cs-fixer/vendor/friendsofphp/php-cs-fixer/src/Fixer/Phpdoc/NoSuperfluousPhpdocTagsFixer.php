@@ -369,7 +369,7 @@ class Foo {
         ?string $currentSymbol,
         array $shortNames
     ): string {
-        if (\count($element['types']) > 0) {
+        if ($element['types'] !== []) {
             $propertyTypeInfo = $this->parseTypeHint($tokens, array_key_first($element['types']));
         } else {
             $propertyTypeInfo = self::NO_TYPE_INFO;
@@ -420,11 +420,7 @@ class Foo {
             $beforeArgumentIndex = $tokens->getPrevTokenOfKind($index, ['(', ',']);
             $typeIndex = $tokens->getNextMeaningfulToken($beforeArgumentIndex);
 
-            if ($typeIndex !== $index) {
-                $info = $this->parseTypeHint($tokens, $typeIndex);
-            } else {
-                $info = self::NO_TYPE_INFO;
-            }
+            $info = $typeIndex !== $index ? $this->parseTypeHint($tokens, $typeIndex) : self::NO_TYPE_INFO;
 
             if (!$info['allows_null']) {
                 $nextIndex = $tokens->getNextMeaningfulToken($index);

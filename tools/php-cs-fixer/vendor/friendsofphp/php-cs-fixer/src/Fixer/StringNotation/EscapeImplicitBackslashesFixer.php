@@ -106,7 +106,7 @@ final class EscapeImplicitBackslashesFixer extends AbstractFixer implements Conf
             }
 
             // Nowdoc syntax
-            if ($token->isGivenKind(T_ENCAPSED_AND_WHITESPACE) && '\'' === substr(rtrim($tokens[$index - 1]->getContent()), -1)) {
+            if ($token->isGivenKind(T_ENCAPSED_AND_WHITESPACE) && str_ends_with(rtrim($tokens[$index - 1]->getContent()), '\'')) {
                 continue;
             }
 

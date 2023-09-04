@@ -63,7 +63,7 @@ class OutputFormatterStyleStack implements ResetInterface
             return $this->emptyStyle;
         }
 
-        if (null === $style) {
+        if (!$style instanceof \Symfony\Component\Console\Formatter\OutputFormatterStyleInterface) {
             return array_pop($this->styles);
         }
 

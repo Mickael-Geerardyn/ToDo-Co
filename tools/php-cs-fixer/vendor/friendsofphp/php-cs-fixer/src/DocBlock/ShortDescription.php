@@ -21,14 +21,13 @@ namespace PhpCsFixer\DocBlock;
  */
 final class ShortDescription
 {
-    /**
-     * The docblock containing the short description.
-     */
-    private DocBlock $doc;
-
-    public function __construct(DocBlock $doc)
+    public function __construct(
+        /**
+         * The docblock containing the short description.
+         */
+        private readonly DocBlock $doc
+    )
     {
-        $this->doc = $doc;
     }
 
     /**

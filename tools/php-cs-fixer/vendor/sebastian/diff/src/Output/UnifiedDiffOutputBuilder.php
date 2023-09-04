@@ -34,13 +34,9 @@ final class UnifiedDiffOutputBuilder extends AbstractChunkOutputBuilder
      * @psalm-var positive-int
      */
     private int $contextLines = 3;
-    private string $header;
-    private bool $addLineNumbers;
 
-    public function __construct(string $header = "--- Original\n+++ New\n", bool $addLineNumbers = false)
+    public function __construct(private readonly string $header = "--- Original\n+++ New\n", private readonly bool $addLineNumbers = false)
     {
-        $this->header         = $header;
-        $this->addLineNumbers = $addLineNumbers;
     }
 
     public function getDiff(array $diff): string
@@ -55,7 +51,7 @@ final class UnifiedDiffOutputBuilder extends AbstractChunkOutputBuilder
             }
         }
 
-        if (0 !== count($diff)) {
+        if ([] !== $diff) {
             $this->writeDiffHunks($buffer, $diff);
         }
 
@@ -79,7 +75,7 @@ final class UnifiedDiffOutputBuilder extends AbstractChunkOutputBuilder
         $upperLimit = count($diff);
 
         if (0 === $diff[$upperLimit - 1][1]) {
-            $lc = substr($diff[$upperLimit - 1][0], -1);
+            $lc = substr((string) $diff[$upperLimit - 1][0], -1);
 
             if ("\n" !== $lc) {
                 array_splice($diff, $upperLimit, 0, [["\n\\ No newline at end of file\n", Differ::NO_LINE_END_EOF_WARNING]]);
@@ -92,13 +88,13 @@ final class UnifiedDiffOutputBuilder extends AbstractChunkOutputBuilder
             for ($i = $upperLimit - 1; $i >= 0; $i--) {
                 if (isset($toFind[$diff[$i][1]])) {
                     unset($toFind[$diff[$i][1]]);
-                    $lc = substr($diff[$i][0], -1);
+                    $lc = substr((string) $diff[$i][0], -1);
 
                     if ("\n" !== $lc) {
                         array_splice($diff, $i + 1, 0, [["\n\\ No newline at end of file\n", Differ::NO_LINE_END_EOF_WARNING]]);
                     }
 
-                    if (!count($toFind)) {
+                    if ($toFind === []) {
                         break;
                     }
                 }

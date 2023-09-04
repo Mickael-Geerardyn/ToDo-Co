@@ -25,11 +25,10 @@ final class Ctype
      *
      * @see https://php.net/ctype-alnum
      *
-     * @param mixed $text
      *
      * @return bool
      */
-    public static function ctype_alnum($text)
+    public static function ctype_alnum(mixed $text)
     {
         $text = self::convert_int_to_char_for_ctype($text, __FUNCTION__);
 
@@ -41,11 +40,10 @@ final class Ctype
      *
      * @see https://php.net/ctype-alpha
      *
-     * @param mixed $text
      *
      * @return bool
      */
-    public static function ctype_alpha($text)
+    public static function ctype_alpha(mixed $text)
     {
         $text = self::convert_int_to_char_for_ctype($text, __FUNCTION__);
 
@@ -57,11 +55,10 @@ final class Ctype
      *
      * @see https://php.net/ctype-cntrl
      *
-     * @param mixed $text
      *
      * @return bool
      */
-    public static function ctype_cntrl($text)
+    public static function ctype_cntrl(mixed $text)
     {
         $text = self::convert_int_to_char_for_ctype($text, __FUNCTION__);
 
@@ -73,11 +70,10 @@ final class Ctype
      *
      * @see https://php.net/ctype-digit
      *
-     * @param mixed $text
      *
      * @return bool
      */
-    public static function ctype_digit($text)
+    public static function ctype_digit(mixed $text)
     {
         $text = self::convert_int_to_char_for_ctype($text, __FUNCTION__);
 
@@ -89,11 +85,10 @@ final class Ctype
      *
      * @see https://php.net/ctype-graph
      *
-     * @param mixed $text
      *
      * @return bool
      */
-    public static function ctype_graph($text)
+    public static function ctype_graph(mixed $text)
     {
         $text = self::convert_int_to_char_for_ctype($text, __FUNCTION__);
 
@@ -105,11 +100,10 @@ final class Ctype
      *
      * @see https://php.net/ctype-lower
      *
-     * @param mixed $text
      *
      * @return bool
      */
-    public static function ctype_lower($text)
+    public static function ctype_lower(mixed $text)
     {
         $text = self::convert_int_to_char_for_ctype($text, __FUNCTION__);
 
@@ -121,11 +115,10 @@ final class Ctype
      *
      * @see https://php.net/ctype-print
      *
-     * @param mixed $text
      *
      * @return bool
      */
-    public static function ctype_print($text)
+    public static function ctype_print(mixed $text)
     {
         $text = self::convert_int_to_char_for_ctype($text, __FUNCTION__);
 
@@ -137,11 +130,10 @@ final class Ctype
      *
      * @see https://php.net/ctype-punct
      *
-     * @param mixed $text
      *
      * @return bool
      */
-    public static function ctype_punct($text)
+    public static function ctype_punct(mixed $text)
     {
         $text = self::convert_int_to_char_for_ctype($text, __FUNCTION__);
 
@@ -153,11 +145,10 @@ final class Ctype
      *
      * @see https://php.net/ctype-space
      *
-     * @param mixed $text
      *
      * @return bool
      */
-    public static function ctype_space($text)
+    public static function ctype_space(mixed $text)
     {
         $text = self::convert_int_to_char_for_ctype($text, __FUNCTION__);
 
@@ -169,11 +160,10 @@ final class Ctype
      *
      * @see https://php.net/ctype-upper
      *
-     * @param mixed $text
      *
      * @return bool
      */
-    public static function ctype_upper($text)
+    public static function ctype_upper(mixed $text)
     {
         $text = self::convert_int_to_char_for_ctype($text, __FUNCTION__);
 
@@ -185,11 +175,10 @@ final class Ctype
      *
      * @see https://php.net/ctype-xdigit
      *
-     * @param mixed $text
      *
      * @return bool
      */
-    public static function ctype_xdigit($text)
+    public static function ctype_xdigit(mixed $text)
     {
         $text = self::convert_int_to_char_for_ctype($text, __FUNCTION__);
 
@@ -204,12 +193,10 @@ final class Ctype
      * (negative values have 256 added in order to allow characters in the Extended ASCII range).
      * Any other integer is interpreted as a string containing the decimal digits of the integer.
      *
-     * @param mixed  $int
      * @param string $function
-     *
      * @return mixed
      */
-    private static function convert_int_to_char_for_ctype($int, $function)
+    private static function convert_int_to_char_for_ctype(mixed $int, $function)
     {
         if (!\is_int($int)) {
             return $int;
@@ -219,9 +206,7 @@ final class Ctype
             return (string) $int;
         }
 
-        if (\PHP_VERSION_ID >= 80100) {
-            @trigger_error($function.'(): Argument of type int will be interpreted as string in the future', \E_USER_DEPRECATED);
-        }
+        @trigger_error($function.'(): Argument of type int will be interpreted as string in the future', \E_USER_DEPRECATED);
 
         if ($int < 0) {
             $int += 256;

@@ -105,12 +105,7 @@ final class CommentsAnalyzer
         if ($this->isValidLanguageConstruct($tokens, $token, $nextIndex)) {
             return true;
         }
-
-        if ($tokens[$nextIndex]->isGivenKind(CT::T_USE_TRAIT)) {
-            return true;
-        }
-
-        return false;
+        return $tokens[$nextIndex]->isGivenKind(CT::T_USE_TRAIT);
     }
 
     /**

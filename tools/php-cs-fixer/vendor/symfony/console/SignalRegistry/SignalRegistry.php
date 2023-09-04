@@ -47,7 +47,7 @@ final class SignalRegistry
      */
     public function handle(int $signal): void
     {
-        $count = \count($this->signalHandlers[$signal]);
+        $count = is_countable($this->signalHandlers[$signal]) ? \count($this->signalHandlers[$signal]) : 0;
 
         foreach ($this->signalHandlers[$signal] as $i => $signalHandler) {
             $hasNext = $i !== $count - 1;

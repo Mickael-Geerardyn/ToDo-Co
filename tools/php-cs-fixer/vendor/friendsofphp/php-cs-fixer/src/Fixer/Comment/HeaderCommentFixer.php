@@ -223,7 +223,7 @@ echo 1;
     {
         $lineEnding = $this->whitespacesConfig->getLineEnding();
         $comment = (self::HEADER_COMMENT === $this->configuration['comment_type'] ? '/*' : '/**').$lineEnding;
-        $lines = explode("\n", str_replace("\r", '', $this->configuration['header']));
+        $lines = explode("\n", str_replace("\r", '', (string) $this->configuration['header']));
 
         foreach ($lines as $line) {
             $comment .= rtrim(' * '.$line).$lineEnding;
@@ -425,7 +425,7 @@ echo 1;
         $nextIndex = $index + 1;
         $nextToken = $tokens[$nextIndex] ?? null;
 
-        if (!$newlineRemoved && null !== $nextToken && $nextToken->isWhitespace()) {
+        if (!$newlineRemoved && $nextToken instanceof \PhpCsFixer\Tokenizer\Token && $nextToken->isWhitespace()) {
             $content = Preg::replace('/^\R/', '', $nextToken->getContent());
 
             $tokens->ensureWhitespaceAtIndex($nextIndex, 0, $content);

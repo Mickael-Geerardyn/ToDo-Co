@@ -214,7 +214,7 @@ class Sample
                                     'Unexpected spacing for element type "%s", expected any of %s, got "%s".',
                                     $spacing,
                                     Utils::naturalLanguageJoin($supportedSpacings),
-                                    \is_object($spacing) ? \get_class($spacing) : (null === $spacing ? 'null' : \gettype($spacing).'#'.$spacing)
+                                    \is_object($spacing) ? $spacing::class : (null === $spacing ? 'null' : \gettype($spacing).'#'.$spacing)
                                 )
                             );
                         }
@@ -539,7 +539,7 @@ class Sample
         if ('method' === $element['type'] && !$tokens[$class['index']]->isGivenKind(T_INTERFACE)) {
             $attributes = $tokensAnalyzer->getMethodAttributes($element['index']);
 
-            if (true === $attributes['abstract']) {
+            if ($attributes['abstract']) {
                 $elementEndIndex = $tokens->getNextTokenOfKind($element['index'], [';']);
             } else {
                 $elementEndIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $tokens->getNextTokenOfKind($element['index'], ['{']));

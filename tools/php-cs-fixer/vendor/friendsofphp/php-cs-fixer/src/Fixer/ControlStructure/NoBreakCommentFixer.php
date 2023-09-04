@@ -177,7 +177,7 @@ switch ($foo) {
                         $text = $this->configuration['comment_text'];
                         $tokens[$commentPosition] = new Token([
                             $tokens[$commentPosition]->getId(),
-                            str_ireplace($text, $text, $tokens[$commentPosition]->getContent()),
+                            str_ireplace((string) $text, (string) $text, $tokens[$commentPosition]->getContent()),
                         ]);
 
                         $this->ensureNewLineAt($tokens, $commentPosition);
@@ -201,7 +201,7 @@ switch ($foo) {
             return false;
         }
 
-        $text = preg_quote($this->configuration['comment_text'], '~');
+        $text = preg_quote((string) $this->configuration['comment_text'], '~');
 
         return Preg::match("~^((//|#)\\s*{$text}\\s*)|(/\\*\\*?\\s*{$text}(\\s+.*)*\\*/)$~i", $token->getContent());
     }
@@ -337,7 +337,7 @@ switch ($foo) {
     /**
      * @return array<int>
      */
-    private static function getParenthesisedStructureKinds(): array
+    private function getParenthesisedStructureKinds(): array
     {
         static $structureKinds = null;
 

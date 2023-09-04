@@ -163,7 +163,7 @@ class FooTest extends TestCase {
 
         if ('' === $this->configuration['prefix']) {
             $name = lcfirst($name);
-        } elseif ('_' !== substr($this->configuration['prefix'], -1)) {
+        } elseif (!str_ends_with((string) $this->configuration['prefix'], '_')) {
             $name = ucfirst($name);
         }
 

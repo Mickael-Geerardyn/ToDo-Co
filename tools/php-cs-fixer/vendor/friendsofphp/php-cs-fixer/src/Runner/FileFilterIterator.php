@@ -29,10 +29,6 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 final class FileFilterIterator extends \FilterIterator
 {
-    private ?EventDispatcherInterface $eventDispatcher;
-
-    private CacheManagerInterface $cacheManager;
-
     /**
      * @var array<string, bool>
      */
@@ -43,17 +39,14 @@ final class FileFilterIterator extends \FilterIterator
      */
     public function __construct(
         \Traversable $iterator,
-        ?EventDispatcherInterface $eventDispatcher,
-        CacheManagerInterface $cacheManager
+        private readonly ?EventDispatcherInterface $eventDispatcher,
+        private readonly CacheManagerInterface $cacheManager
     ) {
         if (!$iterator instanceof \Iterator) {
             $iterator = new \IteratorIterator($iterator);
         }
 
         parent::__construct($iterator);
-
-        $this->eventDispatcher = $eventDispatcher;
-        $this->cacheManager = $cacheManager;
     }
 
     public function accept(): bool
@@ -102,7 +95,7 @@ final class FileFilterIterator extends \FilterIterator
 
     private function dispatchEvent(string $name, Event $event): void
     {
-        if (null === $this->eventDispatcher) {
+        if (!$this->eventDispatcher instanceof \Symfony\Component\EventDispatcher\EventDispatcherInterface) {
             return;
         }
 

@@ -158,7 +158,7 @@ final class GeneralPhpdocTagRenameFixer extends AbstractFixer implements Configu
 
     protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
-        if (0 === \count($this->configuration['replacements'])) {
+        if (0 === (is_countable($this->configuration['replacements']) ? \count($this->configuration['replacements']) : 0)) {
             return;
         }
 
@@ -187,7 +187,7 @@ final class GeneralPhpdocTagRenameFixer extends AbstractFixer implements Configu
                 $regex,
                 static function (array $matches) use ($caseInsensitive, $replacements) {
                     if ($caseInsensitive) {
-                        $matches[1] = strtolower($matches[1]);
+                        $matches[1] = strtolower((string) $matches[1]);
                     }
 
                     return $replacements[$matches[1]];

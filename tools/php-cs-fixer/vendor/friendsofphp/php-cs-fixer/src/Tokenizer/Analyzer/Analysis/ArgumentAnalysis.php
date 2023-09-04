@@ -20,29 +20,23 @@ namespace PhpCsFixer\Tokenizer\Analyzer\Analysis;
 final class ArgumentAnalysis
 {
     /**
-     * The name of the argument.
-     */
-    private ?string $name;
-
-    /**
-     * The index where the name is located in the supplied Tokens object.
-     */
-    private ?int $nameIndex;
-
-    /**
      * The default value of the argument.
      */
-    private ?string $default;
+    private readonly ?string $default;
 
     /**
      * The type analysis of the argument.
      */
-    private ?TypeAnalysis $typeAnalysis;
+    private readonly ?TypeAnalysis $typeAnalysis;
 
-    public function __construct(?string $name, ?int $nameIndex, ?string $default, ?TypeAnalysis $typeAnalysis = null)
+    public function __construct(/**
+     * The name of the argument.
+     */
+    private readonly ?string $name, /**
+     * The index where the name is located in the supplied Tokens object.
+     */
+    private readonly ?int $nameIndex, ?string $default, ?TypeAnalysis $typeAnalysis = null)
     {
-        $this->name = $name;
-        $this->nameIndex = $nameIndex;
         $this->default = $default ?? null;
         $this->typeAnalysis = $typeAnalysis ?? null;
     }
@@ -74,6 +68,6 @@ final class ArgumentAnalysis
 
     public function hasTypeAnalysis(): bool
     {
-        return null !== $this->typeAnalysis;
+        return $this->typeAnalysis instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis;
     }
 }

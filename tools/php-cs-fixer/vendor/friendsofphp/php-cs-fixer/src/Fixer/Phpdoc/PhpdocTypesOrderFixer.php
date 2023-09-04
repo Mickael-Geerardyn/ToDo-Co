@@ -125,13 +125,13 @@ final class PhpdocTypesOrderFixer extends AbstractFixer implements ConfigurableF
             $doc = new DocBlock($token->getContent());
             $annotations = $doc->getAnnotationsOfType(Annotation::getTagsWithTypes());
 
-            if (0 === \count($annotations)) {
+            if ([] === $annotations) {
                 continue;
             }
 
             foreach ($annotations as $annotation) {
                 // fix main types
-                if (null !== $annotation->getTypeExpression()) {
+                if ($annotation->getTypeExpression() instanceof \PhpCsFixer\DocBlock\TypeExpression) {
                     $annotation->setTypes(
                         $this->sortTypes(
                             $annotation->getTypeExpression()

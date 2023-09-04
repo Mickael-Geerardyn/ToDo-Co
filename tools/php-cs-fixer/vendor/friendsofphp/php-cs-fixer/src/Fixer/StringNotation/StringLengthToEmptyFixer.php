@@ -121,11 +121,7 @@ final class StringLengthToEmptyFixer extends AbstractFunctionReferenceFixer
 
             $keepParentheses = $this->keepParentheses($tokens, $openParenthesisIndex, $closeParenthesisIndex);
 
-            if (T_IS_IDENTICAL === $replacement) {
-                $operandContent = '===';
-            } else { // T_IS_NOT_IDENTICAL === $replacement
-                $operandContent = '!==';
-            }
+            $operandContent = T_IS_IDENTICAL === $replacement ? '===' : '!==';
 
             // apply fixing
 

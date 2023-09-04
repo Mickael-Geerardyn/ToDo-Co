@@ -261,12 +261,12 @@ final class FinalInternalClassFixer extends AbstractFixer implements Configurabl
             if (!Preg::match('/@([^\(\s]+)/', $annotation->getContent(), $matches)) {
                 continue;
             }
-            $tag = strtolower(substr(array_shift($matches), 1));
+            $tag = strtolower(substr((string) array_shift($matches), 1));
 
             $tags[$tag] = true;
         }
 
-        if (\count(array_intersect_key($this->configuration['exclude'], $tags)) > 0) {
+        if (array_intersect_key($this->configuration['exclude'], $tags) !== []) {
             return false;
         }
 
@@ -296,7 +296,7 @@ final class FinalInternalClassFixer extends AbstractFixer implements Configurabl
             $attributeString .= strtolower($tokens[$currentIndex]->getContent());
         }
 
-        if (\count(array_intersect_key($this->configuration['exclude'], $attributeCandidates)) > 0) {
+        if (array_intersect_key($this->configuration['exclude'], $attributeCandidates) !== []) {
             return false;
         }
 
@@ -312,11 +312,11 @@ final class FinalInternalClassFixer extends AbstractFixer implements Configurabl
      */
     private function isConfiguredAsInclude(array $attributes): bool
     {
-        if (0 === \count($this->configuration['include'])) {
+        if (0 === (is_countable($this->configuration['include']) ? \count($this->configuration['include']) : 0)) {
             return true;
         }
 
-        return \count(array_intersect_key($this->configuration['include'], $attributes)) > 0;
+        return array_intersect_key($this->configuration['include'], $attributes) !== [];
     }
 
     private function assertConfigHasNoConflicts(): void
@@ -349,7 +349,7 @@ final class FinalInternalClassFixer extends AbstractFixer implements Configurabl
 
         $intersect = array_intersect_assoc($this->configuration['include'], $this->configuration['exclude']);
 
-        if (\count($intersect) > 0) {
+        if ($intersect !== []) {
             throw new InvalidFixerConfigurationException($this->getName(), sprintf('Annotation cannot be used in both "include" and "exclude" list, got duplicates: %s.', Utils::naturalLanguageJoin(array_keys($intersect))));
         }
     }

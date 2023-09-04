@@ -30,10 +30,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class ConcatSpaceFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
-    /**
-     * @var null|string
-     */
-    private $fixCallback;
+    private ?string $fixCallback = null;
 
     public function configure(array $configuration): void
     {

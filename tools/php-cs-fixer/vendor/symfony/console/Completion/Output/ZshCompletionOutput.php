@@ -26,9 +26,9 @@ class ZshCompletionOutput implements CompletionOutputInterface
             $values[] = $value->getValue().($value->getDescription() ? "\t".$value->getDescription() : '');
         }
         foreach ($suggestions->getOptionSuggestions() as $option) {
-            $values[] = '--'.$option->getName().($option->getDescription() ? "\t".$option->getDescription() : '');
+            $values[] = '--'.$option->getName().($option->getDescription() !== '' && $option->getDescription() !== '0' ? "\t".$option->getDescription() : '');
             if ($option->isNegatable()) {
-                $values[] = '--no-'.$option->getName().($option->getDescription() ? "\t".$option->getDescription() : '');
+                $values[] = '--no-'.$option->getName().($option->getDescription() !== '' && $option->getDescription() !== '0' ? "\t".$option->getDescription() : '');
             }
         }
         $output->write(implode("\n", $values)."\n");

@@ -62,7 +62,7 @@ final class PhpdocInlineTagNormalizerFixer extends AbstractFixer implements Conf
 
     protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
-        if (0 === \count($this->configuration['tags'])) {
+        if (0 === (is_countable($this->configuration['tags']) ? \count($this->configuration['tags']) : 0)) {
             return;
         }
 
@@ -80,7 +80,7 @@ final class PhpdocInlineTagNormalizerFixer extends AbstractFixer implements Conf
                     implode('|', array_map(static fn (string $tag): string => preg_quote($tag, '/'), $this->configuration['tags']))
                 ),
                 static function (array $matches): string {
-                    $doc = trim($matches[2]);
+                    $doc = trim((string) $matches[2]);
 
                     if ('' === $doc) {
                         return '{@'.$matches[1].'}';

@@ -24,16 +24,10 @@ use PhpCsFixer\RuleSet\RuleSetDescriptionInterface;
 final class ReportSummary
 {
     /**
-     * @var list<RuleSetDescriptionInterface>
-     */
-    private array $sets;
-
-    /**
      * @param list<RuleSetDescriptionInterface> $sets
      */
-    public function __construct(array $sets)
+    public function __construct(private readonly array $sets)
     {
-        $this->sets = $sets;
     }
 
     /**

@@ -86,10 +86,10 @@ class RegisterListenersPass implements CompilerPassInterface
                     $event['method'] = 'on'.preg_replace_callback([
                         '/(?<=\b|_)[a-z]/i',
                         '/[^a-z0-9]/i',
-                    ], fn ($matches) => strtoupper($matches[0]), $event['event']);
+                    ], fn ($matches) => strtoupper($matches[0]), (string) $event['event']);
                     $event['method'] = preg_replace('/[^a-z0-9]/i', '', $event['method']);
 
-                    if (null !== ($class = $container->getDefinition($id)->getClass()) && ($r = $container->getReflectionClass($class, false)) && !$r->hasMethod($event['method'])) {
+                    if (null !== ($class = $container->getDefinition($id)->getClass()) && (($r = $container->getReflectionClass($class, false)) instanceof \ReflectionClass) && !$r->hasMethod($event['method'])) {
                         if (!$r->hasMethod('__invoke')) {
                             throw new InvalidArgumentException(sprintf('None of the "%s" or "__invoke" methods exist for the service "%s". Please define the "method" attribute on "kernel.event_listener" tags.', $event['method'], $id));
                         }
@@ -125,7 +125,7 @@ class RegisterListenersPass implements CompilerPassInterface
             // We must assume that the class value has been correctly filled, even if the service is created by a factory
             $class = $def->getClass();
 
-            if (!$r = $container->getReflectionClass($class)) {
+            if (!($r = $container->getReflectionClass($class)) instanceof \ReflectionClass) {
                 throw new InvalidArgumentException(sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
             }
             if (!$r->isSubclassOf(EventSubscriberInterface::class)) {
@@ -142,7 +142,7 @@ class RegisterListenersPass implements CompilerPassInterface
                 $dispatcherDefinitions[$attributes['dispatcher']] = $container->findDefinition($attributes['dispatcher']);
             }
 
-            if (!$dispatcherDefinitions) {
+            if ($dispatcherDefinitions === []) {
                 $dispatcherDefinitions = [$globalDispatcherDefinition];
             }
 
@@ -162,7 +162,7 @@ class RegisterListenersPass implements CompilerPassInterface
                     ++$noPreload;
                 }
             }
-            if ($noPreload && \count($extractingDispatcher->listeners) === $noPreload) {
+            if ($noPreload && (is_countable($extractingDispatcher->listeners) ? \count($extractingDispatcher->listeners) : 0) === $noPreload) {
                 $container->getDefinition($id)->addTag('container.no_preload');
             }
             $extractingDispatcher->listeners = [];
@@ -174,7 +174,7 @@ class RegisterListenersPass implements CompilerPassInterface
     {
         if (
             null === ($class = $container->getDefinition($id)->getClass())
-            || !($r = $container->getReflectionClass($class, false))
+            || !(($r = $container->getReflectionClass($class, false)) instanceof \ReflectionClass)
             || !$r->hasMethod($method)
             || 1 > ($m = $r->getMethod($method))->getNumberOfParameters()
             || !($type = $m->getParameters()[0]->getType()) instanceof \ReflectionNamedType

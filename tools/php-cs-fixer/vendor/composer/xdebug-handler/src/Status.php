@@ -22,52 +22,39 @@ use Psr\Log\LogLevel;
  */
 class Status
 {
-    const ENV_RESTART = 'XDEBUG_HANDLER_RESTART';
-    const CHECK = 'Check';
-    const ERROR = 'Error';
-    const INFO = 'Info';
-    const NORESTART = 'NoRestart';
-    const RESTART = 'Restart';
-    const RESTARTING = 'Restarting';
-    const RESTARTED = 'Restarted';
+    final public const ENV_RESTART = 'XDEBUG_HANDLER_RESTART';
+    final public const CHECK = 'Check';
+    final public const ERROR = 'Error';
+    final public const INFO = 'Info';
+    final public const NORESTART = 'NoRestart';
+    final public const RESTART = 'Restart';
+    final public const RESTARTING = 'Restarting';
+    final public const RESTARTED = 'Restarted';
 
-    /** @var bool */
-    private $debug;
+    private readonly bool $debug;
 
-    /** @var string */
-    private $envAllowXdebug;
+    private ?string $loaded = null;
 
-    /** @var string|null */
-    private $loaded;
+    private ?\Psr\Log\LoggerInterface $logger = null;
 
-    /** @var LoggerInterface|null */
-    private $logger;
+    private bool $modeOff = false;
 
-    /** @var bool */
-    private $modeOff;
-
-     /** @var float */
-    private $time;
+     private readonly float|int $time;
 
     /**
      * @param string $envAllowXdebug Prefixed _ALLOW_XDEBUG name
      * @param bool $debug Whether debug output is required
      */
-    public function __construct(string $envAllowXdebug, bool $debug)
+    public function __construct(private readonly string $envAllowXdebug, bool $debug)
     {
         $start = getenv(self::ENV_RESTART);
         Process::setEnv(self::ENV_RESTART);
         $this->time = is_numeric($start) ? round((microtime(true) - $start) * 1000) : 0;
-
-        $this->envAllowXdebug = $envAllowXdebug;
         $this->debug = $debug && defined('STDERR');
-        $this->modeOff = false;
     }
 
     /**
      * Activates status message output to a PSR3 logger
-     *
-     * @return void
      */
     public function setLogger(LoggerInterface $logger): void
     {
@@ -81,7 +68,7 @@ class Status
      */
     public function report(string $op, ?string $data): void
     {
-        if ($this->logger !== null || $this->debug) {
+        if ($this->logger instanceof \Psr\Log\LoggerInterface || $this->debug) {
             $callable = [$this, 'report'.$op];
 
             if (!is_callable($callable)) {
@@ -98,8 +85,8 @@ class Status
      */
     private function output(string $text, ?string $level = null): void
     {
-        if ($this->logger !== null) {
-            $this->logger->log($level !== null ? $level: LogLevel::DEBUG, $text);
+        if ($this->logger instanceof \Psr\Log\LoggerInterface) {
+            $this->logger->log($level ?? LogLevel::DEBUG, $text);
         }
 
         if ($this->debug) {
@@ -112,7 +99,7 @@ class Status
      */
     private function reportCheck(string $loaded): void
     {
-        list($version, $mode) = explode('|', $loaded);
+        [$version, $mode] = explode('|', $loaded);
 
         if ($version !== '') {
             $this->loaded = '('.$version.')'.($mode !== '' ? ' xdebug.mode='.$mode : '');

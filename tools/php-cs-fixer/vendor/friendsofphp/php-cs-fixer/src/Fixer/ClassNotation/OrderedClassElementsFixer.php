@@ -131,7 +131,7 @@ final class OrderedClassElementsFixer extends AbstractFixer implements Configura
             $this->typePosition[$type] = null;
         }
 
-        $lastPosition = \count($this->configuration['order']);
+        $lastPosition = is_countable($this->configuration['order']) ? \count($this->configuration['order']) : 0;
 
         foreach ($this->typePosition as &$pos) {
             if (null === $pos) {
@@ -253,16 +253,14 @@ Custom values:
             $i = $tokens->getNextTokenOfKind($i, ['{']);
             $elements = $this->getElements($tokens, $i);
 
-            if (0 === \count($elements)) {
+            if ([] === $elements) {
                 continue;
             }
 
             $sorted = $this->sortElements($elements);
             $endIndex = $elements[\count($elements) - 1]['end'];
 
-            if ($sorted !== $elements) {
-                $this->sortTokens($tokens, $i, $endIndex, $sorted);
-            }
+            $this->sortTokens($tokens, $i, $endIndex, $sorted);
 
             $i = $endIndex;
         }
@@ -270,7 +268,7 @@ Custom values:
 
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
-        $builtIns = array_keys(array_merge(self::$typeHierarchy, self::$specialTypes));
+        $builtIns = array_keys([...self::$typeHierarchy, ...self::$specialTypes]);
 
         return new FixerConfigurationResolver([
             (new FixerOptionBuilder('order', 'List of strings defining order of elements.'))
@@ -282,7 +280,7 @@ Custom values:
                                 return true;
                             }
 
-                            if (\is_string($value) && 'method:' === substr($value, 0, 7)) {
+                            if (\is_string($value) && str_starts_with($value, 'method:')) {
                                 return true;
                             }
                         }
@@ -466,8 +464,6 @@ Custom values:
         if ($tokens[$index]->equals('{')) {
             $index = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
         }
-
-        for (++$index; $tokens[$index]->isWhitespace(" \t") || $tokens[$index]->isComment(); ++$index);
 
         --$index;
 

@@ -39,20 +39,13 @@ final class DotsOutput implements ProgressOutputInterface
         FixerFileProcessedEvent::STATUS_LINT => ['symbol' => 'E', 'format' => '<bg=red>%s</bg=red>', 'description' => 'error'],
     ];
 
-    /** @readonly */
-    private OutputContext $context;
-
     private int $processedFiles = 0;
 
-    /**
-     * @var int
-     */
-    private $symbolsPerLine;
+    private readonly int $symbolsPerLine;
 
-    public function __construct(OutputContext $context)
+    public function __construct(/** @readonly */
+    private readonly OutputContext $context)
     {
-        $this->context = $context;
-
         // max number of characters per line
         // - total length x 2 (e.g. "  1 / 123" => 6 digits and padding spaces)
         // - 11               (extra spaces, parentheses and percentage characters, e.g. " x / x (100%)")
@@ -65,7 +58,7 @@ final class DotsOutput implements ProgressOutputInterface
      */
     public function __sleep(): array
     {
-        throw new \BadMethodCallException('Cannot serialize '.__CLASS__);
+        throw new \BadMethodCallException('Cannot serialize '.self::class);
     }
 
     /**
@@ -76,7 +69,7 @@ final class DotsOutput implements ProgressOutputInterface
      */
     public function __wakeup(): void
     {
-        throw new \BadMethodCallException('Cannot unserialize '.__CLASS__);
+        throw new \BadMethodCallException('Cannot unserialize '.self::class);
     }
 
     public function onFixerFileProcessed(FixerFileProcessedEvent $event): void

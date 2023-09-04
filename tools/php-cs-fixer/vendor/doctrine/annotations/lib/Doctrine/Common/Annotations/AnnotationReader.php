@@ -24,7 +24,7 @@ class AnnotationReader implements Reader
      *
      * @var array<string, class-string>
      */
-    private static $globalImports = [
+    private static array $globalImports = [
         'ignoreannotation' => Annotation\IgnoreAnnotation::class,
     ];
 
@@ -35,7 +35,7 @@ class AnnotationReader implements Reader
      *
      * @var array<string, true>
      */
-    private static $globalIgnoredNames = ImplicitlyIgnoredAnnotationNames::LIST;
+    private static array $globalIgnoredNames = ImplicitlyIgnoredAnnotationNames::LIST;
 
     /**
      * A list with annotations that are not causing exceptions when not resolved to an annotation class.
@@ -44,7 +44,7 @@ class AnnotationReader implements Reader
      *
      * @var array<string, true>
      */
-    private static $globalIgnoredNamespaces = [];
+    private static array $globalIgnoredNamespaces = [];
 
     /**
      * Add a new annotation to the globally ignored annotation names with regard to exception handling.
@@ -64,38 +64,32 @@ class AnnotationReader implements Reader
 
     /**
      * Annotations parser.
-     *
-     * @var DocParser
      */
-    private $parser;
+    private readonly \Doctrine\Common\Annotations\DocParser $parser;
 
     /**
      * Annotations parser used to collect parsing metadata.
-     *
-     * @var DocParser
      */
-    private $preParser;
+    private readonly \Doctrine\Common\Annotations\DocParser $preParser;
 
     /**
      * PHP parser used to collect imports.
-     *
-     * @var PhpParser
      */
-    private $phpParser;
+    private readonly \Doctrine\Common\Annotations\PhpParser $phpParser;
 
     /**
      * In-memory cache mechanism to store imported annotations per class.
      *
      * @psalm-var array<'class'|'function', array<string, array<string, class-string>>>
      */
-    private $imports = [];
+    private array $imports = [];
 
     /**
      * In-memory cache mechanism to store ignored annotations per class.
      *
      * @psalm-var array<'class'|'function', array<string, array<string, true>>>
      */
-    private $ignoredAnnotationNames = [];
+    private array $ignoredAnnotationNames = [];
 
     /**
      * Initializes a new AnnotationReader.
@@ -319,10 +313,10 @@ class AnnotationReader implements Reader
                 continue;
             }
 
-            $traitImports = array_merge($traitImports, $this->phpParser->parseUseStatements($trait));
+            $traitImports = [...$traitImports, ...$this->phpParser->parseUseStatements($trait)];
         }
 
-        return array_merge($classImports, $traitImports);
+        return [...$classImports, ...$traitImports];
     }
 
     /**
@@ -342,10 +336,10 @@ class AnnotationReader implements Reader
                 continue;
             }
 
-            $traitImports = array_merge($traitImports, $this->phpParser->parseUseStatements($trait));
+            $traitImports = [...$traitImports, ...$this->phpParser->parseUseStatements($trait)];
         }
 
-        return array_merge($classImports, $traitImports);
+        return [...$classImports, ...$traitImports];
     }
 
     /**
@@ -371,14 +365,7 @@ class AnnotationReader implements Reader
             }
         }
 
-        $this->imports[$type][$name] = array_merge(
-            self::$globalImports,
-            $this->phpParser->parseUseStatements($reflection),
-            [
-                '__NAMESPACE__' => $reflection->getNamespaceName(),
-                'self' => $name,
-            ]
-        );
+        $this->imports[$type][$name] = [...self::$globalImports, ...$this->phpParser->parseUseStatements($reflection), '__NAMESPACE__' => $reflection->getNamespaceName(), 'self' => $name];
 
         $this->ignoredAnnotationNames[$type][$name] = $ignoredAnnotationNames;
     }

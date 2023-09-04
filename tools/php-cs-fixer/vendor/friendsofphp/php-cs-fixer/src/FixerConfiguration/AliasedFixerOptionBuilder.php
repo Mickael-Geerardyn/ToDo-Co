@@ -21,20 +21,11 @@ namespace PhpCsFixer\FixerConfiguration;
  */
 final class AliasedFixerOptionBuilder
 {
-    private FixerOptionBuilder $optionBuilder;
-
-    private string $alias;
-
-    public function __construct(FixerOptionBuilder $optionBuilder, string $alias)
+    public function __construct(private readonly FixerOptionBuilder $optionBuilder, private readonly string $alias)
     {
-        $this->optionBuilder = $optionBuilder;
-        $this->alias = $alias;
     }
 
-    /**
-     * @param mixed $default
-     */
-    public function setDefault($default): self
+    public function setDefault(mixed $default): self
     {
         $this->optionBuilder->setDefault($default);
 

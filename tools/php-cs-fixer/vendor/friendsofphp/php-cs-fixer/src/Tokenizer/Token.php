@@ -149,14 +149,10 @@ final class Token
             // Inlined getPrototype() on this very hot path.
             // We access the private properties of $other directly to save function call overhead.
             // This is only possible because $other is of the same class as `self`.
-            if (!$other->isArray) {
-                $otherPrototype = $other->content;
-            } else {
-                $otherPrototype = [
-                    $other->id,
-                    $other->content,
-                ];
-            }
+            $otherPrototype = $other->isArray ? [
+                $other->id,
+                $other->content,
+            ] : $other->content;
         } else {
             $otherPrototype = $other;
         }

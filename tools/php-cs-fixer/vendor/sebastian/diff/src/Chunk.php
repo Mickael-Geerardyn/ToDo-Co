@@ -11,19 +11,8 @@ namespace SebastianBergmann\Diff;
 
 final class Chunk
 {
-    private int $start;
-    private int $startRange;
-    private int $end;
-    private int $endRange;
-    private array $lines;
-
-    public function __construct(int $start = 0, int $startRange = 1, int $end = 0, int $endRange = 1, array $lines = [])
+    public function __construct(private readonly int $start = 0, private readonly int $startRange = 1, private readonly int $end = 0, private readonly int $endRange = 1, private array $lines = [])
     {
-        $this->start      = $start;
-        $this->startRange = $startRange;
-        $this->end        = $end;
-        $this->endRange   = $endRange;
-        $this->lines      = $lines;
     }
 
     public function getStart(): int

@@ -34,7 +34,7 @@ abstract class AbstractChunkOutputBuilder implements DiffOutputBuilderInterface
                 } else {
                     $chunkSize++;
                 }
-            } elseif ($capturing !== false) {
+            } elseif ($capturing) {
                 if ($chunkSize >= $lineThreshold) {
                     $commonChunks[$chunkStart] = $chunkStart + $chunkSize;
                 }
@@ -43,7 +43,7 @@ abstract class AbstractChunkOutputBuilder implements DiffOutputBuilderInterface
             }
         }
 
-        if ($capturing !== false && $chunkSize >= $lineThreshold) {
+        if ($capturing && $chunkSize >= $lineThreshold) {
             $commonChunks[$chunkStart] = $chunkStart + $chunkSize;
         }
 

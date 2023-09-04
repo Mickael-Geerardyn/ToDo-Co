@@ -26,10 +26,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ConsoleLogger extends AbstractLogger
 {
-    public const INFO = 'info';
-    public const ERROR = 'error';
-
-    private OutputInterface $output;
+    final public const INFO = 'info';
+    final public const ERROR = 'error';
     private array $verbosityLevelMap = [
         LogLevel::EMERGENCY => OutputInterface::VERBOSITY_NORMAL,
         LogLevel::ALERT => OutputInterface::VERBOSITY_NORMAL,
@@ -52,9 +50,8 @@ class ConsoleLogger extends AbstractLogger
     ];
     private bool $errored = false;
 
-    public function __construct(OutputInterface $output, array $verbosityLevelMap = [], array $formatLevelMap = [])
+    public function __construct(private OutputInterface $output, array $verbosityLevelMap = [], array $formatLevelMap = [])
     {
-        $this->output = $output;
         $this->verbosityLevelMap = $verbosityLevelMap + $this->verbosityLevelMap;
         $this->formatLevelMap = $formatLevelMap + $this->formatLevelMap;
     }

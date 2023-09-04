@@ -345,7 +345,7 @@ $array = [
             --$index;
         }
 
-        if (\count($this->alignOperatorTokens) > 0) {
+        if ($this->alignOperatorTokens !== []) {
             $this->fixAlignment($tokens, $this->alignOperatorTokens);
         }
     }
@@ -380,7 +380,7 @@ $array = [
                                         static fn ($value): string => Utils::toString($value),
                                         self::$allowedValues
                                     )),
-                                    \is_object($value) ? \get_class($value) : (null === $value ? 'null' : \gettype($value).'#'.$value)
+                                    \is_object($value) ? $value::class : (null === $value ? 'null' : \gettype($value).'#'.$value)
                                 )
                             );
                         }
@@ -596,7 +596,7 @@ $array = [
                 }
             }
 
-            $tokens->setCode($this->replacePlaceholders($tokensClone, $alignStrategy, $tokenContent));
+            $tokens->setCode($this->replacePlaceholders($tokensClone, $alignStrategy));
         }
     }
 
@@ -853,7 +853,7 @@ $array = [
     /**
      * Look for group of placeholders and provide vertical alignment.
      */
-    private function replacePlaceholders(Tokens $tokens, string $alignStrategy, string $tokenContent): string
+    private function replacePlaceholders(Tokens $tokens, string $alignStrategy): string
     {
         $tmpCode = $tokens->generateCode();
 

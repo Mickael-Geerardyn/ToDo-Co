@@ -293,7 +293,7 @@ $c = get_class($d);
         $exclude = $this->normalizeFunctionNames($this->configuration['exclude']);
 
         if (\in_array(self::SET_ALL, $this->configuration['include'], true)) {
-            if (\count($exclude) > 0) {
+            if ($exclude !== []) {
                 return static fn (string $functionName): bool => !isset($exclude[strtolower($functionName)]);
             }
 
@@ -309,12 +309,12 @@ $c = get_class($d);
         }
 
         foreach ($this->configuration['include'] as $additional) {
-            if (!str_starts_with($additional, '@')) {
-                $include[strtolower($additional)] = true;
+            if (!str_starts_with((string) $additional, '@')) {
+                $include[strtolower((string) $additional)] = true;
             }
         }
 
-        if (\count($exclude) > 0) {
+        if ($exclude !== []) {
             return static fn (string $functionName): bool => isset($include[strtolower($functionName)]) && !isset($exclude[strtolower($functionName)]);
         }
 

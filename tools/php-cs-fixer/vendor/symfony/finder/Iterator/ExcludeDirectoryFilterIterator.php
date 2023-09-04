@@ -24,9 +24,7 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 class ExcludeDirectoryFilterIterator extends \FilterIterator implements \RecursiveIterator
 {
-    /** @var \Iterator<string, SplFileInfo> */
-    private \Iterator $iterator;
-    private bool $isRecursive;
+    private readonly bool $isRecursive;
     private array $excludedDirs = [];
     private ?string $excludedPattern = null;
 
@@ -34,9 +32,8 @@ class ExcludeDirectoryFilterIterator extends \FilterIterator implements \Recursi
      * @param \Iterator<string, SplFileInfo> $iterator    The Iterator to filter
      * @param string[]                       $directories An array of directories to exclude
      */
-    public function __construct(\Iterator $iterator, array $directories)
+    public function __construct(private readonly \Iterator $iterator, array $directories)
     {
-        $this->iterator = $iterator;
         $this->isRecursive = $iterator instanceof \RecursiveIterator;
         $patterns = [];
         foreach ($directories as $directory) {
@@ -47,7 +44,7 @@ class ExcludeDirectoryFilterIterator extends \FilterIterator implements \Recursi
                 $this->excludedDirs[$directory] = true;
             }
         }
-        if ($patterns) {
+        if ($patterns !== []) {
             $this->excludedPattern = '#(?:^|/)(?:'.implode('|', $patterns).')(?:/|$)#';
         }
 

@@ -158,7 +158,7 @@ class Command
             trigger_deprecation('symfony/console', '6.2', 'Calling "%s()" without any arguments is deprecated, pass null explicitly instead.', __METHOD__);
         }
         $this->application = $application;
-        if ($application) {
+        if ($application instanceof \Symfony\Component\Console\Application) {
             $this->setHelperSet($application->getHelperSet());
         } else {
             $this->helperSet = null;
@@ -320,7 +320,7 @@ class Command
 
         $input->validate();
 
-        if ($this->code) {
+        if ($this->code instanceof \Closure) {
             $statusCode = ($this->code)($input, $output);
         } else {
             $statusCode = $this->execute($input, $output);
@@ -367,7 +367,7 @@ class Command
             if (null === $r->getClosureThis()) {
                 set_error_handler(static function () {});
                 try {
-                    if ($c = \Closure::bind($code, $this)) {
+                    if (($c = \Closure::bind($code, $this)) instanceof \Closure) {
                         $code = $c;
                     }
                 } finally {
@@ -394,7 +394,7 @@ class Command
      */
     public function mergeApplicationDefinition(bool $mergeArgs = true): void
     {
-        if (null === $this->application) {
+        if (!$this->application instanceof \Symfony\Component\Console\Application) {
             return;
         }
 
@@ -702,7 +702,7 @@ class Command
      */
     public function getHelper(string $name): mixed
     {
-        if (null === $this->helperSet) {
+        if (!$this->helperSet instanceof \Symfony\Component\Console\Helper\HelperSet) {
             throw new LogicException(sprintf('Cannot retrieve helper "%s" because there is no HelperSet defined. Did you forget to add your command to the application or to set the application on the command using the setApplication() method? You can also set the HelperSet directly using the setHelperSet() method.', $name));
         }
 

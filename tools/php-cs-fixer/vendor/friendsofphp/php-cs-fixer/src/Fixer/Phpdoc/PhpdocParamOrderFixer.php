@@ -203,7 +203,7 @@ function m($a, array $b, Foo $c) {}
      */
     private function getOtherAnnotationsBetweenParams(DocBlock $doc, array $paramAnnotations): array
     {
-        if (0 === \count($paramAnnotations)) {
+        if ([] === $paramAnnotations) {
             return [];
         }
 

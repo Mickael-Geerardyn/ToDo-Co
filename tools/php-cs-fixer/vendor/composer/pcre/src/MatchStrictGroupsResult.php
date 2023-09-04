@@ -14,14 +14,6 @@ namespace Composer\Pcre;
 final class MatchStrictGroupsResult
 {
     /**
-     * An array of match group => string matched
-     *
-     * @readonly
-     * @var array<int|string, string>
-     */
-    public $matches;
-
-    /**
      * @readonly
      * @var bool
      */
@@ -29,11 +21,15 @@ final class MatchStrictGroupsResult
 
     /**
      * @param 0|positive-int $count
-     * @param array<string> $matches
+     * @param array<int|string, string> $matches
      */
-    public function __construct(int $count, array $matches)
+    public function __construct(int $count, /**
+     * An array of match group => string matched
+     *
+     * @readonly
+     */
+    public array $matches)
     {
-        $this->matches = $matches;
         $this->matched = (bool) $count;
     }
 }

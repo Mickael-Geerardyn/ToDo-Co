@@ -16,23 +16,22 @@ namespace Symfony\Component\Stopwatch;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class StopwatchEvent
+class StopwatchEvent implements \Stringable
 {
     /**
      * @var StopwatchPeriod[]
      */
     private array $periods = [];
 
-    private float $origin;
-    private string $category;
-    private bool $morePrecision;
+    private readonly float $origin;
+    private readonly string $category;
 
     /**
      * @var float[]
      */
     private array $started = [];
 
-    private string $name;
+    private readonly string $name;
 
     /**
      * @param float       $origin        The origin time in milliseconds
@@ -42,11 +41,10 @@ class StopwatchEvent
      *
      * @throws \InvalidArgumentException When the raw time is not valid
      */
-    public function __construct(float $origin, string $category = null, bool $morePrecision = false, string $name = null)
+    public function __construct(float $origin, string $category = null, private readonly bool $morePrecision = false, string $name = null)
     {
         $this->origin = $this->formatTime($origin);
         $this->category = \is_string($category) ? $category : 'default';
-        $this->morePrecision = $morePrecision;
         $this->name = $name ?? 'default';
     }
 
@@ -87,7 +85,7 @@ class StopwatchEvent
      */
     public function stop(): static
     {
-        if (!\count($this->started)) {
+        if ($this->started === []) {
             throw new \LogicException('stop() called but start() has not been called before.');
         }
 
@@ -101,7 +99,7 @@ class StopwatchEvent
      */
     public function isStarted(): bool
     {
-        return !empty($this->started);
+        return $this->started !== [];
     }
 
     /**
@@ -159,7 +157,7 @@ class StopwatchEvent
     {
         $count = \count($this->periods);
 
-        return $count ? $this->periods[$count - 1]->getEndTime() : 0;
+        return $count !== 0 ? $this->periods[$count - 1]->getEndTime() : 0;
     }
 
     /**

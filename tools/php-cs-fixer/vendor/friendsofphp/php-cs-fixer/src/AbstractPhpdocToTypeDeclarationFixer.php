@@ -134,7 +134,7 @@ abstract class AbstractPhpdocToTypeDeclarationFixer extends AbstractFixer implem
 
         $newTokens = [];
 
-        if (true === $isNullable && 'mixed' !== $type) {
+        if ($isNullable && 'mixed' !== $type) {
             $newTokens[] = new Token([CT::T_NULLABLE_TYPE, '?']);
         }
 
@@ -170,7 +170,7 @@ abstract class AbstractPhpdocToTypeDeclarationFixer extends AbstractFixer implem
     protected function getCommonTypeFromAnnotation(Annotation $annotation, bool $isReturnType): ?array
     {
         $typesExpression = $annotation->getTypeExpression();
-        if (null === $typesExpression) {
+        if (!$typesExpression instanceof \PhpCsFixer\DocBlock\TypeExpression) {
             return null;
         }
 
@@ -214,7 +214,7 @@ abstract class AbstractPhpdocToTypeDeclarationFixer extends AbstractFixer implem
             try {
                 Tokens::fromCode($code);
                 self::$syntaxValidationCache[$code] = true;
-            } catch (\ParseError $e) {
+            } catch (\ParseError) {
                 self::$syntaxValidationCache[$code] = false;
             }
         }

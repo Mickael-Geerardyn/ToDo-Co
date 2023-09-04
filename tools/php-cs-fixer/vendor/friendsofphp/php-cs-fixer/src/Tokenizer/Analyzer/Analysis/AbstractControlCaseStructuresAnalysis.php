@@ -19,17 +19,8 @@ namespace PhpCsFixer\Tokenizer\Analyzer\Analysis;
  */
 abstract class AbstractControlCaseStructuresAnalysis
 {
-    private int $index;
-
-    private int $open;
-
-    private int $close;
-
-    public function __construct(int $index, int $open, int $close)
+    public function __construct(private readonly int $index, private readonly int $open, private readonly int $close)
     {
-        $this->index = $index;
-        $this->open = $open;
-        $this->close = $close;
     }
 
     public function getIndex(): int

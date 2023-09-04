@@ -86,7 +86,7 @@ class FooTest extends TestCase {
         foreach (array_reverse($dataProviderAnalyzer->getDataProviders($tokens, $startIndex, $endIndex)) as $dataProviderAnalysis) {
             $typeAnalysis = $functionsAnalyzer->getFunctionReturnType($tokens, $dataProviderAnalysis->getNameIndex());
 
-            if (null === $typeAnalysis) {
+            if (!$typeAnalysis instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis) {
                 $argumentsStart = $tokens->getNextTokenOfKind($dataProviderAnalysis->getNameIndex(), ['(']);
                 $argumentsEnd = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $argumentsStart);
 

@@ -38,22 +38,12 @@ final class SelfUpdateCommand extends Command
 {
     protected static $defaultName = 'self-update';
 
-    private NewVersionCheckerInterface $versionChecker;
-
-    private ToolInfoInterface $toolInfo;
-
-    private PharCheckerInterface $pharChecker;
-
     public function __construct(
-        NewVersionCheckerInterface $versionChecker,
-        ToolInfoInterface $toolInfo,
-        PharCheckerInterface $pharChecker
+        private readonly NewVersionCheckerInterface $versionChecker,
+        private readonly ToolInfoInterface $toolInfo,
+        private readonly PharCheckerInterface $pharChecker
     ) {
         parent::__construct();
-
-        $this->versionChecker = $versionChecker;
-        $this->toolInfo = $toolInfo;
-        $this->pharChecker = $pharChecker;
     }
 
     protected function configure(): void
@@ -142,10 +132,10 @@ final class SelfUpdateCommand extends Command
             return 1;
         }
 
-        $tempFilename = \dirname($localFilename).'/'.basename($localFilename, '.phar').'-tmp.phar';
+        $tempFilename = \dirname((string) $localFilename).'/'.basename((string) $localFilename, '.phar').'-tmp.phar';
         $remoteFilename = $this->toolInfo->getPharDownloadUri($remoteTag);
 
-        if (false === @copy($remoteFilename, $tempFilename)) {
+        if (!@copy($remoteFilename, $tempFilename)) {
             $output->writeln(sprintf('<error>Unable to download new version</error> %s <error>from the server.</error>', $remoteTag));
 
             return 1;

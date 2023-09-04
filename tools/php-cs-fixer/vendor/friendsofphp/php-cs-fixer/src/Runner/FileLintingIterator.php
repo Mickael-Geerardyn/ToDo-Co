@@ -26,21 +26,14 @@ use PhpCsFixer\Linter\LintingResultInterface;
  */
 final class FileLintingIterator extends \IteratorIterator
 {
-    /**
-     * @var LintingResultInterface
-     */
-    private $currentResult;
-
-    private LinterInterface $linter;
+    private ?\PhpCsFixer\Linter\LintingResultInterface $currentResult = null;
 
     /**
      * @param \Iterator<mixed, \SplFileInfo> $iterator
      */
-    public function __construct(\Iterator $iterator, LinterInterface $linter)
+    public function __construct(\Iterator $iterator, private readonly LinterInterface $linter)
     {
         parent::__construct($iterator);
-
-        $this->linter = $linter;
     }
 
     public function currentLintingResult(): ?LintingResultInterface

@@ -22,9 +22,6 @@ class Section
      * @var StopwatchEvent[]
      */
     private array $events = [];
-
-    private ?float $origin;
-    private bool $morePrecision;
     private ?string $id = null;
 
     /**
@@ -36,10 +33,8 @@ class Section
      * @param float|null $origin        Set the origin of the events in this section, use null to set their origin to their start time
      * @param bool       $morePrecision If true, time is stored as float to keep the original microsecond precision
      */
-    public function __construct(float $origin = null, bool $morePrecision = false)
+    public function __construct(private readonly ?float $origin = null, private readonly bool $morePrecision = false)
     {
-        $this->origin = $origin;
-        $this->morePrecision = $morePrecision;
     }
 
     /**
@@ -63,7 +58,7 @@ class Section
      */
     public function open(?string $id): self
     {
-        if (null === $id || null === $session = $this->get($id)) {
+        if (null === $id || !($session = $this->get($id)) instanceof \Symfony\Component\Stopwatch\Section) {
             $session = $this->children[] = new self(microtime(true) * 1000, $this->morePrecision);
         }
 

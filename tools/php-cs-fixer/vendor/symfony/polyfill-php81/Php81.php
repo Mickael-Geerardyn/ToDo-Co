@@ -26,7 +26,7 @@ final class Php81
 
         $nextKey = -1;
 
-        foreach ($array as $k => $v) {
+        foreach (array_keys($array) as $k) {
             if ($k !== ++$nextKey) {
                 return false;
             }

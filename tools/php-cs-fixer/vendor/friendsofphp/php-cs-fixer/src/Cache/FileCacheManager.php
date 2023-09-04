@@ -34,40 +34,24 @@ final class FileCacheManager implements CacheManagerInterface
 {
     public const WRITE_FREQUENCY = 10;
 
-    private FileHandlerInterface $handler;
-
-    private SignatureInterface $signature;
-
-    private bool $isDryRun;
-
-    private DirectoryInterface $cacheDirectory;
-
     private int $writeCounter = 0;
 
     private bool $signatureWasUpdated = false;
 
-    /**
-     * @var CacheInterface
-     */
-    private $cache;
+    private \PhpCsFixer\Cache\CacheInterface $cache;
 
     public function __construct(
-        FileHandlerInterface $handler,
-        SignatureInterface $signature,
-        bool $isDryRun = false,
-        ?DirectoryInterface $cacheDirectory = null
+        private readonly FileHandlerInterface $handler,
+        private readonly SignatureInterface $signature,
+        private readonly bool $isDryRun = false,
+        private readonly DirectoryInterface $cacheDirectory = new Directory('')
     ) {
-        $this->handler = $handler;
-        $this->signature = $signature;
-        $this->isDryRun = $isDryRun;
-        $this->cacheDirectory = $cacheDirectory ?? new Directory('');
-
         $this->readCache();
     }
 
     public function __destruct()
     {
-        if (true === $this->signatureWasUpdated || 0 !== $this->writeCounter) {
+        if ($this->signatureWasUpdated || 0 !== $this->writeCounter) {
             $this->writeCache();
         }
     }
@@ -78,7 +62,7 @@ final class FileCacheManager implements CacheManagerInterface
      */
     public function __sleep(): array
     {
-        throw new \BadMethodCallException('Cannot serialize '.__CLASS__);
+        throw new \BadMethodCallException('Cannot serialize '.self::class);
     }
 
     /**
@@ -89,7 +73,7 @@ final class FileCacheManager implements CacheManagerInterface
      */
     public function __wakeup(): void
     {
-        throw new \BadMethodCallException('Cannot unserialize '.__CLASS__);
+        throw new \BadMethodCallException('Cannot unserialize '.self::class);
     }
 
     public function needFixing(string $file, string $fileContent): bool
@@ -121,7 +105,7 @@ final class FileCacheManager implements CacheManagerInterface
     {
         $cache = $this->handler->read();
 
-        if (null === $cache || !$this->signature->equals($cache->getSignature())) {
+        if (!$cache instanceof \PhpCsFixer\Cache\CacheInterface || !$this->signature->equals($cache->getSignature())) {
             $cache = new Cache($this->signature);
             $this->signatureWasUpdated = true;
         }

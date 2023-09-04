@@ -22,7 +22,7 @@ use Symfony\Component\Filesystem\Exception\IOException;
  */
 class Filesystem
 {
-    private static $lastError;
+    private static ?string $lastError = null;
 
     /**
      * Copies a file.
@@ -109,7 +109,7 @@ class Filesystem
         $maxPathLength = \PHP_MAXPATHLEN - 2;
 
         foreach ($this->toIterable($files) as $file) {
-            if (\strlen($file) > $maxPathLength) {
+            if (\strlen((string) $file) > $maxPathLength) {
                 throw new IOException(sprintf('Could not check if file exist because path length exceeds %d characters.', $maxPathLength), 0, null, $file);
             }
 
@@ -198,7 +198,7 @@ class Filesystem
 
                     throw new IOException(sprintf('Failed to remove directory "%s": ', $file).$lastError);
                 }
-            } elseif (!self::box('unlink', $file) && (str_contains(self::$lastError, 'Permission denied') || file_exists($file))) {
+            } elseif (!self::box('unlink', $file) && (str_contains((string) self::$lastError, 'Permission denied') || file_exists($file))) {
                 throw new IOException(sprintf('Failed to remove file "%s": ', $file).self::$lastError);
             }
         }
@@ -247,10 +247,8 @@ class Filesystem
                 if (!self::box('lchown', $file, $user)) {
                     throw new IOException(sprintf('Failed to chown file "%s": ', $file).self::$lastError, 0, null, $file);
                 }
-            } else {
-                if (!self::box('chown', $file, $user)) {
-                    throw new IOException(sprintf('Failed to chown file "%s": ', $file).self::$lastError, 0, null, $file);
-                }
+            } elseif (!self::box('chown', $file, $user)) {
+                throw new IOException(sprintf('Failed to chown file "%s": ', $file).self::$lastError, 0, null, $file);
             }
         }
     }
@@ -275,10 +273,8 @@ class Filesystem
                 if (!self::box('lchgrp', $file, $group)) {
                     throw new IOException(sprintf('Failed to chgrp file "%s": ', $file).self::$lastError, 0, null, $file);
                 }
-            } else {
-                if (!self::box('chgrp', $file, $group)) {
-                    throw new IOException(sprintf('Failed to chgrp file "%s": ', $file).self::$lastError, 0, null, $file);
-                }
+            } elseif (!self::box('chgrp', $file, $group)) {
+                throw new IOException(sprintf('Failed to chgrp file "%s": ', $file).self::$lastError, 0, null, $file);
             }
         }
     }
@@ -403,10 +399,8 @@ class Filesystem
      */
     private function linkException(string $origin, string $target, string $linkType): never
     {
-        if (self::$lastError) {
-            if ('\\' === \DIRECTORY_SEPARATOR && str_contains(self::$lastError, 'error code(1314)')) {
-                throw new IOException(sprintf('Unable to create "%s" link due to error code 1314: \'A required privilege is not held by the client\'. Do you have the required Administrator-rights?', $linkType), 0, null, $target);
-            }
+        if (self::$lastError && ('\\' === \DIRECTORY_SEPARATOR && str_contains((string) self::$lastError, 'error code(1314)'))) {
+            throw new IOException(sprintf('Unable to create "%s" link due to error code 1314: \'A required privilege is not held by the client\'. Do you have the required Administrator-rights?', $linkType), 0, null, $target);
         }
         throw new IOException(sprintf('Failed to create "%s" link from "%s" to "%s": ', $linkType, $origin, $target).self::$lastError, 0, null, $target);
     }
@@ -458,8 +452,8 @@ class Filesystem
             $startPath = str_replace('\\', '/', $startPath);
         }
 
-        $splitDriveLetter = fn ($path) => (\strlen($path) > 2 && ':' === $path[1] && '/' === $path[2] && ctype_alpha($path[0]))
-            ? [substr($path, 2), strtoupper($path[0])]
+        $splitDriveLetter = fn ($path) => (\strlen((string) $path) > 2 && ':' === $path[1] && '/' === $path[2] && ctype_alpha((string) $path[0]))
+            ? [substr((string) $path, 2), strtoupper((string) $path[0])]
             : [$path, null];
 
         $splitPath = function ($path) {
@@ -482,9 +476,9 @@ class Filesystem
         $startPathArr = $splitPath($startPath);
         $endPathArr = $splitPath($endPath);
 
-        if ($endDriveLetter && $startDriveLetter && $endDriveLetter != $startDriveLetter) {
+        if ($endDriveLetter && $startDriveLetter && $endDriveLetter !== $startDriveLetter) {
             // End path is on another drive, so no relative path exists
-            return $endDriveLetter.':/'.($endPathArr ? implode('/', $endPathArr).'/' : '');
+            return $endDriveLetter.':/'.($endPathArr !== [] ? implode('/', $endPathArr).'/' : '');
         }
 
         // Find for which directory the common path stops
@@ -494,11 +488,7 @@ class Filesystem
         }
 
         // Determine how deep the start path is relative to the common path (ie, "web/bundles" = 2 levels)
-        if (1 === \count($startPathArr) && '' === $startPathArr[0]) {
-            $depth = 0;
-        } else {
-            $depth = \count($startPathArr) - $index;
-        }
+        $depth = 1 === \count($startPathArr) && '' === $startPathArr[0] ? 0 : \count($startPathArr) - $index;
 
         // Repeated "../" for each level need to reach the common path
         $traverser = str_repeat('../', $depth);
@@ -543,13 +533,13 @@ class Filesystem
         // Iterate in destination folder to remove obsolete entries
         if ($this->exists($targetDir) && isset($options['delete']) && $options['delete']) {
             $deleteIterator = $iterator;
-            if (null === $deleteIterator) {
+            if (!$deleteIterator instanceof \Traversable) {
                 $flags = \FilesystemIterator::SKIP_DOTS;
                 $deleteIterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($targetDir, $flags), \RecursiveIteratorIterator::CHILD_FIRST);
             }
             $targetDirLen = \strlen($targetDir);
             foreach ($deleteIterator as $file) {
-                $origin = $originDir.substr($file->getPathname(), $targetDirLen);
+                $origin = $originDir.substr((string) $file->getPathname(), $targetDirLen);
                 if (!$this->exists($origin)) {
                     $this->remove($file);
                 }
@@ -558,7 +548,7 @@ class Filesystem
 
         $copyOnWindows = $options['copy_on_windows'] ?? false;
 
-        if (null === $iterator) {
+        if (!$iterator instanceof \Traversable) {
             $flags = $copyOnWindows ? \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::FOLLOW_SYMLINKS : \FilesystemIterator::SKIP_DOTS;
             $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($originDir, $flags), \RecursiveIteratorIterator::SELF_FIRST);
         }
@@ -571,7 +561,7 @@ class Filesystem
                 continue;
             }
 
-            $target = $targetDir.substr($file->getPathname(), $originDirLen);
+            $target = $targetDir.substr((string) $file->getPathname(), $originDirLen);
             $filesCreatedWhileMirroring[$target] = true;
 
             if (!$copyOnWindows && is_link($file)) {
@@ -630,7 +620,7 @@ class Filesystem
         // Loop until we create a valid temp file or have reached 10 attempts
         for ($i = 0; $i < 10; ++$i) {
             // Create a unique filename
-            $tmpFile = $dir.'/'.$prefix.uniqid(mt_rand(), true).$suffix;
+            $tmpFile = $dir.'/'.$prefix.uniqid(random_int(0, mt_getrandmax()), true).$suffix;
 
             // Use fopen instead of file_exists as some streams do not support stat
             // Use mode 'x+' to atomically check existence and create to avoid a TOCTOU vulnerability
@@ -749,7 +739,7 @@ class Filesystem
         self::assertFunctionExists($func);
 
         self::$lastError = null;
-        set_error_handler(__CLASS__.'::handleError');
+        set_error_handler(self::class.'::handleError');
         try {
             return $func(...$args);
         } finally {

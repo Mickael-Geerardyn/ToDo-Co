@@ -63,7 +63,7 @@ final class ArgumentsAnalyzer
             // skip nested (), [], {} constructs
             $blockDefinitionProbe = Tokens::detectBlockType($token);
 
-            if (null !== $blockDefinitionProbe && true === $blockDefinitionProbe['isStart']) {
+            if (null !== $blockDefinitionProbe && $blockDefinitionProbe['isStart']) {
                 $paramContentIndex = $tokens->findBlockEnd($blockDefinitionProbe['type'], $paramContentIndex);
 
                 continue;

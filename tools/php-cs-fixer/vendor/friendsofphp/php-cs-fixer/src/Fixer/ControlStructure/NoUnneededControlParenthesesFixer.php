@@ -104,34 +104,32 @@ final class NoUnneededControlParenthesesFixer extends AbstractFixer implements C
     /**
      * @var list<list<int>|string>
      */
-    private array $noopTypes;
+    private array $noopTypes = [
+        '$',
+        [T_CONSTANT_ENCAPSED_STRING],
+        [T_DNUMBER],
+        [T_DOUBLE_COLON],
+        [T_LNUMBER],
+        [T_NS_SEPARATOR],
+        [T_STRING],
+        [T_VARIABLE],
+        [T_STATIC],
+        // magic constants
+        [T_CLASS_C],
+        [T_DIR],
+        [T_FILE],
+        [T_FUNC_C],
+        [T_LINE],
+        [T_METHOD_C],
+        [T_NS_C],
+        [T_TRAIT_C],
+    ];
 
     private TokensAnalyzer $tokensAnalyzer;
 
     public function __construct()
     {
         parent::__construct();
-
-        $this->noopTypes = [
-            '$',
-            [T_CONSTANT_ENCAPSED_STRING],
-            [T_DNUMBER],
-            [T_DOUBLE_COLON],
-            [T_LNUMBER],
-            [T_NS_SEPARATOR],
-            [T_STRING],
-            [T_VARIABLE],
-            [T_STATIC],
-            // magic constants
-            [T_CLASS_C],
-            [T_DIR],
-            [T_FILE],
-            [T_FUNC_C],
-            [T_LINE],
-            [T_METHOD_C],
-            [T_NS_C],
-            [T_TRAIT_C],
-        ];
 
         foreach (Token::getObjectOperatorKinds() as $kind) {
             $this->noopTypes[] = [$kind];

@@ -32,10 +32,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class PhpUnitNamespacedFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
-    /**
-     * @var string
-     */
-    private $originalClassRegEx;
+    private ?string $originalClassRegEx = null;
 
     /**
      * Class Mappings.
@@ -47,7 +44,7 @@ final class PhpUnitNamespacedFixer extends AbstractFixer implements Configurable
      *
      * @var array|string[] Class Mappings
      */
-    private $classMap;
+    private ?array $classMap = null;
 
     public function getDefinition(): FixerDefinitionInterface
     {

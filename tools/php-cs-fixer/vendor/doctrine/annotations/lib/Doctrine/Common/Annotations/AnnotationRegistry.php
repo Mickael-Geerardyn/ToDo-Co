@@ -12,7 +12,7 @@ final class AnnotationRegistry
      *
      * @var null[] indexed by class name
      */
-    private static $failedToAutoload = [];
+    private static array $failedToAutoload = [];
 
     public static function reset(): void
     {

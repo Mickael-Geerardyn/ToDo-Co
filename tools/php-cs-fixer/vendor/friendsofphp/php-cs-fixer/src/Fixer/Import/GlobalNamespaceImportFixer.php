@@ -138,7 +138,7 @@ if (count($x)) {
 
         $newImports = array_filter($newImports);
 
-        if (\count($newImports) > 0) {
+        if ($newImports !== []) {
             $this->insertImports($tokens, $newImports, $useDeclarations);
         }
     }
@@ -431,7 +431,7 @@ if (count($x)) {
      */
     private function insertImports(Tokens $tokens, array $imports, array $useDeclarations): void
     {
-        if (\count($useDeclarations) > 0) {
+        if ($useDeclarations !== []) {
             $useDeclaration = end($useDeclarations);
             $index = $useDeclaration->getEndIndex() + 1;
         } else {
@@ -694,7 +694,7 @@ if (count($x)) {
     {
         $annotations = $doc->getAnnotationsOfType(Annotation::getTagsWithTypes());
 
-        if (0 === \count($annotations)) {
+        if ([] === $annotations) {
             return false;
         }
 
@@ -712,7 +712,7 @@ if (count($x)) {
                     $newType = $callback($type);
 
                     if (null !== $newType && $type !== $newType) {
-                        $newFullType = substr_replace($newFullType, $newType, $offset, \strlen($type));
+                        $newFullType = substr_replace($newFullType, (string) $newType, $offset, \strlen((string) $type));
                     }
                 }
 

@@ -94,7 +94,7 @@ function foo() {}
 
     protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
-        if (0 === \count($this->configuration['annotations'])) {
+        if (0 === (is_countable($this->configuration['annotations']) ? \count($this->configuration['annotations']) : 0)) {
             return;
         }
 
@@ -107,7 +107,7 @@ function foo() {}
             $annotations = $this->getAnnotationsToRemove($doc);
 
             // nothing to do if there are no annotations
-            if (0 === \count($annotations)) {
+            if ([] === $annotations) {
                 continue;
             }
 

@@ -23,11 +23,8 @@ use SebastianBergmann\Diff\Differ;
  */
 final class DiffOnlyOutputBuilder implements DiffOutputBuilderInterface
 {
-    private string $header;
-
-    public function __construct(string $header = "--- Original\n+++ New\n")
+    public function __construct(private readonly string $header = "--- Original\n+++ New\n")
     {
-        $this->header = $header;
     }
 
     public function getDiff(array $diff): string
@@ -55,7 +52,7 @@ final class DiffOnlyOutputBuilder implements DiffOutputBuilderInterface
                 continue; // we didn't write the not-changed line, so do not add a line break either
             }
 
-            $lc = substr($diffEntry[0], -1);
+            $lc = substr((string) $diffEntry[0], -1);
 
             if ($lc !== "\n" && $lc !== "\r") {
                 fwrite($buffer, "\n"); // \No newline at end of file

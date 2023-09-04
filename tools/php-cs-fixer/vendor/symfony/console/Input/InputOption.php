@@ -28,34 +28,32 @@ class InputOption
     /**
      * Do not accept input for the option (e.g. --yell). This is the default behavior of options.
      */
-    public const VALUE_NONE = 1;
+    final public const VALUE_NONE = 1;
 
     /**
      * A value must be passed when the option is used (e.g. --iterations=5 or -i5).
      */
-    public const VALUE_REQUIRED = 2;
+    final public const VALUE_REQUIRED = 2;
 
     /**
      * The option may or may not have a value (e.g. --yell or --yell=loud).
      */
-    public const VALUE_OPTIONAL = 4;
+    final public const VALUE_OPTIONAL = 4;
 
     /**
      * The option accepts multiple values (e.g. --dir=/foo --dir=/bar).
      */
-    public const VALUE_IS_ARRAY = 8;
+    final public const VALUE_IS_ARRAY = 8;
 
     /**
      * The option may have either positive or negative value (e.g. --ansi or --no-ansi).
      */
-    public const VALUE_NEGATABLE = 16;
+    final public const VALUE_NEGATABLE = 16;
 
-    private string $name;
-    private string|array|null $shortcut;
-    private int $mode;
+    private readonly string $name;
+    private readonly string|array|null $shortcut;
+    private readonly int $mode;
     private string|int|bool|array|null|float $default;
-    private array|\Closure $suggestedValues;
-    private string $description;
 
     /**
      * @param string|array|null                                                             $shortcut        The shortcuts, can be null, a string of shortcuts delimited by | or an array of shortcuts
@@ -65,17 +63,17 @@ class InputOption
      *
      * @throws InvalidArgumentException If option mode is invalid or incompatible
      */
-    public function __construct(string $name, string|array $shortcut = null, int $mode = null, string $description = '', string|bool|int|float|array $default = null, array|\Closure $suggestedValues = [])
+    public function __construct(string $name, string|array $shortcut = null, int $mode = null, private readonly string $description = '', string|bool|int|float|array $default = null, private array|\Closure $suggestedValues = [])
     {
         if (str_starts_with($name, '--')) {
             $name = substr($name, 2);
         }
 
-        if (empty($name)) {
+        if ($name === '') {
             throw new InvalidArgumentException('An option name cannot be empty.');
         }
 
-        if (empty($shortcut)) {
+        if ($shortcut === '' || $shortcut === [] || $shortcut === null) {
             $shortcut = null;
         }
 
@@ -87,7 +85,7 @@ class InputOption
             $shortcuts = array_filter($shortcuts);
             $shortcut = implode('|', $shortcuts);
 
-            if (empty($shortcut)) {
+            if ($shortcut === '') {
                 throw new InvalidArgumentException('An option shortcut cannot be empty.');
             }
         }
@@ -101,8 +99,6 @@ class InputOption
         $this->name = $name;
         $this->shortcut = $shortcut;
         $this->mode = $mode;
-        $this->description = $description;
-        $this->suggestedValues = $suggestedValues;
 
         if ($suggestedValues && !$this->acceptValue()) {
             throw new LogicException('Cannot set suggested values if the option does not accept a value.');

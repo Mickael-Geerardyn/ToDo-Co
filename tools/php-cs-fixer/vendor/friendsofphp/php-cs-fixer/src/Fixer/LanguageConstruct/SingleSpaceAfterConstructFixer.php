@@ -100,7 +100,7 @@ final class SingleSpaceAfterConstructFixer extends AbstractProxyFixer implements
         'yield_from' => T_YIELD_FROM,
     ];
 
-    private SingleSpaceAroundConstructFixer $singleSpaceAroundConstructFixer;
+    private readonly SingleSpaceAroundConstructFixer $singleSpaceAroundConstructFixer;
 
     public function __construct()
     {

@@ -20,17 +20,11 @@ use Symfony\Component\Process\Process;
  */
 class ProcessTimedOutException extends RuntimeException
 {
-    public const TYPE_GENERAL = 1;
-    public const TYPE_IDLE = 2;
+    final public const TYPE_GENERAL = 1;
+    final public const TYPE_IDLE = 2;
 
-    private $process;
-    private $timeoutType;
-
-    public function __construct(Process $process, int $timeoutType)
+    public function __construct(private readonly \Symfony\Component\Process\Process $process, private readonly int $timeoutType)
     {
-        $this->process = $process;
-        $this->timeoutType = $timeoutType;
-
         parent::__construct(sprintf(
             'The process "%s" exceeded the timeout of %s seconds.',
             $process->getCommandLine(),

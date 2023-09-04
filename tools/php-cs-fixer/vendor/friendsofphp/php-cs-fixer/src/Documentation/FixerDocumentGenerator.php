@@ -37,13 +37,10 @@ use PhpCsFixer\Utils;
  */
 final class FixerDocumentGenerator
 {
-    private DocumentationLocator $locator;
+    private readonly FullDiffer $differ;
 
-    private FullDiffer $differ;
-
-    public function __construct(DocumentationLocator $locator)
+    public function __construct(private readonly DocumentationLocator $locator)
     {
-        $this->locator = $locator;
         $this->differ = new FullDiffer();
     }
 
@@ -81,7 +78,7 @@ final class FixerDocumentGenerator
                 RST;
             $alternatives = $fixer->getSuccessorsNames();
 
-            if (0 !== \count($alternatives)) {
+            if ([] !== $alternatives) {
                 $deprecationDescription .= RstUtils::toRst(sprintf(
                     "\n\nYou should use %s instead.",
                     Utils::naturalLanguageJoinWithBackticks($alternatives)
@@ -175,7 +172,7 @@ final class FixerDocumentGenerator
 
         $samples = $definition->getCodeSamples();
 
-        if (0 !== \count($samples)) {
+        if ([] !== $samples) {
             $doc .= <<<'RST'
 
 
@@ -252,7 +249,7 @@ final class FixerDocumentGenerator
             'Phpdoc' => 'PHPDoc',
         ];
 
-        usort($fixers, static fn (FixerInterface $a, FixerInterface $b): int => strcmp(\get_class($a), \get_class($b)));
+        usort($fixers, static fn (FixerInterface $a, FixerInterface $b): int => strcmp($a::class, $b::class));
 
         $documentation = <<<'RST'
             =======================
@@ -263,7 +260,7 @@ final class FixerDocumentGenerator
         $currentGroup = null;
 
         foreach ($fixers as $fixer) {
-            $namespace = Preg::replace('/^.*\\\\(.+)\\\\.+Fixer$/', '$1', \get_class($fixer));
+            $namespace = Preg::replace('/^.*\\\\(.+)\\\\.+Fixer$/', '$1', $fixer::class);
             $group = $overrideGroups[$namespace] ?? Preg::replace('/(?<=[[:lower:]])(?=[[:upper:]])/', ' ', $namespace);
 
             if ($group !== $currentGroup) {
@@ -285,7 +282,7 @@ final class FixerDocumentGenerator
                 $attributes[] = 'risky';
             }
 
-            $attributes = 0 === \count($attributes)
+            $attributes = [] === $attributes
                 ? ''
                 : ' *('.implode(', ', $attributes).')*';
 
