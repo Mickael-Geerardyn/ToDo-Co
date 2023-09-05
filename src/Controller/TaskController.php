@@ -15,10 +15,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TaskController extends AbstractController
 {
+	private const HTTP_STATUS_OK = 200;
+	private const HTTP_STATUS_CREATE = 201;
+	private const HTTP_STATUS_NO_CONTENT = 204;
+	private const HTTP_STATUS_FORBIDDEN = 403;
     public function __construct(
       private readonly EntityManagerInterface $entityManager,
 	  private readonly RequestStack $requestStack,
-	  private readonly TaskRepository $taskRepository
+	  private readonly TaskRepository $taskRepository,
+	  private readonly TaskVoter $taskVoter
     )
     {
     }
@@ -29,7 +34,7 @@ class TaskController extends AbstractController
         return $this->render('task/list.html.twig', ['tasks' => $this->taskRepository->findAll()]);
     }
 
-	#[Route(path: "/tasks/create", name: "task_create")]
+	#[Route(path: "/tasks/create", name: "task_create", methods: ["GET", "POST"])]
     public function createTasks(): Response|RedirectResponse
     {
         $task = new Task();
@@ -85,9 +90,20 @@ class TaskController extends AbstractController
         return $this->redirectToRoute('task_list');
     }
 
-	#[Route(path: "/tasks/{id}/delete", name: "task_delete", methods: ["DELETE"])]
+
+	#[Route(path: "/tasks/{id}/delete", name: "task_delete")]
     public function deleteTaskAction(Task $task): RedirectResponse
     {
+		//Add this to check ROLE in user object. Both of USER and ADMIN role can delete a task but only own task for
+		// USER and anonymous task for ADMIN
+		// TaskVoter is called by denyAccessUnlessGranted method
+		if($this->denyAccessUnlessGranted($this->taskVoter::ROLE_USER, $task) === false)
+		{
+			$this->addFlash('error','Vous ne pouvez pas supprimer cette tâche');
+
+			return $this->redirectToRoute('task_list', status: self::HTTP_STATUS_FORBIDDEN);
+		}
+
         $this->entityManager->remove($task);
         $this->entityManager->flush();
 

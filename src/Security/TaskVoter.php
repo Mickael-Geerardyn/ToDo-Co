@@ -9,12 +9,12 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class TaskVoter extends Voter
 {
-	const TASK_ANONYMOUS_DELETE_ROLE = "ROLE_ADMIN";
-	const TASK_DELETE_MIN_ROLE = "ROLE_USER";
+	const ROLE_ADMIN = "ROLE_ADMIN";
+	const ROLE_USER = "ROLE_USER";
 	protected function supports(string $attribute, $subject): bool
 	{
 
-		if (!in_array($attribute, [self::TASK_ANONYMOUS_DELETE_ROLE, self::TASK_DELETE_MIN_ROLE])) {
+		if (!in_array($attribute, [self::ROLE_ADMIN, self::ROLE_USER])) {
 			return false;
 		}
 
@@ -34,27 +34,32 @@ class TaskVoter extends Voter
 			return false;
 		}
 
+		/** @var $role */
+		$authenticatedUserRole = implode($user->getRoles());
+
 		/** @var Task $task */
 		$task = $subject;
 
-		switch ($attribute) {
-			case self::TASK_ANONYMOUS_DELETE_ROLE:
-				return $this->canDeleteAnonymousTask($task, $user);
-			case self::TASK_DELETE_MIN_ROLE:
-				return $this->canDeleteOnlyByOwner($task, $user);
-		}
-
-		throw new \LogicException('This code should not be reached!');
+		return match ($authenticatedUserRole) {
+			self::ROLE_ADMIN => $this->canDeleteOwnOrAnonymousTask($task, $user),
+			self::ROLE_USER => $this->canDeleteOnlyByOwner($task, $user),
+			default => false,
+		};
 	}
 
-	public function canDeleteAnonymousTask(Task $task, User $user): bool
+	public function canDeleteOwnOrAnonymousTask(Task $task, User $user): bool
 	{
-		if(implode($user->getRoles()) != self::TASK_ANONYMOUS_DELETE_ROLE)
+		if(empty($task->getUser()) && implode($user->getRoles()) === self::ROLE_ADMIN)
 		{
-			return false;
+			return true;
 		}
 
-		return true;
+		if($this->canDeleteOnlyByOwner($task, $user))
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 	public function canDeleteOnlyByOwner(Task $task, User $user): bool
@@ -63,7 +68,6 @@ class TaskVoter extends Voter
 		{
 			return false;
 		}
-
 		return true;
 	}
 }

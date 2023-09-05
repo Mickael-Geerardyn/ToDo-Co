@@ -2,29 +2,23 @@
 
 namespace Tests\Controller;
 
-use App\Controller\TaskController;
-use App\Entity\Task;
-use App\Repository\TaskRepository;
-use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Request;
 
-class DefaultControllerTest extends WebTestCase
+class HomeControllerTest extends WebTestCase
 {
-    public function testAddUserToTask(UserRepository $userRepository)
+	private KernelBrowser|null $client = null;
+	public function setUp() : void
+
+	{
+		$this->client = static::createClient();
+	}
+
+	public function testGetHomePageIsUp()
     {
-		$client = static::createClient();
-		$crawler = $client->request("POST", '/tasks/create');
+		$urlGenerator = $this->client->getContainer()->get('router.default');
 
-		$user = $userRepository->find(1);
-
-		$task = new Task();
-		$task->setTitle("Titre de test");
-		$task->setContent("Description de test");
-		$task->setUser($user);
-
-
-        $this->assertSame($task, $client->getResponse()->getStatusCode());
+		$this->client->request(Request::METHOD_GET, $urlGenerator->generate('home_page'));
     }
 }

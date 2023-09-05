@@ -15,7 +15,7 @@
                     <h4><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
                     <p>{{ task.content }}</p>
                     <p><strong>Utilisateur propriétaire:</strong> {{ (task.user) ?  task.user
-                        .getUsername : "Tâche anonyme"}}</p>
+                        .username : "Tâche anonyme"}}</p>
                 </div>
                 <div>
                     <form action="{{ path('task_toggle', {'id' : task.id }) }}">
@@ -23,12 +23,9 @@
                             {% if not task.isDone %}Marquer comme faite{% else %}Marquer non terminée{% endif %}
                         </button>
                     </form>
-                    {% if (task.user) and (task.user.getEmail) is same as
-                        (app.user.getEmail) or (task.user) is not empty and (app
-                    .user.roles|join) is same as ("ROLE_ADMIN") %}
-                    <form action="{{ path('task_delete', {'id' : task.id,
-                        'method': 'DELETE'})
-                    }}">
+                    {% if (task.user is empty and 'ROLE_ADMIN' in app.user.roles|join) or
+                        (task.user and task.user.email == app.user.email) %}
+                    <form action="{{ path('task_delete', {'id' : task.id, 'method': 'DELETE'}) }}">
                         <button class="btn btn-danger btn-sm pull-right">Supprimer</button>
                     </form>
                     {% endif  %}

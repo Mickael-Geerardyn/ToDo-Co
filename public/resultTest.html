@@ -1,0 +1,31 @@
+PHPUnit 10.3.2 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.1.22
+Configuration: /var/www/openclassrooms/projet8/projet8-TodoList/phpunit.xml.dist
+
+F                                                                   1 / 1 (100%)
+
+Time: 00:00.079, Memory: 24.00 MB
+
+There was 1 PHPUnit test runner warning:
+
+1) XDEBUG_MODE=coverage or xdebug.mode=coverage has to be set
+
+--
+
+There was 1 failure:
+
+1) Tests\Controller\TaskControllerTest::testDeleteTaskAction
+Failed asserting that false is true.
+
+/var/www/openclassrooms/projet8/projet8-TodoList/tests/Controller/TaskControllerTest.php:52
+/var/www/openclassrooms/projet8/projet8-TodoList/vendor/bin/phpunit:127
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1, Warnings: 1.
+
+Remaining direct deprecation notices (1)
+
+  1x: Since symfony/security-core 5.4: The $credentials argument of "Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken::__construct" is deprecated.
+    1x in TaskControllerTest::testDeleteTaskAction from Tests\Controller
+

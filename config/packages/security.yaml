@@ -35,8 +35,12 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/tasks/(create|(\d+)/*), roles: [ROLE_USER, IS_AUTHENTICATED_FULLY] }
-         - { path: ^/users/(\d+)/*, roles: [ROLE_ADMIN, IS_AUTHENTICATED_FULLY] }
+            #TaskVoter check if user can delete the task (Anonymous task only by
+            # ROLE_ADMIN and owner can delete these task (no matter the ROLE,
+            # only his own task)
+         - { path: ^/tasks/(\d+)/delete, roles: [IS_AUTHENTICATED_FULLY], methods: [DELETE] }
+         - { path: ^/tasks/(create|(\d+)/edit), roles: [IS_AUTHENTICATED_FULLY, ROLE_USER], methods: [GET, POST, PUT] }
+         - { path: ^/users/(\d+)/edit, roles: [ROLE_ADMIN], methods: [GET, PUT, PATCH] }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
