@@ -37,7 +37,7 @@ class UserVoter extends Voter
 
 		if ($attribute !== self::ROLE_ADMIN) {
 
-			throw new \LogicException('This code should not be reached!');
+			return false;
 		}
 
 		return $this->canEditUser($userObjectToEdit, $authenticatedUser);

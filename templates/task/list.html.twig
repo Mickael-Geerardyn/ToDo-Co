@@ -24,7 +24,7 @@
                         </button>
                     </form>
                     {% if (task.user is empty and 'ROLE_ADMIN' in app.user.roles|join) or
-                        (task.user and task.user.email == app.user.email) %}
+                        (task.user is not empty and app.user.email is defined and task.user.email == app.user.email) %}
                     <form action="{{ path('task_delete', {'id' : task.id, 'method': 'DELETE'}) }}">
                         <button class="btn btn-danger btn-sm pull-right">Supprimer</button>
                     </form>

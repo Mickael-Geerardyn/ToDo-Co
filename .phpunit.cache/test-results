@@ -1,1 +1,1 @@
-{"version":1,"defects":{"Tests\\Controller\\TaskControllerTest::testDeleteTaskAction":7},"times":{"Tests\\Controller\\TaskControllerTest::testDeleteTaskAction":0.01}}
+{"version":1,"defects":{"Tests\\Controller\\TaskControllerTest::testDeleteTaskAction":8},"times":{"Tests\\Controller\\TaskControllerTest::testDeleteTaskAction":0.018}}

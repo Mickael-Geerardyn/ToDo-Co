@@ -19,7 +19,7 @@
                     <th>Adresse d'utilisateur</th>
                     <th>Role</th>
     {% if (app.user) and (app.user.roles|join) is same as
-        ("ROLE_ADMIN")) %}
+        "ROLE_ADMIN" %}
                     <th>Actions</th>
     {% endif %}
                 </tr>
@@ -34,7 +34,7 @@
                             "Administrateur" : "Utilisateur"
                             }}</td>
                         {% if (app.user) and (app.user.roles|join) is same as
-                            ("ROLE_ADMIN")) %}
+                            "ROLE_ADMIN" %}
                         <td>
                             <a href="{{ path('user_edit', {'id' : user.id}) }}" class="btn btn-success btn-sm">Edit</a>
                         </td>

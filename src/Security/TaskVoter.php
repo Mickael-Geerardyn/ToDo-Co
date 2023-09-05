@@ -40,6 +40,7 @@ class TaskVoter extends Voter
 		/** @var Task $task */
 		$task = $subject;
 
+
 		return match ($authenticatedUserRole) {
 			self::ROLE_ADMIN => $this->canDeleteOwnOrAnonymousTask($task, $user),
 			self::ROLE_USER => $this->canDeleteOnlyByOwner($task, $user),
@@ -49,7 +50,7 @@ class TaskVoter extends Voter
 
 	public function canDeleteOwnOrAnonymousTask(Task $task, User $user): bool
 	{
-		if(empty($task->getUser()) && implode($user->getRoles()) === self::ROLE_ADMIN)
+		if(empty($task->getUser()))
 		{
 			return true;
 		}
@@ -64,10 +65,12 @@ class TaskVoter extends Voter
 
 	public function canDeleteOnlyByOwner(Task $task, User $user): bool
 	{
-		if($task->getUser() !== $user)
+
+		if($task->getUser()->getId() !== $user->getId())
 		{
 			return false;
 		}
+
 		return true;
 	}
 }

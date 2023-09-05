@@ -22,11 +22,13 @@ class TaskControllerTest extends WebTestCase
 	private User $user;
 	private Router $urlGenerator;
 	private TaskVoter $taskVoter;
-	private const TASK_ID = 13;
+	private const TASK_ID = 31;
 	public function setUp() : void
 
 	{
 		$this->client = static::createClient();
+
+		$this->client->followRedirects();
 
 		$this->userRepository = $this->client->getContainer()->get("doctrine.orm.entity_manager")->getRepository
 		(User::class);
@@ -44,7 +46,8 @@ class TaskControllerTest extends WebTestCase
 	{
 		$task = $this->taskRepository->findOneBy(["id" => self::TASK_ID]);
 
-		$token = new UsernamePasswordToken($this->user,  'credentials', 'memory');
+		$token = new UsernamePasswordToken($this->user,  'main', ['memory']);
+
 		$decisionManager = $this->client->getContainer()->get('security.access.decision_manager');
 
 		$decision = $decisionManager->decide($token, $this->user->getRoles(), $task);
@@ -54,8 +57,6 @@ class TaskControllerTest extends WebTestCase
 		$crawler = $this->client->request(Request::METHOD_DELETE, $this->urlGenerator->generate('task_delete', [
 			"id" => self::TASK_ID
 		]));
-
-		$this->client->followRedirect();
 
 		$this->assertResponseStatusCodeSame(Response::HTTP_NO_CONTENT);
 	}
