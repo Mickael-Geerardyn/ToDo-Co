@@ -15,9 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TaskController extends AbstractController
 {
-	private const HTTP_STATUS_OK = 200;
-	private const HTTP_STATUS_CREATE = 201;
-	private const HTTP_STATUS_NO_CONTENT = 204;
 	private const HTTP_STATUS_FORBIDDEN = 403;
     public function __construct(
       private readonly EntityManagerInterface $entityManager,
@@ -29,7 +26,7 @@ class TaskController extends AbstractController
     }
 
 	#[Route(path: "/tasks", name: "task_list")]
-    public function showTasks(): Response
+    public function getTasks(): Response
 	{
         return $this->render('task/list.html.twig', ['tasks' => $this->taskRepository->findAll()]);
     }
@@ -38,13 +35,12 @@ class TaskController extends AbstractController
     public function createTasks(): Response|RedirectResponse
     {
         $task = new Task();
+		$task->setUser($this->getUser());
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($this->requestStack->getCurrentRequest());
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-			$this->getUser() ? $task->setUser($this->getUser()) : null;
 
             $this->entityManager->persist($task);
             $this->entityManager->flush();
@@ -57,7 +53,7 @@ class TaskController extends AbstractController
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
 
-	#[Route(path: "/tasks/{id}/edit", name: "task_edit", requirements: ["id" => "\d+"], methods: ["GET", "POST"])]
+	#[Route(path: "/tasks/{id}/edit", name: "task_edit", requirements: ["id" => "\d+"], methods: ["GET", "POST", "PATCH", "PUT"])]
     public function editTasks(Task $task): Response|RedirectResponse
     {
         $form = $this->createForm(TaskType::class, $task);

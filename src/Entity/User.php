@@ -29,6 +29,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $username;
 
 	#[ORM\Column(type: Types::STRING, length: 64)]
+	#[Assert\NotBlank(message: 'Veuillez entrer un mot de passe valide', groups: ["Registration"])]
+	#[Assert\Length(min: 6, max: 64, minMessage: 'Votre mot de passe doit contenir au minimum 6 caractères',
+		groups: ["Registration"])]
     private string $password;
 
 	#[ORM\Column(type: Types::STRING, length: 60, unique: true)]
@@ -40,7 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $tasks;
 
 	#[ORM\Column(type: "json")]
-	private array $roles = [];
+	private string|array $roles;
 
     public function __construct()
     {
@@ -87,19 +90,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->email = $email;
     }
 
-	public function getRoles(): array
+	public function getRoles(): string|array
 	{
-		$roles = $this->roles;
-		// guarantee every user at least has ROLE_USER
-		if($roles === [])
+		$roles[] = $this->roles;
+
+		if(!$roles)
 		{
-			$roles[] = 'ROLE_USER';
+			$roles = ["ROLE_USER"];
 		}
+
 
 		return array_unique($roles);
 	}
 
-	public function setRoles(array $roles): self
+	public function setRoles(string $roles): self
 	{
 		$this->roles = $roles;
 

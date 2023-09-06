@@ -30,7 +30,7 @@
                         <th scope="row">{{ loop.index }}</th>
                         <td>{{ user.username }}</td>
                         <td>{{ user.email }}</td>
-                        <td>{{ (user.getRoles|join) is same as "ROLE_ADMIN" ?
+                        <td>{{ (user.roles|join) is same as "ROLE_ADMIN" ?
                             "Administrateur" : "Utilisateur"
                             }}</td>
                         {% if (app.user) and (app.user.roles|join) is same as

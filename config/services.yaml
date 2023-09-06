@@ -21,6 +21,9 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Security\UserVoter:
+        tags:
+            - { name: 'security.voter', priority: 300 }
     App\Security\TaskVoter:
         tags:
             - { name: 'security.voter', priority: 300 }

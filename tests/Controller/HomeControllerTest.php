@@ -20,5 +20,6 @@ class HomeControllerTest extends WebTestCase
 		$urlGenerator = $this->client->getContainer()->get('router.default');
 
 		$this->client->request(Request::METHOD_GET, $urlGenerator->generate('home_page'));
+		$this->assertResponseIsSuccessful();
     }
 }

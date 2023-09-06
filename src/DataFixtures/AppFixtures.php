@@ -15,7 +15,7 @@ class AppFixtures extends Fixture
 		[
 			["email" => "contact@mickael-geerardyn.com", "name" => "Mickaël", "password" => "password", "role" => "ROLE_ADMIN"],
 			["email" => "kelly.l@gmail.com", "name" => "Kelly", "password" => "password", "role" => "ROLE_USER"],
-			["email" => "freddy.g@gmail.com", "name" => "Freddy", "password" => "password", "role" => "ROLE_USER"]
+			["email" => "freddy.g@gmail.com", "name" => "Freddy", "password" => "password", "role" => "ROLE_USER"],
 		];
 	private array $objectUsersArray;
 
@@ -41,7 +41,7 @@ class AppFixtures extends Fixture
 			$user1->setUsername($user["name"]);
 			$user1->setEmail($user["email"]);
 			$user1->setPassword($this->userPasswordHasher->hashPassword($user1, $user["password"]));
-			$user1->setRoles([$user["role"]]);
+			$user1->setRoles($user["role"]);
 
 			$this->objectUsersArray[] = $user1;
 

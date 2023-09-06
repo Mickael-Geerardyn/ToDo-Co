@@ -19,37 +19,39 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+	{
         $builder
-            ->add('username', TextType::class, ['label' => "Nom d'utilisateur"])
-            ->add('plainPassword', RepeatedType::class, [
+            ->add('username', TextType::class, [
+				'label' => "Nom d'utilisateur",
+				'attr' => ['class' => 'form-control']
+			])
+            ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les deux mots de passe doivent correspondre.',
-                'required' => true,
-				'mapped' => false,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Tapez le mot de passe à nouveau'],
-				'constraints' => [
-					new NotBlank([
-									 'message' => 'Veuillez entrer un mot de passe valide',
-								 ]),
-					new Length([
-								   'min' => 6,
-								   'minMessage' => 'Votre mot de passe doit contenir au minimum {{ limit }} caractères',
-								   // max length allowed by Symfony for security reasons
-								   'max' => 4096,
-							   ]),
+				'required' => $options['is_create'],
+				'mapped' => $options['is_create'],
+                'first_options'  => [
+					'label' => 'Mot de passe',
+					'attr' => ['class' => 'form-control']
+					],
+                'second_options' => [
+					'label' => 'Tapez le mot de passe à nouveau',
+					'attr' => ['class' => 'form-control']
 				],
             ])
-            ->add('email', EmailType::class, ['label' => 'Adresse email'])
+            ->add('email', EmailType::class, [
+				'label' => 'Adresse email',
+				'attr' => ['class' => 'form-control']
+			])
 			->add('roles', ChoiceType::class, [
 				'choices'  => [
-					'Utilisateur'  => 'ROLE_USER',
-					'Administrateur' => 'ROLE_ADMIN'
+					'Administrateur' => 'ROLE_ADMIN',
+					'Utilisateur'  => 'ROLE_USER'
 				],
 				'expanded' => true,
-				'mapped' => false
+				'mapped' => false,
+				'required' => true,
 				])
         ;
     }
@@ -57,7 +59,8 @@ class UserType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver): void
 	{
 		$resolver->setDefaults([
-								   'data_class' => User::class,
+			'data_class' => User::class,
+			"is_create" => false
 							   ]);
 	}
 }

@@ -37,7 +37,10 @@ class UserController extends AbstractController
     public function createUser(): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, [
+			'validation_groups' => ['Registration'],
+			'is_create' => true
+		]);
 
         $form->handleRequest($this->requestStack->getCurrentRequest());
 
@@ -46,12 +49,11 @@ class UserController extends AbstractController
 			$user->setPassword(
 				$this->passwordHasher->hashPassword(
 					$user,
-					$form->get('plainPassword')->getData()
+					$form->get('password')->getData()
 				),
 			);
 
-			$selectedRole[] = $form->get("roles")->getData();
-			$user->setRoles($selectedRole);
+			$user->setRoles($form->get("roles")->getData());
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();
@@ -65,7 +67,6 @@ class UserController extends AbstractController
     }
 
 
-
 	#[Route("/users/{id}/edit", name: "user_edit", methods: ["GET", "PATCH", "POST"])]
     public function editUser(User $user): Response
     {
@@ -76,28 +77,38 @@ class UserController extends AbstractController
 		{
 			$this->addFlash('error','Vous ne pouvez pas éditer les utilisateurs');
 
-			return $this->redirectToRoute('home_page', status: self::HTTP_STATUS_FORBIDDEN);
+			return $this->redirectToRoute('home_page');
 		}
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, [
+			'is_create' => false
+		]);
 
         $form->handleRequest($this->requestStack->getCurrentRequest());
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-			$user->setPassword(
-				$this->passwordHasher->hashPassword(
-					$user,
-					$form->get('plainPassword')->getData()
-				),
-			);
+			if($form->get('password')->getData())
+			{
+				$user->setPassword(
+					$this->passwordHasher->hashPassword(
+						$user,
+						$form->get('password')->getData()
+					),
+				);
+			}
+
+			if($form->get("roles")->getData() !== implode($user->getRoles()))
+			{
+				$user->setRoles($form->get("roles")->getData());
+			}
 
             $this->entityManager->persist($user);
 			$this->entityManager->flush();
 
             $this->addFlash('success', "L'utilisateur a bien été modifié");
 
-            return $this->redirectToRoute('user_list', status: self::HTTP_STATUS_OK);
+            return $this->redirectToRoute('user_list');
         }
 
         return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);

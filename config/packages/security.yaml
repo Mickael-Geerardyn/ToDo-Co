@@ -37,7 +37,10 @@ security:
             # ROLE_ADMIN and owner can delete these task (no matter the ROLE,
             # only his own task)
          - { path: ^/tasks/(\d+)/delete, roles: [IS_AUTHENTICATED_FULLY], methods: [DELETE] }
-         - { path: ^/tasks/(create|(\d+)/edit), roles: [IS_AUTHENTICATED_FULLY, ROLE_USER], methods: [GET, POST, PUT] }
+         - { path: ^/tasks/(create|(\d+)/edit), roles:
+           [IS_AUTHENTICATED_FULLY, ROLE_USER, ROLE_ADMIN], methods: [GET,
+                                                                      POST,
+                                                                PUT] }
          - { path: ^/users/(\d+)/edit, roles: [ROLE_ADMIN], methods: [GET, PUT, PATCH] }
         # - { path: ^/profile, roles: ROLE_USER }
 
