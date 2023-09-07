@@ -52,7 +52,6 @@ class AppFixtures extends Fixture
 	public function loadTask(ObjectManager $manager): void
 	{
 		$lengthUserArray = count($this->objectUsersArray) -1;
-		$imageNumber = 0;
 
 		for($i = 0; $i < 60; $i++)
 		{

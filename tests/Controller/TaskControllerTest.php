@@ -81,8 +81,10 @@ class TaskControllerTest extends WebTestCase
 
 		// Select the form with the button name and fill datas in the fiels
 		$form = $crawler->selectButton("Modifier")->form();
-		$form["task[title]"] = "Tâche de test pour la modification";
-		$form["task[content]"] = "Contenu de la tâche de test pour la modification";
+		$form->setValues([
+			"task[title]" => "Tâche de test pour la création",
+			"task[content]" => "Contenu de la tâche de test pour la création"
+						 ]);
 
 		$this->client->submit($form);
 		echo $this->client->getResponse()->getContent();
@@ -95,8 +97,10 @@ class TaskControllerTest extends WebTestCase
 
 		$form = $crawler->selectButton("Ajouter")->form();
 		//Add this "task[title]" in $form[] because "task[title]" is the name in the rendered field form name
-		$form["task[title]"] = "Tâche de test pour la création";
-		$form["task[content]"] = "Contenu de la tâche de test pour la création";
+		$form->setValues([
+			"task[title]" => "Tâche de test pour la création",
+			"task[content]" => "Contenu de la tâche de test pour la création"
+						 ]);
 
 		//The logged-in user is automatically added to the task in the controller.
 		//If not logged in, access to the creation page is redirected to the login page.

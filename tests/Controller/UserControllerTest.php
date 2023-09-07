@@ -34,8 +34,6 @@ class UserControllerTest extends WebTestCase
 
 		$this->client->followRedirects();
 
-		$this->decisionManager = $this->client->getContainer()->get('security.access.decision_manager');
-
 		$this->newUser = new User();
 
 		$this->userRepository = $this->client->getContainer()->get("doctrine.orm.entity_manager")->getRepository
@@ -52,11 +50,13 @@ class UserControllerTest extends WebTestCase
 
 	public function testGetUsers()
 	{
+		$this->client->loginUser($this->user);
+
 		$this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_list', [
 			'users' => $this->userRepository->findAll()
 		]));
 
-		$this->assertResponseRedirects($this->urlGenerator->generate('user_list'), 200);
+		$this->assertResponseIsSuccessful();
 		$this->client->followRedirect();
 	}
 
@@ -80,7 +80,7 @@ class UserControllerTest extends WebTestCase
 		//If not logged in, access to the creation page is redirected to the login page.
 
 		$this->client->submit($form);
-		$this->assertResponseRedirects($this->urlGenerator->generate('user_list'));
+		$this->assertResponseRedirects($this->urlGenerator->generate('user_list'), 302);
 		$this->client->followRedirect();
 	}
 
@@ -102,7 +102,9 @@ class UserControllerTest extends WebTestCase
 
 		$token = new UsernamePasswordToken($this->user, 'main', ['memory']);
 
-		$decision = $this->decisionManager->decide($token, $this->user->getRoles(), $user);
+		$decisionManager = $this->client->getContainer()->get('security.access.decision_manager');
+
+		$decision = $decisionManager->decide($token, $this->user->getRoles(), $user);
 
 		$this->assertFalse($decision);
 
@@ -122,7 +124,9 @@ class UserControllerTest extends WebTestCase
 
 		$token = new UsernamePasswordToken($this->admin, 'main', ['memory']);
 
-		$decision = $this->decisionManager->decide($token, $this->admin->getRoles(), $user);
+		$decisionManager = $this->client->getContainer()->get('security.access.decision_manager');
+
+		$decision = $decisionManager->decide($token, $this->admin->getRoles(), $user);
 
 		$this->assertTrue($decision);
 

@@ -3,9 +3,9 @@ PHPUnit 10.3.2 by Sebastian Bergmann and contributors.
 Runtime:       PHP 8.1.22
 Configuration: /var/www/openclassrooms/projet8/projet8-TodoList/phpunit.xml.dist
 
-F                                                                   1 / 1 (100%)
+EE                                                                  2 / 2 (100%)
 
-Time: 00:00.076, Memory: 24.00 MB
+Time: 00:00.009, Memory: 10.00 MB
 
 There was 1 PHPUnit test runner warning:
 
@@ -13,13 +13,21 @@ There was 1 PHPUnit test runner warning:
 
 --
 
-There was 1 failure:
+There were 2 errors:
 
-1) Tests\Controller\TaskControllerTest::testDeleteTaskAction
-Failed asserting that false is true.
+1) Tests\Entity\TaskTest::testGetId
+Error: Typed property App\Entity\Task::$id must not be accessed before initialization
 
-/var/www/openclassrooms/projet8/projet8-TodoList/tests/Controller/TaskControllerTest.php:66
+/var/www/openclassrooms/projet8/projet8-TodoList/src/Entity/Task.php:47
+/var/www/openclassrooms/projet8/projet8-TodoList/tests/Entity/TaskTest.php:18
 /var/www/openclassrooms/projet8/projet8-TodoList/vendor/bin/phpunit:127
 
-FAILURES!
-Tests: 1, Assertions: 1, Failures: 1, Warnings: 1.
+2) Tests\Entity\UserTest::testGetId
+TypeError: App\Entity\User::getId(): Return value must be of type int, null returned
+
+/var/www/openclassrooms/projet8/projet8-TodoList/src/Entity/User.php:55
+/var/www/openclassrooms/projet8/projet8-TodoList/tests/Entity/UserTest.php:14
+/var/www/openclassrooms/projet8/projet8-TodoList/vendor/bin/phpunit:127
+
+ERRORS!
+Tests: 2, Assertions: 0, Errors: 2, Warnings: 1.

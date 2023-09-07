@@ -35,6 +35,10 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="unit_tests" />
+                    <option name="lastUsedInstant" value="1694041801" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="initial_project" />
                     <option name="lastUsedInstant" value="1693935146" />
                   </RecentBranch>
@@ -49,10 +53,6 @@
                   <RecentBranch>
                     <option name="branchName" value="update-tests" />
                     <option name="lastUsedInstant" value="1693506326" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="delete-files-config" />
-                    <option name="lastUsedInstant" value="1693506285" />
                   </RecentBranch>
                 </list>
               </option>
@@ -283,7 +283,7 @@
       <workItem from="1693750232391" duration="26217000" />
       <workItem from="1693836365455" duration="36316000" />
       <workItem from="1693917777603" duration="33124000" />
-      <workItem from="1694008340046" duration="28336000" />
+      <workItem from="1694008340046" duration="36191000" />
     </task>
     <servers />
   </component>
