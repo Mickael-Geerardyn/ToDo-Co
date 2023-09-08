@@ -8,6 +8,9 @@ namespace App\Controller;
 
 	class HomeController extends AbstractController
 	{
+		/**
+		 * @return Response
+		 */
 		#[Route(path: "/", name: "home_page")]
   		public function getHomePage(): Response
 		{

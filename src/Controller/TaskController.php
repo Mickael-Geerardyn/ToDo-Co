@@ -25,12 +25,18 @@ class TaskController extends AbstractController
     {
     }
 
+	/**
+	 * @return Response
+	 */
 	#[Route(path: "/tasks", name: "task_list")]
     public function getTasks(): Response
 	{
         return $this->render('task/list.html.twig', ['tasks' => $this->taskRepository->findAll()]);
     }
 
+	/**
+	 * @return Response|RedirectResponse
+	 */
 	#[Route(path: "/tasks/create", name: "task_create", methods: ["GET", "POST"])]
     public function createTasks(): Response|RedirectResponse
     {
@@ -40,7 +46,7 @@ class TaskController extends AbstractController
 
         $form->handleRequest($this->requestStack->getCurrentRequest());
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() === true) {
 
             $this->entityManager->persist($task);
             $this->entityManager->flush();
@@ -53,6 +59,11 @@ class TaskController extends AbstractController
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
 
+	/**
+	 * @param Task $task
+	 *
+	 * @return Response|RedirectResponse
+	 */
 	#[Route(path: "/tasks/{id}/edit", name: "task_edit", requirements: ["id" => "\d+"], methods: ["GET", "POST", "PATCH", "PUT"])]
     public function editTasks(Task $task): Response|RedirectResponse
     {
@@ -60,7 +71,7 @@ class TaskController extends AbstractController
 
         $form->handleRequest($this->requestStack->getCurrentRequest());
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() === true) {
 
             $this->entityManager->flush();
 
@@ -75,6 +86,11 @@ class TaskController extends AbstractController
         ]);
     }
 
+	/**
+	 * @param Task $task
+	 *
+	 * @return RedirectResponse
+	 */
 	#[Route(path: "/tasks/{id}/toggle", name: "task_toggle", requirements: ["id" => "\d+"], methods: ["GET"])]
     public function toggleTaskAction(Task $task): RedirectResponse
     {
@@ -87,6 +103,11 @@ class TaskController extends AbstractController
     }
 
 
+	/**
+	 * @param Task $task
+	 *
+	 * @return RedirectResponse
+	 */
 	#[Route(path: "/tasks/{id}/delete", name: "task_delete")]
     public function deleteTaskAction(Task $task): RedirectResponse
     {

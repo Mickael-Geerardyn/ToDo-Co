@@ -27,12 +27,20 @@ class UserController extends AbstractController
  {
  }
 
+	/**
+	 * @param UserRepository $userRepository
+	 *
+	 * @return Response
+	 */
 	#[Route("/users", name: "user_list", methods: ["GET"])]
     public function getUsers(UserRepository $userRepository): Response
     {
         return $this->render('user/list.html.twig', ['users' => $userRepository->findAll()]);
     }
 
+	/**
+	 * @return Response
+	 */
 	#[Route("users/create", name: "user_create", methods: ["GET", "POST"])]
     public function createUser(): Response
     {
@@ -44,7 +52,7 @@ class UserController extends AbstractController
 
         $form->handleRequest($this->requestStack->getCurrentRequest());
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() === true) {
 
 			$user->setPassword(
 				$this->passwordHasher->hashPassword(
@@ -67,6 +75,11 @@ class UserController extends AbstractController
     }
 
 
+	/**
+	 * @param User $user
+	 *
+	 * @return Response
+	 */
 	#[Route("/users/{id}/edit", name: "user_edit", methods: ["GET", "PATCH", "POST"])]
     public function editUser(User $user): Response
     {
@@ -86,7 +99,7 @@ class UserController extends AbstractController
 
         $form->handleRequest($this->requestStack->getCurrentRequest());
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() === true) {
 
 			if($form->get('password')->getData())
 			{

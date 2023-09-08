@@ -10,7 +10,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+	/**
+	 * @var Task
+	 */
 	private Task $task;
+
+	/**
+	 * @var array|array[]
+	 */
 	private array $users =
 		[
 			["email" => "contact@mickael-geerardyn.com", "name" => "Mickaël", "password" => "password", "role" => "ROLE_ADMIN"],
@@ -19,12 +26,21 @@ class AppFixtures extends Fixture
 		];
 	private array $objectUsersArray;
 
+	/**
+	 * @param UserPasswordHasherInterface $userPasswordHasher
+	 */
 	public function __construct(
 		private readonly UserPasswordHasherInterface $userPasswordHasher
 	)
 	{
 		$this->objectUsersArray = array();
 	}
+
+	/**
+	 * @param ObjectManager $manager
+	 *
+	 * @return void
+	 */
     public function load(ObjectManager $manager): void
     {
 		self::loadUser($manager);
@@ -33,10 +49,14 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 
+	/**
+	 * @param ObjectManager $manager
+	 *
+	 * @return void
+	 */
 	public function loadUser(ObjectManager $manager): void
 	{
-		foreach($this->users as $user)
-		{
+		foreach($this->users as $user) {
 			$user1 = new User();
 			$user1->setUsername($user["name"]);
 			$user1->setEmail($user["email"]);
@@ -49,6 +69,11 @@ class AppFixtures extends Fixture
 		}
 	}
 
+	/**
+	 * @param ObjectManager $manager
+	 *
+	 * @return void
+	 */
 	public function loadTask(ObjectManager $manager): void
 	{
 		$lengthUserArray = count($this->objectUsersArray) -1;

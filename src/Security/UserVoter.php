@@ -16,7 +16,7 @@ class UserVoter extends Voter
 			return false;
 		}
 
-		if (!$subject instanceof User) {
+		if ($subject instanceof User === false) {
 			return false;
 		}
 
@@ -27,7 +27,7 @@ class UserVoter extends Voter
 	{
 		$authenticatedUser = $token->getUser();
 
-		if (!$authenticatedUser instanceof User) {
+		if ($authenticatedUser instanceof User === false) {
 
 			return false;
 		}
