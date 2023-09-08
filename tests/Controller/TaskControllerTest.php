@@ -94,6 +94,8 @@ class TaskControllerTest extends WebTestCase
 	{
 		// Same to edit, first, call the page web form
 		$crawler =  $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('task_create'));
+		$this->assertResponseIsSuccessful();
+		$this->assertSelectorExists('form');
 
 		$form = $crawler->selectButton("Ajouter")->form();
 		//Add this "task[title]" in $form[] because "task[title]" is the name in the rendered field form name
@@ -108,7 +110,7 @@ class TaskControllerTest extends WebTestCase
 		$this->client->submit($form);
 		$this->assertResponseRedirects($this->urlGenerator->generate('user_create'));
 		$this->assertSelectorTextContains('div.alert.alert-success', "Votre compte vient d'être créer avec succès");
-		echo $this->client->getResponse()->getContent();
+		$this->client->followRedirect();
 	}
 
 }

@@ -42,9 +42,9 @@ class Task
         $this->createdAt = new Datetime();
     }
 
-    public function getId(): int
+    public function getId(): int|null
     {
-        return $this->id;
+		return $this->id;
     }
 
     public function getCreatedAt(): Datetime

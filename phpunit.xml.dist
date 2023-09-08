@@ -10,6 +10,7 @@
             ignoreDeprecatedCodeUnits="true"
             disableCodeCoverageIgnore="true">
     <report>
+      <clover outputFile="clover.xml"/>
       <html outputDirectory="public/resultTest"/>
       <php outputFile="php://stdout"/>
     </report>
@@ -28,6 +29,9 @@
       <directory>tests</directory>
     </testsuite>
   </testsuites>
-  <logging/>
-  <source/>
+  <source>
+    <include>
+      <directory suffix=".php">src</directory>
+    </include>
+  </source>
 </phpunit>

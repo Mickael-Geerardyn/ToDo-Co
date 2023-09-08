@@ -70,10 +70,10 @@ class UserControllerTest extends WebTestCase
 		$form = $crawler->selectButton("Ajouter")->form();
 
 		//Add this "user[username]" in $form[] because "user[username]" is the name in the rendered field form name
-		$form["user[username]"] = "phpUnit5";
+		$form["user[username]"] = "phpUnit6";
 		$form["user[password][first]"] = "password";
 		$form["user[password][second]"] = "password";
-		$form["user[email]"] = "phpunit5@gmail.com";
+		$form["user[email]"] = "phpunit6@gmail.com";
 		$form["user[roles]"] = "ROLE_ADMIN";
 
 		//The logged-in user is automatically added to the task in the controller.

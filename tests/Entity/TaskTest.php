@@ -7,15 +7,13 @@ use App\Repository\TaskRepository;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use App\Entity\Task;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class TaskTest extends TestCase
 {
 	public function testGetId()
 	{
-
 		$task = new Task();
-		$this->assertEquals(null, $task->getId());
+		$this->assertNull($task->getId());
 	}
 
 	public function testGetSetTitle()
@@ -43,7 +41,7 @@ class TaskTest extends TestCase
 	{
 		$task = new Task();
 		$task->setIsDone(true);
-		$this->assertEquals(true, $task->isDone());
+		$this->assertTrue($task->isDone());
 	}
 
 	public function testGetSetAuthor()

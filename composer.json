@@ -85,6 +85,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "phpunit/php-code-coverage": "^10.1",
         "phpunit/phpunit": "^10.3",
         "rector/rector": "*",
         "symfony/maker-bundle": "*",
