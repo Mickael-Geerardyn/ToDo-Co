@@ -4,35 +4,52 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use App\Repository\TaskRepository;
+use App\Security\TaskVoter;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-class TaskController extends Controller
+class TaskController extends AbstractController
 {
-    /**
-     * @Route("/tasks", name="task_list")
-     */
-    public function listAction()
+	private const HTTP_STATUS_FORBIDDEN = 403;
+    public function __construct(
+      private readonly EntityManagerInterface $entityManager,
+	  private readonly RequestStack $requestStack,
+	  private readonly TaskRepository $taskRepository,
+	  private readonly TaskVoter $taskVoter
+    )
     {
-        return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository('AppBundle:Task')->findAll()]);
     }
 
-    /**
-     * @Route("/tasks/create", name="task_create")
-     */
-    public function createAction(Request $request)
+	/**
+	 * @return Response
+	 */
+	#[Route(path: "/tasks", name: "task_list")]
+    public function getTasks(): Response
+	{
+        return $this->render('task/list.html.twig', ['tasks' => $this->taskRepository->findAll()]);
+    }
+
+	/**
+	 * @return Response|RedirectResponse
+	 */
+	#[Route(path: "/tasks/create", name: "task_create", methods: ["GET", "POST"])]
+    public function createTasks(): Response|RedirectResponse
     {
         $task = new Task();
+		$task->setUser($this->getUser());
         $form = $this->createForm(TaskType::class, $task);
 
-        $form->handleRequest($request);
+        $form->handleRequest($this->requestStack->getCurrentRequest());
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        if ($form->isSubmitted() && $form->isValid() === true) {
 
-            $em->persist($task);
-            $em->flush();
+            $this->entityManager->persist($task);
+            $this->entityManager->flush();
 
             $this->addFlash('success', 'La tâche a été bien été ajoutée.');
 
@@ -42,17 +59,21 @@ class TaskController extends Controller
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/tasks/{id}/edit", name="task_edit")
-     */
-    public function editAction(Task $task, Request $request)
+	/**
+	 * @param Task $task
+	 *
+	 * @return Response|RedirectResponse
+	 */
+	#[Route(path: "/tasks/{id}/edit", name: "task_edit", requirements: ["id" => "\d+"], methods: ["GET", "POST", "PATCH", "PUT"])]
+    public function editTasks(Task $task): Response|RedirectResponse
     {
         $form = $this->createForm(TaskType::class, $task);
 
-        $form->handleRequest($request);
+        $form->handleRequest($this->requestStack->getCurrentRequest());
 
-        if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if ($form->isSubmitted() && $form->isValid() === true) {
+
+            $this->entityManager->flush();
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
 
@@ -65,27 +86,48 @@ class TaskController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/tasks/{id}/toggle", name="task_toggle")
-     */
-    public function toggleTaskAction(Task $task)
+	/**
+	 * @param Task $task
+	 *
+	 * @return RedirectResponse
+	 */
+	#[Route(path: "/tasks/{id}/toggle", name: "task_toggle", requirements: ["id" => "\d+"], methods: ["GET"])]
+    public function toggleTaskAction(Task $task): RedirectResponse
     {
         $task->toggle(!$task->isDone());
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->flush();
 
-        $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
+		if($task->isDone() === true){
+			$this->addFlash('success','La tâche '.$task->getTitle().' a bien été marquée comme terminée.');
+		}else {
+			$this->addFlash('success','La tâche '.$task->getTitle().' a bien été marquée comme non terminée.');
+		}
+
 
         return $this->redirectToRoute('task_list');
     }
 
-    /**
-     * @Route("/tasks/{id}/delete", name="task_delete")
-     */
-    public function deleteTaskAction(Task $task)
+
+	/**
+	 * @param Task $task
+	 *
+	 * @return RedirectResponse
+	 */
+	#[Route(path: "/tasks/{id}/delete", name: "task_delete")]
+    public function deleteTaskAction(Task $task): RedirectResponse
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($task);
-        $em->flush();
+		//Add this to check ROLE in user object. Both of USER and ADMIN role can delete a task but only own task for
+		// USER and anonymous task for ADMIN
+		// TaskVoter is called by denyAccessUnlessGranted method
+		if($this->denyAccessUnlessGranted($this->taskVoter::ROLE_USER, $task) === false)
+		{
+			$this->addFlash('error','Vous ne pouvez pas supprimer cette tâche');
+
+			return $this->redirectToRoute('task_list', status: self::HTTP_STATUS_FORBIDDEN);
+		}
+
+        $this->entityManager->remove($task);
+        $this->entityManager->flush();
 
         $this->addFlash('success', 'La tâche a bien été supprimée.');
 
