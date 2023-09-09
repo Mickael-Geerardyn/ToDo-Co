@@ -119,7 +119,7 @@ class TaskController extends AbstractController
 		//Add this to check ROLE in user object. Both of USER and ADMIN role can delete a task but only own task for
 		// USER and anonymous task for ADMIN
 		// TaskVoter is called by denyAccessUnlessGranted method
-		if($this->denyAccessUnlessGranted($this->taskVoter::ROLE_USER[0], $task) === false)
+		if($this->denyAccessUnlessGranted($this->taskVoter::ROLE_USER, $task) === false)
 		{
 			$this->addFlash('error','Vous ne pouvez pas supprimer cette tâche');
 

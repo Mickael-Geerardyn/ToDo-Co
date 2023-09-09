@@ -37,7 +37,7 @@ security:
     access_control:
         - { path: ^/users/(\d+)/edit}
         - { path: ^/users, role: [IS_AUTHENTICATED_FULLY], methods: [ GET ] }
-        - { path: ^/tasks/(\d+)/delete, roles: [IS_AUTHENTICATED_FULLY], methods: [DELETE] }
+        - { path: ^/tasks/(\d+)/delete, methods: [DELETE] }
         - { path: ^/tasks/(create|(\d+)/edit), roles: [IS_AUTHENTICATED_FULLY, ROLE_USER, ROLE_ADMIN], methods: [GET, POST, PUT] }
         # - { path: ^/profile, roles: ROLE_USER }
 
