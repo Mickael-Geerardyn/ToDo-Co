@@ -29,11 +29,13 @@
                             {% if not task.isDone %}Marquer comme faite{% else %}Marquer non terminée{% endif %}
                         </button>
                     </form>
+                    {% if app.user %}
                     <form action="{{ path('task_edit', {'id' : task.id }) }}">
                         <button class="btn btn-warning btn-sm pull-right">
                             Modifier la tâche
                         </button>
                     </form>
+                    {% endif %}
                 </div>
             </div>
         </div>

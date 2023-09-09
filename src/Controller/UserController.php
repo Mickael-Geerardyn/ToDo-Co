@@ -35,6 +35,13 @@ class UserController extends AbstractController
 	#[Route("/users", name: "user_list", methods: ["GET"])]
     public function getUsers(UserRepository $userRepository): Response
     {
+		if($this->denyAccessUnlessGranted(implode($this->getUser()->getRoles()), $this->getUser()) === false) {
+
+			$this->addFlash('error',"L'accès à cette page n'est pas autorisé");
+
+			return $this->redirectToRoute('app_login');
+		}
+
         return $this->render('user/list.html.twig', ['users' => $userRepository->findAll()]);
     }
 

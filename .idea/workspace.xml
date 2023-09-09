@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.phpunit.cache/test-results" beforeDir="false" afterPath="$PROJECT_DIR$/.phpunit.cache/test-results" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clover.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clover.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/resultTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/resultTest/AppBundle.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/AppBundle.php.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/resultTest/Controller/HomeController.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Controller/HomeController.php.html" afterDir="false" />
@@ -39,8 +40,11 @@
       <change beforePath="$PROJECT_DIR$/public/resultTest/Security/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Security/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/resultTest/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/resultTest/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Controller/HomeControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Controller/HomeControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Controller/TaskControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Controller/TaskControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/UserVoter.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/UserVoter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/task/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/task/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Controller/UserControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Controller/UserControllerTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -325,7 +329,8 @@
       <workItem from="1694008340046" duration="36191000" />
       <workItem from="1694090421727" duration="5187000" />
       <workItem from="1694185145099" duration="13171000" />
-      <workItem from="1694208594312" duration="14176000" />
+      <workItem from="1694208594312" duration="14444000" />
+      <workItem from="1694266427727" duration="3434000" />
     </task>
     <servers />
   </component>

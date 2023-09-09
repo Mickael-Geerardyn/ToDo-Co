@@ -32,8 +32,6 @@ class UserControllerTest extends WebTestCase
 	{
 		$this->client = static::createClient();
 
-		$this->client->followRedirects();
-
 		$this->newUser = new User();
 
 		$this->userRepository = $this->client->getContainer()->get("doctrine.orm.entity_manager")->getRepository
@@ -50,6 +48,15 @@ class UserControllerTest extends WebTestCase
 
 	public function testGetUsers()
 	{
+		//Anonymous user cannot visit
+		$this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_list', [
+			'users' => $this->userRepository->findAll()
+		]));
+
+		$this->assertResponseRedirects($this->urlGenerator->generate('app_login'), 302);
+		$this->client->followRedirect();
+
+		// User logged in can visit
 		$this->client->loginUser($this->user);
 
 		$this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_list', [

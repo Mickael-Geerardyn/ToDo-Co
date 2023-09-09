@@ -8,11 +8,11 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class UserVoter extends Voter
 {
-	const ROLE_ADMIN = "ROLE_ADMIN";
+	const USER_ROLES = ["ROLE_ADMIN", "ROLE_USER"];
 
 	protected function supports(string $attribute, $subject): bool
 	{
-		if ($attribute !== self::ROLE_ADMIN) {
+		if (in_array($attribute, self::USER_ROLES) === false) {
 			return false;
 		}
 
@@ -35,17 +35,17 @@ class UserVoter extends Voter
 		/** @var User $user */
 		$userObjectToEdit = $subject;
 
-		if ($attribute !== self::ROLE_ADMIN) {
+		if (in_array($attribute, self::USER_ROLES) === true) {
 
-			return false;
+			return $this->canEditUser($userObjectToEdit, $authenticatedUser);
 		}
 
-		return $this->canEditUser($userObjectToEdit, $authenticatedUser);
+		return false;
 	}
 
 	public function canEditUser(User $authenticatedUser): bool
 	{
-		if(implode($authenticatedUser->getRoles()) !== self::ROLE_ADMIN)
+		if(implode($authenticatedUser->getRoles()) !== self::USER_ROLES[0])
 		{
 			return false;
 		}
