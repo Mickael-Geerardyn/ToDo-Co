@@ -26,8 +26,11 @@ class UserVoter extends Voter
 	protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
 	{
 		$authenticatedUser = $token->getUser();
+		dump($authenticatedUser->getRoles());
+		dump($authenticatedUser->getEmail());
 
 		if ($authenticatedUser instanceof User === false) {
+
 
 			return false;
 		}
@@ -37,7 +40,7 @@ class UserVoter extends Voter
 
 		if (in_array($attribute, self::USER_ROLES) === true) {
 
-			return $this->canEditUser($userObjectToEdit, $authenticatedUser);
+			return $this->canEditUser($authenticatedUser);
 		}
 
 		return false;
@@ -45,6 +48,7 @@ class UserVoter extends Voter
 
 	public function canEditUser(User $authenticatedUser): bool
 	{
+
 		if(implode($authenticatedUser->getRoles()) !== self::USER_ROLES[0])
 		{
 			return false;

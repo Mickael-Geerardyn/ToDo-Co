@@ -41,7 +41,7 @@ class UserControllerTest extends WebTestCase
 
 		$this->user = $this->userRepository->findOneBy(["email" => "kelly.l@gmail.com"]);
 
-		$this->admin = $this->userRepository->findOneBy(["id" => 1]);
+		$this->admin = $this->userRepository->findOneBy(["email" => "contact@mickael-geerardyn.com"]);
 
 		$this->urlGenerator = $this->client->getContainer()->get('router.default');
 	}
@@ -69,6 +69,7 @@ class UserControllerTest extends WebTestCase
 
 	public function testCreateUser()
 	{
+		$this->client->loginUser($this->user);
 		// Same to edit, first, call the page web form
 		$crawler =  $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_create'));
 		$this->assertResponseIsSuccessful();
@@ -87,8 +88,9 @@ class UserControllerTest extends WebTestCase
 		//If not logged in, access to the creation page is redirected to the login page.
 
 		$this->client->submit($form);
-		$this->assertResponseRedirects($this->urlGenerator->generate('user_list'), 302);
+		$this->assertResponseRedirects($this->urlGenerator->generate('user_list'), 201);
 		$this->client->followRedirect();
+		$this->assertSelectorTextContains('div.alert.alert-success', "L'utilisateur a bien été ajouté.");
 	}
 
 	public function testEditUserWithoutLogin()
@@ -147,6 +149,7 @@ class UserControllerTest extends WebTestCase
 		$this->assertResponseIsSuccessful();
 		$this->assertSelectorExists('form');
 
+		dd("Je suis ici");
 		$form = $crawler->selectButton("Modifier")->form();
 
 		//Add this "user[username]" in $form[] because "user[username]" is the name in the rendered field form name

@@ -35,13 +35,6 @@ class UserController extends AbstractController
 	#[Route("/users", name: "user_list", methods: ["GET"])]
     public function getUsers(UserRepository $userRepository): Response
     {
-		if($this->denyAccessUnlessGranted(implode($this->getUser()->getRoles()), $this->getUser()) === false) {
-
-			$this->addFlash('error',"L'accès à cette page n'est pas autorisé");
-
-			return $this->redirectToRoute('app_login');
-		}
-
         return $this->render('user/list.html.twig', ['users' => $userRepository->findAll()]);
     }
 
@@ -87,13 +80,13 @@ class UserController extends AbstractController
 	 *
 	 * @return Response
 	 */
-	#[Route("/users/{id}/edit", name: "user_edit", methods: ["GET", "PATCH", "POST"])]
+	#[Route("/users/{id}/edit", name: "user_edit", methods: ["GET", "PUT", "PATCH"])]
     public function editUser(User $user): Response
     {
 		//Add this to check ROLE in user object because only ADMIN_ROLE.
 		// security.yaml is not enough because if user enters the url manually, he can access to the editing page
 		// UserVoter is called by denyAccessUnlessGranted method
-		if($this->denyAccessUnlessGranted($this->userVoter::ROLE_ADMIN, $user) === false)
+		if($this->denyAccessUnlessGranted($this->userVoter::USER_ROLES, $user) === false)
 		{
 			$this->addFlash('error','Vous ne pouvez pas éditer les utilisateurs');
 
@@ -103,6 +96,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user, [
 			'is_create' => false
 		]);
+
 
         $form->handleRequest($this->requestStack->getCurrentRequest());
 
