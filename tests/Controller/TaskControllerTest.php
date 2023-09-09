@@ -63,11 +63,11 @@ class TaskControllerTest extends WebTestCase
 
 		$decision = $decisionManager->decide($token, $this->user->getRoles(), $task);
 
-		$this->assertTrue($decision);
-
 		$this->client->request(Request::METHOD_DELETE, $this->urlGenerator->generate('task_delete', [
 			"id" => self::TASK_ID
 		]));
+
+		$this->assertTrue($decision);
 
 		$this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 	}
