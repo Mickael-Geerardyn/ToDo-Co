@@ -29,17 +29,16 @@ security:
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
-
+    role_hierarchy:
+        ROLE_USER: ROLE_USER
+        ROLE_ADMIN: ROLE_ADMIN
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-            #TaskVoter check if user can delete the task (Anonymous task only by
-            # ROLE_ADMIN and owner can delete these task (no matter the ROLE,
-            # only his own task)
-         - { path: ^/tasks/(\d+)/delete, roles: [IS_AUTHENTICATED_FULLY], methods: [DELETE] }
-         - { path: ^/tasks/(create|(\d+)/edit), roles: [IS_AUTHENTICATED_FULLY, ROLE_USER, ROLE_ADMIN], methods: [GET, POST, PUT] }
-         - { path: ^/users, roles: [IS_AUTHENTICATED_FULLY], methods: [GET] }
-         - { path: ^/users/(\d+)/edit, roles: [IS_AUTHENTICATED_FULLY], methods: [GET, PUT, PATCH] }
+        - { path: ^/users/(\d+)/edit}
+        - { path: ^/users, role: [IS_AUTHENTICATED_FULLY], methods: [ GET ] }
+        - { path: ^/tasks/(\d+)/delete, roles: [IS_AUTHENTICATED_FULLY], methods: [DELETE] }
+        - { path: ^/tasks/(create|(\d+)/edit), roles: [IS_AUTHENTICATED_FULLY, ROLE_USER, ROLE_ADMIN], methods: [GET, POST, PUT] }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

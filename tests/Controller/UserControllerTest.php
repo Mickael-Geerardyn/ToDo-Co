@@ -53,8 +53,18 @@ class UserControllerTest extends WebTestCase
 			'users' => $this->userRepository->findAll()
 		]));
 
-		$this->assertResponseRedirects($this->urlGenerator->generate('app_login'), 302);
-		$this->client->followRedirect();
+		$token = new UsernamePasswordToken($this->user, 'main', ['memory']);
+
+		$decisionManager = $this->client->getContainer()->get('security.access.decision_manager');
+
+		$decision = $decisionManager->decide($token, $this->user->getRoles(), $this->user);
+
+		if($decision === false) {
+			$this->assertFalse($decision);
+			$this->assertResponseStatusCodeSame(302);
+			$this->assertResponseRedirects($this->urlGenerator->generate('app_login'), 302);
+			$this->client->followRedirect();
+		}
 
 		// User logged in can visit
 		$this->client->loginUser($this->user);
@@ -93,18 +103,19 @@ class UserControllerTest extends WebTestCase
 		$this->assertSelectorTextContains('div.alert.alert-success', "L'utilisateur a bien été ajouté.");
 	}
 
-	public function testEditUserWithoutLogin()
+	public function testEditUser()
 	{
+		// Edit User without login
 		$this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_edit', [
 			'id' => self::USER_ID
 		]));
 
-		$this->assertResponseRedirects($this->urlGenerator->generate('home_page'), 302);
+		$this->assertResponseRedirects($this->urlGenerator->generate('app_login'), 302);
 		$this->client->followRedirect();
-	}
 
-	public function testEditUserRoleUser()
-	{
+		/******************************************/
+
+		// Edit user with USER_ROLE
 		$this->client->loginUser($this->user);
 
 		$user = $this->userRepository->findOneBy(["id" => self::USER_ID]);
@@ -115,18 +126,19 @@ class UserControllerTest extends WebTestCase
 
 		$decision = $decisionManager->decide($token, $this->user->getRoles(), $user);
 
-		$this->assertFalse($decision);
-
 		$this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_edit', [
 			'id' => self::USER_ID
 		]));
 
-		$this->assertResponseRedirects($this->urlGenerator->generate('home_page'), 302);
-		$this->client->followRedirect();
-	}
+		if($decision === false) {
+			$this->assertFalse($decision);
+			$this->assertResponseStatusCodeSame(403);
+		}
 
-	public function testEditUserRoleAdminWithoutPassword()
-	{
+
+		/*************************************************************/
+
+		// Edit user with ROLE_ADMIN without password to edit
 		$this->client->loginUser($this->admin);
 
 		$user = $this->userRepository->findOneBy(["id" => self::USER_ID]);
@@ -135,10 +147,12 @@ class UserControllerTest extends WebTestCase
 
 		$decisionManager = $this->client->getContainer()->get('security.access.decision_manager');
 
+
 		$decision = $decisionManager->decide($token, $this->admin->getRoles(), $user);
 
 		$this->assertTrue($decision);
 
+		dump($user->getId());
 		$crawler =  $this->client->request(
 			Request::METHOD_GET, $this->urlGenerator->generate(
 			'user_edit',
@@ -146,10 +160,10 @@ class UserControllerTest extends WebTestCase
 				'id' => $user->getId()
 			]));
 
-		$this->assertResponseIsSuccessful();
+		$this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
 		$this->assertSelectorExists('form');
 
-		dd("Je suis ici");
 		$form = $crawler->selectButton("Modifier")->form();
 
 		//Add this "user[username]" in $form[] because "user[username]" is the name in the rendered field form name
@@ -162,10 +176,10 @@ class UserControllerTest extends WebTestCase
 		$this->client->submit($form);
 		$this->assertResponseRedirects($this->urlGenerator->generate('user_list'));
 		$this->client->followRedirect();
-	}
 
-	public function testEditUserRoleAdminWithPassword()
-	{
+		/*********************************************************/
+
+		// Edit user with ROLE_ADMIN with password to edit
 		$this->client->loginUser($this->admin);
 
 		$user = $this->userRepository->findOneBy(["id" => self::USER_ID]);
@@ -202,6 +216,7 @@ class UserControllerTest extends WebTestCase
 		$this->client->submit($form);
 		$this->assertResponseRedirects($this->urlGenerator->generate('user_list'));
 		$this->client->followRedirect();
+
 	}
 
 

@@ -8,13 +8,17 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class UserVoter extends Voter
 {
-	const USER_ROLES = ["ROLE_ADMIN", "ROLE_USER"];
+	const ROLE_ADMIN = "ROLE_ADMIN";
+	const ROLE_USER = "ROLE_USER";
+	const ARRAY_ROLES = ["ROLE_ADMIN", "ROLE_USER"];
 
 	protected function supports(string $attribute, $subject): bool
 	{
-		if (in_array($attribute, self::USER_ROLES) === false) {
+		if (in_array($attribute, self::ARRAY_ROLES) === false) {
+
 			return false;
 		}
+
 
 		if ($subject instanceof User === false) {
 			return false;
@@ -26,8 +30,6 @@ class UserVoter extends Voter
 	protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
 	{
 		$authenticatedUser = $token->getUser();
-		dump($authenticatedUser->getRoles());
-		dump($authenticatedUser->getEmail());
 
 		if ($authenticatedUser instanceof User === false) {
 
@@ -38,7 +40,7 @@ class UserVoter extends Voter
 		/** @var User $user */
 		$userObjectToEdit = $subject;
 
-		if (in_array($attribute, self::USER_ROLES) === true) {
+		if (in_array($attribute, self::ARRAY_ROLES) === true) {
 
 			return $this->canEditUser($authenticatedUser);
 		}
@@ -49,7 +51,7 @@ class UserVoter extends Voter
 	public function canEditUser(User $authenticatedUser): bool
 	{
 
-		if(implode($authenticatedUser->getRoles()) !== self::USER_ROLES[0])
+		if(implode($authenticatedUser->getRoles()) !== self::ROLE_ADMIN)
 		{
 			return false;
 		}
