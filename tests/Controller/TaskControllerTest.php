@@ -21,8 +21,9 @@ class TaskControllerTest extends WebTestCase
 	private UserRepository $userRepository;
 	private TaskRepository $taskRepository;
 	private User $user;
+	private array $tasks;
 	private Router $urlGenerator;
-	private const TASK_ID = 1;
+
 	public function setUp() : void
 
 	{
@@ -36,6 +37,8 @@ class TaskControllerTest extends WebTestCase
 		$this->taskRepository = $this->client->getContainer()->get("doctrine.orm.entity_manager")->getRepository
 		(Task::class);
 
+		$this->tasks = $this->taskRepository->findAll();
+
 		$this->user = $this->userRepository->findOneBy(["email" => "kelly.l@gmail.com"]);
 
 		$this->urlGenerator = $this->client->getContainer()->get('router.default');
@@ -46,7 +49,7 @@ class TaskControllerTest extends WebTestCase
 	public function testGetTasks()
 	{
 		$this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('task_list', [
-			'users' => $this->taskRepository->findAll()
+			'users' => $this->tasks
 		]));
 
 		$this->assertResponseRedirects($this->urlGenerator->generate('task_list'), 200);
@@ -55,7 +58,7 @@ class TaskControllerTest extends WebTestCase
 
 	public function testDeleteTaskAction()
 	{
-		$task = $this->taskRepository->findOneBy(["id" => self::TASK_ID]);
+		$task = $this->taskRepository->findOneBy(["id" => $this->tasks[0]->getId()]);
 
 		$token = new UsernamePasswordToken($this->user, 'main', ['memory']);
 
@@ -64,8 +67,16 @@ class TaskControllerTest extends WebTestCase
 		$decision = $decisionManager->decide($token, $this->user->getRoles(), $task);
 
 		$this->client->request(Request::METHOD_DELETE, $this->urlGenerator->generate('task_delete', [
-			"id" => self::TASK_ID
+			"id" => $this->tasks[0]->getId()
 		]));
+
+		if(!$decision)
+		{
+			$this->assertFalse($decision);
+			$this->assertResponseRedirects($this->urlGenerator->generate('task_list'), 403);
+			$this->client->followRedirect();
+			$this->assertSelectorTextContains('div.alert.alert-danger', 'Vous ne pouvez pas supprimer cette tâche');
+		}
 
 		$this->assertTrue($decision);
 
@@ -76,8 +87,9 @@ class TaskControllerTest extends WebTestCase
 	{
 		// First, call the task_edit page to return the edit page form in the crawler.
 		$crawler =  $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('task_edit', [
-			"id" => self::TASK_ID
+			"id" => $this->tasks[0]->getId()
 		]));
+		$this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
 		// Select the form with the button name and fill datas in the fiels
 		$form = $crawler->selectButton("Modifier")->form();
@@ -87,7 +99,8 @@ class TaskControllerTest extends WebTestCase
 						 ]);
 
 		$this->client->submit($form);
-		echo $this->client->getResponse()->getContent();
+		$this->client->followRedirect();
+		$this->assertSelectorTextContains('div.alert.alert-success', 'La tâche a bien été modifiée.');
 	}
 
 	public function testCreateTasks()
@@ -111,6 +124,21 @@ class TaskControllerTest extends WebTestCase
 		$this->assertResponseRedirects($this->urlGenerator->generate('user_create'));
 		$this->assertSelectorTextContains('div.alert.alert-success', "Votre compte vient d'être créer avec succès");
 		$this->client->followRedirect();
+	}
+
+	public function testToggleTaskAction()
+	{
+		$isDone = $this->tasks[6]->isDone();
+		$this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('task_toggle', ['id' => $this->tasks[0]->getId()]));
+		$this->client->followRedirect();
+
+		if($isDone)		{
+			$this->assertSelectorTextContains('div.alert.alert-success', 'La tâche '.$this->tasks[0]->getTitle().' a bien été marquée comme terminée.');
+		} elseif (!$isDone) {
+			$this->assertSelectorTextContains('div.alert.alert-success', 'La tâche ' . $this->tasks[0]->getTitle() . ' a bien été marquée comme non terminée.');
+		}
+
+
 	}
 
 }
