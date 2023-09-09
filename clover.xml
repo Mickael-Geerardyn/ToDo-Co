@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1694279832">
-  <project timestamp="1694279832">
+<coverage generated="1694280976">
+  <project timestamp="1694280976">
     <file name="/var/www/openclassrooms/projet8/projet8-TodoList/src/AppBundle.php">
       <class name="App\AppBundle" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -336,29 +336,27 @@
     </file>
     <file name="/var/www/openclassrooms/projet8/projet8-TodoList/src/Security/LoginAuthenticator.php">
       <class name="App\Security\LoginAuthenticator" namespace="global">
-        <metrics complexity="5" methods="4" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="2" elements="20" coveredelements="4"/>
+        <metrics complexity="5" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="13" elements="18" coveredelements="16"/>
       </class>
-      <line num="26" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="11"/>
-      <line num="28" type="stmt" count="11"/>
-      <line num="30" type="method" name="authenticate" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="32" type="stmt" count="0"/>
-      <line num="34" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <line num="38" type="stmt" count="0"/>
-      <line num="39" type="stmt" count="0"/>
-      <line num="40" type="stmt" count="0"/>
-      <line num="41" type="stmt" count="0"/>
-      <line num="42" type="stmt" count="0"/>
-      <line num="45" type="method" name="onAuthenticationSuccess" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="47" type="stmt" count="0"/>
-      <line num="48" type="stmt" count="0"/>
-      <line num="51" type="stmt" count="0"/>
+      <line num="26" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="14"/>
+      <line num="28" type="stmt" count="14"/>
+      <line num="30" type="method" name="authenticate" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="1"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="1"/>
+      <line num="39" type="stmt" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <line num="45" type="method" name="onAuthenticationSuccess" visibility="public" complexity="2" crap="2.15" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="48" type="stmt" count="1"/>
       <line num="52" type="stmt" count="0"/>
-      <line num="55" type="stmt" count="0"/>
-      <line num="59" type="method" name="getLoginUrl" visibility="protected" complexity="1" crap="1" count="5"/>
-      <line num="61" type="stmt" count="5"/>
-      <metrics loc="64" ncloc="64" classes="1" methods="4" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="2" elements="20" coveredelements="4"/>
+      <line num="56" type="method" name="getLoginUrl" visibility="protected" complexity="1" crap="1" count="6"/>
+      <line num="58" type="stmt" count="6"/>
+      <metrics loc="61" ncloc="61" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="13" elements="18" coveredelements="16"/>
     </file>
     <file name="/var/www/openclassrooms/projet8/projet8-TodoList/src/Security/TaskVoter.php">
       <class name="App\Security\TaskVoter" namespace="global">
@@ -419,6 +417,6 @@
       <line num="57" type="stmt" count="1"/>
       <metrics loc="59" ncloc="58" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="15" elements="20" coveredelements="17"/>
     </file>
-    <metrics files="16" loc="1103" ncloc="984" classes="14" methods="66" coveredmethods="43" conditionals="0" coveredconditionals="0" statements="256" coveredstatements="160" elements="322" coveredelements="203"/>
+    <metrics files="16" loc="1100" ncloc="981" classes="14" methods="66" coveredmethods="44" conditionals="0" coveredconditionals="0" statements="254" coveredstatements="171" elements="320" coveredelements="215"/>
   </project>
 </coverage>

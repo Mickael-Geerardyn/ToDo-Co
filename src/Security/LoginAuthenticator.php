@@ -23,7 +23,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
     final public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private readonly UrlGeneratorInterface $urlGenerator, private readonly Security $security)
+    public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
     {
     }
 
@@ -47,9 +47,6 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-
-		$session = new Session();
-		$session->getFlashBag()->add("success", "Bienvenue " . $this->security->getUser()->getUserIdentifier());
 
 
          return new RedirectResponse($this->urlGenerator->generate('home_page'));
