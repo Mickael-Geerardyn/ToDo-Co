@@ -53,6 +53,8 @@ Le test fonctionnel va servir à simuler ce cheminement à travers l’applicati
 Ces tests sont un prérequis en terme d’assurance qualité de code. Ils permettent de vérifier en amont et de façon automatique l’ensemble des fonctionnalités isolées puis ces fonctionnalités intégrées dans un cheminement utilisateur.
 
 
+
+
 ### Règles collaboratives
 
 Afin d'assurer une qualité à l'application et à son fonctionnement, il est demandé d'utiliser le système de contrôle de versions à l'aide gds commandes ```bash git``` et de github.
