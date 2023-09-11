@@ -113,7 +113,7 @@ class TaskController extends AbstractController
 	 *
 	 * @return RedirectResponse
 	 */
-	#[Route(path: "/tasks/{id}/delete", name: "task_delete")]
+	#[Route(path: "/tasks/{id}/delete", name: "task_delete", methods: ["DELETE"])]
     public function deleteTaskAction(Task $task): RedirectResponse
     {
 		//Add this to check ROLE in user object. Both of USER and ADMIN role can delete a task but only own task for

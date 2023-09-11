@@ -16,9 +16,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
-	private const HTTP_STATUS_OK = 200;
 	private const HTTP_STATUS_CREATED = 201;
-	private const HTTP_STATUS_FORBIDDEN = 403;
 	public function __construct(
 		private readonly EntityManagerInterface $entityManager,
 		private readonly RequestStack $requestStack,

@@ -6,6 +6,44 @@
   <component name="ChangeListManager">
     <list default="true" id="9dccbdda-f8db-4baf-bd07-5bbb9527c2d3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.phpunit.cache/test-results" beforeDir="false" afterPath="$PROJECT_DIR$/.phpunit.cache/test-results" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clover.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clover.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phpunit.xml.dist" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml.dist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/AppBundle.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/AppBundle.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Controller/HomeController.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Controller/HomeController.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Controller/SecurityController.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Controller/SecurityController.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Controller/TaskController.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Controller/TaskController.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Controller/UserController.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Controller/UserController.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Controller/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Controller/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Controller/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Controller/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/DataFixtures/AppFixtures.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/DataFixtures/AppFixtures.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/DataFixtures/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/DataFixtures/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/DataFixtures/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/DataFixtures/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Entity/Task.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Entity/Task.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Entity/User.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Entity/User.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Entity/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Entity/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Entity/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Entity/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Form/TaskType.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Form/TaskType.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Form/UserType.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Form/UserType.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Form/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Form/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Form/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Form/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Kernel.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Kernel.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Repository/TaskRepository.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Repository/TaskRepository.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Repository/UserRepository.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Repository/UserRepository.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Repository/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Repository/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Repository/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Repository/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Security/LoginAuthenticator.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Security/LoginAuthenticator.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Security/TaskVoter.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Security/TaskVoter.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Security/UserVoter.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Security/UserVoter.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Security/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Security/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/Security/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/Security/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/resultTest/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/resultTest/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TaskController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,7 +340,7 @@
       <workItem from="1694208594312" duration="14444000" />
       <workItem from="1694266427727" duration="6675000" />
       <workItem from="1694275810628" duration="3038000" />
-      <workItem from="1694437804477" duration="680000" />
+      <workItem from="1694437804477" duration="11313000" />
     </task>
     <servers />
   </component>
