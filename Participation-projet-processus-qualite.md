@@ -51,3 +51,18 @@ Cela commence par l’authentification de l’utilisateur, le clic sur le lien p
 Le test fonctionnel va servir à simuler ce cheminement à travers l’application afin de tester l’ensemble des fonctionnalités nécessaires à sa réalisation pour vérifier que l’application se comporte comme souhaité.
 
 Ces tests sont un prérequis en terme d’assurance qualité de code. Ils permettent de vérifier en amont et de façon automatique l’ensemble des fonctionnalités isolées puis ces fonctionnalités intégrées dans un cheminement utilisateur.
+
+
+### Règles collaboratives
+
+Afin d'assurer une qualité à l'application et à son fonctionnement, il est demandé d'utiliser le système de contrôle de versions à l'aide gds commandes ```bash git``` et de github.
+
+Chaque nouvelle fonctionnalité ou chaque modification de fonctionnalité doit être effectué sur une nouvelle branche, jamais immédiatement sur la branche "main" du repository.
+
+En effet, la branche "main" est la branche qui comprends l'ensemble du code et des fonctionnalités considérées comme validées et donc qui font parti du projet qui est mis en production.
+
+A chaque nouvel ajout ou modification, il est demandé de créer une pull request sur github afin que le travail puisse être vérifié et validé par un ou plusieurs autres développeurs.
+
+Ce processus vise à garantir une qualité maximale mais aussi apporter un oeil nouveau sur les ajouts et modifications dans le but de d'assurer que le code ne possède pas de bug et/ou de failles de sécurité.
+
+Ce travail collaboratif est un prérequis sur lequel il ne faut en aucun cas faire l'impasse.
