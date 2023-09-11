@@ -29,12 +29,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $username;
 
 	#[ORM\Column(type: Types::STRING, length: 64)]
-	#[Assert\NotBlank(message: 'Veuillez entrer un mot de passe valide', groups: ["Registration"])]
-	#[Assert\Length(min: 12, max: 64, minMessage: 'Votre mot de passe doit contenir au minimum 8 caractères',
+	#[Assert\NotBlank(message: 'Veuillez entrer un mot de passe valide',
 		groups: ["Registration"])]
 	#[Assert\Regex(
-		pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
-		message: 'Le mot de passe doit comporter au moins 12 caractères, contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.'
+		pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])([A-Za-z\d@$!%*?&]{12,64})$/',
+		message: 'Le mot de passe doit comporter au moins 12 caractères et au maximum 64 caractères, contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.',groups: ["Registration"]
 	)]
     private string $password;
 
