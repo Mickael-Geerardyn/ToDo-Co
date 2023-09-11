@@ -4,7 +4,7 @@
 ## Règles à respecter et processus de qualité
 
 
-***Règles (standards) à respecter***
+### Règles (standards) à respecter
 
 *Ressource :* 
 -	https://symfony.com/doc/5.4/contributing/code/standards.html 
