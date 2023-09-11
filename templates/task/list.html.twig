@@ -24,12 +24,12 @@
                         <button class="btn btn-danger btn-sm pull-right">Supprimer</button>
                     </form>
                     {% endif  %}
+                    {% if app.user %}
                     <form action="{{ path('task_toggle', {'id' : task.id }) }}">
                         <button class="btn btn-success btn-sm pull-right">
                             {% if not task.isDone %}Marquer comme faite{% else %}Marquer non terminée{% endif %}
                         </button>
                     </form>
-                    {% if app.user %}
                     <form action="{{ path('task_edit', {'id' : task.id }) }}">
                         <button class="btn btn-warning btn-sm pull-right">
                             Modifier la tâche

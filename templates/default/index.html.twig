@@ -11,6 +11,8 @@
             une nouvelle tâche</a>
         <a href="{{ path('task_list') }}" class="btn btn-info">Consulter la
             liste des tâches à faire</a>
+        {% if app.user %}
         <a href="" class="btn btn-warning">Consulter la liste des tâches terminées</a>
+        {% endif %}
     </div>
 {% endblock %}
