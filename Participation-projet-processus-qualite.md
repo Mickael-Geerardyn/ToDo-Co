@@ -3,9 +3,9 @@
 
 ## Règles à respecter et processus de qualité
 
-
+__________________________________
 ### Règles (standards) à respecter
----------------------------------
+__________________________________
 
 *Ressource :* 
 -	https://symfony.com/doc/5.4/contributing/code/standards.html 
@@ -55,9 +55,9 @@ Ces tests sont un prérequis en terme d’assurance qualité de code. Ils permet
 
 
 
-
+_________________________
 ### Règles collaboratives
--------------------------
+_________________________
 
 Afin d'assurer une qualité à l'application et à son fonctionnement, il est demandé d'utiliser le système de contrôle de versions à l'aide gds commandes `git` et de github.
 
